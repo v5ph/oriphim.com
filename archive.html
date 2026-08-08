@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive | Oriphim</title>
+<meta name="description" content="Build notes, research notes, and status updates from Oriphim.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oriphim.com/archive">
+<meta name="theme-color" content="#f34b03">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oriphim">
+<meta property="og:title" content="Archive | Oriphim">
+<meta property="og:description" content="Build notes, research notes, and status updates from Oriphim.">
+<meta property="og:url" content="https://oriphim.com/archive">
+<meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Archive | Oriphim">
+<meta name="twitter:description" content="Build notes, research notes, and status updates from Oriphim.">
+<meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/oriphim-red.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#c2391b;
+    --paper:#ece4d3;
+    --paper-dim:#ddd4bf;
+    --ink:#18130f;
+    --ink-soft:#241d16;
+    --line:rgba(24,19,15,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:1;mix-blend-mode:multiply;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:560;color:var(--ink);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);}
+
+  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
+  .brand-icon{display:block;width:42px;height:42px;}
+  .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
+  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;text-transform:lowercase;}
+  .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
+  h1 .veil-word{font-size:1.18em;}
+  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;}
+  .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
+  .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger{border-color:var(--ink);}
+  .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
+  .nav-trigger{appearance:none;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;text-transform:inherit;padding:0 0 2px;cursor:pointer;}
+  .navlinks .nav-trigger{border-bottom:1px solid var(--ink);}
+  .subnav{position:absolute;left:50%;top:100%;min-width:112px;border:1px solid var(--ink);background:var(--paper);padding:6px;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .15s ease,transform .15s ease;z-index:20;}
+  .nav-menu:hover .subnav,.nav-menu.is-open .subnav,.nav-menu:focus-within .subnav{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+  .subnav a{display:block;border:0;background:var(--ink);color:var(--paper);padding:9px 12px;text-align:center;white-space:nowrap;}
+  .subnav a + a{margin-top:6px;}
+  .signin-btn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;border:1px solid var(--ink);padding:8px 18px;}
+  .signin-btn:hover{background:var(--ink);color:var(--paper);}
+
+  .archive-grid{display:grid;grid-template-columns:1fr 340px;gap:56px;padding:36px 0 90px;align-items:start;}
+  .feed-tabs{display:flex;gap:30px;border-bottom:1px solid var(--line);margin-bottom:4px;overflow-x:auto;}
+  .feed-tab{flex:0 0 auto;padding:16px 2px;font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;color:var(--ink-soft);border:0;border-bottom:2px solid transparent;cursor:pointer;background:none;}
+  .feed-tab.active{color:var(--ink);border-color:var(--ink);}
+  .feed-card{padding:26px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
+  .feed-card[hidden]{display:none;}
+  .feed-main{min-width:0;flex:1;}
+  .feed-title{font-size:18.5px;margin-top:4px;}
+  .feed-title a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;}
+  .feed-title a:hover{border-color:var(--ink);}
+  .feed-body{font-size:14.5px;line-height:1.62;color:var(--ink-soft);margin-top:6px;}
+  .feed-catalogue{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;color:var(--ink-soft);margin-top:0;}
+  .feed-infographic{flex-shrink:0;border:1px solid var(--ink);background:var(--paper);width:86px;line-height:0;}
+  .feed-infographic img{display:block;width:100%;height:auto;color:var(--ink);}
+  .feed-meta{display:flex;gap:18px;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);}
+  .feed-read{display:inline-block;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);}
+  .feed-empty{padding:60px 20px;text-align:center;}
+  .feed-empty p{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--ink-soft);line-height:1.6;}
+  .feed-empty[hidden]{display:none;}
+
+  .sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:24px;}
+  .search-box{display:flex;align-items:center;gap:10px;border:1px solid var(--ink);padding:12px 16px;background:var(--paper);}
+  .search-icon{position:relative;width:16px;height:16px;flex-shrink:0;}
+  .search-icon::before{content:"";position:absolute;left:1px;top:1px;width:10px;height:10px;border:2px solid var(--ink-soft);border-radius:50%;}
+  .search-icon::after{content:"";position:absolute;right:0;bottom:1px;width:7px;height:2px;background:var(--ink-soft);transform:rotate(45deg);transform-origin:center;}
+  .search-input-wrap{position:relative;flex:1;min-width:0;}
+  .search-input-wrap input{position:relative;z-index:1;border:0;outline:0;background:transparent;width:100%;font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);}
+  .search-placeholder-cycle{position:absolute;left:0;top:50%;transform:translateY(-50%);font-family:'Inter',sans-serif;font-size:14px;color:var(--ink-soft);opacity:1;transition:opacity .7s ease;pointer-events:none;white-space:nowrap;}
+  .trending-panel{border:1px solid var(--ink);padding:22px 22px 24px;background:var(--paper);}
+  .trending-panel h3{font-size:17px;margin-bottom:4px;}
+  .trending-empty{text-align:center;padding:26px 6px 8px;}
+  .trending-empty p{font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+  .fade.in{opacity:1;transform:translateY(0);}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
+  .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
+  .footer-x:hover{color:var(--ink);background:var(--paper);}
+  .footer-x svg{display:block;width:14px;height:14px;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
+  @media (max-width:860px){.archive-grid{grid-template-columns:1fr;padding:28px 0 64px;}.sidebar{position:static;order:-1;}}
+  @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.feed-card{flex-direction:column;}.feed-infographic{width:86px;}.signin-btn{padding:8px 14px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Oriphim home">
+      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
+      <span class="word">oriphim</span>
+    </a>
+    <nav class="navlinks">
+      <a href="/archive" aria-current="page">Archive</a>
+      <a href="/company">Company</a>
+      <div class="nav-menu" data-dropdown>
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="veil-word">VEIL</span></a>
+        <span class="subnav" role="menu"><a href="/pricing" role="menuitem">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
+      </div>
+    </nav>
+    <a href="/sign-in" class="signin-btn">Sign In</a>
+  </div>
+</div>
+
+<main>
+  <h1 class="sr-only">Oriphim Archive</h1>
+  <div class="wrap archive-grid">
+    <section class="fade" aria-label="Archive feed">
+      <div class="feed-tabs" role="tablist" aria-label="Archive filters">
+        <button type="button" class="feed-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="feed-tab" data-filter="announcement" role="tab" aria-selected="false">Announcements</button>
+        <button type="button" class="feed-tab" data-filter="research" role="tab" aria-selected="false">Research Notes</button>
+        <button type="button" class="feed-tab" data-filter="build" role="tab" aria-selected="false">Build Log</button>
+      </div>
+
+      <article class="feed-card" data-entry data-category="announcement">
+        <div class="feed-main">
+          <div class="feed-catalogue">ORIPHIM RESEARCH - CATALOGUE No. 01 <span class="feed-catalogue-date">/ JUL 23</span></div>
+          <h2 class="feed-title"><a href="/archive/catalogue-01">The Archive is live.</a></h2>
+          <p class="feed-body">This is where build notes, research notes, and honest status updates will live - what's shipped, what's roadmap, and everything in between. Starting now.</p>
+          <div class="feed-meta">
+            <span>Announcement</span>
+            <span>1 min read</span>
+          </div>
+          <a class="feed-read" href="/archive/catalogue-01">Read entry</a>
+        </div>
+        <a class="feed-infographic" href="/archive/catalogue-01" aria-label="Read The Archive is live.">
+          <img src="assets/archive-stamp-01.png" alt="Hand-drawn black archive stamp with a looped staff and star point" width="1254" height="1254" loading="lazy" decoding="async">
+        </a>
+      </article>
+
+      <div class="feed-empty" data-feed-empty>
+        <p>That's everything, for now.</p>
+      </div>
+    </section>
+
+    <aside class="sidebar fade" aria-label="Archive tools">
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true"></span>
+        <div class="search-input-wrap">
+          <input type="text" id="archiveSearchInput" aria-label="Search the archive">
+          <span class="search-placeholder-cycle" id="searchPlaceholder">Browse entries</span>
+        </div>
+      </div>
+
+      <div class="trending-panel">
+        <h3>Recent entries</h3>
+        <div class="trending-empty">
+          <p>Is there anything? We're looking just as hard as you...</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+<script>
+  const fadeItems = document.querySelectorAll(".fade");
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.1});
+    fadeItems.forEach((item) => obs.observe(item));
+  } else {
+    fadeItems.forEach((item) => item.classList.add("in"));
+  }
+
+  const tabs = document.querySelectorAll(".feed-tab");
+  const entries = document.querySelectorAll("[data-entry]");
+  const emptyState = document.querySelector("[data-feed-empty]");
+  const searchInput = document.getElementById("archiveSearchInput");
+  const cycleEl = document.getElementById("searchPlaceholder");
+  const phrases = ["Browse entries", "Search the archive", "Wisdom?"];
+  let phraseIndex = 0;
+  let activeFilter = "all";
+
+  const suppressed = () => document.activeElement === searchInput || searchInput.value.length > 0;
+
+  const filterEntries = () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    entries.forEach((entry) => {
+      const categoryMatch = activeFilter === "all" || entry.dataset.category === activeFilter;
+      const textMatch = !query || entry.textContent.toLowerCase().includes(query);
+      const visible = categoryMatch && textMatch;
+      entry.hidden = !visible;
+      if (visible) visibleCount += 1;
+    });
+
+    emptyState.hidden = visibleCount !== 0;
+    emptyState.querySelector("p").textContent = query ? "No entries match that signal." : "That's everything, for now.";
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((item) => {
+        item.classList.remove("active");
+        item.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      activeFilter = tab.dataset.filter;
+      filterEntries();
+    });
+  });
+
+  const nextPhrase = () => {
+    if (suppressed()) return;
+    cycleEl.style.opacity = "0";
+    window.setTimeout(() => {
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      cycleEl.textContent = phrases[phraseIndex];
+      if (!suppressed()) cycleEl.style.opacity = "1";
+    }, 700);
+  };
+
+  window.setInterval(nextPhrase, 4200);
+  searchInput.addEventListener("focus", () => { cycleEl.style.opacity = "0"; });
+  searchInput.addEventListener("input", () => {
+    cycleEl.style.opacity = "0";
+    filterEntries();
+  });
+  searchInput.addEventListener("blur", () => {
+    if (searchInput.value.length === 0) cycleEl.style.opacity = "1";
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

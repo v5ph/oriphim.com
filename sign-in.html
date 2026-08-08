@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In | Oriphim</title>
+<meta name="description" content="Sign in to Oriphim.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://oriphim.com/sign-in">
+<meta name="theme-color" content="#f34b03">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/oriphim-red.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#c2391b;--paper:#ece4d3;--paper-hot:#f4eee0;--ink:#18130f;--ink-soft:#241d16;--line:rgba(24,19,15,.32);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(to right,rgba(24,19,15,.13) 1px,transparent 1px),linear-gradient(to bottom,rgba(24,19,15,.13) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  .topbar{border-bottom:1px solid var(--line);padding:18px 0;position:relative;z-index:5;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
+  .brand-icon{display:block;width:42px;height:42px;}
+  .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
+  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
+  h1 .veil-word{font-size:1.18em;}
+  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks a,.auth-top-link{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
+  .navlinks a:hover,.nav-trigger:hover,.nav-menu.is-open .nav-trigger{border-color:var(--ink);}
+  .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
+  .nav-trigger{appearance:none;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0 0 2px;cursor:pointer;}
+  .navlinks .nav-trigger{border-bottom:1px solid var(--ink);}
+  .subnav{position:absolute;left:50%;top:100%;min-width:112px;border:1px solid var(--ink);background:var(--paper);padding:6px;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .15s ease,transform .15s ease;z-index:20;}
+  .nav-menu:hover .subnav,.nav-menu.is-open .subnav,.nav-menu:focus-within .subnav{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+  .subnav a{display:block;border:0;background:var(--ink);color:var(--paper);padding:9px 12px;text-align:center;white-space:nowrap;}
+  .subnav a + a{margin-top:6px;}
+  .auth-top-link{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--ink);padding:8px 18px;}
+  .auth-top-link:hover{background:var(--ink);color:var(--paper);}
+  .auth-stage{position:relative;z-index:2;min-height:calc(100vh - 79px);display:grid;place-items:center;padding:58px 24px;}
+  .auth-card{width:min(820px,100%);display:grid;grid-template-columns:minmax(0,1fr) 260px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);}
+  .auth-content{padding:32px;}
+  .auth-art{display:grid;place-items:center;border-left:1px solid var(--ink);background:#f34b03;overflow:hidden;}
+  .auth-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
+  .auth-card-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px;}
+  .auth-card-brand{display:flex;align-items:center;gap:10px;font-family:'Jacquard 12','Fraunces',serif;font-size:32px;line-height:1;text-transform:lowercase;}
+  .auth-card-brand img{width:34px;height:34px;object-fit:contain;}
+  .auth-close{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:18px;}
+  .auth-close:hover{background:var(--ink);color:var(--paper);}
+  .eyebrow{margin:0 0 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+  h1{margin:0 0 24px;font-family:'Fraunces',Georgia,serif;font-size:clamp(42px,7vw,66px);font-weight:560;line-height:.96;color:var(--ink);}
+  .auth-form{display:grid;gap:15px;}
+  .auth-form label{display:grid;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+  .auth-form input{width:100%;min-height:48px;border:1px solid var(--ink);background:var(--paper-hot);color:var(--ink);padding:12px 13px;font:inherit;outline:none;}
+  .auth-form input:focus{box-shadow:inset 0 0 0 3px #f34b03;}
+  .auth-submit{min-height:50px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:13px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+  .auth-submit:hover{background:transparent;color:var(--ink);}
+  .form-status{min-height:18px;margin:0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:#9c2c12;}
+  .auth-switch{margin:18px 0 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);}
+  .auth-switch a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;}
+  @media(max-width:680px){.navlinks{display:none;}.wrap{padding:0 24px;}.auth-card{grid-template-columns:1fr;}.auth-art{display:none;}.auth-content{padding:26px;}h1{font-size:42px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Oriphim home">
+      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
+      <span class="word">oriphim</span>
+    </a>
+    <nav class="navlinks">
+      <a href="/archive">Archive</a>
+      <a href="/company">Company</a>
+      <div class="nav-menu" data-dropdown>
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="veil-word">VEIL</span></a>
+        <span class="subnav" role="menu"><a href="/pricing" role="menuitem">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
+      </div>
+    </nav>
+    <a href="/sign-up" class="auth-top-link">Sign Up</a>
+  </div>
+</div>
+
+<main class="auth-stage" aria-label="Sign in">
+  <section class="auth-card" aria-labelledby="auth-title">
+    <div class="auth-content">
+      <div class="auth-card-top">
+        <span class="auth-card-brand"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true">oriphim</span>
+        <a class="auth-close" href="/" aria-label="Return home">x</a>
+      </div>
+      <p class="eyebrow">ORIPHIM ACCESS</p>
+      <h1 id="auth-title">Sign in</h1>
+      <form class="auth-form" data-static-form data-form-message="Account access is not live from this static preview.">
+        <label>Email <input type="email" name="email" autocomplete="email" required></label>
+        <label>Password <input type="password" name="password" autocomplete="current-password" required></label>
+        <button class="auth-submit" type="submit">Sign In</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="auth-switch">No account yet? <a href="/sign-up">Create one</a></p>
+    </div>
+    <aside class="auth-art" aria-hidden="true"><img src="assets/sign-in-city.jpg" alt=""></aside>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

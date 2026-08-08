@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company | Oriphim</title>
+<meta name="description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oriphim.com/company">
+<meta name="theme-color" content="#f34b03">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oriphim">
+<meta property="og:title" content="Company | Oriphim">
+<meta property="og:description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
+<meta property="og:url" content="https://oriphim.com/company">
+<meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Company | Oriphim">
+<meta name="twitter:description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
+<meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/oriphim-red.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Oriphim",
+  "url": "https://oriphim.com/",
+  "logo": "https://oriphim.com/assets/oriphim-red.png",
+  "email": "hello@oriphim.com",
+  "sameAs": ["https://x.com/Oriphim"]
+}
+</script>
+<style>
+  :root{
+    --bg:#c2391b;
+    --bg-deep:#9c2c12;
+    --paper:#ece4d3;
+    --paper-dim:#ddd4bf;
+    --ink:#18130f;
+    --ink-soft:#241d16;
+    --line:rgba(24,19,15,.32);
+    --line-soft:rgba(24,19,15,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:1;mix-blend-mode:multiply;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:560;color:var(--ink);}
+  h1{font-size:clamp(34px,5vw,58px);line-height:1.04;max-width:11ch;}
+  h2{font-size:clamp(26px,3vw,36px);line-height:1.12;}
+  h3{font-size:19px;line-height:1.18;}
+  p{color:var(--ink-soft);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+  .btn,.btn-outline{display:inline-block;border:1px solid var(--ink);padding:14px 26px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .18s ease,color .18s ease,border-color .18s ease;}
+  .btn{background:var(--ink);color:var(--paper);}
+  .btn:hover{background:transparent;color:var(--ink);}
+  .btn-outline{background:transparent;color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+
+  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
+  .brand-icon{display:block;width:42px;height:42px;}
+  .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
+  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
+  h1 .veil-word{font-size:1.18em;}
+  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
+  .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger{border-color:var(--ink);}
+  .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
+  .nav-trigger{appearance:none;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0 0 2px;cursor:pointer;}
+  .navlinks .nav-trigger{border-bottom:1px solid var(--ink);}
+  .subnav{position:absolute;left:50%;top:100%;min-width:112px;border:1px solid var(--ink);background:var(--paper);padding:6px;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .15s ease,transform .15s ease;z-index:20;}
+  .nav-menu:hover .subnav,.nav-menu.is-open .subnav,.nav-menu:focus-within .subnav{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+  .subnav a{display:block;border:0;background:var(--ink);color:var(--paper);padding:9px 12px;text-align:center;white-space:nowrap;}
+  .subnav a + a{margin-top:6px;}
+  .signin-btn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--ink);padding:8px 18px;}
+  .signin-btn:hover{background:var(--ink);color:var(--paper);}
+
+  section{padding:64px 0;}
+  .section-flush{padding:0;}
+  .divider{border-top:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:72px 0 64px;}
+  .hero-grid .eyebrow{margin-bottom:22px;}
+  .lede{margin-top:24px;font-size:16px;line-height:1.68;max-width:60ch;}
+  .plate-image{border:1px solid var(--ink);line-height:0;background:var(--ink);overflow:hidden;}
+  .plate-image img{display:block;width:100%;height:auto;}
+  .hero-grid .plate-image img{aspect-ratio:1122/1402;object-fit:cover;}
+  .mission-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;padding:64px 0;}
+  .mission-grid .plate-image{background:var(--paper);}
+  .mission-grid .plate-image img{aspect-ratio:1122/1402;object-fit:cover;}
+  .section-head{margin-bottom:44px;}
+  .section-head .eyebrow,.mission-copy .eyebrow{margin-bottom:14px;}
+  .section-head h2{max-width:16ch;}
+  .mission-body{font-size:16px;line-height:1.7;max-width:66ch;margin-top:18px;}
+  .mission-body:first-of-type{margin-top:0;}
+  .mission-scope{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;max-width:66ch;margin-top:24px;border-top:1px solid var(--line);padding-top:18px;color:var(--ink-soft);}
+  .mission-scope span{color:var(--ink);letter-spacing:.06em;}
+  .principles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
+  .principle-card{background:var(--paper);padding:30px 30px 32px;display:flex;flex-direction:column;gap:12px;min-height:190px;}
+  .principle-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-soft);}
+  .principle-card p{font-size:14px;line-height:1.6;}
+  .status-note{display:flex;justify-content:space-between;align-items:flex-start;gap:36px;flex-wrap:wrap;}
+  .status-note h2{max-width:14ch;}
+  .status-note p{font-size:14.5px;line-height:1.68;max-width:48ch;}
+  .status-copy{max-width:48ch;}
+  .status-copy p{max-width:none;}
+  .social-follow{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
+  .contact-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;}
+  .contact-row .contact-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.04em;margin-top:6px;}
+  .contact-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .cta-band{background:var(--ink);color:var(--paper);padding:80px 0;text-align:center;position:relative;overflow:hidden;isolation:isolate;}
+  .topo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.72;pointer-events:none;}
+  .cta-band::before{content:"";position:absolute;inset:0;background:rgba(24,19,15,.34);pointer-events:none;z-index:1;}
+  .cta-band .wrap{z-index:2;}
+  .cta-band h2{color:var(--paper);font-size:clamp(30px,4vw,44px);max-width:18ch;margin:0 auto 30px;}
+  .cta-band .eyebrow{color:var(--paper-dim);margin-bottom:18px;}
+  .cta-band .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);}
+  .cta-band .btn:hover{background:transparent;color:var(--paper);}
+  .cta-band .btn-outline{color:var(--paper);border-color:var(--paper);}
+  .cta-band .btn-outline:hover{background:var(--paper);color:var(--ink);}
+  .cta-row-band{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
+  .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
+  .footer-x:hover{color:var(--ink);background:var(--paper);}
+  .footer-x svg{display:block;width:14px;height:14px;}
+  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+  .fade.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}.topo-canvas{opacity:.52;}}
+  @media (max-width:860px){.principles-grid{grid-template-columns:1fr;}.hero-grid{grid-template-columns:1fr;padding:48px 0;}.mission-grid{grid-template-columns:1fr;padding:48px 0;}.mission-grid .plate-image{order:-1;}h1{max-width:13ch;}}
+  @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}section{padding:48px 0;}.hero-grid,.mission-grid{gap:34px;}.contact-actions{width:100%;}.contact-actions .btn{width:100%;text-align:center;}.principle-card{padding:24px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Oriphim home">
+      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
+      <span class="word">oriphim</span>
+    </a>
+    <nav class="navlinks">
+      <a href="/archive">Archive</a>
+      <a href="/company" aria-current="page">Company</a>
+      <div class="nav-menu" data-dropdown>
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="veil-word">VEIL</span></a>
+        <span class="subnav" role="menu"><a href="/pricing" role="menuitem">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
+      </div>
+    </nav>
+    <a href="/sign-in" class="signin-btn">Sign In</a>
+  </div>
+</div>
+
+<main aria-label="Company">
+  <section class="section-flush">
+    <div class="wrap hero-grid">
+      <div class="fade">
+        <p class="eyebrow">ORIPHIM MISSION</p>
+        <h1>Theory and experiment, in the same room.</h1>
+        <p class="lede">Oriphim is a place where theorists and experimentalists coexist - to build, test, and deploy real solutions for the world, not just publish about them. Applications should assist scientific work the way they already quietly do in a hundred labs, and do it more deliberately. Technology was supposed to be the magic we dreamt of. We want to help make that true again.</p>
+      </div>
+      <figure class="plate-image fade">
+        <img src="assets/company-theory-experiment.png" alt="Ink portrait with geometric research diagrams" width="1122" height="1402" decoding="async" fetchpriority="high">
+      </figure>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section class="section-flush">
+    <div class="wrap mission-grid">
+      <figure class="plate-image fade">
+        <img src="assets/company-field-theorist.png" alt="Cloaked theorist figure within field line diagrams" width="1122" height="1402" loading="lazy" decoding="async">
+      </figure>
+      <div class="mission-copy fade">
+        <p class="eyebrow">The mission</p>
+        <h2>Advanced modeling, for every hard field.</h2>
+        <p class="mission-body">Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making. <span class="veil-word">VEIL</span>, the flagship platform, is an AI-assisted simulation and research environment: model a complex system, test assumptions, compare outcomes, find where it fails, and improve the design - before committing real resources to it.</p>
+        <p class="mission-body">The long-term goal is bigger than one platform: make scientific modeling, simulation, and experimentation more accessible, reliable, and useful - in physics, energy, materials science, robotics, aerospace, biology, climate science, mathematics, and artificial intelligence.</p>
+        <p class="mission-scope"><span>SCOPE</span> - Oriphim may build software, research infrastructure, data systems, simulation engines, scientific tools, and related intellectual property in service of that mission.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head fade">
+        <p class="eyebrow">What we hold to</p>
+        <h2>A claim is not a result.</h2>
+      </div>
+      <div class="principles-grid fade">
+        <article class="principle-card">
+          <p class="principle-num">I</p>
+          <h3>Verify, don't assume</h3>
+          <p>A claim becomes a spec, and a spec gets run. We'd rather simulate something and be wrong than cite it and never check.</p>
+        </article>
+        <article class="principle-card">
+          <p class="principle-num">II</p>
+          <h3>Local-first, always</h3>
+          <p>Your data and models run on your own hardware by default. The cloud is an option you opt into, never a requirement you discover later.</p>
+        </article>
+        <article class="principle-card">
+          <p class="principle-num">III</p>
+          <h3>Expand capability, don't replace it</h3>
+          <p>Technology should make people more capable, not stand in for them. We build tools for scientists and engineers, not replacements for their judgment.</p>
+        </article>
+        <article class="principle-card">
+          <p class="principle-num">IV</p>
+          <h3>Evidence and safety, before ambition</h3>
+          <p>Big ideas still have to clear a real bar: does it check out, and is it safe to act on. Responsible AI development isn't a separate track from the mission - it's part of it.</p>
+        </article>
+        <article class="principle-card">
+          <p class="principle-num">V</p>
+          <h3>Say what's shipped</h3>
+          <p>What's live and what's roadmap are always labeled separately, everywhere on this site - including here.</p>
+        </article>
+        <article class="principle-card">
+          <p class="principle-num">VI</p>
+          <h3>Built to be run, not read</h3>
+          <p>A result you can reproduce is worth more than one that only looks convincing. Every output is meant to be re-run, not just believed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <section>
+    <div class="wrap status-note fade">
+      <h2>Where we are right now.</h2>
+      <div class="status-copy">
+        <p>Oriphim is built by one person, aiming at a field-spanning mission - that gap is intentional. The engine gets built first, the team comes after. Everything described on this site is either running today or explicitly marked as roadmap. Nothing in between.</p>
+        <div class="social-follow" aria-label="Follow Oriphim on X">
+          <a class="btn" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer">Follow Phil</a>
+          <a class="btn-outline" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer">Follow Oriphim</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-flush">
+    <div class="wrap contact-row fade">
+      <div>
+        <h2>Get in touch.</h2>
+        <p class="contact-meta">hello@oriphim.com</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn" href="mailto:hello@oriphim.com">Send a message</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
+    <div class="wrap fade">
+      <p class="eyebrow">Oriphim Research</p>
+      <h2>Pierce through.</h2>
+      <div class="cta-row-band">
+        <a class="btn" href="/pricing">See Pricing</a>
+        <a class="btn-outline" href="/download">Try Guest Mode</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+<script>
+  const topoCanvas = document.querySelector("[data-topo-map]");
+  if (topoCanvas) {
+    const ctx = topoCanvas.getContext("2d");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    const step = 14;
+    const levels = [-1.3, -1.05, -0.8, -0.55, -0.3, -0.05, 0.2, 0.45, 0.7, 0.95, 1.2, 1.45];
+
+    const resizeTopo = () => {
+      const rect = topoCanvas.getBoundingClientRect();
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      topoCanvas.width = Math.ceil(width * dpr);
+      topoCanvas.height = Math.ceil(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const terrain = (x, y, time) => {
+      const driftX = time * 0.006;
+      const driftY = time * -0.004;
+      const nx = (x + driftX) / 118;
+      const ny = (y + driftY) / 92;
+      const ridgeA = Math.sin(nx * 1.4 + Math.cos(ny * 0.9) * 1.7);
+      const ridgeB = Math.sin(ny * 1.75 + Math.sin(nx * 0.82) * 1.8);
+      const ridgeC = Math.sin((nx + ny) * 1.35 + Math.cos(nx * 1.6));
+      const moundA = Math.sin(Math.hypot(x - width * 0.22, y - height * 0.42) / 28 + time * 0.0009);
+      const moundB = Math.sin(Math.hypot(x - width * 0.76, y - height * 0.54) / 24 - time * 0.0007);
+      return ridgeA * 0.72 + ridgeB * 0.58 + ridgeC * 0.38 + moundA * 0.34 + moundB * 0.28;
+    };
+
+    const interp = (a, b, level) => {
+      const span = b.v - a.v || 1;
+      const amount = (level - a.v) / span;
+      return {
+        x: a.x + (b.x - a.x) * amount,
+        y: a.y + (b.y - a.y) * amount
+      };
+    };
+
+    const renderTopo = (time = 0) => {
+      if (!width || !height) resizeTopo();
+      const cols = Math.ceil(width / step) + 3;
+      const rows = Math.ceil(height / step) + 3;
+      const values = new Array(rows);
+
+      for (let y = 0; y < rows; y += 1) {
+        values[y] = new Array(cols);
+        for (let x = 0; x < cols; x += 1) {
+          const px = (x - 1) * step;
+          const py = (y - 1) * step;
+          values[y][x] = { x: px, y: py, v: terrain(px, py, time) };
+        }
+      }
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      levels.forEach((level, index) => {
+        ctx.beginPath();
+
+        for (let y = 0; y < rows - 1; y += 1) {
+          for (let x = 0; x < cols - 1; x += 1) {
+            const tl = values[y][x];
+            const tr = values[y][x + 1];
+            const br = values[y + 1][x + 1];
+            const bl = values[y + 1][x];
+            const points = [];
+
+            if ((tl.v < level) !== (tr.v < level)) points.push(interp(tl, tr, level));
+            if ((tr.v < level) !== (br.v < level)) points.push(interp(tr, br, level));
+            if ((br.v < level) !== (bl.v < level)) points.push(interp(br, bl, level));
+            if ((bl.v < level) !== (tl.v < level)) points.push(interp(bl, tl, level));
+
+            if (points.length === 2) {
+              ctx.moveTo(points[0].x, points[0].y);
+              ctx.lineTo(points[1].x, points[1].y);
+            } else if (points.length === 4) {
+              ctx.moveTo(points[0].x, points[0].y);
+              ctx.lineTo(points[1].x, points[1].y);
+              ctx.moveTo(points[2].x, points[2].y);
+              ctx.lineTo(points[3].x, points[3].y);
+            }
+          }
+        }
+
+        ctx.strokeStyle = index % 4 === 0 ? "rgba(243,75,3,.56)" : "rgba(236,228,211,.38)";
+        ctx.lineWidth = index % 4 === 0 ? 1.35 : 0.9;
+        ctx.stroke();
+      });
+    };
+
+    resizeTopo();
+    renderTopo(0);
+    window.addEventListener("resize", () => {
+      resizeTopo();
+      renderTopo(0);
+    });
+
+    if (!reduceMotion) {
+      const animateTopo = (time) => {
+        renderTopo(time);
+        requestAnimationFrame(animateTopo);
+      };
+      requestAnimationFrame(animateTopo);
+    }
+  }
+
+  const fadeItems = document.querySelectorAll(".fade");
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    fadeItems.forEach((item) => obs.observe(item));
+  } else {
+    fadeItems.forEach((item) => item.classList.add("in"));
+  }
+</script>
+<script src="script.js"></script>
+</body>
+</html>

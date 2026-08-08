@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download VEIL | Oriphim</title>
+<meta name="description" content="Download VEIL, Oriphim's local-first research workspace for deriving, simulating, and verifying claims on your own machine.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oriphim.com/download">
+<meta name="theme-color" content="#f34b03">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Oriphim">
+<meta property="og:title" content="Download VEIL | Oriphim">
+<meta property="og:description" content="Run VEIL locally by default, with cloud access only when you ask for it.">
+<meta property="og:url" content="https://oriphim.com/download">
+<meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Oriphim red-orange logo mark">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Download VEIL | Oriphim">
+<meta name="twitter:description" content="Run VEIL locally by default, with cloud access only when you ask for it.">
+<meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/oriphim-red.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VEIL",
+  "applicationCategory": "ResearchApplication",
+  "operatingSystem": "macOS, Windows, Linux",
+  "description": "VEIL is Oriphim's local-first research workspace for deriving, simulating, and verifying claims from papers and datasets.",
+  "url": "https://oriphim.com/download",
+  "downloadUrl": "https://oriphim.com/download",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Oriphim",
+    "url": "https://oriphim.com/",
+    "logo": "https://oriphim.com/assets/oriphim-red.png"
+  }
+}
+</script>
+<style>
+  :root{
+    --bg:#c2391b;
+    --bg-deep:#9c2c12;
+    --paper:#ece4d3;
+    --paper-dim:#ddd4bf;
+    --cream:#f4eee0;
+    --ink:#18130f;
+    --ink-soft:#241d16;
+    --line:rgba(24,19,15,.32);
+    --line-soft:rgba(24,19,15,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:1;mix-blend-mode:multiply;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:560;letter-spacing:0;color:var(--ink);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+
+  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
+  .brand-icon{display:block;width:42px;height:42px;}
+  .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
+  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
+  h1 .veil-word{font-size:1.18em;}
+  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
+  .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger,.nav-menu[data-current="true"] .nav-trigger{border-color:var(--ink);}
+  .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
+  .nav-trigger{appearance:none;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0 0 2px;cursor:pointer;}
+  .navlinks .nav-trigger{border-bottom:1px solid var(--ink);}
+  .subnav{position:absolute;left:50%;top:100%;min-width:122px;border:1px solid var(--ink);background:var(--paper);padding:6px;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .15s ease,transform .15s ease;z-index:20;}
+  .nav-menu:hover .subnav,.nav-menu.is-open .subnav,.nav-menu:focus-within .subnav{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+  .subnav a{display:block;border:0;background:var(--ink);color:var(--paper);padding:9px 12px;text-align:center;white-space:nowrap;}
+  .subnav a + a{margin-top:6px;}
+  .subnav a:hover,.subnav a[aria-current="page"]{background:var(--bg);color:var(--ink);}
+  .signin-btn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--ink);padding:8px 18px;}
+  .signin-btn:hover{background:var(--ink);color:var(--paper);}
+
+  .hero{padding:64px 0 8px;text-align:center;}
+  .hero .eyebrow{margin-bottom:20px;}
+  .hero h1{font-size:clamp(34px,5vw,54px);line-height:1.05;}
+  .hero p{margin:18px auto 0;font-size:15.5px;line-height:1.6;color:var(--ink-soft);max-width:46ch;}
+  .download-block{padding:40px 0 0;text-align:center;}
+  .btn-primary,.btn-outline{font-family:'IBM Plex Mono',monospace;font-size:13.5px;letter-spacing:.05em;text-transform:uppercase;padding:17px 34px;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:background .18s ease,color .18s ease;}
+  .btn-primary{background:var(--ink);color:var(--paper);}
+  .btn-primary:hover{background:transparent;color:var(--ink);}
+  .btn-outline{background:transparent;color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+  .download-icon{width:15px;height:15px;flex-shrink:0;}
+  .download-version{display:block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.04em;}
+  .download-status{min-height:18px;margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--bg-deep);}
+  .alt-platforms{margin-top:22px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;}
+  .alt-platforms a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);}
+  .alt-platforms a:hover,.alt-platforms a[aria-current="true"]{border-color:var(--ink);}
+  section{padding:64px 0;}
+  .divider{border-top:1px solid var(--line);}
+  .spec-panel{border:1px solid var(--ink);background:var(--paper);max-width:640px;margin:0 auto;}
+  .spec-row{display:flex;justify-content:space-between;gap:20px;padding:16px 26px;border-bottom:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row .k{color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;}
+  .spec-row .v{color:var(--ink);text-align:right;}
+  .notes-link{text-align:center;padding:18px 0 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.03em;}
+  .notes-link a{color:var(--ink);border-bottom:1px solid var(--ink);text-decoration:none;}
+  .section-head{text-align:center;margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(24px,2.8vw,30px);}
+  .req-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
+  .req-card{background:var(--paper);padding:26px 24px;}
+  .req-card h3{font-size:16px;margin-bottom:14px;}
+  .req-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .req-card li{font-size:13px;line-height:1.5;color:var(--ink-soft);padding-left:16px;position:relative;}
+  .req-card li::before{content:"-";position:absolute;left:0;top:0;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;}
+  .account-note{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:34px;}
+  .account-note h2{font-size:clamp(24px,2.8vw,30px);max-width:16ch;}
+  .account-note p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:48ch;}
+  .account-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
+  .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
+  .footer-x:hover{color:var(--ink);background:var(--paper);}
+  .footer-x svg{display:block;width:14px;height:14px;}
+  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+  .fade.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
+  @media (max-width:860px){.req-grid{grid-template-columns:1fr;}}
+  @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.spec-row{flex-direction:column;gap:4px;}.spec-row .v{text-align:left;}.btn-primary,.btn-outline{width:100%;}.account-actions{width:100%;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Oriphim home">
+      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
+      <span class="word">oriphim</span>
+    </a>
+    <nav class="navlinks" aria-label="Primary navigation">
+      <a href="/archive">Archive</a>
+      <a href="/company">Company</a>
+      <div class="nav-menu" data-dropdown data-current="true">
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false" aria-current="page"><span class="veil-word">VEIL</span></a>
+        <span class="subnav" role="menu">
+          <a href="/pricing" role="menuitem">PRICING</a>
+          <a href="/download" role="menuitem" aria-current="page">DOWNLOAD</a>
+        </span>
+      </div>
+    </nav>
+    <a href="/sign-in" class="signin-btn">Sign In</a>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <section class="hero fade">
+      <h1>Run <span class="veil-word">VEIL</span> on your own machine.</h1>
+      <p>The desktop build of <span class="veil-word">VEIL</span> is local by default, with cloud access only when you ask for it.</p>
+    </section>
+
+    <div class="download-block fade">
+      <a href="#download-status" id="primaryDownload" class="btn-primary" aria-describedby="versionLine download-status">
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M12 3v12"></path>
+          <polyline points="7,10 12,15 17,10"></polyline>
+          <line x1="4" y1="20" x2="20" y2="20"></line>
+        </svg>
+        <span id="primaryDownloadLabel">Download for macOS</span>
+      </a>
+      <span class="download-version" id="versionLine">v0.1.0 &middot; Apple Silicon &middot; 214 MB</span>
+      <p class="download-status" id="download-status" role="status" aria-live="polite"></p>
+
+      <div class="alt-platforms" aria-label="Choose platform">
+        <a href="#macos" data-platform="mac">macOS</a>
+        <a href="#windows" data-platform="windows">Windows</a>
+        <a href="#linux" data-platform="linux">Linux</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:56px;"></div>
+
+  <section>
+    <div class="wrap">
+      <div class="spec-panel fade">
+        <div class="spec-row"><span class="k">Version</span><span class="v">0.1.0</span></div>
+        <div class="spec-row"><span class="k">Released</span><span class="v">Jul 2026</span></div>
+        <div class="spec-row"><span class="k">License</span><span class="v">Standard / Enterprise account required</span></div>
+        <div class="spec-row"><span class="k">Signed &amp; notarized</span><span class="v">Yes</span></div>
+        <div class="spec-row"><span class="k">Update channel</span><span class="v">Manual - auto-update on roadmap</span></div>
+      </div>
+      <div class="notes-link">Full release notes live in the <a href="/archive">Archive</a>.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="requirements">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Before you install</p>
+        <h2>System requirements.</h2>
+      </div>
+
+      <div class="req-grid fade">
+        <div class="req-card" id="macos">
+          <h3>macOS</h3>
+          <ul>
+            <li>macOS 13 Ventura or later</li>
+            <li>Apple Silicon or Intel</li>
+            <li>8 GB RAM minimum, 16 GB recommended</li>
+            <li>2 GB free disk space</li>
+          </ul>
+        </div>
+        <div class="req-card" id="windows">
+          <h3>Windows</h3>
+          <ul>
+            <li>Windows 10 64-bit or later</li>
+            <li>x86-64 processor</li>
+            <li>8 GB RAM minimum, 16 GB recommended</li>
+            <li>2 GB free disk space</li>
+          </ul>
+        </div>
+        <div class="req-card" id="linux">
+          <h3>Linux</h3>
+          <ul>
+            <li>Ubuntu 22.04+ or equivalent</li>
+            <li>x86-64 processor</li>
+            <li>8 GB RAM minimum, 16 GB recommended</li>
+            <li>2 GB free disk space</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="wrap account-note fade">
+      <div>
+        <p class="eyebrow">Access</p>
+        <h2>Account required for cloud.</h2>
+      </div>
+      <div>
+        <p>Guest Mode runs locally. Standard and Enterprise add <span class="veil-word">VEIL</span> Cloud, document workflows, and support once the work gets serious.</p>
+        <div class="account-actions">
+          <a href="/sign-up" class="btn-primary">Create Account</a>
+          <a href="/pricing" class="btn-outline">See Pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+
+<script>
+  const fadeItems = document.querySelectorAll(".fade");
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeItems.forEach((item) => obs.observe(item));
+  } else {
+    fadeItems.forEach((item) => item.classList.add("in"));
+  }
+
+  const builds = {
+    mac: { label: "Download for macOS", version: "v0.1.0 &middot; Apple Silicon &middot; 214 MB" },
+    windows: { label: "Download for Windows", version: "v0.1.0 &middot; x86-64 &middot; 198 MB" },
+    linux: { label: "Download for Linux", version: "v0.1.0 &middot; .AppImage &middot; 187 MB" }
+  };
+
+  const primaryDownload = document.getElementById("primaryDownload");
+  const primaryDownloadLabel = document.getElementById("primaryDownloadLabel");
+  const versionLine = document.getElementById("versionLine");
+  const downloadStatus = document.getElementById("download-status");
+  const platformLinks = document.querySelectorAll("[data-platform]");
+
+  function detectPlatform(){
+    const ua = navigator.userAgent || "";
+    if (/Mac/i.test(ua)) return "mac";
+    if (/Win/i.test(ua)) return "windows";
+    if (/Linux/i.test(ua)) return "linux";
+    return "mac";
+  }
+
+  function setPlatform(key){
+    const build = builds[key];
+    if (!build) return;
+    primaryDownload.dataset.platform = key;
+    primaryDownloadLabel.textContent = build.label;
+    versionLine.innerHTML = build.version;
+    downloadStatus.textContent = "";
+    platformLinks.forEach((link) => {
+      link.setAttribute("aria-current", link.dataset.platform === key ? "true" : "false");
+    });
+  }
+
+  setPlatform(detectPlatform());
+
+  platformLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      setPlatform(link.dataset.platform);
+    });
+  });
+
+  primaryDownload.addEventListener("click", (event) => {
+    event.preventDefault();
+    const platform = primaryDownload.dataset.platform || detectPlatform();
+    const label = builds[platform]?.label || "Selected download";
+    downloadStatus.textContent = `${label} packages are not attached to this static preview yet.`;
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "Oriphim",
+  "short_name": "Oriphim",
+  "description": "Oriphim publishes VEIL, a falsification-first research workspace.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#c2391b",
+  "theme_color": "#f34b03",
+  "icons": [
+    {
+      "src": "/assets/oriphim-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/oriphim-red.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
