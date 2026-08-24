@@ -31,7 +31,7 @@
   body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
   body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:1;mix-blend-mode:multiply;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
-  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar{border-bottom:0;padding:18px 0;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -40,7 +40,7 @@
   .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .veil-word{font-size:1.18em;}
-  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
   .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease;}
   .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger{border-color:var(--ink);}
   .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
@@ -52,7 +52,7 @@
   .subnav a + a{margin-top:6px;}
   .signin-btn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--ink);padding:8px 18px;}
   .blank-canvas{position:relative;min-height:calc(100vh - 137px);}
-  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:0;padding:22px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
@@ -79,7 +79,7 @@
   </div>
 </div>
 <main class="blank-canvas" aria-label="Company"></main>
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
 <script src="script.js"></script>
 </body>
 </html>

@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oriphim | VEIL Research Workspace</title>
+<title>VEIL Research Workspace for Scientific Verification | Oriphim</title>
 <meta name="description" content="Install or request access to VEIL, Oriphim's falsification-first research workspace for deriving, simulating, and verifying claims from papers and datasets.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/">
 <meta name="theme-color" content="#f34b03">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="Oriphim | VEIL Research Workspace">
+<meta property="og:title" content="VEIL Research Workspace for Scientific Verification | Oriphim">
 <meta property="og:description" content="Derive experiments from papers and datasets, simulate the mechanism, and verify claims against the source.">
 <meta property="og:url" content="https://oriphim.com/">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
@@ -19,13 +20,12 @@
 <meta property="og:image:height" content="1254">
 <meta property="og:image:alt" content="Oriphim red-orange logo mark">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Oriphim | VEIL Research Workspace">
+<meta name="twitter:title" content="VEIL Research Workspace for Scientific Verification | Oriphim">
 <meta name="twitter:description" content="Derive experiments from papers and datasets, simulate the mechanism, and verify claims against the source.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" as="image" href="assets/veil-hero.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
 
   /* ---------- topbar ---------- */
   .topbar{
-    border-bottom:1px solid var(--line);
+    border-bottom:0;
     padding:18px 0;
   }
   .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;}
@@ -94,9 +94,11 @@
   h1 .veil-word{font-size:1.18em;}
 
   .navlinks{
-    display:flex; align-items:center; gap:26px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:clamp(34px, 5vw, 76px);
+    width:clamp(240px, 38vw, 520px);
     font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
+    font-size:14px;
     letter-spacing:.08em;
     text-transform:uppercase;
   }
@@ -182,8 +184,8 @@
   .signin-btn:hover{background:var(--ink); color:var(--paper);}
 
   /* ---------- hero ---------- */
-  .hero{padding:88px 0 100px;}
-  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:start;}
+  .hero{padding:64px 0 72px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:44px; align-items:center;}
   .hero .eyebrow{margin-bottom:22px;}
   .hero h1{
     font-size:clamp(40px, 5.2vw, 68px);
@@ -224,21 +226,39 @@
     padding-bottom:2px;
   }
 
-  /* ---------- specimen plate (embedded brand image) ---------- */
-  .plate-image{
-    border:1px solid var(--ink);
-    line-height:0;
-    background:var(--ink);
-  }
-  .plate-image img{
-    display:block;
+  /* ---------- specimen plate (interactive voxel surface) ---------- */
+  .voxel-plate{
+    position:relative;
     width:100%;
-    height:auto;
+    aspect-ratio:1;
+    min-height:clamp(360px, 44vw, 520px);
+    background:transparent;
+    overflow:visible;
+    isolation:isolate;
   }
+  .voxel-sphere{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+    background:transparent;
+    image-rendering:pixelated;
+    pointer-events:none;
+    opacity:.92;
+  }
+  .voxel-grab{
+    position:absolute;
+    border-radius:50%;
+    background:transparent;
+    pointer-events:auto;
+    touch-action:none;
+    cursor:grab;
+  }
+  .voxel-grab:active{cursor:grabbing;}
 
   /* ---------- section shell ---------- */
   section{padding:84px 0;}
-  .divider{border-top:1px solid var(--line);}
   .section-head{
     display:flex; justify-content:space-between; align-items:flex-end;
     gap:24px; margin-bottom:48px; flex-wrap:wrap;
@@ -272,11 +292,11 @@
   .vol-card p{font-size:13.5px; line-height:1.55; color:var(--ink-soft);}
 
   /* ---------- how it works : spec rows ---------- */
-  .spec-rows{border-top:1px solid var(--line);}
+  .spec-rows{border-top:0;}
   .spec-row{
     display:grid; grid-template-columns:70px 200px 1fr;
     gap:24px; padding:26px 0;
-    border-bottom:1px solid var(--line);
+    border-bottom:0;
     align-items:baseline;
   }
   .spec-row .sr-num{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);}
@@ -308,7 +328,7 @@
     gap:24px; flex-wrap:wrap;
     font-family:'IBM Plex Mono', monospace; font-size:10.5px;
     letter-spacing:.05em; color:var(--ink-soft);
-    border-top:1px solid var(--line); padding-top:22px;
+    border-top:0; padding-top:22px;
   }
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
@@ -319,6 +339,8 @@
 
   @media (max-width: 860px){
     .hero-grid{grid-template-columns:1fr;}
+    .hero{padding:52px 0 64px;}
+    .voxel-plate{min-height:min(68vw, 540px);}
     .vol-grid{grid-template-columns:1fr 1fr;}
     .spec-row{grid-template-columns:50px 1fr; }
     .spec-row .sr-label{grid-column:2; }
@@ -328,6 +350,8 @@
     .vol-grid{grid-template-columns:1fr;}
     .meta-row{display:none;}
     .navlinks{display:none;}
+    .hero{padding:42px 0 54px;}
+    .voxel-plate{min-height:330px;}
   }
   @media (prefers-reduced-motion: reduce){
     .topo-canvas{opacity:.52;}
@@ -356,6 +380,22 @@
         "height": 1254
       },
       "description": "Oriphim publishes VEIL, a falsification-first research workspace."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://oriphim.com/#veil",
+      "name": "VEIL",
+      "applicationCategory": "ScienceApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "url": "https://oriphim.com/download",
+      "description": "A local-first research workspace for deriving experiments from papers and datasets, simulating mechanisms, and verifying claims against their sources.",
+      "publisher": { "@id": "https://oriphim.com/#organization" },
+      "featureList": [
+        "Derive testable experiments from papers and datasets",
+        "Simulate scientific and mathematical models",
+        "Verify claims against source material",
+        "Local-first research workflow"
+      ]
     }
   ]
 }
@@ -390,7 +430,7 @@
   <section class="hero" id="veil">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">ORIPHIM RESEARCH - CATALOGUE No. 01</div>
+        <div class="eyebrow">ORIPHIM RESEARCH - CATALOG No. 01</div>
         <h1>Pull back the <span class="veil-word">veil</span> on how things actually work.</h1>
         <p class="lede">Upload a paper or a dataset. Derive an experiment from it. Simulate the mechanism, verify it against the source, and see the model underneath - across physics, chemistry, quantum systems, mathematics, and logistics.</p>
         <div class="cta-row">
@@ -399,14 +439,12 @@
         </div>
       </div>
 
-      <div class="plate-image fade">
-        <img src="assets/veil-hero.jpg" width="850" height="1062" fetchpriority="high" decoding="async" alt="A warrior with a spear facing an armored knight with a heraldic shield, in engraved battle-scene style">
+      <div class="voxel-plate fade" data-voxel-piece aria-label="Interactive voxel sphere">
+        <canvas class="voxel-sphere" data-voxel-sphere aria-hidden="true"></canvas>
+        <div class="voxel-grab" data-voxel-grab aria-hidden="true"></div>
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
-
   <section id="volumes">
     <div class="wrap">
       <div class="section-head">
@@ -457,9 +495,6 @@
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
-
   <section id="method">
     <div class="wrap">
       <div class="section-head">
@@ -503,7 +538,7 @@
 <footer>
   <div class="wrap">
     <span>&copy; 2026 ORIPHIM, INC.</span>
-    <a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a>
+    <a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a>
   </div>
 </footer>
 
@@ -618,6 +653,396 @@
       requestAnimationFrame(animateTopo);
     }
   }
+
+  (() => {
+    document.querySelectorAll('[data-voxel-piece]').forEach((piece) => {
+      const cv = piece.querySelector('[data-voxel-sphere]');
+      const grab = piece.querySelector('[data-voxel-grab]');
+      if (!cv) return;
+
+      const ctx = cv.getContext('2d');
+      const off = document.createElement('canvas');
+      const octx = off.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const CELL = 2;
+      const VOX = 72;
+      const CHROMA = 1.0;
+      const SPIN = 0.45;
+      const RATE = 1.25;
+      const SIZE = 0.34;
+      const A = { amp: 0.3, den: 0.6, flow: 0.6, turb: 1 };
+
+      let gw = 0;
+      let gh = 0;
+      let img = null;
+      let buf32 = null;
+      let buf8 = null;
+      let depth = null;
+      let val = null;
+      let chb = null;
+
+      const BAYER = new Float32Array(64);
+      (() => {
+        const m = [
+          0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,
+          60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,
+          15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21
+        ];
+        for (let i = 0; i < 64; i += 1) BAYER[i] = (m[i] + 0.5) / 64;
+      })();
+
+      const h3 = (i, j, k) => {
+        let n = Math.imul(i | 0, 374761393) ^ Math.imul(j | 0, 668265263) ^ Math.imul(k | 0, 1442695041);
+        n = Math.imul(n ^ (n >>> 13), 1274126177);
+        return ((n ^ (n >>> 16)) >>> 0) * 2.3283064365386963e-10;
+      };
+
+      const noise3 = (x, y, z) => {
+        const xi = Math.floor(x);
+        const yi = Math.floor(y);
+        const zi = Math.floor(z);
+        let fx = x - xi;
+        let fy = y - yi;
+        let fz = z - zi;
+        fx = fx * fx * (3 - 2 * fx);
+        fy = fy * fy * (3 - 2 * fy);
+        fz = fz * fz * (3 - 2 * fz);
+        const c000 = h3(xi, yi, zi);
+        const c100 = h3(xi + 1, yi, zi);
+        const c010 = h3(xi, yi + 1, zi);
+        const c110 = h3(xi + 1, yi + 1, zi);
+        const c001 = h3(xi, yi, zi + 1);
+        const c101 = h3(xi + 1, yi, zi + 1);
+        const c011 = h3(xi, yi + 1, zi + 1);
+        const c111 = h3(xi + 1, yi + 1, zi + 1);
+        const x00 = c000 + (c100 - c000) * fx;
+        const x10 = c010 + (c110 - c010) * fx;
+        const x01 = c001 + (c101 - c001) * fx;
+        const x11 = c011 + (c111 - c011) * fx;
+        const y0 = x00 + (x10 - x00) * fy;
+        const y1 = x01 + (x11 - x01) * fy;
+        return y0 + (y1 - y0) * fz;
+      };
+
+      const fbm = (x, y, z) => {
+        let v = noise3(x, y, z) * 0.5;
+        v += noise3(x * 2.03 + 7.1, y * 2.03 - 3.4, z * 2.03 + 1.7) * 0.29;
+        v += noise3(x * 4.11 - 5.3, y * 4.11 + 9.2, z * 4.11 - 2.6) * 0.15;
+        return v * 1.064;
+      };
+
+      const NPT = 52000;
+      const PT = new Float32Array(NPT * 3);
+      const ORDER = new Uint32Array(NPT);
+      (() => {
+        const ga = Math.PI * (3 - Math.sqrt(5));
+        for (let i = 0; i < NPT; i += 1) {
+          const y = 1 - 2 * (i + 0.5) / NPT;
+          const r = Math.sqrt(Math.max(0, 1 - y * y));
+          const th = i * ga;
+          PT[i * 3] = Math.cos(th) * r;
+          PT[i * 3 + 1] = y;
+          PT[i * 3 + 2] = Math.sin(th) * r;
+          ORDER[i] = i;
+        }
+        let seed = 0x9e3779b9;
+        const rnd = () => {
+          seed = Math.imul(seed ^ (seed >>> 15), 0x2545f491);
+          return ((seed >>> 0) % 1000000) / 1000000;
+        };
+        for (let i = NPT - 1; i > 0; i -= 1) {
+          const j = (rnd() * (i + 1)) | 0;
+          const t = ORDER[i];
+          ORDER[i] = ORDER[j];
+          ORDER[j] = t;
+        }
+      })();
+
+      const resize = () => {
+        const rect = piece.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const W = Math.max(1, rect.width);
+        const H = Math.max(1, rect.height);
+        cv.width = Math.round(W * dpr);
+        cv.height = Math.round(H * dpr);
+        gw = Math.max(8, Math.ceil(W / CELL));
+        gh = Math.max(8, Math.ceil(H / CELL));
+        off.width = gw;
+        off.height = gh;
+        img = octx.createImageData(gw, gh);
+        const ab = new ArrayBuffer(gw * gh * 4);
+        buf32 = new Uint32Array(ab);
+        buf8 = new Uint8ClampedArray(ab);
+        depth = new Float32Array(gw * gh);
+        val = new Float32Array(gw * gh);
+        chb = new Float32Array(gw * gh);
+        ctx.imageSmoothingEnabled = false;
+
+        if (grab) {
+          const dia = Math.min(W, H) * SIZE * 2 * 1.25;
+          grab.style.width = `${dia}px`;
+          grab.style.height = `${dia}px`;
+          grab.style.left = `${W * 0.5 - dia * 0.5}px`;
+          grab.style.top = `${H * 0.5 - dia * 0.5}px`;
+        }
+      };
+
+      const LX = -0.44;
+      const LY = 0.55;
+      const LZ = 0.71;
+      const TAU = Math.PI * 2;
+      const M = new Float32Array([1,0,0, 0,1,0, 0,0,1]);
+
+      const rotX = (a) => {
+        const c = Math.cos(a);
+        const s = Math.sin(a);
+        const a3 = M[3];
+        const a4 = M[4];
+        const a5 = M[5];
+        const a6 = M[6];
+        const a7 = M[7];
+        const a8 = M[8];
+        M[3] = c * a3 - s * a6;
+        M[4] = c * a4 - s * a7;
+        M[5] = c * a5 - s * a8;
+        M[6] = s * a3 + c * a6;
+        M[7] = s * a4 + c * a7;
+        M[8] = s * a5 + c * a8;
+      };
+
+      const rotY = (a) => {
+        const c = Math.cos(a);
+        const s = Math.sin(a);
+        const a0 = M[0];
+        const a1 = M[1];
+        const a2 = M[2];
+        const a6 = M[6];
+        const a7 = M[7];
+        const a8 = M[8];
+        M[0] = c * a0 + s * a6;
+        M[1] = c * a1 + s * a7;
+        M[2] = c * a2 + s * a8;
+        M[6] = -s * a0 + c * a6;
+        M[7] = -s * a1 + c * a7;
+        M[8] = -s * a2 + c * a8;
+      };
+
+      rotX(-0.30);
+
+      let dragging = false;
+      let lx = 0;
+      let ly = 0;
+      let vx = 0;
+      let vy = 0;
+      let ldt = 1;
+      let idle = 1;
+
+      if (grab) {
+        const K = 0.007;
+        grab.addEventListener('pointerdown', (event) => {
+          dragging = true;
+          lx = event.clientX;
+          ly = event.clientY;
+          vx = 0;
+          vy = 0;
+          idle = 0;
+          try { grab.setPointerCapture(event.pointerId); } catch {}
+          event.preventDefault();
+        });
+        const stop = () => {
+          dragging = false;
+        };
+        grab.addEventListener('pointerup', stop);
+        grab.addEventListener('pointercancel', stop);
+        grab.addEventListener('pointerleave', stop);
+        grab.addEventListener('pointermove', (event) => {
+          if (!dragging) return;
+          const dx = event.clientX - lx;
+          const dy = event.clientY - ly;
+          rotY(dx * K);
+          rotX(dy * K);
+          const inv = 1 / Math.max(ldt, 0.008);
+          vx = Math.max(-8, Math.min(8, dx * K * inv));
+          vy = Math.max(-8, Math.min(8, dy * K * inv));
+          lx = event.clientX;
+          ly = event.clientY;
+          event.preventDefault();
+        });
+      }
+
+      const lfo = (t, p1, p2, ph) => {
+        const v = 0.5 + 0.5 * (0.68 * Math.sin(t * TAU / p1 + ph) + 0.32 * Math.sin(t * TAU / p2 + ph * 1.7));
+        return v < 0 ? 0 : (v > 1 ? 1 : v);
+      };
+
+      const frame = (ft) => {
+        const cx = gw * 0.5;
+        const cy = gh * 0.5;
+        const R = Math.min(gw, gh) * SIZE;
+        const G = VOX;
+        const s = Math.max(1, Math.ceil(R / G));
+        const half = s * 0.5;
+        const m0 = M[0];
+        const m1 = M[1];
+        const m2 = M[2];
+        const m3 = M[3];
+        const m4 = M[4];
+        const m5 = M[5];
+        const m6 = M[6];
+        const m7 = M[7];
+        const m8 = M[8];
+        const tw = 1.7 * A.turb;
+        const amp = A.amp * 0.55;
+        const F = 2.15;
+        const active = Math.max(1200, (NPT * A.den) | 0);
+
+        val.fill(0);
+        depth.fill(-1e9);
+
+        for (let k = 0; k < active; k += 1) {
+          const i = ORDER[k] * 3;
+          const dx = PT[i];
+          const dy = PT[i + 1];
+          const dz = PT[i + 2];
+          const wx = m0 * dx + m1 * dy + m2 * dz;
+          const wy = m3 * dx + m4 * dy + m5 * dz;
+          const wz = m6 * dx + m7 * dy + m8 * dz;
+          if (wz < -0.28) continue;
+
+          const sx = dx * F;
+          const sy = dy * F;
+          const sz = dz * F;
+          const q = fbm(sx, sy, sz + ft * 0.3);
+          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + ft * 0.15, sz - tw * q);
+          f = f * f * (3 - 2 * f);
+          const rr = 1 + amp * (f - 0.5) * 2;
+          const X = Math.round(wx * rr * G) / G;
+          const Y = Math.round(wy * rr * G) / G;
+          const Z = Math.round(wz * rr * G) / G;
+          const ax = wx < 0 ? -wx : wx;
+          const ay = wy < 0 ? -wy : wy;
+          const az = wz < 0 ? -wz : wz;
+          let face;
+          if (az >= ax && az >= ay) face = 1.00;
+          else if (ay >= ax) face = wy > 0 ? 0.86 : 0.30;
+          else face = wx > 0 ? 0.60 : 0.46;
+
+          const lam = Math.max(0, wx * LX + wy * LY + wz * LZ);
+          const rim = Math.pow(1 - az, 5) * 0.85;
+          let v = face * (0.16 + 0.92 * lam) * (0.34 + 0.95 * f) + rim;
+          v *= 0.58 + 0.42 * (Z + 1) * 0.5;
+          const cm = (f - 0.5) + (lam - 0.5) * 0.35;
+          const spx = cx + X * R;
+          const spy = cy - Y * R;
+          const x0 = (spx - half) | 0;
+          const y0 = (spy - half) | 0;
+          const ve = v * 0.74;
+
+          for (let yy = y0; yy < y0 + s; yy += 1) {
+            if (yy < 0 || yy >= gh) continue;
+            const ro = yy * gw;
+            const edgeY = yy === y0 && s > 2;
+            for (let xx = x0; xx < x0 + s; xx += 1) {
+              if (xx < 0 || xx >= gw) continue;
+              const idx = ro + xx;
+              if (Z > depth[idx]) {
+                depth[idx] = Z;
+                val[idx] = (edgeY || (xx === x0 && s > 2)) ? ve : v;
+                chb[idx] = cm;
+              }
+            }
+          }
+        }
+
+        for (let py = 0, p = 0; py < gh; py += 1) {
+          const brow = (py & 7) << 3;
+          for (let px = 0; px < gw; px += 1, p += 1) {
+            const isVox = depth[p] > -1e8;
+            if (!isVox) {
+              buf32[p] = 0;
+              continue;
+            }
+            let v = val[p];
+            v = v < 0 ? 0 : (v > 1 ? 1 : v);
+            v = Math.pow(v, 0.88);
+            const bi = brow | (px & 7);
+            const tR = BAYER[bi];
+            let r;
+            let g;
+            let b;
+            if (isVox) {
+              const tG = BAYER[(bi + 21) & 63];
+              const tB = BAYER[(bi + 42) & 63];
+              const o = chb[p] * CHROMA * 0.20;
+              r = (v + o > tR) ? 255 : 0;
+              g = (v > tG) ? 255 : 0;
+              b = (v - o > tB) ? 255 : 0;
+            } else {
+              r = g = b = (v > tR) ? 255 : 0;
+            }
+            buf32[p] = 0xff000000 | (b << 16) | (g << 8) | r;
+          }
+        }
+
+        img.data.set(buf8);
+        octx.putImageData(img, 0, 0);
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(off, 0, 0, cv.width, cv.height);
+      };
+
+      let cyc = 0;
+      let ftAcc = 0;
+      let last = performance.now();
+      const loop = (now) => {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        ldt = dt;
+        cyc += dt * RATE;
+        A.amp = 0.08 + 0.64 * lfo(cyc, 47, 29.3, 0.0);
+        A.den = 0.30 + 0.70 * lfo(cyc, 31, 19.7, 1.9);
+        A.flow = 0.20 + 1.25 * lfo(cyc, 59, 37.1, 3.4);
+        A.turb = 0.45 + 1.40 * lfo(cyc, 41, 23.9, 5.2);
+        ftAcc += dt * 0.40 * A.flow;
+
+        if (dragging) {
+          idle = 0;
+        } else {
+          if (vx || vy) {
+            rotY(vx * dt);
+            rotX(vy * dt);
+            const k = Math.exp(-2.4 * dt);
+            vx *= k;
+            vy *= k;
+            if (Math.abs(vx) < 0.004) vx = 0;
+            if (Math.abs(vy) < 0.004) vy = 0;
+          }
+          idle = Math.min(1, idle + dt * 0.7);
+          rotY(dt * 0.10 * SPIN * idle);
+        }
+
+        frame(ftAcc);
+        requestAnimationFrame(loop);
+      };
+
+      resize();
+      frame(0);
+      if (window.ResizeObserver) {
+        new ResizeObserver(() => {
+          resize();
+          frame(ftAcc);
+        }).observe(piece);
+      } else {
+        window.addEventListener('resize', () => {
+          resize();
+          frame(ftAcc);
+        });
+      }
+
+      if (!reduceMotion) requestAnimationFrame(loop);
+    });
+  })();
 
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });

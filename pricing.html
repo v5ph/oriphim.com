@@ -3,21 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing | Oriphim</title>
-<meta name="description" content="Pricing for Oriphim and VEIL, including Standard and Enterprise plans.">
+<title>VEIL Pricing | Standard and Enterprise Plans</title>
+<meta name="description" content="Compare VEIL Standard and Enterprise plans for local-first scientific research, simulation, formal verification, and team workflows.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/pricing">
 <meta name="theme-color" content="#f34b03">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="Pricing | Oriphim">
-<meta property="og:description" content="Pricing for Oriphim and VEIL.">
+<meta property="og:title" content="VEIL Pricing | Standard and Enterprise Plans">
+<meta property="og:description" content="Compare VEIL plans for local-first research, simulation, verification, and team workflows.">
 <meta property="og:url" content="https://oriphim.com/pricing">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Oriphim red-orange logo mark">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pricing | Oriphim">
-<meta name="twitter:description" content="Pricing for Oriphim and VEIL.">
+<meta name="twitter:title" content="VEIL Pricing | Standard and Enterprise Plans">
+<meta name="twitter:description" content="Compare VEIL plans for local-first research, simulation, verification, and team workflows.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
@@ -25,6 +29,37 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://oriphim.com/#veil",
+  "name": "VEIL",
+  "applicationCategory": "ScienceApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "url": "https://oriphim.com/pricing",
+  "description": "A local-first research workspace for scientific simulation and formal verification.",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "VEIL Standard",
+      "price": "39.00",
+      "priceCurrency": "USD",
+      "url": "https://oriphim.com/pricing",
+      "availability": "https://schema.org/InStock"
+    },
+    {
+      "@type": "Offer",
+      "name": "VEIL Enterprise",
+      "price": "299.00",
+      "priceCurrency": "USD",
+      "url": "https://oriphim.com/pricing",
+      "availability": "https://schema.org/InStock"
+    }
+  ],
+  "publisher": { "@id": "https://oriphim.com/#organization" }
+}
+</script>
 <style>
   :root{--bg:#c2391b;--bg-deep:#9c2c12;--paper:#ece4d3;--paper-dim:#ddd4bf;--cream:#f4eee0;--ink:#18130f;--ink-soft:#241d16;--line:rgba(24,19,15,.32);--olive:#333c27;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -36,7 +71,7 @@
   code{font-family:'IBM Plex Mono',monospace;font-size:.92em;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
 
-  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar{border-bottom:0;padding:18px 0;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -45,7 +80,7 @@
   .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .veil-word{font-size:1.18em;}
-  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
   .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
   .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger,.nav-menu[data-current="true"] .nav-trigger{border-color:var(--ink);}
   .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
@@ -76,7 +111,6 @@
   .btn-outline:hover{background:var(--ink);color:var(--paper);}
 
   section{padding:0 0 84px;}
-  .divider{border-top:1px solid var(--line);}
   .section-pad{padding:64px 0;}
   .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink);}
   .price-card{background:var(--paper);padding:38px 34px 34px;display:flex;flex-direction:column;}
@@ -89,7 +123,6 @@
   .price-billing-note{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin-top:8px;}
   .price-cta{margin-top:26px;}
   .price-cta a{width:100%;text-align:center;}
-  .price-divider{border-top:1px solid var(--line);margin:28px 0 22px;}
   .price-list-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
   .price-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
   .price-features li{font-size:14px;line-height:1.55;padding-left:22px;position:relative;color:var(--ink);}
@@ -102,8 +135,8 @@
   .guest-note h2{font-size:clamp(24px,2.8vw,30px);max-width:16ch;}
   .guest-note p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:46ch;}
   .faq-title{font-size:clamp(26px,3vw,32px);margin-bottom:34px;}
-  .faq-list{border-top:1px solid var(--line);}
-  .faq-item{border-bottom:1px solid var(--line);padding:22px 0;}
+  .faq-list{border-top:0;}
+  .faq-item{border-bottom:0;padding:22px 0;}
   .faq-item summary{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink);}
   .faq-item summary::-webkit-details-marker{display:none;}
   .faq-item summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:18px;color:var(--ink-soft);flex-shrink:0;transition:transform .2s ease;}
@@ -120,7 +153,7 @@
   .cta-band .btn-outline{color:var(--paper);border-color:var(--paper);}
   .cta-band .btn-outline:hover{background:var(--paper);color:var(--ink);}
   .cta-row-band{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:0;padding:22px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
@@ -177,7 +210,6 @@
           </div>
           <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime</div>
           <div class="price-cta"><a href="/sign-up" class="btn">Choose Standard</a></div>
-          <div class="price-divider"></div>
           <div class="price-list-label">What's included</div>
           <ul class="price-features">
             <li>Unlimited local AI chat and notebook - runs on your own hardware, so "unlimited" is a real word here.</li>
@@ -199,7 +231,6 @@
           </div>
           <div class="price-billing-note">Self-serve &middot; custom pricing on request</div>
           <div class="price-cta"><a href="/sign-up" class="btn-outline">Talk to us</a></div>
-          <div class="price-divider"></div>
           <div class="price-list-label">Live now</div>
           <ul class="price-features">
             <li>Everything in Standard, with an uncapped <span class="veil-word">VEIL</span> Cloud quota.</li>
@@ -222,18 +253,12 @@
       </div>
     </div>
   </section>
-
-  <div class="divider"></div>
-
   <section class="section-pad">
     <div class="wrap guest-note fade">
       <h2>Try Guest Mode first.</h2>
       <p>Guest mode is the free, unauthenticated way in - it runs locally in your browser, no account and no card required. Standard and Enterprise are what you step into once it's real work.</p>
     </div>
   </section>
-
-  <div class="divider"></div>
-
   <section class="section-pad">
     <div class="wrap fade">
       <h2 class="faq-title">Questions &amp; Answers</h2>
@@ -279,7 +304,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
 
 <script>
   const topoCanvas = document.querySelector("[data-topo-map]");

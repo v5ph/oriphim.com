@@ -3,20 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Company | Oriphim</title>
+<title>About Oriphim | Scientific Computing and Research Tools</title>
 <meta name="description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/company">
 <meta name="theme-color" content="#f34b03">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="Company | Oriphim">
+<meta property="og:title" content="About Oriphim | Scientific Computing and Research Tools">
 <meta property="og:description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
 <meta property="og:url" content="https://oriphim.com/company">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Oriphim red-orange logo mark">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Company | Oriphim">
+<meta name="twitter:title" content="About Oriphim | Scientific Computing and Research Tools">
 <meta name="twitter:description" content="Oriphim is a research and technology company building advanced computational tools for science, engineering, and complex decision-making.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -64,7 +68,7 @@
   .btn-outline{background:transparent;color:var(--ink);}
   .btn-outline:hover{background:var(--ink);color:var(--paper);}
 
-  .topbar{border-bottom:1px solid var(--line);padding:18px 0;}
+  .topbar{border-bottom:0;padding:18px 0;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -73,7 +77,7 @@
   .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .veil-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .veil-word{font-size:1.18em;}
-  .navlinks{display:flex;align-items:center;gap:26px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
   .navlinks a,.signin-btn{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s ease,background .15s ease,color .15s ease;}
   .navlinks a:hover,.navlinks a[aria-current="page"],.nav-trigger:hover,.nav-menu.is-open .nav-trigger{border-color:var(--ink);}
   .nav-menu{position:relative;display:flex;align-items:center;padding:12px 0;margin:-12px 0;}
@@ -88,13 +92,12 @@
 
   section{padding:64px 0;}
   .section-flush{padding:0;}
-  .divider{border-top:1px solid var(--line);}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:72px 0 64px;}
   .hero-grid .eyebrow{margin-bottom:22px;}
   .lede{margin-top:24px;font-size:16px;line-height:1.68;max-width:60ch;}
   .plate-image{border:1px solid var(--ink);line-height:0;background:var(--ink);overflow:hidden;}
   .plate-image img{display:block;width:100%;height:auto;}
-  .hero-grid .plate-image img{aspect-ratio:1122/1402;object-fit:cover;}
+  .hero-grid .plate-image img{aspect-ratio:1448/1086;object-fit:cover;}
   .mission-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;padding:64px 0;}
   .mission-grid .plate-image{background:var(--paper);}
   .mission-grid .plate-image img{aspect-ratio:1122/1402;object-fit:cover;}
@@ -103,7 +106,7 @@
   .section-head h2{max-width:16ch;}
   .mission-body{font-size:16px;line-height:1.7;max-width:66ch;margin-top:18px;}
   .mission-body:first-of-type{margin-top:0;}
-  .mission-scope{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;max-width:66ch;margin-top:24px;border-top:1px solid var(--line);padding-top:18px;color:var(--ink-soft);}
+  .mission-scope{font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;max-width:66ch;margin-top:24px;border-top:0;padding-top:18px;color:var(--ink-soft);}
   .mission-scope span{color:var(--ink);letter-spacing:.06em;}
   .principles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
   .principle-card{background:var(--paper);padding:30px 30px 32px;display:flex;flex-direction:column;gap:12px;min-height:190px;}
@@ -115,7 +118,7 @@
   .status-copy{max-width:48ch;}
   .status-copy p{max-width:none;}
   .social-follow{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
-  .contact-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;}
+  .contact-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:0;border-bottom:0;padding:34px 0;}
   .contact-row .contact-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.04em;margin-top:6px;}
   .contact-actions{display:flex;gap:14px;flex-wrap:wrap;}
   .cta-band{background:var(--ink);color:var(--paper);padding:80px 0;text-align:center;position:relative;overflow:hidden;isolation:isolate;}
@@ -129,7 +132,7 @@
   .cta-band .btn-outline{color:var(--paper);border-color:var(--paper);}
   .cta-band .btn-outline:hover{background:var(--paper);color:var(--ink);}
   .cta-row-band{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:1px solid var(--line);padding:22px 0;}
+  footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:0;padding:22px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
@@ -169,13 +172,10 @@
         <p class="lede">Oriphim is a place where theorists and experimentalists coexist - to build, test, and deploy real solutions for the world, not just publish about them. Applications should assist scientific work the way they already quietly do in a hundred labs, and do it more deliberately. Technology was supposed to be the magic we dreamt of. We want to help make that true again.</p>
       </div>
       <figure class="plate-image fade">
-        <img src="assets/company-theory-experiment.png" alt="Ink portrait with geometric research diagrams" width="1122" height="1402" decoding="async" fetchpriority="high">
+        <img src="assets/about-hero.png" alt="Engraved archive room with columns, scholars, and research artifacts" width="1448" height="1086" decoding="async" fetchpriority="high">
       </figure>
     </div>
   </section>
-
-  <div class="divider" aria-hidden="true"></div>
-
   <section class="section-flush">
     <div class="wrap mission-grid">
       <figure class="plate-image fade">
@@ -190,9 +190,6 @@
       </div>
     </div>
   </section>
-
-  <div class="divider" aria-hidden="true"></div>
-
   <section>
     <div class="wrap">
       <div class="section-head fade">
@@ -233,9 +230,6 @@
       </div>
     </div>
   </section>
-
-  <div class="divider" aria-hidden="true"></div>
-
   <section>
     <div class="wrap status-note fade">
       <h2>Where we are right now.</h2>
@@ -274,7 +268,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></a></div></footer>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
 <script>
   const topoCanvas = document.querySelector("[data-topo-map]");
   if (topoCanvas) {
