@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VEIL Research Workspace for Scientific Verification | Oriphim</title>
-<meta name="description" content="Install or request access to VEIL, Oriphim's falsification-first research workspace for deriving, simulating, and verifying claims from papers and datasets.">
+<title>VEIL | Defensible Engineering Simulation and Verification</title>
+<meta name="description" content="VEIL derives, runs, verifies, and validates engineering simulations, producing defensible evidence with explicit error budgets, assumptions, and limits.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/">
 <meta name="theme-color" content="#f34b03">
@@ -12,16 +12,16 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="VEIL Research Workspace for Scientific Verification | Oriphim">
-<meta property="og:description" content="Derive experiments from papers and datasets, simulate the mechanism, and verify claims against the source.">
+<meta property="og:title" content="VEIL | Defensible Engineering Simulation and Verification">
+<meta property="og:description" content="Simulation that can be defended: governing equations, deterministic computation, verification, validation, and explicit limits.">
 <meta property="og:url" content="https://oriphim.com/">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-red.png">
 <meta property="og:image:width" content="1254">
 <meta property="og:image:height" content="1254">
 <meta property="og:image:alt" content="Oriphim red-orange logo mark">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VEIL Research Workspace for Scientific Verification | Oriphim">
-<meta name="twitter:description" content="Derive experiments from papers and datasets, simulate the mechanism, and verify claims against the source.">
+<meta name="twitter:title" content="VEIL | Defensible Engineering Simulation and Verification">
+<meta name="twitter:description" content="Simulation that can be defended: deterministic computation, verification, validation, and explicit limits.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-red.png">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
@@ -184,14 +184,24 @@
   .signin-btn:hover{background:var(--ink); color:var(--paper);}
 
   /* ---------- hero ---------- */
-  .hero{padding:64px 0 72px;}
-  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:44px; align-items:center;}
-  .hero .eyebrow{margin-bottom:22px;}
+  .hero{padding:56px 0 72px;}
+  .hero-grid{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:8px;
+  }
+  .hero-copy{max-width:64ch;}
+  .hero .eyebrow{margin-bottom:20px;}
   .hero h1{
     font-size:clamp(40px, 5.2vw, 68px);
     line-height:1.03;
-    max-width:11ch;
+    max-width:20ch;
+    margin:0 auto;
   }
+  .hero .lede{margin-left:auto; margin-right:auto;}
+  .hero .cta-row{justify-content:center;}
   .hero p.lede{
     margin-top:26px;
     font-size:16.5px;
@@ -229,9 +239,9 @@
   /* ---------- specimen plate (interactive voxel surface) ---------- */
   .voxel-plate{
     position:relative;
-    width:100%;
+    width:min(520px, 72vw);
     aspect-ratio:1;
-    min-height:clamp(360px, 44vw, 520px);
+    margin:0 auto;
     background:transparent;
     overflow:visible;
     isolation:isolate;
@@ -246,6 +256,7 @@
     image-rendering:pixelated;
     pointer-events:none;
     opacity:.92;
+    z-index:1;
   }
   .voxel-grab{
     position:absolute;
@@ -254,6 +265,7 @@
     pointer-events:auto;
     touch-action:none;
     cursor:grab;
+    z-index:3;
   }
   .voxel-grab:active{cursor:grabbing;}
 
@@ -269,6 +281,56 @@
     font-size:13.5px; color:var(--ink-soft); max-width:34ch; line-height:1.6;
     font-family:'Inter', sans-serif;
   }
+  .evidence-section{border-top:1px solid rgba(24,19,15,.18);}
+  .evidence-section .section-head{align-items:flex-start;}
+  .evidence-section .section-head h2{max-width:20ch;}
+  .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink);}
+  .tier-card{background:var(--paper);padding:38px 34px;}
+  .tier-card h3{font-size:25px;margin-bottom:18px;}
+  .tier-card p,.narrative-copy p{font-size:15px;line-height:1.75;color:var(--ink-soft);}
+  .tier-note{margin-top:28px;max-width:72ch;font-family:'Fraunces',serif;font-size:20px;line-height:1.5;}
+  .narrative-grid{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(40px,8vw,120px);align-items:start;}
+  .narrative-grid h2{font-size:clamp(28px,3.4vw,40px);max-width:18ch;}
+  .narrative-grid .eyebrow{margin-bottom:14px;}
+  .narrative-copy{max-width:68ch;}
+  .narrative-copy p + p{margin-top:22px;}
+  .narrative-copy strong{color:var(--ink);}
+  .limits-section{background:var(--paper);}
+  body.tab-layout{--topbar-h:79px;height:100svh;overflow:hidden;}
+  .tab-experience{position:relative;height:calc(100svh - var(--topbar-h));min-height:0;overflow:hidden;}
+  .tab-orb-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;}
+  .tab-orb-stage .voxel-plate{width:min(760px,48vw,calc(100svh - var(--topbar-h) - 48px));margin:0;pointer-events:auto;}
+  .tab-panel{position:absolute;top:50%;width:20vw;transform:translateY(calc(-50% + 8px));opacity:0;visibility:hidden;pointer-events:none;transition:opacity 260ms ease,transform 260ms ease;}
+  .tab-panel[data-side="right"]{left:77vw;}.tab-panel[data-side="left"]{left:3vw;}
+  .tab-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(-50%);transition-delay:320ms;}
+  .tab-panel .eyebrow{margin-bottom:18px;}.tab-panel h1,.tab-panel h2{font-size:clamp(30px,3vw,46px);line-height:1.04;max-width:13ch;}.tab-panel p{font-size:clamp(13px,1vw,15px);line-height:1.6;margin-top:20px;max-width:48ch;}.tab-panel .cta-row{margin-top:26px;}
+
+  .tab-report{
+    position:absolute; top:50%; left:76vw; width:min(258px,22vw);
+    transform:translateY(calc(-50% + 8px)) rotate(-2deg);
+    background:var(--paper); border:1px solid var(--ink); color:var(--ink);
+    padding:20px 22px 18px; box-shadow:10px 14px 0 rgba(24,19,15,.14);
+    opacity:0; visibility:hidden; pointer-events:none; z-index:4;
+    transition:opacity 260ms ease, transform 260ms ease;
+  }
+  .tab-report.is-active{opacity:1; visibility:visible; transform:translateY(-50%) rotate(-2deg); transition-delay:320ms;}
+  .tab-report .eyebrow{font-size:10px;}
+  .tab-report .report-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .tab-report .report-id{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft);}
+  .tab-report h3{font-family:'Fraunces',serif; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
+  .tab-report .report-rows{display:flex; flex-direction:column; gap:8px; margin-bottom:16px; border-top:1px solid var(--line-soft); padding-top:12px;}
+  .tab-report .report-row{display:flex; justify-content:space-between; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.02em; color:var(--ink-soft);}
+  .tab-report .report-row b{color:var(--ink); font-weight:500;}
+  .tab-report .report-plot{display:block; width:100%; height:auto; margin-bottom:14px;}
+  .tab-report .report-plot polyline{fill:none; stroke:var(--bg-deep); stroke-width:1.6;}
+  .tab-report .report-plot line{stroke:var(--line-soft); stroke-width:1;}
+  .tab-report .report-sign{display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-top:1px solid var(--line-soft); padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
+  .tab-report .report-sign b{font-family:'Fraunces',serif; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
+
+  .section-tabs{position:absolute;left:32px;bottom:32px;display:flex;gap:20px;z-index:5;}
+  .section-tabs button{appearance:none;border:0;border-bottom:1px solid transparent;background:transparent;padding:4px 0;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;opacity:.45;cursor:pointer;}
+  .section-tabs button[aria-current="true"]{opacity:1;border-bottom-color:var(--bg-deep);}
+  main>.hero,main>.evidence-section,main>.cta-band,body.tab-layout>footer{display:none;}
 
   /* ---------- volumes grid ---------- */
   .vol-grid{
@@ -337,10 +399,32 @@
   .fade{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
   .fade.in{opacity:1; transform:translateY(0);}
 
+  @media (max-width: 980px){
+    .tab-experience{height:calc(100svh - var(--topbar-h));min-height:0;}
+    .tab-orb-stage{inset:0 0 auto;height:42vh;transform:none!important;}
+    .tab-orb-stage .voxel-plate{width:min(390px,78vw,38svh);pointer-events:none;}
+    .tab-panel,.tab-panel[data-side="right"],.tab-panel[data-side="left"]{top:44vh;left:8vw;width:84vw;transform:translateY(8px);}
+    .tab-panel.is-active{transform:translateY(0);}
+    .tab-panel h1,.tab-panel h2{font-size:clamp(28px,8vw,42px);}.tab-panel p{font-size:13.5px;line-height:1.55;margin-top:16px;}.tab-panel .cta-row{margin-top:20px;}
+    .section-tabs{left:50%;bottom:18px;transform:translateX(-50%);}
+    .tab-report{display:none;}
+  }
+  @media (max-height: 700px) and (min-width: 981px){
+    .tab-panel h1,.tab-panel h2{font-size:clamp(26px,2.5vw,38px);}
+    .tab-panel p{font-size:12.5px;line-height:1.48;margin-top:14px;}
+    .tab-panel .eyebrow{margin-bottom:12px;}
+    .tab-panel .cta-row{margin-top:18px;}
+    .section-tabs{bottom:18px;}
+    .tab-report{padding:16px 18px 14px;}
+    .tab-report h3{font-size:15px;margin-bottom:12px;}
+    .tab-report .report-rows{gap:6px;margin-bottom:12px;padding-top:10px;}
+  }
   @media (max-width: 860px){
     .hero-grid{grid-template-columns:1fr;}
-    .hero{padding:52px 0 64px;}
-    .voxel-plate{min-height:min(68vw, 540px);}
+    .hero{padding:44px 0 56px;}
+    .voxel-plate{width:min(440px, 78vw);}
+    .narrative-grid{grid-template-columns:1fr;gap:28px;}
+    .tier-grid{grid-template-columns:1fr;}
     .vol-grid{grid-template-columns:1fr 1fr;}
     .spec-row{grid-template-columns:50px 1fr; }
     .spec-row .sr-label{grid-column:2; }
@@ -350,8 +434,8 @@
     .vol-grid{grid-template-columns:1fr;}
     .meta-row{display:none;}
     .navlinks{display:none;}
-    .hero{padding:42px 0 54px;}
-    .voxel-plate{min-height:330px;}
+    .hero{padding:36px 0 48px;}
+    .voxel-plate{width:min(320px, 84vw);}
   }
   @media (prefers-reduced-motion: reduce){
     .topo-canvas{opacity:.52;}
@@ -379,7 +463,7 @@
         "width": 1254,
         "height": 1254
       },
-      "description": "Oriphim publishes VEIL, a falsification-first research workspace."
+      "description": "Oriphim publishes VEIL, a research system for defensible engineering simulation, verification, and validation."
     },
     {
       "@type": "SoftwareApplication",
@@ -388,20 +472,20 @@
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Windows, macOS, Linux",
       "url": "https://oriphim.com/download",
-      "description": "A local-first research workspace for deriving experiments from papers and datasets, simulating mechanisms, and verifying claims against their sources.",
+      "description": "A research system that derives governing equations, runs deterministic simulations, verifies numerical accuracy, and quantifies validation discrepancy against reality.",
       "publisher": { "@id": "https://oriphim.com/#organization" },
       "featureList": [
-        "Derive testable experiments from papers and datasets",
-        "Simulate scientific and mathematical models",
-        "Verify claims against source material",
-        "Local-first research workflow"
+        "Derive governing equations from described physical systems",
+        "Run deterministic engineering simulations",
+        "Quantify numerical error and convergence",
+        "Validate models against measurements and benchmarks"
       ]
     }
   ]
 }
 </script>
 </head>
-<body>
+<body class="tab-layout">
 
 <div class="topbar">
   <div class="wrap">
@@ -411,8 +495,6 @@
     </a>
 
     <nav class="navlinks">
-      <a href="/archive">Archive</a>
-      <a href="/company">Company</a>
       <div class="nav-menu" data-dropdown>
         <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="veil-word">VEIL</span></a>
         <span class="subnav" role="menu">
@@ -420,6 +502,8 @@
           <a href="/download" role="menuitem">DOWNLOAD</a>
         </span>
       </div>
+      <a href="/archive">Archive</a>
+      <a href="/company">Company</a>
     </nav>
 
     <a href="/sign-in" class="signin-btn">Sign In</a>
@@ -427,109 +511,92 @@
 </div>
 
 <main>
+  <section class="tab-experience" data-tab-experience aria-label="VEIL overview">
+    <div class="tab-orb-stage" data-tab-orb-stage aria-hidden="true">
+      <div class="voxel-plate" data-shape-piece>
+        <canvas class="voxel-sphere" data-voxel-sphere></canvas>
+        <div class="voxel-grab" data-voxel-grab></div>
+      </div>
+    </div>
+    <article class="tab-panel is-active" data-tab-panel="0" data-side="left">
+      <div class="eyebrow">ORIPHIM RESEARCH — CATALOG No. 01</div><h1>Simulation that can be defended.</h1>
+      <p>Veil derives the governing equations from a described system, runs the model, and subjects it to every check the available reality permits — convergence, conservation, error budgets, sensitivity to every free parameter. Then it states plainly what the numbers do and do not license you to conclude.</p>
+      <div class="cta-row"><a href="/sign-up" class="btn">Request Access</a><a href="/archive" class="link-line">Read the archive</a></div>
+    </article>
+    <aside class="tab-report is-active" data-tab-report="0" aria-hidden="true">
+      <div class="report-head"><span class="eyebrow">Sample Output</span><span class="report-id">No. 0114</span></div>
+      <h3>Wing Spar — Load Case 4</h3>
+      <div class="report-rows">
+        <div class="report-row"><span>Mesh quality</span><b>Pass</b></div>
+        <div class="report-row"><span>Convergence</span><b>0.4% @ h/2</b></div>
+        <div class="report-row"><span>Margin of safety</span><b>+0.31</b></div>
+        <div class="report-row"><span>Force balance</span><b>&lt; 0.1%</b></div>
+      </div>
+      <svg class="report-plot" viewBox="0 0 220 60" aria-hidden="true">
+        <line x1="4" y1="54" x2="216" y2="54"></line>
+        <polyline points="4,48 40,41 76,28 112,19 148,13 184,10 216,9"></polyline>
+      </svg>
+      <div class="report-sign"><span>Reviewed &amp; signed</span><b>J. K., P.E.</b></div>
+    </aside>
+    <article class="tab-panel" data-tab-panel="1" data-side="left">
+      <div class="eyebrow">The Deliverable</div><h2>A package, in the form the review board already reads.</h2>
+      <p>Objectives and margin summary. Load cases and boundary conditions. Modelling and mesh. Solver checks — mesh quality, ground checks, force balance. Margins per part with the critical case. Hand calcs, fatigue, bolted joints. Hours instead of months. A named engineer reviews it, corrects it, and signs it. Veil captures every correction.</p>
+    </article>
+    <article class="tab-panel" data-tab-panel="2" data-side="right">
+      <div class="eyebrow">Limits</div><h2>Veil does not claim a model is correct.</h2>
+      <p>Verification claims the mathematics was solved to a stated accuracy, and that conclusions hold under stated perturbations. Validation claims the model is wrong by a quantified amount under stated conditions. Both are defensible. Neither is “good agreement.” And no number in a Veil report is written by a language model.</p>
+    </article>
+    <nav class="section-tabs" aria-label="Sections">
+      <button type="button" data-tab="0" aria-current="true">01</button><button type="button" data-tab="1">02</button><button type="button" data-tab="2">03</button>
+    </nav>
+  </section>
   <section class="hero" id="veil">
     <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">ORIPHIM RESEARCH - CATALOG No. 01</div>
-        <h1>Pull back the <span class="veil-word">veil</span> on how things actually work.</h1>
-        <p class="lede">Upload a paper or a dataset. Derive an experiment from it. Simulate the mechanism, verify it against the source, and see the model underneath - across physics, chemistry, quantum systems, mathematics, and logistics.</p>
-        <div class="cta-row">
-          <a href="/sign-up" class="btn">Request Access</a>
-          <a href="/archive" class="link-line">See the collection</a>
-        </div>
-      </div>
-
       <div class="voxel-plate fade" data-voxel-piece aria-label="Interactive voxel sphere">
         <canvas class="voxel-sphere" data-voxel-sphere aria-hidden="true"></canvas>
         <div class="voxel-grab" data-voxel-grab aria-hidden="true"></div>
       </div>
+
+      <div class="hero-copy">
+        <div class="eyebrow">ORIPHIM RESEARCH - CATALOG No. 01</div>
+        <h1>Simulation that can be defended.</h1>
+        <p class="lede"><span class="veil-word">VEIL</span> takes a described physical system, derives the governing equations, builds and runs the model, subjects it to every check the available reality permits, and states plainly what the numbers do and do not license you to conclude.</p>
+        <div class="cta-row">
+          <a href="/sign-up" class="btn">Request Access</a>
+          <a href="/archive" class="link-line">Read the archive</a>
+        </div>
+      </div>
+
     </div>
   </section>
-  <section id="volumes">
+  <section class="evidence-section" id="distinction">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <div class="eyebrow">The Collection</div>
-          <h2>Six volumes, one engine.</h2>
+          <div class="eyebrow">The Distinction</div>
+          <h2>Verification and validation are not the same claim.</h2>
         </div>
-        <p class="section-note">Every domain runs on the same core: ingest a claim, formalize it, simulate it, check it against reality.</p>
       </div>
 
-      <div class="vol-grid">
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. I</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/></svg></div>
-          <h3>Physics</h3>
-          <p>Classical dynamics and ODEs via SciPy, with conservation laws checked at every step.</p>
-        </div>
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. II</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-6 10a1 1 0 0 0 1 1.5h14a1 1 0 0 0 1-1.5L14 9V3"/></svg></div>
-          <h3>Chemistry</h3>
-          <p>Reaction kinetics, SIR epidemic models, and Michaelis-Menten enzyme dynamics.</p>
-        </div>
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. III</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><line x1="7" y1="9" x2="12" y2="15"/><line x1="17" y1="9" x2="12" y2="15"/><line x1="7" y1="7" x2="17" y2="7"/></svg></div>
-          <h3>Quantum</h3>
-          <p>Canonical circuit simulation with NumPy and Qiskit, run and inspected gate by gate.</p>
-        </div>
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. IV</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><path d="M4 18 L10 6 L14 14 L20 4"/></svg></div>
-          <h3>Mathematics</h3>
-          <p>Turn a conjecture into a spec, then search for counterexamples with Z3 and LLM-assisted proof.</p>
-        </div>
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. V</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="19" r="1.6"/><circle cx="19" cy="5" r="1.6"/><circle cx="14" cy="14" r="1.6"/><path d="M5 19 L14 14 L19 5"/></svg></div>
-          <h3>Logistics</h3>
-          <p>Routing and scheduling problems solved with heuristics and OR-Tools, at real-world scale.</p>
-        </div>
-        <div class="vol-card fade">
-          <div class="vol-num">VOL. VI</div>
-          <div class="vol-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg></div>
-          <h3>Cross-Domain</h3>
-          <p>Ingest a paper, verify it formally, and search adaptively over the model space that fits it.</p>
-        </div>
+      <div class="tier-grid">
+        <article class="tier-card fade"><h3>Verification</h3><p>Was the mathematics solved correctly? Numerical error budgets, convergence under refinement, conservation, integrator cross-agreement, dimensional consistency, and sensitivity of the conclusion to every free parameter. This tier needs no reference data. It is available for any system you can describe. Most published computational work has never received it.</p></article>
+        <article class="tier-card fade"><h3>Validation</h3><p>How far is the model from reality? Discrepancy against measurement, with uncertainty carried on both sides — not one representative run compared to an experimental mean and called reasonable. This tier needs reality to compare against: a published benchmark, an inter-laboratory result, or your own test campaign.</p></article>
       </div>
+      <p class="tier-note">Veil says which tier a report belongs to, on the report. It does not produce a report it cannot stand behind.</p>
     </div>
   </section>
-  <section id="method">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Method</div>
-          <h2>How a claim becomes a result.</h2>
-        </div>
-        <p class="section-note">Three passes, the same for every domain - so the output can always be traced back to the source.</p>
-      </div>
+  <section class="evidence-section"><div class="wrap narrative-grid"><div><div class="eyebrow">The Deliverable</div><h2>A package, in the form the review board already reads.</h2></div><div class="narrative-copy fade"><p>Objectives and margin summary. Load cases and boundary conditions. How the components were modelled and meshed. Solver checks — mesh quality, ground checks, force balance. Margins per part with the critical case shown. Hand calcs. Fatigue and fracture where the program requires it. Bolted joints.</p><p>Hours instead of months. A named person reviews it, corrects it, and signs it. Veil captures every correction.</p><p><strong>Judgment stays with the engineer.</strong> Where a credibility framework requires a practitioner's signature, that requirement is the product specification, not a constraint on it.</p></div></div></section>
 
-      <div class="spec-rows">
-        <div class="spec-row fade">
-          <div class="sr-num">01</div>
-          <div class="sr-label">Ingest</div>
-          <div class="sr-desc">Upload the paper, dataset, or stated problem. Oriphim reads it and pulls out the claims that can be tested.</div>
-        </div>
-        <div class="spec-row fade">
-          <div class="sr-num">02</div>
-          <div class="sr-label">Derive</div>
-          <div class="sr-desc">Each claim becomes a formal spec - equations, constraints, a model - ready to run rather than just read.</div>
-        </div>
-        <div class="spec-row fade">
-          <div class="sr-num">03</div>
-          <div class="sr-label">Simulate</div>
-          <div class="sr-desc">The spec runs as a real simulation, checked against conservation laws, known solutions, or counterexample search.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="evidence-section limits-section"><div class="wrap narrative-grid"><div><div class="eyebrow">Limits</div><h2>Veil does not claim a model is correct.</h2></div><div class="narrative-copy fade"><p>At the verification tier it claims the model was solved to a stated accuracy, and that the conclusions are or are not stable under stated perturbations. At the validation tier it claims the model is wrong by a quantified amount under stated conditions.</p><p>Both are defensible. Neither is “good agreement.”</p><p><strong>No number is written by a language model.</strong> A model may propose a brief and write interpretive prose. Every number in a report comes from deterministic computation.</p></div></div></section>
+
+  <section class="evidence-section"><div class="wrap narrative-grid"><div><div class="eyebrow">Scope</div><h2>Bounded by what you can describe.</h2></div><div class="narrative-copy fade"><p>Verification is available for any system you can pose — a warped accretion disc has no mesh, no machinery and no CAD model, and Veil handles it natively. Validation is earned one domain at a time, and Veil states the limit explicitly wherever reality is not available to compare against.</p><p>FEA is one solver backend. CAD is one geometry input. Both matter when a system has geometry and are irrelevant when it doesn't.</p></div></div></section>
 
   <section class="cta-band">
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="eyebrow">Oriphim Research</div>
-      <h2>Pierce through.</h2>
+      <h2>Bring the idea. Veil brings the evidence.</h2>
+      <p style="max-width:58ch;margin:0 auto 30px;color:var(--paper-dim);line-height:1.7;">You articulate the system and the questions, at whatever level of formality you have. You do not supply the equations. That work is Veil's.</p>
       <a href="/sign-up" class="btn">Request Access</a>
     </div>
   </section>
@@ -553,6 +620,13 @@
     const step = 14;
     const levels = [-1.3, -1.05, -0.8, -0.55, -0.3, -0.05, 0.2, 0.45, 0.7, 0.95, 1.2, 1.45];
 
+    // Reused across frames — the old version allocated a full grid of {x,y,v}
+    // objects plus per-cell intersection-point arrays every single frame,
+    // which was a steady source of GC pauses (stutter) for this always-on loop.
+    let cols = 0;
+    let rows = 0;
+    let values = null;
+
     const resizeTopo = () => {
       const rect = topoCanvas.getBoundingClientRect();
       width = Math.max(1, rect.width);
@@ -561,6 +635,9 @@
       topoCanvas.width = Math.ceil(width * dpr);
       topoCanvas.height = Math.ceil(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(width / step) + 3;
+      rows = Math.ceil(height / step) + 3;
+      values = new Float32Array(rows * cols);
     };
 
     const terrain = (x, y, time) => {
@@ -576,27 +653,14 @@
       return ridgeA * 0.72 + ridgeB * 0.58 + ridgeC * 0.38 + moundA * 0.34 + moundB * 0.28;
     };
 
-    const interp = (a, b, level) => {
-      const span = b.v - a.v || 1;
-      const amount = (level - a.v) / span;
-      return {
-        x: a.x + (b.x - a.x) * amount,
-        y: a.y + (b.y - a.y) * amount
-      };
-    };
-
     const renderTopo = (time = 0) => {
       if (!width || !height) resizeTopo();
-      const cols = Math.ceil(width / step) + 3;
-      const rows = Math.ceil(height / step) + 3;
-      const values = new Array(rows);
 
       for (let y = 0; y < rows; y += 1) {
-        values[y] = new Array(cols);
+        const py = (y - 1) * step;
+        const ro = y * cols;
         for (let x = 0; x < cols; x += 1) {
-          const px = (x - 1) * step;
-          const py = (y - 1) * step;
-          values[y][x] = { x: px, y: py, v: terrain(px, py, time) };
+          values[ro + x] = terrain((x - 1) * step, py, time);
         }
       }
 
@@ -604,30 +668,50 @@
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      levels.forEach((level, index) => {
+      for (let index = 0; index < levels.length; index += 1) {
+        const level = levels[index];
         ctx.beginPath();
 
         for (let y = 0; y < rows - 1; y += 1) {
+          const ro = y * cols, ro1 = (y + 1) * cols;
+          const ly = (y - 1) * step, ly1 = y * step;
           for (let x = 0; x < cols - 1; x += 1) {
-            const tl = values[y][x];
-            const tr = values[y][x + 1];
-            const br = values[y + 1][x + 1];
-            const bl = values[y + 1][x];
-            const points = [];
+            const tl = values[ro + x], tr = values[ro + x + 1];
+            const br = values[ro1 + x + 1], bl = values[ro1 + x];
+            const lx = (x - 1) * step, lx1 = x * step;
 
-            if ((tl.v < level) !== (tr.v < level)) points.push(interp(tl, tr, level));
-            if ((tr.v < level) !== (br.v < level)) points.push(interp(tr, br, level));
-            if ((br.v < level) !== (bl.v < level)) points.push(interp(br, bl, level));
-            if ((bl.v < level) !== (tl.v < level)) points.push(interp(bl, tl, level));
+            let p0x, p0y, p1x, p1y, p2x, p2y, p3x, p3y, pc = 0;
+            if ((tl < level) !== (tr < level)) {
+              const t = (level - tl) / ((tr - tl) || 1);
+              p0x = lx + (lx1 - lx) * t; p0y = ly; pc = 1;
+            }
+            if ((tr < level) !== (br < level)) {
+              const t = (level - tr) / ((br - tr) || 1);
+              const px = lx1, py = ly + (ly1 - ly) * t;
+              if (pc === 0) { p0x = px; p0y = py; } else { p1x = px; p1y = py; }
+              pc += 1;
+            }
+            if ((br < level) !== (bl < level)) {
+              const t = (level - br) / ((bl - br) || 1);
+              const px = lx1 + (lx - lx1) * t, py = ly1;
+              if (pc === 0) { p0x = px; p0y = py; } else if (pc === 1) { p1x = px; p1y = py; } else { p2x = px; p2y = py; }
+              pc += 1;
+            }
+            if ((bl < level) !== (tl < level)) {
+              const t = (level - bl) / ((tl - bl) || 1);
+              const px = lx, py = ly1 + (ly - ly1) * t;
+              if (pc === 0) { p0x = px; p0y = py; } else if (pc === 1) { p1x = px; p1y = py; } else if (pc === 2) { p2x = px; p2y = py; } else { p3x = px; p3y = py; }
+              pc += 1;
+            }
 
-            if (points.length === 2) {
-              ctx.moveTo(points[0].x, points[0].y);
-              ctx.lineTo(points[1].x, points[1].y);
-            } else if (points.length === 4) {
-              ctx.moveTo(points[0].x, points[0].y);
-              ctx.lineTo(points[1].x, points[1].y);
-              ctx.moveTo(points[2].x, points[2].y);
-              ctx.lineTo(points[3].x, points[3].y);
+            if (pc === 2) {
+              ctx.moveTo(p0x, p0y);
+              ctx.lineTo(p1x, p1y);
+            } else if (pc === 4) {
+              ctx.moveTo(p0x, p0y);
+              ctx.lineTo(p1x, p1y);
+              ctx.moveTo(p2x, p2y);
+              ctx.lineTo(p3x, p3y);
             }
           }
         }
@@ -635,7 +719,7 @@
         ctx.strokeStyle = index % 4 === 0 ? 'rgba(243,75,3,.56)' : 'rgba(236,228,211,.38)';
         ctx.lineWidth = index % 4 === 0 ? 1.35 : 0.9;
         ctx.stroke();
-      });
+      }
     };
 
     resizeTopo();
@@ -655,7 +739,7 @@
   }
 
   (() => {
-    document.querySelectorAll('[data-voxel-piece]').forEach((piece) => {
+    document.querySelectorAll('[data-shape-piece]').forEach((piece) => {
       const cv = piece.querySelector('[data-voxel-sphere]');
       const grab = piece.querySelector('[data-voxel-grab]');
       if (!cv) return;
@@ -670,7 +754,7 @@
       const CHROMA = 1.0;
       const SPIN = 0.45;
       const RATE = 1.25;
-      const SIZE = 0.34;
+      const SIZE = 0.41;
       const A = { amp: 0.3, den: 0.6, flow: 0.6, turb: 1 };
 
       let gw = 0;
@@ -698,42 +782,58 @@
         return ((n ^ (n >>> 16)) >>> 0) * 2.3283064365386963e-10;
       };
 
-      const noise3 = (x, y, z) => {
-        const xi = Math.floor(x);
-        const yi = Math.floor(y);
-        const zi = Math.floor(z);
-        let fx = x - xi;
-        let fy = y - yi;
-        let fz = z - zi;
-        fx = fx * fx * (3 - 2 * fx);
-        fy = fy * fy * (3 - 2 * fy);
-        fz = fz * fz * (3 - 2 * fz);
-        const c000 = h3(xi, yi, zi);
-        const c100 = h3(xi + 1, yi, zi);
-        const c010 = h3(xi, yi + 1, zi);
-        const c110 = h3(xi + 1, yi + 1, zi);
-        const c001 = h3(xi, yi, zi + 1);
-        const c101 = h3(xi + 1, yi, zi + 1);
-        const c011 = h3(xi, yi + 1, zi + 1);
-        const c111 = h3(xi + 1, yi + 1, zi + 1);
-        const x00 = c000 + (c100 - c000) * fx;
-        const x10 = c010 + (c110 - c010) * fx;
-        const x01 = c001 + (c101 - c001) * fx;
-        const x11 = c011 + (c111 - c011) * fx;
-        const y0 = x00 + (x10 - x00) * fy;
-        const y1 = x01 + (x11 - x01) * fy;
-        return y0 + (y1 - y0) * fz;
-      };
+      // Baked periodic noise volume, trilinearly sampled — per-point live fbm
+      // (hash lookups per octave, per axis) was the main source of frame
+      // stutter once point counts got high, so the field is computed once.
+      const VN = 64, VNM = VN - 1;
+      const VOL = new Float32Array(VN * VN * VN);
+      (() => {
+        const oct = (i, j, k, Gd, sd) => {
+          const x = i * Gd / VN, y = j * Gd / VN, z = k * Gd / VN;
+          const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+          let fx = x - xi, fy = y - yi, fz = z - zi;
+          fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy); fz = fz * fz * (3 - 2 * fz);
+          const X0 = xi % Gd, Y0 = yi % Gd, Z0 = zi % Gd;
+          const X1 = (X0 + 1) % Gd, Y1 = (Y0 + 1) % Gd, Z1 = (Z0 + 1) % Gd;
+          const c000 = h3(X0 + sd, Y0, Z0), c100 = h3(X1 + sd, Y0, Z0),
+                c010 = h3(X0 + sd, Y1, Z0), c110 = h3(X1 + sd, Y1, Z0),
+                c001 = h3(X0 + sd, Y0, Z1), c101 = h3(X1 + sd, Y0, Z1),
+                c011 = h3(X0 + sd, Y1, Z1), c111 = h3(X1 + sd, Y1, Z1);
+          const a = c000 + (c100 - c000) * fx, b = c010 + (c110 - c010) * fx,
+                c = c001 + (c101 - c001) * fx, d = c011 + (c111 - c011) * fx;
+          const e = a + (b - a) * fy, f = c + (d - c) * fy;
+          return e + (f - e) * fz;
+        };
+        let p = 0;
+        for (let k = 0; k < VN; k += 1) for (let j = 0; j < VN; j += 1) for (let i = 0; i < VN; i += 1) {
+          VOL[p++] = 0.52 * oct(i, j, k, 4, 17) + 0.30 * oct(i, j, k, 8, 911) + 0.18 * oct(i, j, k, 16, 7727);
+        }
+      })();
 
       const fbm = (x, y, z) => {
-        let v = noise3(x, y, z) * 0.5;
-        v += noise3(x * 2.03 + 7.1, y * 2.03 - 3.4, z * 2.03 + 1.7) * 0.29;
-        v += noise3(x * 4.11 - 5.3, y * 4.11 + 9.2, z * 4.11 - 2.6) * 0.15;
-        return v * 1.064;
+        let fx = x * VN, fy = y * VN, fz = z * VN;
+        let i = Math.floor(fx), j = Math.floor(fy), k = Math.floor(fz);
+        let tx = fx - i, ty = fy - j, tz = fz - k;
+        tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty); tz = tz * tz * (3 - 2 * tz);
+        i &= VNM; j &= VNM; k &= VNM;
+        const i1 = (i + 1) & VNM, j1 = (j + 1) & VNM, k1 = (k + 1) & VNM;
+        const b0 = k * VN * VN, b1 = k1 * VN * VN, r0 = j * VN, r1 = j1 * VN;
+        const c000 = VOL[b0 + r0 + i], c100 = VOL[b0 + r0 + i1],
+              c010 = VOL[b0 + r1 + i], c110 = VOL[b0 + r1 + i1],
+              c001 = VOL[b1 + r0 + i], c101 = VOL[b1 + r0 + i1],
+              c011 = VOL[b1 + r1 + i], c111 = VOL[b1 + r1 + i1];
+        const a = c000 + (c100 - c000) * tx, b = c010 + (c110 - c010) * tx,
+              c = c001 + (c101 - c001) * tx, d = c011 + (c111 - c011) * tx;
+        const e = a + (b - a) * ty, f = c + (d - c) * ty;
+        return e + (f - e) * tz;
       };
 
       const NPT = 52000;
       const PT = new Float32Array(NPT * 3);
+      const TESS4 = new Float32Array(NPT * 4);
+      const TETRA = new Float32Array(NPT * 3);
+      const TETRA_NORMAL = new Float32Array(NPT * 3);
+      const TETRA_EDGE = new Float32Array(NPT);
       const ORDER = new Uint32Array(NPT);
       (() => {
         const ga = Math.PI * (3 - Math.sqrt(5));
@@ -745,6 +845,42 @@
           PT[i * 3 + 1] = y;
           PT[i * 3 + 2] = Math.sin(th) * r;
           ORDER[i] = i;
+        }
+        for (let i = 0; i < NPT; i += 1) {
+          const edge = i & 31, dim = edge >> 3, base = edge & 7;
+          let bit = 0;
+          for (let d = 0; d < 4; d += 1) {
+            if (d === dim) TESS4[i * 4 + d] = -1 + 2 * h3(i, 17, 43);
+            else { TESS4[i * 4 + d] = (base & (1 << bit)) ? 1 : -1; bit += 1; }
+          }
+          const tri = i & 255;
+          const unit = tri >> 5;
+          const tet = (tri >> 2) & 7;
+          const face = tri & 3;
+          const ucx = (unit & 1 ? .5 : -.5), ucy = (unit & 2 ? .5 : -.5), ucz = (unit & 4 ? .5 : -.5);
+          const sx = tet & 1 ? 1 : -1, sy = tet & 2 ? 1 : -1, sz = tet & 4 ? 1 : -1;
+          const ax = ucx + sx*.5, ay = ucy, az = ucz;
+          const bx = ucx, by = ucy + sy*.5, bz = ucz;
+          const cx = ucx, cy = ucy, cz = ucz + sz*.5;
+          const dx = ucx + sx*.5, dy = ucy + sy*.5, dz = ucz + sz*.5;
+          let p0x,p0y,p0z,p1x,p1y,p1z,p2x,p2y,p2z;
+          if (face === 0) { p0x=ax;p0y=ay;p0z=az;p1x=bx;p1y=by;p1z=bz;p2x=cx;p2y=cy;p2z=cz; }
+          else if (face === 1) { p0x=ax;p0y=ay;p0z=az;p1x=bx;p1y=by;p1z=bz;p2x=dx;p2y=dy;p2z=dz; }
+          else if (face === 2) { p0x=bx;p0y=by;p0z=bz;p1x=cx;p1y=cy;p1z=cz;p2x=dx;p2y=dy;p2z=dz; }
+          else { p0x=cx;p0y=cy;p0z=cz;p1x=ax;p1y=ay;p1z=az;p2x=dx;p2y=dy;p2z=dz; }
+          const r1 = Math.sqrt(h3(i, 401, 733)), r2 = h3(i, 911, 127);
+          const b0 = 1-r1, b1 = r1*(1-r2), b2 = r1*r2;
+          TETRA_EDGE[i] = Math.min(b0, b1, b2);
+          TETRA[i*3] = (p0x*b0+p1x*b1+p2x*b2)*.56;
+          TETRA[i*3+1] = (p0y*b0+p1y*b1+p2y*b2)*.56;
+          TETRA[i*3+2] = (p0z*b0+p1z*b1+p2z*b2)*.56;
+          const ux=p1x-p0x,uy=p1y-p0y,uz=p1z-p0z,vx=p2x-p0x,vy=p2y-p0y,vz=p2z-p0z;
+          let nnx=uy*vz-uz*vy,nny=uz*vx-ux*vz,nnz=ux*vy-uy*vx;
+          const tcx=(ax+bx+cx+dx)/4,tcy=(ay+by+cy+dy)/4,tcz=(az+bz+cz+dz)/4;
+          const fcx=(p0x+p1x+p2x)/3-tcx,fcy=(p0y+p1y+p2y)/3-tcy,fcz=(p0z+p1z+p2z)/3-tcz;
+          if(nnx*fcx+nny*fcy+nnz*fcz<0){nnx=-nnx;nny=-nny;nnz=-nnz;}
+          const nl=Math.hypot(nnx,nny,nnz)||1;
+          TETRA_NORMAL[i*3]=nnx/nl;TETRA_NORMAL[i*3+1]=nny/nl;TETRA_NORMAL[i*3+2]=nnz/nl;
         }
         let seed = 0x9e3779b9;
         const rnd = () => {
@@ -876,7 +1012,41 @@
         return v < 0 ? 0 : (v > 1 ? 1 : v);
       };
 
-      const frame = (ft) => {
+      const clamp01 = (x) => x < 0 ? 0 : (x > 1 ? 1 : x);
+      const smoothstep = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
+      const morphOut = new Float32Array(3);
+      const shapeA = new Float32Array(3);
+      const shapeB = new Float32Array(3);
+      const morphState = { from: 0, to: 0, elapsed: 0, duration: 0.9 };
+
+      const writeShape = (shape, pointIndex, sx, sy, sz, animationTime, out) => {
+        if (shape === 0) { out[0]=sx*.82; out[1]=sy*.82; out[2]=sz*.82; return; }
+        if (shape === 2) { const i=pointIndex*3; out[0]=TETRA[i]; out[1]=TETRA[i+1]; out[2]=TETRA[i+2]; return; }
+        const ti4 = pointIndex * 4;
+        const azw = animationTime * 0.155;
+        const axy = animationTime * 0.063;
+        const ca = Math.cos(azw), sa = Math.sin(azw), cb = Math.cos(axy), sb = Math.sin(axy);
+        const tx4 = TESS4[ti4] * cb - TESS4[ti4+1] * sb;
+        const ty4 = TESS4[ti4] * sb + TESS4[ti4+1] * cb;
+        const tz4 = TESS4[ti4+2] * ca - TESS4[ti4+3] * sa;
+        const tw4 = TESS4[ti4+2] * sa + TESS4[ti4+3] * ca;
+        const perspective = 2.6 / Math.max(0.3, 2.6 - tw4);
+        out[0]=tx4*perspective*.30;out[1]=ty4*perspective*.30;out[2]=tz4*perspective*.30;
+      };
+
+      const morphPoint = (pointIndex, sx, sy, sz, animationTime, mt) => {
+        // Outside an active transition mt is pinned at 0 or 1 essentially all the time
+        // (transitions last 0.9s), so most frames only need one shape evaluated, not both.
+        if (mt <= 0) { writeShape(morphState.from,pointIndex,sx,sy,sz,animationTime,morphOut); return; }
+        if (mt >= 1) { writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,morphOut); return; }
+        writeShape(morphState.from,pointIndex,sx,sy,sz,animationTime,shapeA);
+        writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,shapeB);
+        morphOut[0]=shapeA[0]+(shapeB[0]-shapeA[0])*mt;
+        morphOut[1]=shapeA[1]+(shapeB[1]-shapeA[1])*mt;
+        morphOut[2]=shapeA[2]+(shapeB[2]-shapeA[2])*mt;
+      };
+
+      const frame = (ft, animationTime) => {
         const cx = gw * 0.5;
         const cy = gh * 0.5;
         const R = Math.min(gw, gh) * SIZE;
@@ -892,45 +1062,61 @@
         const m6 = M[6];
         const m7 = M[7];
         const m8 = M[8];
-        const tw = 1.7 * A.turb;
-        const amp = A.amp * 0.55;
-        const F = 2.15;
-        const active = Math.max(1200, (NPT * A.den) | 0);
+        const mt=smoothstep(morphState.elapsed/morphState.duration);
+        const tetraMix=(morphState.from===2?1-mt:0)+(morphState.to===2?mt:0);
+        const sphereMix=(morphState.from===0?1-mt:0)+(morphState.to===0?mt:0);
+        const tw = 1.7 * (A.turb*(1-tetraMix)+tetraMix);
+        const amp = A.amp * (0.20+0.35*sphereMix) * (1-tetraMix);
+        const F = 0.32;
+        const active = Math.max(1200, (NPT * (A.den+(1-A.den)*tetraMix)) | 0);
 
         val.fill(0);
         depth.fill(-1e9);
 
         for (let k = 0; k < active; k += 1) {
           const i = ORDER[k] * 3;
-          const dx = PT[i];
-          const dy = PT[i + 1];
-          const dz = PT[i + 2];
+          const sourceIndex = ORDER[k];
+          morphPoint(sourceIndex, PT[i], PT[i + 1], PT[i + 2], animationTime, mt);
+          const dx = morphOut[0];
+          const dy = morphOut[1];
+          const dz = morphOut[2];
           const wx = m0 * dx + m1 * dy + m2 * dz;
           const wy = m3 * dx + m4 * dy + m5 * dz;
           const wz = m6 * dx + m7 * dy + m8 * dz;
-          if (wz < -0.28) continue;
+          const ux=PT[i],uy=PT[i+1],uz=PT[i+2];
+          const bnx=m0*ux+m1*uy+m2*uz,bny=m3*ux+m4*uy+m5*uz,bnz=m6*ux+m7*uy+m8*uz;
+          const ni=sourceIndex*3,tn0=TETRA_NORMAL[ni],tn1=TETRA_NORMAL[ni+1],tn2=TETRA_NORMAL[ni+2];
+          const tnx=m0*tn0+m1*tn1+m2*tn2,tny=m3*tn0+m4*tn1+m5*tn2,tnz=m6*tn0+m7*tn1+m8*tn2;
+          const nx=bnx+(tnx-bnx)*tetraMix,ny=bny+(tny-bny)*tetraMix,nz=bnz+(tnz-bnz)*tetraMix;
+          if (nz < (-0.28+0.30*tetraMix)) continue;
 
-          const sx = dx * F;
-          const sy = dy * F;
-          const sz = dz * F;
-          const q = fbm(sx, sy, sz + ft * 0.3);
-          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + ft * 0.15, sz - tw * q);
+          const sx = ux * F;
+          const sy = uy * F;
+          const sz = uz * F;
+          const frozenFt=ft*(1-tetraMix);
+          const q = fbm(sx, sy, sz + frozenFt * 0.3);
+          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
           f = f * f * (3 - 2 * f);
           const rr = 1 + amp * (f - 0.5) * 2;
           const X = Math.round(wx * rr * G) / G;
           const Y = Math.round(wy * rr * G) / G;
           const Z = Math.round(wz * rr * G) / G;
-          const ax = wx < 0 ? -wx : wx;
-          const ay = wy < 0 ? -wy : wy;
-          const az = wz < 0 ? -wz : wz;
+          const ax = nx < 0 ? -nx : nx;
+          const ay = ny < 0 ? -ny : ny;
+          const az = nz < 0 ? -nz : nz;
           let face;
           if (az >= ax && az >= ay) face = 1.00;
           else if (ay >= ax) face = wy > 0 ? 0.86 : 0.30;
           else face = wx > 0 ? 0.60 : 0.46;
+          // This axis-bucketed tint fakes shading for the sphere/tesseract point
+          // clouds, but the tetrahedron's facets aren't axis-aligned, so it flickers
+          // between buckets within a single flat face. Fade it out as tetra takes over.
+          face = face + (1 - face) * tetraMix;
 
-          const lam = Math.max(0, wx * LX + wy * LY + wz * LZ);
-          const rim = Math.pow(1 - az, 5) * 0.85;
+          const lam = Math.max(0, nx * LX + ny * LY + nz * LZ);
+          const rim = Math.pow(1 - az, 5) * 0.85 * (1 - tetraMix);
           let v = face * (0.16 + 0.92 * lam) * (0.34 + 0.95 * f) + rim;
+          if (tetraMix > 0 && TETRA_EDGE[sourceIndex] < 0.05) v *= 1 - 0.5 * tetraMix;
           v *= 0.58 + 0.42 * (Z + 1) * 0.5;
           const cm = (f - 0.5) + (lam - 0.5) * 0.35;
           const spx = cx + X * R;
@@ -994,6 +1180,7 @@
 
       let cyc = 0;
       let ftAcc = 0;
+      let animationTime = 0;
       let last = performance.now();
       const loop = (now) => {
         const dt = Math.min(0.05, (now - last) / 1000);
@@ -1004,7 +1191,9 @@
         A.den = 0.30 + 0.70 * lfo(cyc, 31, 19.7, 1.9);
         A.flow = 0.20 + 1.25 * lfo(cyc, 59, 37.1, 3.4);
         A.turb = 0.45 + 1.40 * lfo(cyc, 41, 23.9, 5.2);
-        ftAcc += dt * 0.40 * A.flow;
+        ftAcc += dt * 0.08 * A.flow;
+        animationTime += dt;
+        morphState.elapsed=Math.min(morphState.duration,morphState.elapsed+dt);
 
         if (dragging) {
           idle = 0;
@@ -1022,26 +1211,68 @@
           rotY(dt * 0.10 * SPIN * idle);
         }
 
-        frame(ftAcc);
+        frame(ftAcc, animationTime);
         requestAnimationFrame(loop);
       };
 
       resize();
-      frame(0);
+      frame(0,0);
+      piece.__setShape=(next)=>{
+        const shape=Math.max(0,Math.min(2,Number(next)||0));
+        if(shape===morphState.to)return;
+        morphState.from=morphState.to;morphState.to=shape;morphState.elapsed=reduceMotion?morphState.duration:0;
+        if(reduceMotion){morphState.from=shape;frame(ftAcc,animationTime);}
+      };
       if (window.ResizeObserver) {
         new ResizeObserver(() => {
           resize();
-          frame(ftAcc);
+          frame(ftAcc, animationTime);
         }).observe(piece);
       } else {
         window.addEventListener('resize', () => {
           resize();
-          frame(ftAcc);
+          frame(ftAcc, animationTime);
         });
       }
 
       if (!reduceMotion) requestAnimationFrame(loop);
     });
+  })();
+
+  (()=>{
+    const experience=document.querySelector('[data-tab-experience]');
+    if(!experience)return;
+    const topbar=document.querySelector('.topbar');
+    const syncTopbarHeight=()=>document.body.style.setProperty('--topbar-h',`${Math.ceil(topbar?.getBoundingClientRect().height||79)}px`);
+    syncTopbarHeight();
+    if(topbar&&window.ResizeObserver)new ResizeObserver(syncTopbarHeight).observe(topbar);
+    else window.addEventListener('resize',syncTopbarHeight);
+    const buttons=[...experience.querySelectorAll('[data-tab]')];
+    const panels=[...experience.querySelectorAll('[data-tab-panel]')];
+    const reports=[...experience.querySelectorAll('[data-tab-report]')];
+    const stage=experience.querySelector('[data-tab-orb-stage]');
+    const piece=experience.querySelector('[data-shape-piece]');
+    let active=0;
+    const showTab=(index,focus=false)=>{
+      const next=(index+buttons.length)%buttons.length;
+      if(next===active&&panels[next].classList.contains('is-active'))return;
+      active=next;
+      panels.forEach((panel,i)=>{const on=i===active;panel.classList.toggle('is-active',on);panel.setAttribute('aria-hidden',on?'false':'true');});
+      reports.forEach(report=>{report.classList.toggle('is-active',Number(report.dataset.tabReport)===active);});
+      buttons.forEach((button,i)=>{if(i===active)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');});
+      piece?.__setShape?.(active);
+      if(focus)buttons[active].focus();
+    };
+    buttons.forEach((button,i)=>{
+      button.addEventListener('click',()=>showTab(i));
+      button.addEventListener('keydown',event=>{
+        if(event.key==='ArrowRight'||event.key==='ArrowDown'){event.preventDefault();showTab(active+1,true);}
+        if(event.key==='ArrowLeft'||event.key==='ArrowUp'){event.preventDefault();showTab(active-1,true);}
+        if(event.key==='Home'){event.preventDefault();showTab(0,true);}
+        if(event.key==='End'){event.preventDefault();showTab(buttons.length-1,true);}
+      });
+    });
+    showTab(0);
   })();
 
   const obs = new IntersectionObserver((entries)=>{
