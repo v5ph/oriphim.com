@@ -1,7 +1,7 @@
 {
   "name": "Oriphim",
   "short_name": "Oriphim",
-  "description": "Oriphim publishes VEIL, a falsification-first research workspace.",
+  "description": "Oriphim publishes ORIPHIM, a falsification-first research workspace.",
   "start_url": "/",
   "scope": "/",
   "display": "browser",

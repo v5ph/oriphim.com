@@ -90,7 +90,7 @@
       ]
     },
     "sign-up": {
-      eyebrow: "START WITH <span class=\"veil-word\">VEIL</span>",
+      eyebrow: "START WITH <span class=\"oriphim-word\">ORIPHIM</span>",
       title: "Create account",
       submit: "Create Account",
       switchText: "Already registered?",
@@ -122,7 +122,7 @@
       .auth-popup__top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px}
       .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
       .auth-popup__brand img{width:34px;height:34px;object-fit:contain;display:block}
-      .auth-popup .veil-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
+      .auth-popup .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
       .auth-popup__close{width:38px;height:38px;border:1px solid #18130f;background:transparent;color:#18130f;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
       .auth-popup__close:hover{background:#18130f;color:#ece4d3}
       .auth-popup__eyebrow{margin:0 0 12px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#241d16}
