@@ -7,6 +7,8 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-Permitted-Cross-Domain-Policies: none
+  Link: <https://fonts.googleapis.com>; rel=preconnect
+  Link: <https://fonts.gstatic.com>; rel=preconnect; crossorigin
 
 /
   Cache-Control: public, max-age=0, must-revalidate
@@ -15,10 +17,7 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
-
-/styles.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+  Cache-Control: public, max-age=1209600, stale-while-revalidate=86400
 
 /script.js
   Cache-Control: public, max-age=86400, stale-while-revalidate=3600
