@@ -296,10 +296,10 @@
   .narrative-copy p + p{margin-top:22px;}
   .narrative-copy strong{color:var(--ink);}
   .limits-section{background:var(--paper);}
-  body.tab-layout{--topbar-h:79px;height:100svh;overflow:hidden;}
-  .tab-experience{position:relative;height:calc(100svh - var(--topbar-h));min-height:0;overflow:hidden;}
+  body.tab-layout{--topbar-h:79px;--footer-h:44px;height:100svh;overflow:hidden;}
+  .tab-experience{position:relative;height:calc(100svh - var(--topbar-h) - var(--footer-h));min-height:0;overflow:hidden;}
   .tab-orb-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;}
-  .tab-orb-stage .voxel-plate{width:min(760px,48vw,calc(100svh - var(--topbar-h) - 48px));margin:0;pointer-events:auto;}
+  .tab-orb-stage .voxel-plate{width:min(760px,48vw,calc(100svh - var(--topbar-h) - var(--footer-h) - 48px));margin:0;pointer-events:auto;}
   .tab-panel{position:absolute;top:50%;width:20vw;transform:translateY(calc(-50% + 8px));opacity:0;visibility:hidden;pointer-events:none;transition:opacity 260ms ease,transform 260ms ease;}
   .tab-panel[data-side="right"]{left:77vw;}.tab-panel[data-side="left"]{left:3vw;}
   .tab-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(-50%);transition-delay:320ms;}
@@ -330,7 +330,9 @@
   .section-tabs{position:absolute;left:32px;bottom:32px;display:flex;gap:20px;z-index:5;}
   .section-tabs button{appearance:none;border:0;border-bottom:1px solid transparent;background:transparent;padding:4px 0;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;opacity:.45;cursor:pointer;}
   .section-tabs button[aria-current="true"]{opacity:1;border-bottom-color:var(--bg-deep);}
-  main>.hero,main>.evidence-section,main>.cta-band,body.tab-layout>footer{display:none;}
+  main>.hero,main>.evidence-section,main>.cta-band{display:none;}
+  body.tab-layout>footer{height:var(--footer-h);display:flex;align-items:center;padding:0;position:relative;z-index:6;}
+  body.tab-layout>footer .wrap{width:100%;padding-top:0;}
 
   /* ---------- volumes grid ---------- */
   .vol-grid{
@@ -400,7 +402,10 @@
   .fade.in{opacity:1; transform:translateY(0);}
 
   @media (max-width: 980px){
-    .tab-experience{height:calc(100svh - var(--topbar-h));min-height:0;}
+    /* stacked one-screen layout is too tight for a reserved footer strip */
+    body.tab-layout{--footer-h:0px;}
+    body.tab-layout>footer{display:none;}
+    .tab-experience{height:calc(100svh - var(--topbar-h) - var(--footer-h));min-height:0;}
     .tab-orb-stage{inset:0 0 auto;height:42vh;transform:none!important;}
     .tab-orb-stage .voxel-plate{width:min(390px,78vw,38svh);pointer-events:none;}
     .tab-panel,.tab-panel[data-side="right"],.tab-panel[data-side="left"]{top:44vh;left:8vw;width:84vw;transform:translateY(8px);}
