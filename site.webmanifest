@@ -9,7 +9,7 @@
   "theme_color": "#f34b03",
   "icons": [
     {
-      "src": "/assets/oriphim-icon.svg",
+      "src": "/assets/oriphim-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"

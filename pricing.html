@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
 <meta name="twitter:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="assets/oriphim-logo.svg">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,8 +76,8 @@
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
   .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
-  .word{font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
-  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .word{font-family:'Fraunces',Georgia,serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .oriphim-word{display:inline-block;font-family:'Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
   .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
@@ -98,7 +98,7 @@
   .pricing-hero h1{font-size:clamp(32px,3.6vw,42px);line-height:1;}
   .tagline{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:460;font-size:16.5px;color:var(--ink-soft);}
   .tagline-line{display:block;}
-  .tagline-theorist{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
+  .tagline-theorist{display:inline-block;font-family:'Fraunces',Georgia,serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
   .toggle{display:inline-flex;border:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
   .toggle button{appearance:none;background:transparent;border:0;color:var(--ink-soft);cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:10px 20px;transition:background .15s ease,color .15s ease;}
   .toggle button + button{border-left:1px solid var(--ink);}
@@ -173,12 +173,9 @@
 <body>
 <div class="topbar">
   <div class="wrap">
-    <div class="nav-menu" data-dropdown data-current="true">
-        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">Oriphim</span></a>
-        <span class="subnav" role="menu"><a href="/pricing" role="menuitem" aria-current="page">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
-      </div>
+    <a class="nav-home" href="/" aria-label="Oriphim home">Oriphim</a>
     
-    <a href="/sign-in" class="signin-btn">Sign In</a>
+    <a href="/?auth=sign-in" class="signin-btn">Sign In</a>
   </div>
 </div>
 
@@ -207,7 +204,7 @@
             <span class="price-per" id="stdPer">/ mo</span>
           </div>
           <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime</div>
-          <div class="price-cta"><a href="/sign-up" class="btn">Choose Standard</a></div>
+          <div class="price-cta"><a href="/?auth=sign-up" class="btn">Choose Standard</a></div>
           <div class="price-list-label">What's included</div>
           <ul class="price-features">
             <li>Unlimited local AI chat and notebook - runs on your own hardware, so "unlimited" is a real word here.</li>
@@ -228,7 +225,7 @@
             <span class="price-per">/ mo</span>
           </div>
           <div class="price-billing-note">Self-serve &middot; custom pricing on request</div>
-          <div class="price-cta"><a href="/sign-up" class="btn-outline">Talk to us</a></div>
+          <div class="price-cta"><a href="/?auth=sign-up" class="btn-outline">Talk to us</a></div>
           <div class="price-list-label">Live now</div>
           <ul class="price-features">
             <li>Everything in Standard, with an uncapped <span class="oriphim-word">Oriphim</span> Cloud quota.</li>
@@ -295,7 +292,7 @@
       <div class="eyebrow">Oriphim Research</div>
       <h2>Two tiers, no vapor.</h2>
       <div class="cta-row-band">
-        <a href="/sign-up" class="btn">Choose Standard</a>
+        <a href="/?auth=sign-up" class="btn">Choose Standard</a>
         <a href="/download" class="btn-outline">Try Guest Mode</a>
       </div>
     </div>
@@ -303,7 +300,7 @@
 </main>
 
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
-    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">[F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 
 <script>
   const topoCanvas = document.querySelector("[data-topo-map]");
