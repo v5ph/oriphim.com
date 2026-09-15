@@ -74,7 +74,7 @@
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:560;color:var(--ink);}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);}
 
-  .topbar{border-bottom:0;padding:13px 0;}
+  .topbar{border-bottom:0;padding:13px 0;position:relative;z-index:30;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -97,7 +97,7 @@
 
   .article-shell{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;padding:36px 0 54px;align-items:start;}
   .article-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border-top:0;padding-top:14px;margin-bottom:14px;}
-  .article-title{font-size:clamp(44px,8vw,98px);line-height:.94;letter-spacing:-.015em;max-width:9.5ch;}
+  .article-title{font-size:clamp(44px,8vw,98px);line-height:.94;letter-spacing:-.015em;max-width:100%;}
   .article-deck{max-width:680px;margin-top:16px;font-size:20px;line-height:1.55;color:var(--ink-soft);}
   .article-body{max-width:720px;}
   .article-body p{font-size:18px;line-height:1.72;color:var(--ink-soft);margin-bottom:24px;}
@@ -124,8 +124,10 @@
   .footer-x svg{display:block;width:14px;height:14px;}
 
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
-  @media (max-width:900px){.article-shell{grid-template-columns:1fr;gap:36px;padding:26px 0 44px;}.article-aside{position:static;max-width:320px;}.article-title{max-width:10ch;}}
+  @media (max-width:900px){.article-shell{grid-template-columns:1fr;gap:36px;padding:26px 0 44px;}.article-aside{position:static;max-width:320px;}.article-title{max-width:100%;}}
   @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.signin-btn{padding:8px 14px;}.article-title{font-size:48px;}.article-deck{font-size:17px;}.article-body p{font-size:16px;}.article-actions{align-items:flex-start;flex-direction:column;}}
+
+  h1,h2,h3,h4{font-family:'Jacquard 12',serif;font-weight:400;text-transform:none;}
 </style>
 </head>
 <body>
@@ -155,7 +157,7 @@
       <p class="article-deck">This is where build notes, research notes, and honest status updates will live - what's shipped, what's roadmap, and everything in between. Starting now.</p>
       <div class="article-body">
         <p>Catalog No. 01 opens that record. Build notes, research notes, shipping notes, and status dispatches will live here. The archive is also a place where conduct thought experiments to show the capabilities of the technology we're building at Oriphim</p>
-        <p>Starting now, this page is the ledger. No theater. No fog machine. Just the work, filed clean.</p>
+        <p>This will soon turn into a complete library where research done with Oriphim can be seen, discussed, shared, and replicated.</p>
       </div>
       <div class="article-actions" aria-label="Article actions">
         <a class="block-button" href="/archive">Back to archive</a>
@@ -199,6 +201,8 @@
     fadeItems.forEach((item) => item.classList.add("in"));
   }
 </script>
+<script src="/assets/supabase-js.js"></script>
+<script src="/assets/oriphim-supabase.js"></script>
 <script src="/script.js"></script>
 </body>
 </html>

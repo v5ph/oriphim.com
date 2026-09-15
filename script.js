@@ -205,7 +205,7 @@
           </div>
           <p class="auth-popup__eyebrow">${config.eyebrow}</p>
           <h2 id="auth-popup-title">${config.title}</h2>
-          <form data-static-form data-form-message="${config.message}">
+          <form data-static-form data-auth-mode="${mode}" data-form-message="${config.message}">
             ${config.fields.map(fieldMarkup).join("")}
             <button class="auth-popup__submit" type="submit">${config.submit}</button>
             <p class="auth-popup__status form-status" role="status" aria-live="polite"></p>
@@ -274,7 +274,7 @@
     }
   });
 
-  document.addEventListener("submit", (event) => {
+  document.addEventListener("submit", async (event) => {
     const form = event.target.closest("[data-static-form]");
     if (!form) return;
 
@@ -285,8 +285,46 @@
     }
 
     const status = form.querySelector(".form-status");
-    if (status) {
-      status.textContent = form.dataset.formMessage || "Account access is not live from this static preview.";
+    const setStatus = (msg, ok) => {
+      if (!status) return;
+      status.textContent = msg;
+      if (ok) status.setAttribute("data-ok", "");
+      else status.removeAttribute("data-ok");
+    };
+
+    const fields = Object.fromEntries(new FormData(form).entries());
+    const mode = form.dataset.authMode || (fields.name !== undefined ? "sign-up" : "sign-in");
+
+    // No Supabase client on the page (script failed to load) — fall back.
+    if (!window.oriphimAuth) {
+      setStatus(form.dataset.formMessage || "Authentication is temporarily unavailable.");
+      return;
+    }
+
+    const submit = form.querySelector('button[type="submit"], .auth-submit, .auth-popup__submit');
+    const submitLabel = submit && submit.textContent;
+    if (submit) { submit.disabled = true; submit.textContent = "…"; }
+    setStatus("");
+
+    try {
+      if (mode === "sign-up") {
+        const { data, error } = await window.oriphimAuth.signUp(fields.email, fields.password, fields.name);
+        if (error) throw error;
+        if (data.session) {
+          window.location.assign("/");
+        } else {
+          setStatus("Check your email to confirm your account.", true);
+        }
+      } else {
+        const { error } = await window.oriphimAuth.signIn(fields.email, fields.password);
+        if (error) throw error;
+        const next = new URLSearchParams(window.location.search).get("next");
+        window.location.assign(next && next.charAt(0) === "/" ? next : "/");
+      }
+    } catch (err) {
+      setStatus((err && err.message) || "Something went wrong. Try again.");
+    } finally {
+      if (submit) { submit.disabled = false; submit.textContent = submitLabel; }
     }
   });
 })();

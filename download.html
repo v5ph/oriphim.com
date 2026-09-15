@@ -67,7 +67,7 @@
   h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:560;letter-spacing:0;color:var(--ink);}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
 
-  .topbar{border-bottom:0;padding:13px 0;}
+  .topbar{border-bottom:0;padding:13px 0;position:relative;z-index:30;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -137,6 +137,8 @@
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
   @media (max-width:860px){.req-grid{grid-template-columns:1fr;}}
   @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.spec-row{flex-direction:column;gap:4px;}.spec-row .v{text-align:left;}.btn-primary,.btn-outline{width:100%;}.account-actions{width:100%;}}
+
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
 </style>
 </head>
 <body>
@@ -320,6 +322,8 @@
     downloadStatus.textContent = `${label} packages are not attached to this static preview yet.`;
   });
 </script>
+<script src="assets/supabase-js.js"></script>
+<script src="assets/oriphim-supabase.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

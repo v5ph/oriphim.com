@@ -47,7 +47,7 @@
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:560;color:var(--ink);}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);}
 
-  .topbar{border-bottom:0;padding:13px 0;}
+  .topbar{border-bottom:0;padding:13px 0;position:relative;z-index:30;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -95,8 +95,8 @@
   .search-icon::before{content:"";position:absolute;left:1px;top:1px;width:10px;height:10px;border:2px solid var(--ink-soft);border-radius:50%;}
   .search-icon::after{content:"";position:absolute;right:0;bottom:1px;width:7px;height:2px;background:var(--ink-soft);transform:rotate(45deg);transform-origin:center;}
   .search-input-wrap{position:relative;flex:1;min-width:0;}
-  .search-input-wrap input{position:relative;z-index:1;border:0;outline:0;background:transparent;width:100%;font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);}
-  .search-placeholder-cycle{position:absolute;left:0;top:50%;transform:translateY(-50%);font-family:'Inter',sans-serif;font-size:14px;color:var(--ink-soft);opacity:1;transition:opacity .7s ease;pointer-events:none;white-space:nowrap;}
+  .search-input-wrap input{position:relative;z-index:1;border:0;outline:0;background:transparent;width:100%;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--ink);}
+  .search-placeholder-cycle{position:absolute;left:0;top:50%;transform:translateY(-50%);font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--ink-soft);opacity:1;transition:opacity .7s ease;pointer-events:none;white-space:nowrap;}
   .trending-panel{border:1px solid var(--ink);padding:16px 18px 18px;background:var(--paper);}
   .trending-panel h3{font-size:17px;margin-bottom:4px;}
   .trending-empty{text-align:center;padding:26px 6px 8px;}
@@ -116,6 +116,8 @@
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
   @media (max-width:860px){.archive-grid{grid-template-columns:1fr;padding:20px 0 44px;}.sidebar{position:static;order:-1;}}
   @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.feed-card{flex-direction:column;}.feed-infographic{width:min(100%,220px);}.signin-btn{padding:8px 14px;}}
+
+  h1,h2,h3,h4{font-family:'Jacquard 12',serif;font-weight:400;text-transform:none;}
 </style>
 </head>
 <body>
@@ -305,6 +307,8 @@
     });
   })();
 </script>
+<script src="assets/supabase-js.js"></script>
+<script src="assets/oriphim-supabase.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

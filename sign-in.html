@@ -21,7 +21,7 @@
   body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
   body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(to right,rgba(24,19,15,.13) 1px,transparent 1px),linear-gradient(to bottom,rgba(24,19,15,.13) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
-  .topbar{border-bottom:0;padding:13px 0;position:relative;z-index:5;}
+  .topbar{border-bottom:0;padding:13px 0;position:relative;z-index:30;}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
@@ -69,6 +69,8 @@
   .footer-x:hover{color:var(--ink);background:var(--paper);}
   .footer-x svg{display:block;width:14px;height:14px;}
   @media(max-width:680px){.navlinks{display:none;}.wrap{padding:0 24px;}.auth-card{grid-template-columns:1fr;}.auth-art{display:none;}.auth-content{padding:20px;}h1{font-size:42px;}}
+
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
 </style>
 </head>
 <body>
@@ -99,7 +101,7 @@
       </div>
       <p class="eyebrow">ORIPHIM ACCESS</p>
       <h1 id="auth-title">Sign in</h1>
-      <form class="auth-form" data-static-form data-form-message="Account access is not live from this static preview.">
+      <form class="auth-form" data-static-form data-auth-mode="sign-in" data-form-message="Authentication is temporarily unavailable.">
         <label>Email <input type="email" name="email" autocomplete="email" required></label>
         <label>Password <input type="password" name="password" autocomplete="current-password" required></label>
         <button class="auth-submit" type="submit">Sign In</button>
@@ -113,6 +115,8 @@
 
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
 
+<script src="assets/supabase-js.js"></script>
+<script src="assets/oriphim-supabase.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

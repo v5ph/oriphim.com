@@ -48,7 +48,7 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'Inter', system-ui, sans-serif;
+    font-family:'Inter',system-ui,sans-serif;
     position:relative;
     overflow-x:hidden;
   }
@@ -75,7 +75,7 @@
   .topbar{
     border-bottom:0;
     padding:13px 0;
-  }
+  position:relative;z-index:30;}
   .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;}
 
   .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); flex-shrink:0;}
@@ -279,7 +279,7 @@
   .section-head .eyebrow{margin-bottom:14px;}
   .section-note{
     font-size:13.5px; color:var(--ink-soft); max-width:34ch; line-height:1.6;
-    font-family:'Inter', sans-serif;
+    font-family:'Inter',system-ui,sans-serif;
   }
   .evidence-section{border-top:1px solid rgba(24,19,15,.18);}
   .evidence-section .section-head{align-items:flex-start;}
@@ -445,6 +445,8 @@
   @media (prefers-reduced-motion: reduce){
     .topo-canvas{opacity:.52;}
   }
+
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
 </style>
 <script type="application/ld+json">
 {
@@ -489,6 +491,11 @@
   ]
 }
 </script>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/product-demo.css">
+<script src="assets/product-demo.js" defer></script>
+<script src="assets/hopf-shape.js"></script>
+<script src="assets/gyroid-shape.js"></script>
 </head>
 <body class="tab-layout">
 
@@ -528,20 +535,42 @@
       <p>Oriphim derives the governing equations from a described system, runs the model, and subjects it to every check the available reality permits — convergence, conservation, error budgets, sensitivity to every free parameter. Then it states plainly what the numbers do and do not license you to conclude.</p>
       <div class="cta-row"><a href="/sign-up" class="btn">Request Access</a><a href="/archive" class="link-line">Read the archive</a></div>
     </article>
-    <aside class="tab-report is-active" data-tab-report="0" aria-hidden="true">
-      <div class="report-head"><span class="eyebrow">Sample Output</span><span class="report-id">No. 0114</span></div>
-      <h3>Wing Spar — Load Case 4</h3>
-      <div class="report-rows">
-        <div class="report-row"><span>Mesh quality</span><b>Pass</b></div>
-        <div class="report-row"><span>Convergence</span><b>0.4% @ h/2</b></div>
-        <div class="report-row"><span>Margin of safety</span><b>+0.31</b></div>
-        <div class="report-row"><span>Force balance</span><b>&lt; 0.1%</b></div>
+    <aside class="tab-report product-demo" data-tab-report="1" aria-label="Animated Oriphim product demonstration">
+      <div class="pd-label"><span>THE WORKSPACE</span><span>IN MOTION ↗</span></div>
+      <div class="pd-window" data-phase="0">
+        <div class="pd-chrome"><span class="pd-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>oriphim</span><span class="pd-project">toroidal-ap</span></div>
+        <div class="pd-tabs" aria-hidden="true"><span>▥</span><span>+</span><span class="pd-session">toroidal-ap <i>×</i></span></div>
+        <div class="pd-viewport" aria-hidden="true">
+          <div class="pd-rail"><span>~/ORIPHIM</span><b>⌑ research</b><span class="pd-selected">toroidal-ap</span><small>brief.md<br>runs/<br>figure.html</small></div>
+          <div class="pd-scene pd-compose">
+            <div class="pd-banner"><b>oriphim 0.1.0</b><span>verification engine</span></div>
+            <p class="pd-dim">describe a system, or attach a paper.<br><b>?</b> for help.</p>
+            <div class="pd-attachment"><span>⌁ &nbsp; plasma-coupling.pdf</span><span>×</span></div>
+            <div class="pd-input"><b>› </b><span class="pd-typed">Reconstruct the particle experiment in this paper.</span><span class="pd-caret">▊</span></div>
+            <div class="pd-log"><p>reading source document …</p><p>anchoring equations to pages …</p><p>preparing draft brief …</p></div>
+          </div>
+          <div class="pd-scene pd-review">
+            <div class="pd-heading">DRAFT BRIEF <span>rev 0 · unsigned</span></div>
+            <div class="pd-row"><b>system</b><span>single particle</span></div><div class="pd-row"><b>field</b><span>toroidal</span></div><div class="pd-row"><b>variants</b><span>printed / consistent</span></div>
+            <p class="pd-warning">! &nbsp; transcription conflict</p><p class="pd-dim">two named equation variants.<br>review before execution.</p>
+            <div class="pd-input pd-approval"><b>› </b><span>approve</span><span class="pd-caret">▊</span></div>
+            <div class="pd-document"><div class="pd-document-title">toroidal-ap · brief.md <span>↗</span></div><div class="pd-document-body"><b>Draft brief</b><p>Prescribed-field particle motion</p><hr><p>Initial velocity basis</p><small>Explicit assumption in the fixture.</small><p class="pd-doc-source">source · §5.1</p></div></div>
+          </div>
+          <div class="pd-scene pd-evidence">
+            <div class="pd-heading">MEASURED <span>recorded suite</span></div>
+            <p class="pd-completed">251 completed · 9 failed</p>
+            <div class="pd-table"><span>temporal order</span><div><small>§5.1 · ε=0.1</small><b>printed</b><b>consistent</b></div><div><span>resolved</span><strong>0.0392</strong><strong>2.0010</strong></div></div>
+            <p class="pd-warning">! &nbsp; limits retained</p><p class="pd-dim">Longer runs retain failed checks.<br>Exact paper reference not run.</p>
+            <div class="pd-heading pd-tier">VERIFICATION</div><p class="pd-dim">validation not attempted</p>
+            <div class="pd-input"><b>› </b><span>open</span><span class="pd-caret">▊</span></div>
+          </div>
+          <svg class="pd-cursor" width="20" height="25" viewBox="0 0 23 28"><path d="M3 2L20 16L12 17L8 24Z" fill="#f6f4f1" stroke="#54200f" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="pd-click"></span>
+        </div>
+        <div class="pd-bottom"><span>● local engine</span><span class="pd-status">ready</span><span class="pd-footer-icons">⌁ &nbsp; ⚙</span></div>
       </div>
-      <svg class="report-plot" viewBox="0 0 220 60" aria-hidden="true">
-        <line x1="4" y1="54" x2="216" y2="54"></line>
-        <polyline points="4,48 40,41 76,28 112,19 148,13 184,10 216,9"></polyline>
-      </svg>
-      <div class="report-sign"><span>Reviewed &amp; signed</span><b>J. K., P.E.</b></div>
+      <div class="pd-playback"><div class="pd-progress" aria-hidden="true"><i></i><i></i><i></i></div><span class="pd-demo-caption">App workflow demo</span><button type="button" class="pd-pause" aria-label="Pause product demo">Ⅱ</button><button type="button" class="pd-replay" aria-label="Replay product demo">↺</button></div>
+      <p class="pd-source">Evidence: recorded development run, 07 Sep 2026.<br>Not a complete paper reproduction.</p>
+      <span class="pd-sr">Demonstration: describe a question, review a brief, inspect evidence. Recorded temporal orders: printed 0.0392; Lorentz-consistent 2.0010 at resolved epsilon 0.1. Physical validation was not attempted.</span>
     </aside>
     <article class="tab-panel" data-tab-panel="1" data-side="left">
       <div class="eyebrow">The Deliverable</div><h2>A package, in the form the review board already reads.</h2>
@@ -835,7 +864,8 @@
 
       const NPT = 52000;
       const PT = new Float32Array(NPT * 3);
-      const TESS4 = new Float32Array(NPT * 4);
+      const hopf = window.createHopfShape(NPT);
+      const gyroid = window.createGyroidShape(NPT);
       const TETRA = new Float32Array(NPT * 3);
       const TETRA_NORMAL = new Float32Array(NPT * 3);
       const TETRA_EDGE = new Float32Array(NPT);
@@ -851,14 +881,7 @@
           PT[i * 3 + 2] = Math.sin(th) * r;
           ORDER[i] = i;
         }
-        for (let i = 0; i < NPT; i += 1) {
-          const edge = i & 31, dim = edge >> 3, base = edge & 7;
-          let bit = 0;
-          for (let d = 0; d < 4; d += 1) {
-            if (d === dim) TESS4[i * 4 + d] = -1 + 2 * h3(i, 17, 43);
-            else { TESS4[i * 4 + d] = (base & (1 << bit)) ? 1 : -1; bit += 1; }
-          }
-        }
+
 
         // ---- shape 2: the 64-tetrahedron grid ----------------------------
         // A stella octangula — two interlocked tetrahedra — with every
@@ -1101,6 +1124,11 @@
 
       const clamp01 = (x) => x < 0 ? 0 : (x > 1 ? 1 : x);
       const smoothstep = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
+      // Stable point coverage dissolves absent fibres without painting black
+      // pixels into the depth buffer. The thresholds never change per frame.
+      const morphCoverage = new Float32Array(NPT);
+      for (let i=0;i<NPT;i++) morphCoverage[i]=h3(i,83,197);
+      const morphEase = x => { const t=clamp01(x); return t*t*t*(t*(t*6-15)+10); };
       const morphOut = new Float32Array(3);
       const shapeA = new Float32Array(3);
       const shapeB = new Float32Array(3);
@@ -1108,17 +1136,9 @@
 
       const writeShape = (shape, pointIndex, sx, sy, sz, animationTime, out) => {
         if (shape === 0) { out[0]=sx*.82; out[1]=sy*.82; out[2]=sz*.82; return; }
-        if (shape === 2) { const i=pointIndex*3; out[0]=TETRA[i]; out[1]=TETRA[i+1]; out[2]=TETRA[i+2]; return; }
-        const ti4 = pointIndex * 4;
-        const azw = animationTime * 0.155;
-        const axy = animationTime * 0.063;
-        const ca = Math.cos(azw), sa = Math.sin(azw), cb = Math.cos(axy), sb = Math.sin(axy);
-        const tx4 = TESS4[ti4] * cb - TESS4[ti4+1] * sb;
-        const ty4 = TESS4[ti4] * sb + TESS4[ti4+1] * cb;
-        const tz4 = TESS4[ti4+2] * ca - TESS4[ti4+3] * sa;
-        const tw4 = TESS4[ti4+2] * sa + TESS4[ti4+3] * ca;
-        const perspective = 2.6 / Math.max(0.3, 2.6 - tw4);
-        out[0]=tx4*perspective*.30;out[1]=ty4*perspective*.30;out[2]=tz4*perspective*.30;
+        if (shape === 1) { const i=pointIndex*3; out[0]=gyroid.points[i]; out[1]=gyroid.points[i+1]; out[2]=gyroid.points[i+2]; return; }
+        const hi = pointIndex * 3;
+        out[0]=hopf.points[hi];out[1]=hopf.points[hi+1];out[2]=hopf.points[hi+2];
       };
 
       const morphPoint = (pointIndex, sx, sy, sz, animationTime, mt) => {
@@ -1128,6 +1148,30 @@
         if (mt >= 1) { writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,morphOut); return; }
         writeShape(morphState.from,pointIndex,sx,sy,sz,animationTime,shapeA);
         writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,shapeB);
+        // Keep the Hopf/sphere exchange open and round: interpolate radius
+        // separately from direction rather than collapsing through the centre.
+        if ((morphState.from===2 && morphState.to===0) || (morphState.from===0 && morphState.to===2)) {
+          const ar=Math.sqrt(shapeA[0]**2+shapeA[1]**2+shapeA[2]**2);
+          const br=Math.sqrt(shapeB[0]**2+shapeB[1]**2+shapeB[2]**2);
+          if (ar>1e-6 && br>1e-6) {
+            const ax=shapeA[0]/ar,ay=shapeA[1]/ar,az=shapeA[2]/ar;
+            const bx=shapeB[0]/br,by=shapeB[1]/br,bz=shapeB[2]/br;
+            const dot=Math.max(-1,Math.min(1,ax*bx+ay*by+az*bz));
+            // Nearly opposite directions need an explicit arc to avoid a flip.
+            if (dot < -.95) {
+              let tx=bx-ax*dot,ty=by-ay*dot,tz=bz-az*dot;
+              let tl=Math.sqrt(tx*tx+ty*ty+tz*tz);
+              if(tl<1e-6){tx=-ay;ty=ax;tz=0;tl=Math.sqrt(tx*tx+ty*ty);if(tl<1e-6){tx=1;ty=0;tl=1;}}
+              const angle=Math.acos(dot)*mt,c=Math.cos(angle),sn=Math.sin(angle),r=ar+(br-ar)*mt;
+              morphOut[0]=(ax*c+tx/tl*sn)*r;morphOut[1]=(ay*c+ty/tl*sn)*r;morphOut[2]=(az*c+tz/tl*sn)*r;
+            } else {
+              const x=ax+(bx-ax)*mt,y=ay+(by-ay)*mt,z=az+(bz-az)*mt;
+              const scale=(ar+(br-ar)*mt)/Math.sqrt(x*x+y*y+z*z);
+              morphOut[0]=x*scale;morphOut[1]=y*scale;morphOut[2]=z*scale;
+            }
+            return;
+          }
+        }
         morphOut[0]=shapeA[0]+(shapeB[0]-shapeA[0])*mt;
         morphOut[1]=shapeA[1]+(shapeB[1]-shapeA[1])*mt;
         morphOut[2]=shapeA[2]+(shapeB[2]-shapeA[2])*mt;
@@ -1141,8 +1185,16 @@
         const cx = gw * 0.5;
         const cy = gh * 0.5;
         const R = Math.min(gw, gh) * SIZE;
-        const G = VOX / renderCoarse;
-        const s = Math.max(1, Math.ceil(R / G));
+        const mt=morphEase(morphState.elapsed/morphState.duration);
+        const hopfMix=(morphState.from===2?1-mt:0)+(morphState.to===2?mt:0);
+        const gyroidMix=(morphState.from===1?1-mt:0)+(morphState.to===1?mt:0);
+        const surfaceMix=hopfMix+gyroidMix;
+        if (gyroidMix > 0) gyroid.prepare(animationTime);
+        if (hopfMix > 0) hopf.prepare(animationTime);
+        const G = (VOX + (R / 1.8 - VOX) * surfaceMix) / renderCoarse;
+        // All shapes enlarge their pixels with the same eye-swap grid.
+        // Keep the surface render's existing two-pixel minimum at rest.
+        const s = Math.max(surfaceMix === 1 ? 2 : 1, Math.ceil(R / G));
         const half = s * 0.5;
         const m0 = M[0];
         const m1 = M[1];
@@ -1153,13 +1205,12 @@
         const m6 = M[6];
         const m7 = M[7];
         const m8 = M[8];
-        const mt=smoothstep(morphState.elapsed/morphState.duration);
-        const tetraMix=(morphState.from===2?1-mt:0)+(morphState.to===2?mt:0);
+        const tetraMix=0; // The former tetrahedron slot now contains Hopf fibres.
         const sphereMix=(morphState.from===0?1-mt:0)+(morphState.to===0?mt:0);
         const tw = 1.7 * (A.turb*(1-tetraMix)+tetraMix);
-        const amp = A.amp * (0.20+0.35*sphereMix) * (1-tetraMix);
+        const amp = A.amp * (0.20+0.35*sphereMix) * (1-tetraMix) * (1-surfaceMix);
         const F = 0.32;
-        const active = Math.max(1200, (NPT * (A.den+(1-A.den)*tetraMix)) | 0);
+        const active = Math.max(1200, (NPT * (A.den*(1-surfaceMix)+hopfMix+gyroid.density*gyroidMix)) | 0);
 
         val.fill(0);
         depth.fill(-1e9);
@@ -1167,6 +1218,9 @@
         for (let k = 0; k < active; k += 1) {
           const i = ORDER[k] * 3;
           const sourceIndex = ORDER[k];
+          // Missing Hopf fibres have zero coverage, not zero brightness.
+          // Skip them before depth testing so they cannot cast a false silhouette.
+          if (hopfMix > 0 && !hopf.visible[sourceIndex] && morphCoverage[sourceIndex] < hopfMix) continue;
           morphPoint(sourceIndex, PT[i], PT[i + 1], PT[i + 2], animationTime, mt);
           const dx = morphOut[0];
           const dy = morphOut[1];
@@ -1176,19 +1230,24 @@
           const wz = m6 * dx + m7 * dy + m8 * dz;
           const ux=PT[i],uy=PT[i+1],uz=PT[i+2];
           const bnx=m0*ux+m1*uy+m2*uz,bny=m3*ux+m4*uy+m5*uz,bnz=m6*ux+m7*uy+m8*uz;
-          const ni=sourceIndex*3,tn0=TETRA_NORMAL[ni],tn1=TETRA_NORMAL[ni+1],tn2=TETRA_NORMAL[ni+2];
-          const tnx=m0*tn0+m1*tn1+m2*tn2,tny=m3*tn0+m4*tn1+m5*tn2,tnz=m6*tn0+m7*tn1+m8*tn2;
-          const nx=bnx+(tnx-bnx)*tetraMix,ny=bny+(tny-bny)*tetraMix,nz=bnz+(tnz-bnz)*tetraMix;
+          const ni=sourceIndex*3;
+          const gn0=gyroid.normals[ni],gn1=gyroid.normals[ni+1],gn2=gyroid.normals[ni+2];
+          const gnx=m0*gn0+m1*gn1+m2*gn2,gny=m3*gn0+m4*gn1+m5*gn2,gnz=m6*gn0+m7*gn1+m8*gn2;
+          const nx=bnx+(gnx-bnx)*gyroidMix,ny=bny+(gny-bny)*gyroidMix,nz=bnz+(gnz-bnz)*gyroidMix;
           // the lattice is a see-through cage — keep its far struts; only the solid shells cull
-          if (nz < (-0.28 - 1.72 * tetraMix)) continue;
+          if (nz < (-0.28 - 1.72 * hopfMix + .23 * gyroidMix)) continue;
 
           const sx = ux * F;
           const sy = uy * F;
           const sz = uz * F;
           const frozenFt=ft*(1-tetraMix);
-          const q = fbm(sx, sy, sz + frozenFt * 0.3);
-          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
-          f = f * f * (3 - 2 * f);
+          // Surface-to-surface morphs do not need the sphere's noise volume.
+          let f = 0.5;
+          if (sphereMix > 0) {
+            const q = fbm(sx, sy, sz + frozenFt * 0.3);
+            f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
+            f = f * f * (3 - 2 * f);
+          }
           const rr = 1 + amp * (f - 0.5) * 2;
           const X = Math.round(wx * rr * G) / G;
           const Y = Math.round(wy * rr * G) / G;
@@ -1200,7 +1259,7 @@
           if (az >= ax && az >= ay) face = 1.00;
           else if (ay >= ax) face = wy > 0 ? 0.86 : 0.30;
           else face = wx > 0 ? 0.60 : 0.46;
-          // This axis-bucketed tint fakes shading for the sphere/tesseract point
+          // This axis-bucketed tint fakes shading for the sphere point
           // clouds, but the tetrahedron's facets aren't axis-aligned, so it flickers
           // between buckets within a single flat face. Fade it out as tetra takes over.
           face = face + (1 - face) * tetraMix;
@@ -1219,11 +1278,26 @@
           }
           if (tetraMix > 0 && TETRA_EDGE[sourceIndex] < 0.05) v *= 1 - 0.5 * tetraMix;
           v *= (0.58 + 0.42 * (Z + 1) * 0.5) * (1 - tetraMix) + tetraMix;
+          if (gyroidMix > 0) {
+            const gx=gyroid.points[ni]*(.41/.42),gy=gyroid.points[ni+1]*(.41/.42),gz=gyroid.points[ni+2]*(.41/.42);
+            const gl=Math.max(0,gnx*(-.44)+gny*.55+gnz*.71);
+            const gr=Math.pow(1-Math.abs(gnz),5)*.75;
+            const pat=.5+.5*Math.sin(2.3*(gx+gy)+1.9*gz-gyroid.flowTime*1.6);
+            const gv=((.12+.95*gl)*(.55+.62*pat)+gr)*gyroid.glow*(.66+.34*(wz*(.41/.42)+1.2)/2.4);
+            v=v*(1-gyroidMix)+gv*gyroidMix;
+            cm=cm*(1-gyroidMix)+((pat-.5)*1.3+(gl-.5)*.4)*gyroidMix;
+          }
+          if (hopfMix > 0 && hopf.visible[sourceIndex]) {
+            const hv = hopf.brightness[sourceIndex] * (0.66 + 0.34 * (wz * (.41/.27) + 1.6) / 3.2);
+            v = v * (1-hopfMix) + hv * hopfMix;
+            cm = cm * (1-hopfMix) + hopf.chroma[sourceIndex] * hopfMix;
+
+          }
           const spx = cx + X * R;
           const spy = cy - Y * R;
           const x0 = (spx - half) | 0;
           const y0 = (spy - half) | 0;
-          const ve = v * (tetraMix > 0.5 ? 1 : 0.74);   // no per-splat edge shadow on the lattice rods
+          const ve = v * (0.74 + 0.26 * surfaceMix);   // no per-splat edge shadow on the lattice rods
 
           for (let yy = y0; yy < y0 + s; yy += 1) {
             if (yy < 0 || yy >= gh) continue;
@@ -1679,5 +1753,7 @@
   });
 </script>
 
+<script src="assets/supabase-js.js"></script>
+<script src="assets/oriphim-supabase.js"></script>
 </body>
 </html>
