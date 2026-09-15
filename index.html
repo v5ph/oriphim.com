@@ -62,7 +62,7 @@
   }
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:2;}
 
-  h1,h2,h3{font-family:'Fraunces', serif; font-weight:560; letter-spacing:-0.01em; color:var(--ink);}
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; font-weight:560; letter-spacing:-0.01em; color:var(--ink);}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
@@ -82,14 +82,14 @@
   .brand-icon{display:block; width:42px; height:42px; color:var(--ink);}
   .brand-icon svg,.brand-icon img{display:block; width:100%; height:100%; object-fit:contain;}
   .word{
-    font-family:'Jacquard 12', 'Fraunces', serif;
+    font-family:'Jacquard 12', 'Fraunces', Georgia, serif;
     font-weight:400;
     font-size:34px;
     line-height:1;
     letter-spacing:.03em;
     text-transform:lowercase;
   }
-  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
 
@@ -288,7 +288,7 @@
   .tier-card{background:var(--paper);padding:38px 34px;}
   .tier-card h3{font-size:25px;margin-bottom:18px;}
   .tier-card p,.narrative-copy p{font-size:15px;line-height:1.75;color:var(--ink-soft);}
-  .tier-note{margin-top:18px;max-width:72ch;font-family:'Fraunces',serif;font-size:20px;line-height:1.5;}
+  .tier-note{margin-top:18px;max-width:72ch;font-family:'Fraunces',Georgia,serif;font-size:20px;line-height:1.5;}
   .narrative-grid{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(40px,8vw,120px);align-items:start;}
   .narrative-grid h2{font-size:clamp(28px,3.4vw,40px);max-width:18ch;}
   .narrative-grid .eyebrow{margin-bottom:14px;}
@@ -317,7 +317,7 @@
   .tab-report .eyebrow{font-size:10px;}
   .tab-report .report-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
   .tab-report .report-id{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft);}
-  .tab-report h3{font-family:'Fraunces',serif; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
+  .tab-report h3{font-family:'Fraunces',Georgia,serif; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
   .tab-report .report-rows{display:flex; flex-direction:column; gap:8px; margin-bottom:16px; border-top:1px solid var(--line-soft); padding-top:12px;}
   .tab-report .report-row{display:flex; justify-content:space-between; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.02em; color:var(--ink-soft);}
   .tab-report .report-row b{color:var(--ink); font-weight:500;}
@@ -325,7 +325,7 @@
   .tab-report .report-plot polyline{fill:none; stroke:var(--bg-deep); stroke-width:1.6;}
   .tab-report .report-plot line{stroke:var(--line-soft); stroke-width:1;}
   .tab-report .report-sign{display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-top:1px solid var(--line-soft); padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
-  .tab-report .report-sign b{font-family:'Fraunces',serif; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
+  .tab-report .report-sign b{font-family:'Fraunces',Georgia,serif; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
 
   .section-tabs{position:absolute;left:32px;bottom:32px;display:flex;gap:20px;z-index:5;}
   .section-tabs button{appearance:none;border:0;border-bottom:1px solid transparent;background:transparent;padding:4px 0;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;opacity:.45;cursor:pointer;}
@@ -364,7 +364,7 @@
     align-items:baseline;
   }
   .spec-row .sr-num{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);}
-  .spec-row .sr-label{font-family:'Fraunces', serif; font-weight:560; font-size:19px;}
+  .spec-row .sr-label{font-family:'Fraunces', Georgia, serif; font-weight:560; font-size:19px;}
   .spec-row .sr-desc{font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:56ch;}
 
   /* ---------- cta band ---------- */
@@ -496,27 +496,23 @@
 <script src="assets/product-demo.js" defer></script>
 <script src="assets/hopf-shape.js"></script>
 <script src="assets/gyroid-shape.js"></script>
+<link rel="stylesheet" href="/assets/site-navigation.css">
+<link rel="stylesheet" href="/assets/page-menu.css">
+<script src="/assets/page-menu.js" defer></script>
 </head>
 <body class="tab-layout">
 
 <div class="topbar">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Oriphim home">
-      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
-      <span class="word">oriphim</span>
-    </a>
-
-    <nav class="navlinks">
-      <div class="nav-menu" data-dropdown>
-        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">ORIPHIM</span></a>
+    <div class="nav-menu" data-dropdown>
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">Oriphim</span></a>
         <span class="subnav" role="menu">
           <a href="/pricing" role="menuitem">PRICING</a>
           <a href="/download" role="menuitem">DOWNLOAD</a>
         </span>
       </div>
-      <a href="/archive">Archive</a>
-      <a href="/company">Company</a>
-    </nav>
+
+    
 
     <a href="/sign-in" class="signin-btn">Sign In</a>
   </div>
@@ -538,7 +534,7 @@
     <aside class="tab-report product-demo" data-tab-report="1" aria-label="Animated Oriphim product demonstration">
       <div class="pd-label"><span>THE WORKSPACE</span><span>IN MOTION ↗</span></div>
       <div class="pd-window" data-phase="0">
-        <div class="pd-chrome"><span class="pd-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>oriphim</span><span class="pd-project">toroidal-ap</span></div>
+        <div class="pd-chrome"><span class="pd-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Oriphim</span><span class="pd-project">toroidal-ap</span></div>
         <div class="pd-tabs" aria-hidden="true"><span>▥</span><span>+</span><span class="pd-session">toroidal-ap <i>×</i></span></div>
         <div class="pd-viewport" aria-hidden="true">
           <div class="pd-rail"><span>~/ORIPHIM</span><b>⌑ research</b><span class="pd-selected">toroidal-ap</span><small>brief.md<br>runs/<br>figure.html</small></div>
@@ -594,7 +590,7 @@
       <div class="hero-copy">
         <div class="eyebrow">ORIPHIM RESEARCH - CATALOG No. 01</div>
         <h1>Simulation that can be defended.</h1>
-        <p class="lede"><span class="oriphim-word">ORIPHIM</span> takes a described physical system, derives the governing equations, builds and runs the model, subjects it to every check the available reality permits, and states plainly what the numbers do and do not license you to conclude.</p>
+        <p class="lede"><span class="oriphim-word">Oriphim</span> takes a described physical system, derives the governing equations, builds and runs the model, subjects it to every check the available reality permits, and states plainly what the numbers do and do not license you to conclude.</p>
         <div class="cta-row">
           <a href="/sign-up" class="btn">Request Access</a>
           <a href="/archive" class="link-line">Read the archive</a>
@@ -639,7 +635,8 @@
 <footer>
   <div class="wrap">
     <span>&copy; 2026 ORIPHIM, INC.</span>
-    <a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a>
+    <a class="footer-company" href="/company">Company</a>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">[F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div>
   </div>
 </footer>
 

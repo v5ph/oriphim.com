@@ -76,8 +76,8 @@
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
   .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
-  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
-  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .word{font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
   .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
@@ -98,7 +98,7 @@
   .pricing-hero h1{font-size:clamp(32px,3.6vw,42px);line-height:1;}
   .tagline{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:460;font-size:16.5px;color:var(--ink-soft);}
   .tagline-line{display:block;}
-  .tagline-theorist{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
+  .tagline-theorist{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
   .toggle{display:inline-flex;border:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
   .toggle button{appearance:none;background:transparent;border:0;color:var(--ink-soft);cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:10px 20px;transition:background .15s ease,color .15s ease;}
   .toggle button + button{border-left:1px solid var(--ink);}
@@ -166,22 +166,18 @@
 
   h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
 </style>
+<link rel="stylesheet" href="/assets/site-navigation.css">
+<link rel="stylesheet" href="/assets/page-menu.css">
+<script src="/assets/page-menu.js" defer></script>
 </head>
 <body>
 <div class="topbar">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Oriphim home">
-      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
-      <span class="word">oriphim</span>
-    </a>
-    <nav class="navlinks" aria-label="Primary navigation">
-      <div class="nav-menu" data-dropdown data-current="true">
-        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">ORIPHIM</span></a>
+    <div class="nav-menu" data-dropdown data-current="true">
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">Oriphim</span></a>
         <span class="subnav" role="menu"><a href="/pricing" role="menuitem" aria-current="page">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
       </div>
-      <a href="/archive">Archive</a>
-      <a href="/company">Company</a>
-    </nav>
+    
     <a href="/sign-in" class="signin-btn">Sign In</a>
   </div>
 </div>
@@ -218,7 +214,7 @@
             <li>Unlimited verified experiments, every domain: physics, chemistry, quantum, logistics, research, general simulation.</li>
             <li>"Run the paper" - full document ingestion (PDF, Office, CSV), equation extraction, symbolic verification, NIST / PubChem grounding.</li>
             <li>Reproducible report export (<code>report.html</code>), no watermark.</li>
-            <li><span class="oriphim-word">ORIPHIM</span> Cloud access with a fair-use quota (500 messages / mo) - metered and enforced server-side from day one.</li>
+            <li><span class="oriphim-word">Oriphim</span> Cloud access with a fair-use quota (500 messages / mo) - metered and enforced server-side from day one.</li>
             <li>Bring your own endpoint - Groq, Ollama, any OpenAI-compatible API, your own key.</li>
             <li>Standard support (email, best-effort).</li>
           </ul>
@@ -235,7 +231,7 @@
           <div class="price-cta"><a href="/sign-up" class="btn-outline">Talk to us</a></div>
           <div class="price-list-label">Live now</div>
           <ul class="price-features">
-            <li>Everything in Standard, with an uncapped <span class="oriphim-word">ORIPHIM</span> Cloud quota.</li>
+            <li>Everything in Standard, with an uncapped <span class="oriphim-word">Oriphim</span> Cloud quota.</li>
             <li>Signed data-residency attestation and a network-egress audit doc - Oriphim already runs fully local and offline; this documents what's already true, for procurement.</li>
             <li>Dedicated onboarding and priority support.</li>
             <li>Invoicing, annual contracts, PO-friendly billing.</li>
@@ -267,14 +263,14 @@
       <div class="faq-list">
         <details class="faq-item">
           <summary>What's the difference between Guest Mode and Standard?</summary>
-          <p>Guest Mode runs entirely on your own hardware - no account, no cloud, no quota. Standard adds <span class="oriphim-word">ORIPHIM</span> Cloud access, unlimited local usage, document ingestion, and report export. Same engine either way; Standard just removes the ceiling.</p>
+          <p>Guest Mode runs entirely on your own hardware - no account, no cloud, no quota. Standard adds <span class="oriphim-word">Oriphim</span> Cloud access, unlimited local usage, document ingestion, and report export. Same engine either way; Standard just removes the ceiling.</p>
         </details>
         <details class="faq-item">
           <summary>Do I need a credit card to try Oriphim?</summary>
           <p>No. Guest Mode asks for nothing - no card, no sign-up. You only enter billing details if you choose Standard or Enterprise.</p>
         </details>
         <details class="faq-item">
-          <summary>What counts against the <span class="oriphim-word">ORIPHIM</span> Cloud quota?</summary>
+          <summary>What counts against the <span class="oriphim-word">Oriphim</span> Cloud quota?</summary>
           <p>Only cloud completions - each one is counted server-side as it happens. Local chat and local simulation runs never touch the quota, since they run on your machine, not ours.</p>
         </details>
         <details class="faq-item">
@@ -306,7 +302,8 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">[F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 
 <script>
   const topoCanvas = document.querySelector("[data-topo-map]");

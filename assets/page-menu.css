@@ -1,0 +1,11 @@
+.page-menu{position:fixed;inset:0;margin:auto;width:min(480px,calc(100vw - 40px));max-height:calc(100dvh - 48px);overflow:auto;box-sizing:border-box;padding:24px;border:1px solid #18130f;background:#eee5d4;color:#18130f;box-shadow:0 20px 80px #18130f40;}
+.page-menu::backdrop{background:rgba(24,19,15,.45);backdrop-filter:blur(5px);}
+.page-menu header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.page-menu h2{font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:560;line-height:1.2;margin:0;text-transform:none;}
+.page-menu button{background:none;border:0;color:inherit;font:28px/1 sans-serif;cursor:pointer;padding:4px 8px;}
+.page-menu nav{display:grid;gap:4px;}
+.page-menu nav a{display:block;padding:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.5;text-decoration:none;color:inherit;border:1px solid transparent;}
+.page-menu nav a[aria-current="page"]{border-color:#18130f50;}
+.page-menu nav a:hover,.page-menu nav a:focus-visible{background:#18130f;color:#eee5d4;outline:none;}
+.page-menu button:focus-visible{outline:2px solid currentColor;}
+.page-menu p{font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.5;margin:18px 0 0;opacity:.65;}

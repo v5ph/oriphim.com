@@ -27,8 +27,8 @@
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
   .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
-  .word{font-family:'Jacquard 12','Fraunces',serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
-  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .word{font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .oriphim-word{display:inline-block;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
   .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
@@ -49,7 +49,7 @@
   .auth-art{display:grid;place-items:center;border-left:1px solid var(--ink);background:#f34b03;overflow:hidden;}
   .auth-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
   .auth-card-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px;}
-  .auth-card-brand{display:flex;align-items:center;gap:10px;font-family:'Jacquard 12','Fraunces',serif;font-size:32px;line-height:1;text-transform:lowercase;}
+  .auth-card-brand{display:flex;align-items:center;gap:10px;font-family:'Jacquard 12','Fraunces',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase;}
   .auth-card-brand img{width:34px;height:34px;object-fit:contain;}
   .auth-close{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:18px;}
   .auth-close:hover{background:var(--ink);color:var(--paper);}
@@ -73,22 +73,18 @@
 
   h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
 </style>
+<link rel="stylesheet" href="/assets/site-navigation.css">
+<link rel="stylesheet" href="/assets/page-menu.css">
+<script src="/assets/page-menu.js" defer></script>
 </head>
 <body>
 <div class="topbar">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Oriphim home">
-      <span class="brand-icon"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true"></span>
-      <span class="word">oriphim</span>
-    </a>
-    <nav class="navlinks">
-      <div class="nav-menu" data-dropdown>
-        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">ORIPHIM</span></a>
+    <div class="nav-menu" data-dropdown>
+        <a class="nav-trigger" href="/download" aria-haspopup="true" aria-expanded="false"><span class="oriphim-word">Oriphim</span></a>
         <span class="subnav" role="menu"><a href="/pricing" role="menuitem">PRICING</a><a href="/download" role="menuitem">DOWNLOAD</a></span>
       </div>
-      <a href="/archive">Archive</a>
-      <a href="/company">Company</a>
-    </nav>
+    
     <a href="/sign-in" class="auth-top-link">Sign In</a>
   </div>
 </div>
@@ -97,10 +93,10 @@
   <section class="auth-card" aria-labelledby="auth-title">
     <div class="auth-content">
       <div class="auth-card-top">
-        <span class="auth-card-brand"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true">oriphim</span>
+        <span class="auth-card-brand"><img src="assets/oriphim-icon.svg" alt="" aria-hidden="true">Oriphim</span>
         <a class="auth-close" href="/" aria-label="Return home">x</a>
       </div>
-      <p class="eyebrow">START WITH <span class="oriphim-word">ORIPHIM</span></p>
+      <p class="eyebrow">START WITH <span class="oriphim-word">Oriphim</span></p>
       <h1 id="auth-title">Create account</h1>
       <form class="auth-form" data-static-form data-auth-mode="sign-up" data-form-message="Authentication is temporarily unavailable.">
         <label>Name <input type="text" name="name" autocomplete="name" required></label>
@@ -115,7 +111,8 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></footer>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">[F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
