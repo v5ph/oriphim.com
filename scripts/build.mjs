@@ -1,5 +1,6 @@
-import { cp, mkdir, readFile, readdir, rm } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -60,6 +61,24 @@ for (const name of [...referenced].sort()) {
   } catch {
     console.warn(`  ! referenced asset not found: assets/${name}`);
   }
+}
+
+// Tie each local stylesheet/script URL to its contents so deployments cannot
+// reuse a browser-cached asset from an older version of the page.
+for (const entry of entries.filter((name) => name.endsWith(".html"))) {
+  const pagePath = join(dist, entry);
+  let html = await readFile(pagePath, "utf8");
+  const references = [...html.matchAll(/(?:src|href)="([^"?#]+\.(?:css|js))"/g)];
+  for (const [, url] of references) {
+    if (/^(?:https?:)?\/\//.test(url)) continue;
+    const assetPath = url.startsWith("/")
+      ? join(dist, url.slice(1))
+      : resolve(dirname(pagePath), url);
+    const content = await readFile(assetPath);
+    const version = createHash("sha256").update(content).digest("hex").slice(0, 12);
+    html = html.replaceAll(`"${url}"`, `"${url}?v=${version}"`);
+  }
+  await writeFile(pagePath, html);
 }
 
 console.log(

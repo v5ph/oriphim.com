@@ -23,12 +23,12 @@
 <meta name="twitter:title" content="ORIPHIM | Defensible Engineering Simulation and Verification">
 <meta name="twitter:description" content="Simulation that can be defended: deterministic computation, verification, validation, and explicit limits.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
-<link rel="icon" type="image/svg+xml" href="assets/oriphim-logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=1">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #c2391b;
@@ -62,7 +62,7 @@
   }
   .wrap{max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:2;}
 
-  h1,h2,h3{font-family:'Fraunces', Georgia, serif; font-weight:560; letter-spacing:-0.01em; color:var(--ink);}
+  h1,h2,h3{font-family:'Geist Mono',monospace; font-weight:560; letter-spacing:-0.01em; color:var(--ink);}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
@@ -82,14 +82,14 @@
   .brand-icon{display:block; width:42px; height:42px; color:var(--ink);}
   .brand-icon svg,.brand-icon img{display:block; width:100%; height:100%; object-fit:contain;}
   .word{
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Geist Mono',monospace;
     font-weight:400;
     font-size:34px;
     line-height:1;
     letter-spacing:.03em;
     text-transform:lowercase;
   }
-  .oriphim-word{display:inline-block;font-family:'Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .oriphim-word{display:inline-block;font-family:'Geist Mono',monospace;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
 
@@ -288,7 +288,7 @@
   .tier-card{background:var(--paper);padding:38px 34px;}
   .tier-card h3{font-size:25px;margin-bottom:18px;}
   .tier-card p,.narrative-copy p{font-size:15px;line-height:1.75;color:var(--ink-soft);}
-  .tier-note{margin-top:18px;max-width:72ch;font-family:'Fraunces',Georgia,serif;font-size:20px;line-height:1.5;}
+  .tier-note{margin-top:18px;max-width:72ch;font-family:'Geist Mono',monospace;font-size:20px;line-height:1.5;}
   .narrative-grid{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(40px,8vw,120px);align-items:start;}
   .narrative-grid h2{font-size:clamp(28px,3.4vw,40px);max-width:18ch;}
   .narrative-grid .eyebrow{margin-bottom:14px;}
@@ -317,7 +317,7 @@
   .tab-report .eyebrow{font-size:10px;}
   .tab-report .report-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
   .tab-report .report-id{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft);}
-  .tab-report h3{font-family:'Fraunces',Georgia,serif; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
+  .tab-report h3{font-family:'Geist Mono',monospace; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
   .tab-report .report-rows{display:flex; flex-direction:column; gap:8px; margin-bottom:16px; border-top:1px solid var(--line-soft); padding-top:12px;}
   .tab-report .report-row{display:flex; justify-content:space-between; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.02em; color:var(--ink-soft);}
   .tab-report .report-row b{color:var(--ink); font-weight:500;}
@@ -325,7 +325,7 @@
   .tab-report .report-plot polyline{fill:none; stroke:var(--bg-deep); stroke-width:1.6;}
   .tab-report .report-plot line{stroke:var(--line-soft); stroke-width:1;}
   .tab-report .report-sign{display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-top:1px solid var(--line-soft); padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
-  .tab-report .report-sign b{font-family:'Fraunces',Georgia,serif; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
+  .tab-report .report-sign b{font-family:'Geist Mono',monospace; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
 
   .section-tabs{position:absolute;left:32px;bottom:32px;display:flex;gap:20px;z-index:5;}
   .section-tabs button{appearance:none;border:0;border-bottom:1px solid transparent;background:transparent;padding:4px 0;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;opacity:.45;cursor:pointer;}
@@ -364,7 +364,7 @@
     align-items:baseline;
   }
   .spec-row .sr-num{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);}
-  .spec-row .sr-label{font-family:'Fraunces', Georgia, serif; font-weight:560; font-size:19px;}
+  .spec-row .sr-label{font-family:'Geist Mono',monospace; font-weight:560; font-size:19px;}
   .spec-row .sr-desc{font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:56ch;}
 
   /* ---------- cta band ---------- */
@@ -446,7 +446,7 @@
     .topo-canvas{opacity:.52;}
   }
 
-  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
+  h1,h2,h3,h4{font-family:'Geist Mono',monospace;font-weight:560;text-transform:none;}
 </style>
 <script type="application/ld+json">
 {

@@ -68,7 +68,7 @@
       .auth-popup__close{width:38px;height:38px;border:1px solid #18130f;background:transparent;color:#18130f;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
       .auth-popup__close:hover{background:#18130f;color:#ece4d3}
       .auth-popup__eyebrow{margin:0 0 12px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#241d16}
-      .auth-popup h2{margin:0 0 20px;font-family:'Fraunces',Georgia,serif;font-size:38px;font-weight:560;line-height:.96;color:#18130f;text-transform:none}
+      .auth-popup h2{margin:0 0 20px;font-family:'Geist Mono',monospace;font-size:38px;font-weight:560;line-height:.96;color:#18130f;text-transform:none}
       .auth-popup form{display:grid;gap:12px}
       .auth-popup label{display:grid;gap:8px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#241d16}
       .auth-popup input{width:100%;min-height:44px;border:1px solid #18130f;background:#f4eee0;color:#18130f;padding:12px 13px;font:inherit;outline:none}

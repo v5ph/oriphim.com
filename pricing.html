@@ -23,12 +23,12 @@
 <meta name="twitter:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
 <meta name="twitter:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
-<link rel="icon" type="image/svg+xml" href="assets/oriphim-logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=1">
 <link rel="apple-touch-icon" href="assets/oriphim-red.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,650&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -67,7 +67,7 @@
   body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;}
   body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:1;mix-blend-mode:multiply;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
-  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:560;letter-spacing:0;color:var(--ink);}
+  h1,h2,h3{font-family:'Geist Mono',monospace;font-weight:560;letter-spacing:0;color:var(--ink);}
   code{font-family:'IBM Plex Mono',monospace;font-size:.92em;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
 
@@ -76,8 +76,8 @@
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex-shrink:0;}
   .brand-icon{display:block;width:42px;height:42px;}
   .brand-icon img{display:block;width:100%;height:100%;object-fit:contain;}
-  .word{font-family:'Fraunces',Georgia,serif;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
-  .oriphim-word{display:inline-block;font-family:'Fraunces',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
+  .word{font-family:'Geist Mono',monospace;font-size:34px;line-height:1;letter-spacing:.03em;text-transform:lowercase;}
+  .oriphim-word{display:inline-block;font-family:'Geist Mono',monospace;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
   .navlinks{display:flex;align-items:center;justify-content:space-between;gap:clamp(34px,5vw,76px);width:clamp(240px,38vw,520px);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
@@ -96,9 +96,9 @@
   .pricing-hero{padding:38px 0 28px;text-align:center;}
   .hero-top{display:flex;flex-direction:column;align-items:center;gap:16px;}
   .pricing-hero h1{font-size:clamp(32px,3.6vw,42px);line-height:1;}
-  .tagline{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:460;font-size:16.5px;color:var(--ink-soft);}
-  .tagline-line{display:block;}
-  .tagline-theorist{display:inline-block;font-family:'Fraunces',Georgia,serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
+  .tagline{display:block;font-family:'Geist Mono',monospace;font-style:italic;font-weight:460;font-size:16.5px;color:var(--ink-soft);}
+  .tagline-line{display:inline;}
+  .tagline-theorist{display:inline-block;font-family:'Jacquard 12',serif;font-style:normal;font-size:1.6em;line-height:.72;color:var(--ink);}
   .toggle{display:inline-flex;border:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
   .toggle button{appearance:none;background:transparent;border:0;color:var(--ink-soft);cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:10px 20px;transition:background .15s ease,color .15s ease;}
   .toggle button + button{border-left:1px solid var(--ink);}
@@ -115,10 +115,10 @@
   .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink);}
   .price-card{background:var(--paper);padding:27px 28px 26px;display:flex;flex-direction:column;}
   .price-card.enterprise{background:var(--cream);}
-  .price-name{font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:560;margin:2px 0 6px;}
+  .price-name{font-family:'Geist Mono',monospace;font-size:28px;font-weight:560;margin:2px 0 6px;}
   .price-tag{font-size:13.5px;color:var(--ink-soft);line-height:1.5;max-width:36ch;}
   .price-amount-row{display:flex;align-items:baseline;gap:8px;margin-top:26px;}
-  .price-amount{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:52px;line-height:1;}
+  .price-amount{font-family:'Geist Mono',monospace;font-weight:650;font-size:52px;line-height:1;}
   .price-per{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);}
   .price-billing-note{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin-top:8px;}
   .price-cta{margin-top:26px;}
@@ -130,14 +130,14 @@
   .roadmap-box{border:1px dashed var(--line);padding:20px 20px 18px;margin-top:28px;}
   .roadmap-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive);margin-bottom:12px;}
   .roadmap-box .price-features li{color:var(--ink-soft);}
-  .roadmap-note{font-family:'Fraunces',Georgia,serif;font-size:12.5px;line-height:1.6;color:var(--ink-soft);margin-top:16px;font-style:italic;}
+  .roadmap-note{font-family:'Geist Mono',monospace;font-size:12.5px;line-height:1.6;color:var(--ink-soft);margin-top:16px;font-style:italic;}
   .guest-note{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;padding:56px 0;}
   .guest-note h2{font-size:clamp(24px,2.8vw,30px);max-width:16ch;}
   .guest-note p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:46ch;}
   .faq-title{font-size:clamp(26px,3vw,32px);margin-bottom:20px;}
   .faq-list{border-top:0;}
   .faq-item{border-bottom:0;padding:15px 0;}
-  .faq-item summary{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink);}
+  .faq-item summary{font-family:'Geist Mono',monospace;font-weight:500;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink);}
   .faq-item summary::-webkit-details-marker{display:none;}
   .faq-item summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:18px;color:var(--ink-soft);flex-shrink:0;transition:transform .2s ease;}
   .faq-item[open] summary::after{transform:rotate(45deg);}
@@ -164,7 +164,24 @@
   @media(max-width:560px){.navlinks{display:none;}.wrap{padding:0 24px;}.price-card{padding:22px 18px 20px;}.price-amount{font-size:44px;}}
   @media(prefers-reduced-motion:reduce){.topo-canvas{opacity:.52;}}
 
-  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:560;text-transform:none;}
+  h1,h2,h3,h4{font-family:'Geist Mono',monospace;font-weight:560;text-transform:none;}
+
+  /* Compact plan summaries; full inclusions remain available on demand. */
+  .pricing-grid{gap:24px;background:transparent;border:0;align-items:start;max-width:960px;margin:0 auto;}
+  .price-card,.price-card.enterprise{background:var(--paper);border:1px solid var(--line);padding:32px;}
+  .price-name{font-size:22px;margin:0 0 10px;}
+  .price-tag{max-width:none;min-height:40px;}
+  .price-amount-row{margin-top:24px;}
+  .price-amount{font-size:44px;font-weight:500;letter-spacing:-.05em;}
+  .price-cta{margin:24px 0;}
+  .plan-highlights{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+  .plan-highlights li{font-size:14px;line-height:1.5;}
+  .plan-details{margin-top:28px;border-top:1px solid var(--line);padding-top:18px;}
+  .plan-details summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.6;}
+  .plan-details[open] summary{margin-bottom:22px;}
+  .roadmap-box{border:0;border-top:1px solid var(--line);padding:20px 0 0;}
+  .tagline{font-style:normal;line-height:1.6;}
+  @media(max-width:680px){.price-card,.price-card.enterprise{padding:24px;}.price-tag{min-height:0;}}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
@@ -184,7 +201,7 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span><span class="tagline-line">become a <span class="tagline-theorist">theorist</span>.</span></p>
+        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span> <span class="tagline-line">become a <span class="tagline-theorist">theorist</span>.</span></p>
         <div class="toggle" id="billingToggle">
           <button type="button" data-period="monthly" class="active">Monthly</button>
           <button type="button" data-period="annual">Annual</button>
@@ -198,13 +215,19 @@
       <div class="pricing-grid fade">
         <div class="price-card">
           <div class="price-name">Standard</div>
-          <p class="price-tag">Everything works today. Nothing here is a promise.</p>
+          <p class="price-tag">For individual research and simulation.</p>
           <div class="price-amount-row">
             <span class="price-amount" id="stdPrice">$39</span>
             <span class="price-per" id="stdPer">/ mo</span>
           </div>
           <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime</div>
           <div class="price-cta"><a href="/?auth=sign-up" class="btn">Choose Standard</a></div>
+          <ul class="plan-highlights">
+            <li>Unlimited local chat and experiments</li>
+            <li>Document ingestion and report export</li>
+            <li>500 cloud messages per month</li>
+          </ul>
+          <details class="plan-details"><summary>All Standard features</summary>
           <div class="price-list-label">What's included</div>
           <ul class="price-features">
             <li>Unlimited local AI chat and notebook - runs on your own hardware, so "unlimited" is a real word here.</li>
@@ -215,17 +238,24 @@
             <li>Bring your own endpoint - Groq, Ollama, any OpenAI-compatible API, your own key.</li>
             <li>Standard support (email, best-effort).</li>
           </ul>
+          </details>
         </div>
 
         <div class="price-card enterprise">
           <div class="price-name">Enterprise</div>
-          <p class="price-tag">Self-serve at $299/mo. Custom pricing above that, for larger orgs.</p>
+          <p class="price-tag">For organizations with dedicated support needs.</p>
           <div class="price-amount-row">
             <span class="price-amount">$299</span>
             <span class="price-per">/ mo</span>
           </div>
           <div class="price-billing-note">Self-serve &middot; custom pricing on request</div>
           <div class="price-cta"><a href="/?auth=sign-up" class="btn-outline">Talk to us</a></div>
+          <ul class="plan-highlights">
+            <li>Everything in Standard, uncapped cloud quota</li>
+            <li>Dedicated onboarding and priority support</li>
+            <li>Invoicing and annual contracts</li>
+          </ul>
+          <details class="plan-details"><summary>Enterprise features &amp; roadmap</summary>
           <div class="price-list-label">Live now</div>
           <ul class="price-features">
             <li>Everything in Standard, with an uncapped <span class="oriphim-word">Oriphim</span> Cloud quota.</li>
@@ -244,6 +274,7 @@
             </ul>
             <p class="roadmap-note">You're an early Enterprise partner: this is what's live today, and your input shapes what ships next.</p>
           </div>
+          </details>
         </div>
       </div>
     </div>
@@ -252,37 +283,6 @@
     <div class="wrap guest-note fade">
       <h2>Try Guest Mode first.</h2>
       <p>Guest mode is the free, unauthenticated way in - it runs locally in your browser, no account and no card required. Standard and Enterprise are what you step into once it's real work.</p>
-    </div>
-  </section>
-  <section class="section-pad">
-    <div class="wrap fade">
-      <h2 class="faq-title">Questions &amp; Answers</h2>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>What's the difference between Guest Mode and Standard?</summary>
-          <p>Guest Mode runs entirely on your own hardware - no account, no cloud, no quota. Standard adds <span class="oriphim-word">Oriphim</span> Cloud access, unlimited local usage, document ingestion, and report export. Same engine either way; Standard just removes the ceiling.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Do I need a credit card to try Oriphim?</summary>
-          <p>No. Guest Mode asks for nothing - no card, no sign-up. You only enter billing details if you choose Standard or Enterprise.</p>
-        </details>
-        <details class="faq-item">
-          <summary>What counts against the <span class="oriphim-word">Oriphim</span> Cloud quota?</summary>
-          <p>Only cloud completions - each one is counted server-side as it happens. Local chat and local simulation runs never touch the quota, since they run on your machine, not ours.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Can I cancel or switch billing anytime?</summary>
-          <p>Standard is month-to-month and cancels anytime. Annual billing is prepaid for the year at the discounted rate. Enterprise self-serve bills monthly by default; annual contracts are available on request.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Is the Enterprise roadmap list a real commitment?</summary>
-          <p>Yes, but it's not live yet - that's why it's labeled separately. SSO, multi-seat accounts, an admin console, and CI integration are committed and in progress, not shipped today. Enterprise partners get priority input on the order we build them in.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Is Oriphim actually private and offline-capable?</summary>
-          <p>Yes - that's the architecture, not a feature flag. Oriphim runs fully local by default. Enterprise adds a signed data-residency attestation and network-egress audit doc on top of that existing fact, for procurement review.</p>
-        </details>
-      </div>
     </div>
   </section>
 
