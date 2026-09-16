@@ -158,8 +158,8 @@
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
   .footer-x svg{display:block;width:14px;height:14px;}
-  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
-  .fade.in{opacity:1;transform:translateY(0);}
+  .fade{opacity:1;transform:none;transition:none;}
+  
   @media(max-width:860px){.pricing-grid{grid-template-columns:1fr;}}
   @media(max-width:560px){.navlinks{display:none;}.wrap{padding:0 24px;}.price-card{padding:22px 18px 20px;}.price-amount{font-size:44px;}}
   @media(prefers-reduced-motion:reduce){.topo-canvas{opacity:.52;}}
@@ -201,7 +201,7 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span> <span class="tagline-line">become a <span class="tagline-theorist">theorist</span>.</span></p>
+        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span> <span class="tagline-line">Become a <span class="tagline-theorist">theorist</span>.</span></p>
         <div class="toggle" id="billingToggle">
           <button type="button" data-period="monthly" class="active">Monthly</button>
           <button type="button" data-period="annual">Annual</button>
@@ -414,19 +414,6 @@
     }
   }
 
-  const fadeItems = document.querySelectorAll(".fade");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-        }
-      });
-    }, { threshold: 0.15 });
-    fadeItems.forEach((item) => obs.observe(item));
-  } else {
-    fadeItems.forEach((item) => item.classList.add("in"));
-  }
 
   const billingToggle = document.getElementById("billingToggle");
   const stdPrice = document.getElementById("stdPrice");

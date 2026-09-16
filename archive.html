@@ -101,8 +101,8 @@
   .trending-panel h3{font-size:17px;margin-bottom:4px;}
   .trending-empty{text-align:center;padding:26px 6px 8px;}
   .trending-empty p{font-family:'Geist Mono',monospace;font-style:italic;font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
-  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
-  .fade.in{opacity:1;transform:translateY(0);}
+  .fade{opacity:1;transform:none;transition:none;}
+  
   footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--ink-soft);border-top:0;padding:15px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
@@ -191,20 +191,6 @@
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 <script>
-  const fadeItems = document.querySelectorAll(".fade");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {threshold: 0.1});
-    fadeItems.forEach((item) => obs.observe(item));
-  } else {
-    fadeItems.forEach((item) => item.classList.add("in"));
-  }
 
   const tabs = document.querySelectorAll(".feed-tab");
   const entries = document.querySelectorAll("[data-entry]");

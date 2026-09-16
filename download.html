@@ -132,8 +132,8 @@
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
   .footer-x svg{display:block;width:14px;height:14px;}
-  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
-  .fade.in{opacity:1;transform:translateY(0);}
+  .fade{opacity:1;transform:none;transition:none;}
+  
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}}
   @media (max-width:860px){.req-grid{grid-template-columns:1fr;}}
   @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}.spec-row{flex-direction:column;gap:4px;}.spec-row .v{text-align:left;}.btn-primary,.btn-outline{width:100%;}.account-actions{width:100%;}}
@@ -250,20 +250,6 @@
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 
 <script>
-  const fadeItems = document.querySelectorAll(".fade");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    fadeItems.forEach((item) => obs.observe(item));
-  } else {
-    fadeItems.forEach((item) => item.classList.add("in"));
-  }
 
   const builds = {
     mac: { label: "Download for macOS", version: "v0.1.0 &middot; Apple Silicon &middot; 214 MB" },

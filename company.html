@@ -142,8 +142,8 @@
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
   .footer-x:hover{color:var(--ink);background:var(--paper);}
   .footer-x svg{display:block;width:14px;height:14px;}
-  .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
-  .fade.in{opacity:1;transform:translateY(0);}
+  .fade{opacity:1;transform:none;transition:none;}
+  
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.fade{opacity:1;transform:none;transition:none;}.topo-canvas{opacity:.52;}}
   @media (max-width:860px){.principles-grid{grid-template-columns:1fr;}.hero-grid{grid-template-columns:1fr;padding:48px 0;}.mission-grid{grid-template-columns:1fr;padding:48px 0;}.mission-grid .plate-image{order:-1;}h1{max-width:13ch;}}
   @media (max-width:560px){.wrap{padding:0 24px;}.navlinks{display:none;}section{padding:26px 0;}.hero-statement{padding-top:34px;}.contact-actions{width:100%;}.contact-actions .btn{width:100%;text-align:center;}.principle-card{padding:17px 18px;}}
@@ -166,18 +166,17 @@
 <main aria-label="Company">
   <section class="section-flush">
     <div class="wrap hero-statement fade">
-      <h1>A claim is not a result.</h1>
+      <h1>Research Without Barriers</h1>
     </div>
   </section>
 
   <section>
     <div class="wrap">
       <div class="section-head fade">
-        <p class="eyebrow">The problem</p>
+        <p class="eyebrow">Our mission</p>
       </div>
       <div class="prose fade">
-        <p class="mission-body">Most computational work in science and engineering has never been checked. Not because researchers are careless, but because checking it properly costs months that nobody has. So results get published, cited, and built on, and the question of whether the mathematics was actually solved correctly goes unasked.</p>
-        <p class="mission-body">Oriphim asks it. You describe a physical system, or hand over a paper. Oriphim determines what system is being posed, derives the governing equations, builds the model, runs it, and subjects the result to every check reality permits. Then it assembles the argument: why these equations, what regime they hold in, what was assumed, what was neglected, and what the numbers do and do not license you to conclude.</p>
+        <p class="mission-body">Lower the cost of scientific discovery. Starting from a paper or research idea, Oriphim recreates and runs computational experiments conversationally, letting researchers verify findings, explore work they're curious about, and make genuine discoveries. Without expertise barriers, expensive infrastructure, or prohibitive time investment.</p>
       </div>
     </div>
   </section>
@@ -186,12 +185,12 @@
     <div class="wrap">
       <div class="section-head fade">
         <p class="eyebrow">Evidence</p>
-        <h2>Two tiers of evidence, never conflated.</h2>
+        <h2>Verification and Validation: Two tiers we don't conflate.</h2>
       </div>
       <div class="prose fade">
-        <p class="mission-body">Verification asks whether the mathematics was solved correctly - error budgets, convergence under refinement, conservation, integrator agreement, and whether the conclusion survives perturbation of every free parameter. It needs no reference data, so it's available for any system you can describe.</p>
-        <p class="mission-body">Validation asks how far the model sits from reality, with uncertainty carried on both sides. It requires reality to compare against, and it's earned one domain at a time.</p>
-        <p class="mission-body">Oriphim states which tier a report belongs to, on the report. It does not claim a model is correct. It claims the model was solved to a stated accuracy, or that it is wrong by a quantified amount under stated conditions. Both are defensible. Neither is &ldquo;good agreement.&rdquo;</p>
+        <p class="mission-body"><strong>Verification</strong> asks: Is the model mathematically correct? We check convergence under refinement, conservation laws, integrator agreement, and whether conclusions hold across every free parameter. Verification requires no real-world data, so it's available for any system you can describe.</p>
+        <p class="mission-body"><strong>Validation</strong> asks: How does the model compare to reality? We carry uncertainty on both sides. Validation requires real data and is earned one domain at a time.</p>
+        <p class="mission-body">Oriphim labels every report with its tier. We don't claim your model is correct. We claim it was solved to a stated accuracy, or that it diverges from reality by a quantified amount under stated conditions. Both findings are defensible. Both matter.</p>
       </div>
     </div>
   </section>
@@ -199,51 +198,39 @@
   <section>
     <div class="wrap">
       <div class="section-head fade">
-        <p class="eyebrow">Principles</p>
-        <h2>What we hold to.</h2>
+        <p class="eyebrow">How We Work</p>
+        <h2>Five commitments that shape everything we build.</h2>
       </div>
       <div class="principles-grid fade">
         <article class="principle-card">
           <p class="principle-num">I</p>
           <h3>Run it, don't cite it.</h3>
-          <p>A claim becomes a spec, and a spec gets run. Better to simulate something and be wrong than to cite it and never check.</p>
+          <p>Claims become code. Code gets executed. You learn faster by simulating something and being wrong than by citing it and never checking.</p>
         </article>
         <article class="principle-card">
           <p class="principle-num">II</p>
           <h3>Local-first, always.</h3>
-          <p>Your data and models run on your own hardware by default. Cloud is something you opt into, never something you discover later.</p>
+          <p>Your research runs on your hardware by default. Cloud is optional, never hidden. You own your data and experiments.</p>
         </article>
         <article class="principle-card">
           <p class="principle-num">III</p>
-          <h3>Critique is our job, not yours.</h3>
-          <p>A plausible result that is silently wrong is the failure mode worth engineering against. Finding it is the product, not an advanced feature for users expert enough to catch it themselves.</p>
+          <h3>Critique is our job.</h3>
+          <p>A plausible but silent error is the failure mode we engineer against. Finding those errors is the product itself, not something left to expert users.</p>
         </article>
         <article class="principle-card">
           <p class="principle-num">IV</p>
-          <h3>Judgment stays with a person.</h3>
-          <p>Oriphim produces the model, the run, the checks, and the argument in hours instead of months. A named person reviews it, corrects it, and owns it. Every correction is captured.</p>
+          <h3>Judgment stays human.</h3>
+          <p>Oriphim produces the model, the run, the checks, and the reasoning in hours instead of months. A named researcher reviews, corrects, and owns every result. Every change is tracked.</p>
         </article>
         <article class="principle-card principle-card-wide">
           <p class="principle-num">V</p>
-          <h3>Shipped and roadmap are labeled separately.</h3>
-          <p>Everywhere on this site, including here.</p>
+          <h3>Shipped and roadmap are labeled.</h3>
+          <p>You always know what's real today and what's coming. No hidden assumptions.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap status-note fade">
-      <h2>Where this is right now.</h2>
-      <div class="status-copy">
-        <p>Oriphim is built by one person, aimed at a mission that spans fields. The gap is deliberate: the engine gets built first, the team comes after. Everything on this site is either running today or explicitly marked roadmap. There is nothing in between.</p>
-        <div class="social-follow" aria-label="Follow Oriphim on X">
-          <a class="btn" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer">Follow Phil</a>
-          <a class="btn-outline" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer">Follow Oriphim</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section-flush">
     <div class="wrap contact-row fade">
@@ -271,7 +258,7 @@
 </main>
 
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company" aria-current="page">Company</a>
-    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 <script>
   const topoCanvas = document.querySelector("[data-topo-map]");
   if (topoCanvas) {
@@ -384,20 +371,6 @@
     }
   }
 
-  const fadeItems = document.querySelectorAll(".fade");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {threshold: 0.12});
-    fadeItems.forEach((item) => obs.observe(item));
-  } else {
-    fadeItems.forEach((item) => item.classList.add("in"));
-  }
 </script>
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
