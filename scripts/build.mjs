@@ -13,6 +13,7 @@ const dist = join(root, "dist");
 const entries = [
   "index.html",
   "company.html",
+  "contact.html",
   "archive.html",
   "archive/catalogue-01/index.html",
   "pricing.html",
@@ -32,6 +33,11 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 for (const entry of entries) {
+  // These pages are temporarily hidden; preserve their sources without publishing them.
+  if (["pricing.html", "download.html"].includes(entry)) {
+    await writeFile(join(dist, entry), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/"><title>Oriphim</title></head><body><a href="/">Continue to Oriphim</a></body></html>');
+    continue;
+  }
   await cp(join(root, entry), join(dist, entry), { recursive: true, force: true });
 }
 

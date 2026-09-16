@@ -31,6 +31,7 @@ const redirects = new Map([
   ["/about", "/company"],
   ["/about.html", "/company"],
   ["/company.html", "/company"],
+  ["/contact.html", "/contact"],
   ["/archive.html", "/archive"],
   ["/archive/catalogue-01/index.html", "/archive/catalogue-01"],
   ["/pricing.html", "/pricing"],

@@ -410,6 +410,7 @@
     .tab-orb-stage .voxel-plate{width:min(390px,78vw,38svh);pointer-events:none;}
     .tab-panel,.tab-panel[data-side="right"],.tab-panel[data-side="left"]{top:44vh;left:8vw;width:84vw;transform:translateY(8px);}
     .tab-panel.is-active{transform:translateY(0);}
+    .tab-panel{max-height:calc(100svh - var(--topbar-h) - var(--footer-h) - 44vh - 60px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:4px;}
     .tab-panel h1,.tab-panel h2{font-size:clamp(28px,8vw,42px);}.tab-panel p{font-size:13.5px;line-height:1.55;margin-top:16px;}.tab-panel .cta-row{margin-top:20px;}
     .section-tabs{left:50%;bottom:18px;transform:translateX(-50%);}
     .tab-report{display:none;}
@@ -478,7 +479,7 @@
       "name": "ORIPHIM",
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Windows, macOS, Linux",
-      "url": "https://oriphim.com/download",
+      "url": "https://oriphim.com/",
       "description": "A research system that derives governing equations, runs deterministic simulations, verifies numerical accuracy, and quantifies validation discrepancy against reality.",
       "publisher": { "@id": "https://oriphim.com/#organization" },
       "featureList": [
@@ -499,6 +500,7 @@
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
 <script src="/assets/page-menu.js" defer></script>
+<link rel="stylesheet" href="/assets/waitlist.css">
 </head>
 <body class="tab-layout">
 
@@ -521,8 +523,8 @@
       </div>
     </div>
     <article class="tab-panel is-active" data-tab-panel="0" data-side="left">
-      <div class="eyebrow">ORIPHIM RESEARCH — CATALOG No. 01</div><h1>Simulation that can be defended.</h1>
-      <p>Oriphim derives the governing equations from a described system, runs the model, and subjects it to every check the available reality permits — convergence, conservation, error budgets, sensitivity to every free parameter. Then it states plainly what the numbers do and do not license you to conclude.</p>
+      <h1>Explore fearlessly. Verify rigorously.</h1>
+      <p>Oriphim takes a system you describe, builds the governing equations, runs the model, and stress-tests it against every check reality permits—convergence, conservation, error budgets, sensitivity across every free parameter. You get a clear statement: what the numbers actually support, and what they don't. That's how you can afford to explore wild ideas without betting your credibility.</p>
       <div class="cta-row"><a href="/?auth=sign-up" class="btn">Request Access</a><a href="/archive" class="link-line">Read the archive</a></div>
     </article>
     <aside class="tab-report product-demo" data-tab-report="1" aria-label="Animated Oriphim product demonstration">
@@ -567,8 +569,8 @@
       <p>Objectives and margin summary. Load cases and boundary conditions. Modelling and mesh. Solver checks — mesh quality, ground checks, force balance. Margins per part with the critical case. Hand calcs, fatigue, bolted joints. Hours instead of months. A named engineer reviews it, corrects it, and signs it. Oriphim captures every correction.</p>
     </article>
     <article class="tab-panel" data-tab-panel="2" data-side="right">
-      <div class="eyebrow">Limits</div><h2>Oriphim does not claim a model is correct.</h2>
-      <p>Verification claims the mathematics was solved to a stated accuracy, and that conclusions hold under stated perturbations. Validation claims the model is wrong by a quantified amount under stated conditions. Both are defensible. Neither is “good agreement.” And no number in a Oriphim report is written by a language model.</p>
+      <div class="eyebrow">Limits</div><h2>Trust the numbers, not the hype.</h2>
+      <p>Oriphim won't tell you a model is correct. Verification reports what accuracy the mathematics reached and whether conclusions survive real perturbations. Validation reports how far the model diverges from reality under stated conditions. Both are defensible claims. Neither gets dressed up as "good agreement." And every number comes from code and simulation, never from a language model filling in gaps.</p>
     </article>
     <nav class="section-tabs" aria-label="Sections">
       <button type="button" data-tab="0" aria-current="true">01</button><button type="button" data-tab="1">02</button><button type="button" data-tab="2">03</button>
@@ -582,7 +584,7 @@
       </div>
 
       <div class="hero-copy">
-        <div class="eyebrow">ORIPHIM RESEARCH - CATALOG No. 01</div>
+        <div class="eyebrow">ORIPHIM RESEARCH - ENTRY No. 01</div>
         <h1>Simulation that can be defended.</h1>
         <p class="lede"><span class="oriphim-word">Oriphim</span> takes a described physical system, derives the governing equations, builds and runs the model, subjects it to every check the available reality permits, and states plainly what the numbers do and do not license you to conclude.</p>
         <div class="cta-row">
@@ -630,7 +632,7 @@
   <div class="wrap">
     <span>&copy; 2026 ORIPHIM, INC.</span>
     <a class="footer-company" href="/company">Company</a>
-    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div>
   </div>
 </footer>
 
@@ -1685,5 +1687,6 @@
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
 <script src="/script.js"></script>
+<script src="/assets/waitlist.js" defer></script>
 </body>
 </html>

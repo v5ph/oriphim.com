@@ -4,7 +4,13 @@
 /company.html /company 301
 /archive.html /archive 301
 /archive/catalogue-01/index.html /archive/catalogue-01 301
-/pricing.html /pricing 301
-/download.html /download 301
+/pricing / 302
+/pricing/ / 302
+/pricing.html / 302
+/download / 302
+/download/ / 302
+/download.html / 302
 /sign-in.html /sign-in 301
 /sign-up.html /sign-up 301
+
+/contact.html /contact 301

@@ -1,0 +1,17 @@
+.waitlist-popup{position:fixed;inset:0;margin:auto;width:min(440px,calc(100vw - 40px));max-height:calc(100dvh - 44px);overflow:auto;box-sizing:border-box;padding:28px;border:1px solid #18130f;background:#ece4d3;color:#18130f;box-shadow:0 18px 60px #18130f4d;}
+.waitlist-popup::backdrop{background:rgba(24,19,15,.45);}
+.waitlist-popup header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.waitlist-brand{font:32px/1 'Jacquard 12',serif;}
+.waitlist-popup h2{font:500 28px/1.2 'Geist Mono',monospace;margin:0 0 18px;}
+.waitlist-popup p{font:14px/1.6 Inter,sans-serif;margin:0 0 16px;}
+.waitlist-popup .waitlist-email{font-size:12px;overflow-wrap:anywhere;}
+.waitlist-popup label{display:flex;align-items:flex-start;gap:10px;font:13px/1.6 Inter,sans-serif;}
+.waitlist-popup input{margin-top:4px;flex-shrink:0;accent-color:#18130f;}
+.waitlist-popup button{cursor:pointer;color:inherit;font:12px/1.5 'IBM Plex Mono',monospace;}
+.waitlist-popup header button{border:0;background:none;font-size:24px;}
+.waitlist-popup .waitlist-primary{display:block;width:100%;padding:12px;border:1px solid #18130f;background:#18130f;color:#ece4d3;}
+.waitlist-popup .waitlist-secondary{display:block;margin:12px auto 0;border:0;background:none;text-decoration:underline;}
+.waitlist-popup [hidden],.page-menu nav [hidden]{display:none;}
+.waitlist-popup .waitlist-status{font-size:12px;min-height:20px;margin:16px 0;}
+.waitlist-popup button:disabled{opacity:.55;cursor:wait;}
+.waitlist-popup :focus-visible{outline:2px solid #18130f;outline-offset:3px;}

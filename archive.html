@@ -122,6 +122,7 @@
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
 <script src="/assets/page-menu.js" defer></script>
+<link rel="stylesheet" href="/assets/waitlist.css">
 </head>
 <body>
 <div class="topbar">
@@ -145,7 +146,7 @@
 
       <article class="feed-card" data-entry data-category="announcement">
         <div class="feed-main">
-          <div class="feed-catalog">ORIPHIM RESEARCH - CATALOG No. 01 <span class="feed-catalog-date">/ JUL 23</span></div>
+          <div class="feed-catalog">ORIPHIM RESEARCH - ENTRY No. 01 <span class="feed-catalog-date">/ JUL 23</span></div>
           <h2 class="feed-title"><a href="/archive/catalogue-01">The Archive is live.</a></h2>
           <p class="feed-body">This is where build notes, research notes, and honest status updates will live - what's shipped, what's roadmap, and everything in between. Starting now.</p>
           <div class="feed-meta">
@@ -154,7 +155,7 @@
           </div>
           <a class="feed-read" href="/archive/catalogue-01">Read entry</a>
         </div>
-        <button class="feed-infographic" type="button" data-lightbox-trigger data-lightbox-src="assets/archive-catalog-01-large.jpg" aria-label="View Catalog No. 01 thumbnail larger">
+        <button class="feed-infographic" type="button" data-lightbox-trigger data-lightbox-src="assets/archive-catalog-01-large.jpg" aria-label="View Entry No. 01 thumbnail larger">
           <img src="assets/archive-catalog-01-thumb.jpg" alt="Engraved archive room with columns, scholars, and catalog shelves" width="420" height="315" loading="lazy" decoding="async">
         </button>
       </article>
@@ -183,13 +184,13 @@
   </div>
 </main>
 
-<div class="image-lightbox" data-image-lightbox role="dialog" aria-modal="true" aria-label="Catalog image preview" hidden>
+<div class="image-lightbox" data-image-lightbox role="dialog" aria-modal="true" aria-label="Entry image preview" hidden>
   <button class="image-lightbox-close" type="button" data-lightbox-close aria-label="Close image preview">x</button>
   <img alt="" data-lightbox-image>
 </div>
 
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
-    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
+    <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 <script>
 
   const tabs = document.querySelectorAll(".feed-tab");
@@ -290,5 +291,6 @@
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
 <script src="script.js"></script>
+<script src="/assets/waitlist.js" defer></script>
 </body>
 </html>

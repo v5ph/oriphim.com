@@ -1,10 +1,9 @@
 (() => {
   const pages = [
     ['Home', '/'],
-    ['Download', '/download'],
-    ['Pricing', '/pricing'],
     ['Archive', '/archive'],
     ['Company', '/company'],
+    ['Contact', '/contact'],
   ];
   const menu = document.createElement('dialog');
   menu.className = 'page-menu';
