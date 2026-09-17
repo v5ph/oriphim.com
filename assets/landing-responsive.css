@@ -1,0 +1,50 @@
+/* Keep the desktop composition, with readable copy and reserved tab controls. */
+body.tab-layout{height:100svh;}
+body.tab-layout .tab-panel{width:clamp(250px,23vw,410px);max-height:calc(100% - 120px);overflow-y:auto;scrollbar-width:thin;}
+body.tab-layout .tab-panel h1,body.tab-layout .tab-panel h2{font-size:clamp(28px,2.8vw,44px);line-height:1.12;}
+body.tab-layout .tab-panel p{font-size:clamp(14px,1vw,16px);line-height:1.6;}
+body.tab-layout .tab-panel[data-tab-panel="2"]{width:min(38vw,610px);}
+body.tab-layout .tab-report.product-demo{max-height:calc(100% - 120px);overflow-y:auto;scrollbar-width:thin;}
+body.tab-layout .product-demo .pd-viewport{height:clamp(220px,calc(100svh - 490px),460px);}
+body.tab-layout .section-tabs button{min-width:44px;min-height:44px;}
+body.tab-layout .section-tabs{bottom:12px;gap:8px;}
+body.tab-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* On narrow or short windows, let the document grow instead of clipping content. */
+@media(max-width:980px),(max-height:700px){
+  body.tab-layout{height:auto;min-height:100svh;overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;}
+  body.tab-layout main{flex:1;}
+  body.tab-layout .tab-experience{display:grid;grid-template-columns:minmax(0,1fr);height:auto;min-height:calc(100svh - var(--topbar-h) - 64px);overflow:visible;padding:0 clamp(20px,5vw,48px);align-content:start;}
+  body.tab-layout .tab-orb-stage{position:relative;grid-row:1;inset:auto;height:clamp(170px,30svh,320px);transform:none!important;}
+  body.tab-layout .tab-orb-stage .voxel-plate{width:min(72vw,30svh,360px);pointer-events:auto;}
+  body.tab-layout .tab-experience:has([data-tab="1"][aria-current="true"]) .tab-orb-stage{height:clamp(150px,24svh,240px);}
+  body.tab-layout .tab-experience:has([data-tab="1"][aria-current="true"]) .voxel-plate{width:min(58vw,24svh,240px);}
+  body.tab-layout .tab-panel,body.tab-layout .tab-panel[data-side="left"],body.tab-layout .tab-panel[data-side="right"]{display:none;position:relative;grid-row:2;top:auto;left:auto;width:100%;max-width:680px;margin:0 auto;max-height:none;overflow:visible;padding:12px 0 20px;transform:none;}
+  body.tab-layout .tab-panel.is-active{display:block;transform:none;}
+  body.tab-layout .tab-panel[data-tab-panel="1"]{display:none;}
+  body.tab-layout .tab-panel h1,body.tab-layout .tab-panel h2{font-size:clamp(27px,4.5vw,42px);max-width:24ch;}
+  body.tab-layout .tab-panel p{font-size:clamp(14px,1.8vw,16px);max-width:none;margin-top:18px;}
+  body.tab-layout .tab-panel .cta-row{margin-top:22px;flex-wrap:wrap;}
+  body.tab-layout .tab-report.product-demo{display:none;position:relative;grid-row:2;inset:auto;transform:none;width:100%;max-width:720px;max-height:none;overflow:visible;margin:12px auto 20px;}
+  body.tab-layout .tab-report.product-demo.is-active{display:block;transform:none;}
+  body.tab-layout .product-demo .pd-viewport{height:clamp(290px,44svh,380px);}
+  body.tab-layout .section-tabs{position:relative;grid-row:3;left:auto;bottom:auto;transform:none;justify-content:center;margin:4px 0 14px;}
+  body.tab-layout>footer{display:block;height:auto;padding:14px 0;}
+  body.tab-layout>footer .wrap{padding-left:24px;padding-right:24px;}
+}
+@media(max-width:480px){
+  body.tab-layout .topbar .wrap{padding-left:20px;padding-right:20px;gap:10px;}
+  body.tab-layout .topbar .nav-home{font-size:32px;}
+  body.tab-layout .signin-btn{font-size:10px;padding:8px 10px;max-width:26vw;}
+  body.tab-layout .product-demo .pd-rail{width:64px;padding-left:6px;padding-right:6px;font-size:7px;}
+  body.tab-layout .product-demo .pd-scene{left:64px;padding:12px 9px;}
+  body.tab-layout .product-demo .pd-document{left:-52px;right:5px;}
+  body.tab-layout .product-demo .pd-heading{overflow-wrap:anywhere;}
+  body.tab-layout .product-demo .pd-chrome{gap:8px;}
+  body.tab-layout .product-demo .pd-row{grid-template-columns:48px minmax(0,1fr);}
+  body.tab-layout .product-demo .pd-row span{overflow-wrap:anywhere;}
+  body.tab-layout .pd-playback{flex-wrap:wrap;}
+  body.tab-layout>footer .wrap{grid-template-columns:1fr auto;row-gap:12px;}
+  body.tab-layout .footer-company{justify-self:end;}
+  body.tab-layout .footer-actions{grid-column:1/-1;justify-self:center;}
+}
+@media(prefers-reduced-motion:reduce){body.tab-layout .tab-panel,body.tab-layout .tab-report{transition:none;}}
