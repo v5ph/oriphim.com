@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oriphim Archive | Research Notes and Product Updates</title>
+<title>Entry | Oriphim Archive</title>
 <meta name="description" content="Explore Oriphim research notes, ORIPHIM build notes, product updates, and technical dispatches on scientific computing and verification.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://oriphim.com/archive">
+<link rel="canonical" href="https://oriphim.com/archive/entry">
 <meta name="theme-color" content="#f34b03">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
@@ -24,8 +24,8 @@
 <meta name="twitter:description" content="Research notes, ORIPHIM build notes, product updates, and technical dispatches from Oriphim.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=1">
-<link rel="apple-touch-icon" href="assets/oriphim-red.png">
-<link rel="manifest" href="site.webmanifest">
+<link rel="apple-touch-icon" href="/assets/oriphim-red.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Jacquard+12&display=swap" rel="stylesheet">
@@ -135,109 +135,16 @@
   </div>
 </div>
 
-<main>
-  <h1 class="sr-only">Oriphim Archive</h1>
-  <div class="wrap archive-grid">
-    <section class="fade" aria-label="Archive feed">
-      <div class="archive-toolbar"><h2>Entries</h2><button type="button" data-edit-entry="new" hidden>New entry</button></div>
-      <div class="feed-tabs" role="tablist" aria-label="Archive filters">
-        <button type="button" class="feed-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
-        <button type="button" class="feed-tab" data-filter="announcement" role="tab" aria-selected="false">Announcement</button>
-        <button type="button" class="feed-tab" data-filter="research" role="tab" aria-selected="false">Research</button>
-        <button type="button" class="feed-tab" data-filter="build" role="tab" aria-selected="false">Build Log</button>
-      </div>
-
-      <div data-dynamic-entries></div>
-      <button type="button" data-load-more hidden>Load more</button>
-      <article class="feed-card" data-entry data-category="announcement">
-        <div class="feed-main">
-          <div class="feed-catalog">ORIPHIM RESEARCH - ENTRY No. 01 <span class="feed-catalog-date">/ JUL 23</span></div>
-          <h2 class="feed-title"><a href="/archive/catalogue-01">The Archive is live.</a></h2>
-          <p class="feed-body">This is where build notes, research notes, and honest status updates will live - what's shipped, what's roadmap, and everything in between. Starting now.</p>
-          <div class="feed-meta">
-            <span>Announcement</span>
-            <span>1 min read</span>
-          </div>
-          <a class="feed-read" href="/archive/catalogue-01">Read entry</a>
-        </div>
-        <button class="feed-infographic" type="button" data-lightbox-trigger data-lightbox-src="assets/archive-catalog-01-large.jpg" aria-label="View Entry No. 01 thumbnail larger">
-          <img src="assets/archive-catalog-01-thumb.jpg" alt="Engraved archive room with columns, scholars, and catalog shelves" width="420" height="315" loading="lazy" decoding="async">
-        </button>
-      </article>
-
-<p class="archive-status" data-archive-status role="status" aria-live="polite"></p>
-      <button class="archive-retry" type="button" data-archive-retry>Refresh entries</button>
-      <div class="feed-empty" data-feed-empty>
-        <p>That's everything, for now.</p>
-      </div>
-    </section>
-
-    <aside class="sidebar fade" aria-label="Archive tools">
-      <div class="search-box">
-        <span class="search-icon" aria-hidden="true"></span>
-        <div class="search-input-wrap">
-          <input type="text" id="archiveSearchInput" aria-label="Search the archive">
-          <span class="search-placeholder-cycle" id="searchPlaceholder">Browse entries</span>
-        </div>
-      </div>
-
-      <div class="trending-panel">
-        <h3>Recent entries</h3>
-        <div data-recent-entries></div>
-      </div>
-    </aside>
-  </div>
+<main class="wrap">
+  <div class="archive-toolbar"><a class="archive-back" href="/archive">← Back to archive</a><button type="button" data-edit-entry="existing" hidden>Edit entry</button></div>
+  <div data-entry-content aria-live="polite"></div>
 </main>
-
-<div class="image-lightbox" data-image-lightbox role="dialog" aria-modal="true" aria-label="Entry image preview" hidden>
-  <button class="image-lightbox-close" type="button" data-lightbox-close aria-label="Close image preview">x</button>
-  <img alt="" data-lightbox-image>
-</div>
-
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><a class="footer-company" href="/company">Company</a>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
-<script>
-
-  (() => {
-    const lightbox = document.querySelector("[data-image-lightbox]");
-    const lightboxImage = document.querySelector("[data-lightbox-image]");
-    const closeButton = document.querySelector("[data-lightbox-close]");
-    let lastFocused = null;
-
-    const closeLightbox = () => {
-      if (!lightbox || lightbox.hidden) return;
-      lightbox.hidden = true;
-      lightboxImage.removeAttribute("src");
-      document.documentElement.style.overflow = "";
-      lastFocused?.focus?.();
-    };
-
-    document.querySelectorAll("[data-lightbox-trigger]").forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const thumbnail = trigger.querySelector("img");
-        lastFocused = document.activeElement;
-        lightboxImage.src = trigger.dataset.lightboxSrc;
-        lightboxImage.alt = thumbnail?.alt || "Archive image preview";
-        lightbox.hidden = false;
-        document.documentElement.style.overflow = "hidden";
-        closeButton.focus();
-      });
-    });
-
-    lightbox?.addEventListener("click", (event) => {
-      if (event.target === lightbox || event.target.closest("[data-lightbox-close]")) closeLightbox();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeLightbox();
-    });
-  })();
-</script>
-<script src="assets/supabase-js.js"></script>
-<script src="assets/oriphim-supabase.js"></script>
-<script src="script.js"></script>
+<script src="/assets/supabase-js.js"></script>
+<script src="/assets/oriphim-supabase.js"></script>
+<script src="/script.js"></script>
 <script src="/assets/waitlist.js" defer></script>
-<script type="module" src="/assets/archive-feed.js"></script>
 <script type="module" src="/assets/archive-editor.js"></script>
-</body>
-</html>
+<script type="module" src="/assets/archive-entry.js"></script>
+</body></html>

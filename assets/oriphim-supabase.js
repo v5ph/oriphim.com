@@ -62,6 +62,25 @@
     signIn: function (email, password) {
       return sb.auth.signInWithPassword({ email: email, password: password });
     },
+    signInWithProvider: function (provider) {
+      if (provider !== "github" && provider !== "google") {
+        return Promise.reject(new Error("Unsupported sign-in provider."));
+      }
+      var destination = new URL(window.location.href);
+      var next = destination.searchParams.get("next");
+      if (next) {
+        var requested = new URL(next, window.location.origin);
+        if (requested.origin === window.location.origin) destination = requested;
+      }
+      ["auth", "next", "code", "error", "error_code", "error_description"].forEach(function (key) {
+        destination.searchParams.delete(key);
+      });
+      destination.hash = "";
+      return sb.auth.signInWithOAuth({
+        provider: provider,
+        options: { redirectTo: destination.href }
+      });
+    },
     signUp: function (email, password, name) {
       return sb.auth.signUp({
         email: email,

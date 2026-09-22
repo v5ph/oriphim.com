@@ -15,6 +15,7 @@ const entries = [
   "company.html",
   "contact.html",
   "archive.html",
+  "archive/entry.html",
   "archive/catalogue-01/index.html",
   "pricing.html",
   "download.html",

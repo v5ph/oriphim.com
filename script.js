@@ -75,6 +75,13 @@
       .auth-popup input:focus{box-shadow:inset 0 0 0 3px #f34b03}
       .auth-popup__submit{min-height:44px;border:1px solid #18130f;background:#18130f;color:#ece4d3;padding:13px 18px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
       .auth-popup__submit:hover{background:transparent;color:#18130f}
+      .auth-popup__providers{display:grid;gap:10px}
+      .auth-popup__provider{width:100%;min-height:44px;padding:12px;border:1px solid #18130f;background:transparent;color:#18130f;font:500 13px 'IBM Plex Mono',monospace;cursor:pointer}
+      .auth-popup__provider:hover{background:#18130f;color:#ece4d3}
+      .auth-popup button:focus-visible{outline:2px solid #f34b03;outline-offset:3px}
+      .auth-popup button:disabled{opacity:.55;cursor:wait}
+      .auth-popup__divider{display:flex;align-items:center;gap:12px;margin:16px 0;font:11px 'IBM Plex Mono',monospace;color:#51473e}
+      .auth-popup__divider::before,.auth-popup__divider::after{content:"";height:1px;background:#18130f33;flex:1}
       .auth-popup__status{min-height:18px;margin:0;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11.5px;letter-spacing:.04em;color:#9c2c12}
       .auth-popup__switch{margin:18px 0 0;font-family:'IBM Plex Mono','Courier New',monospace;font-size:12px;color:#241d16}
       .auth-popup__switch a{color:#18130f;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
@@ -125,12 +132,33 @@
       authPopup.setAttribute("aria-modal", "true");
       document.body.appendChild(authPopup);
 
-      authPopup.addEventListener("click", (event) => {
+      authPopup.addEventListener("click", async (event) => {
         if (event.target === authPopup || event.target.closest("[data-auth-close]")) {
           closeAuthPopup();
           return;
         }
 
+        const providerButton = event.target.closest("[data-auth-provider]");
+        if (providerButton) {
+          if (authPopup.dataset.oauthPending) return;
+          authPopup.dataset.oauthPending = "true";
+          const buttons = Array.from(authPopup.querySelectorAll("[data-auth-provider], [type=submit]"));
+          const status = authPopup.querySelector(".form-status");
+          buttons.forEach(button => { button.disabled = true; });
+          status.textContent = "Opening " + providerButton.textContent.replace("Continue with ", "") + "…";
+          status.removeAttribute("data-ok");
+          try {
+            if (!window.oriphimAuth) throw new Error("Authentication is temporarily unavailable. Please try again.");
+            const { error } = await window.oriphimAuth.signInWithProvider(providerButton.dataset.authProvider);
+            if (error) throw error;
+          } catch (error) {
+            status.textContent = error.message || "Could not start sign-in. Please try again.";
+            buttons.forEach(button => { button.disabled = false; });
+            delete authPopup.dataset.oauthPending;
+          }
+          return;
+        }
+        if (authPopup.dataset.oauthPending) return;
         const switchLink = event.target.closest("[data-auth-switch]");
         if (switchLink) {
           event.preventDefault();
@@ -140,6 +168,7 @@
       });
     }
 
+    delete authPopup.dataset.oauthPending;
     authPopup.setAttribute("aria-labelledby", "auth-popup-title");
     authPopup.innerHTML = `
       <section class="auth-popup__panel">
@@ -150,6 +179,11 @@
           </div>
           <p class="auth-popup__eyebrow">${config.eyebrow}</p>
           <h2 id="auth-popup-title">${config.title}</h2>
+          <div class="auth-popup__providers" aria-label="Sign in with a provider">
+            <button class="auth-popup__provider" type="button" data-auth-provider="github">Continue with GitHub</button>
+            <button class="auth-popup__provider" type="button" data-auth-provider="google">Continue with Google</button>
+          </div>
+          <div class="auth-popup__divider">or use email</div>
           <form data-static-form data-auth-mode="${mode}" data-form-message="${config.message}">
             ${config.fields.map(fieldMarkup).join("")}
             <button class="auth-popup__submit" type="submit">${config.submit}</button>
@@ -250,7 +284,7 @@
         const { data, error } = await window.oriphimAuth.signUp(fields.email, fields.password, fields.name);
         if (error) throw error;
         if (data.session) {
-          window.location.assign("/");
+          window.location.assign(window.location.pathname + window.location.search);
         } else {
           setStatus("Check your email to confirm your account.", true);
         }
@@ -258,7 +292,8 @@
         const { error } = await window.oriphimAuth.signIn(fields.email, fields.password);
         if (error) throw error;
         const next = new URLSearchParams(window.location.search).get("next");
-        window.location.assign(next && next.charAt(0) === "/" ? next : "/");
+        const destination = new URL(next || window.location.pathname + window.location.search, window.location.origin);
+        window.location.assign(destination.origin === window.location.origin ? destination.href : "/");
       }
     } catch (err) {
       setStatus((err && err.message) || "Something went wrong. Try again.");
@@ -266,6 +301,17 @@
       if (submit) { submit.disabled = false; submit.textContent = submitLabel; }
     }
   });
+  // Providers return cancellation/errors in the URL instead of submitting a form.
+  const callbackParams = new URLSearchParams(location.hash.slice(1));
+  const queryParams = new URLSearchParams(location.search);
+  if (callbackParams.has("error") || queryParams.has("error")) {
+    openAuthPopup("sign-in");
+    authPopup.querySelector(".form-status").textContent = "Sign-in wasn’t completed. Please try again.";
+    const cleanUrl = new URL(location.href);
+    ["error", "error_code", "error_description"].forEach(key => cleanUrl.searchParams.delete(key));
+    if (callbackParams.has("error")) cleanUrl.hash = "";
+    history.replaceState(null, "", cleanUrl);
+  }
   const requestedAuth = new URLSearchParams(location.search).get("auth");
   if (authModes[requestedAuth]) {
     openAuthPopup(requestedAuth);
