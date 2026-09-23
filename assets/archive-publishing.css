@@ -58,3 +58,9 @@
     margin:0 .16em 0 0;
   }
 }
+
+/* Match the original entry's thin image frame throughout publishing. */
+.archive-cover img,.archive-article img,.archive-cover-preview,.archive-preview img{
+  box-sizing:border-box;
+  border:1px solid var(--ink,#18130f);
+}
