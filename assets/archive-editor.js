@@ -1,4 +1,4 @@
-import {fields,tags,bucket,element,renderBody,coverUrl} from './archive-common.js';
+import {fields,tags,bucket,element,renderBody,coverUrl,coverMedia,inspectCover} from './archive-common.js';
 const sb=window.sb;
 const control=document.querySelector('[data-edit-entry]');
 if(sb&&control){
@@ -6,16 +6,17 @@ if(sb&&control){
   let entryId=crypto.randomUUID();
   const dialog=element('dialog','','archive-editor');
   dialog.setAttribute('aria-labelledby','archive-editor-title');
-  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Post<textarea name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs."></textarea></label><label>Cover image <small>Optional · JPG, PNG, or WebP · up to 5 MB. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp"></label><img class="archive-cover-preview" alt="Selected cover" hidden><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image for readers using a screen reader"></label><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
+  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Post<textarea name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs."></textarea></label><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
   document.body.append(dialog);
   const form=dialog.querySelector('form');
   const input=name=>form.elements.namedItem(name);
   tags.forEach(tag=>input('tag').append(new Option(tag,tag)));
   const status=dialog.querySelector('[data-editor-status]');
   const preview=dialog.querySelector('.archive-preview');
-  const image=dialog.querySelector('.archive-cover-preview');
+  const image=dialog.querySelector('.archive-cover-selection');
+  let selectedUrl='',selectedSource;
   function clearPreviewUrl(){if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl='';}
-  function setImage(url){image.hidden=!url;if(url)image.src=url;else image.removeAttribute('src');}
+  function setImage(url,source){selectedUrl=url;selectedSource=source;image.hidden=!url;image.replaceChildren();if(url)image.append(coverMedia(url,input('cover_alt').value||'Selected cover','archive-cover-preview',source));}
   function open(){
     if(!allowed||!user)return;
     form.reset();clearPreviewUrl();pendingPath='';pendingFile=null;dirty=false;entryId=current?.id||crypto.randomUUID();preview.hidden=true;status.textContent='';
@@ -25,7 +26,7 @@ if(sb&&control){
     dialog.querySelector('.archive-remove-cover').hidden=!current?.cover_path;
     setImage(coverUrl(current?.cover_path));dialog.showModal();input('title').focus();
   }
-  function close(){if(busy)return;if(dirty&&!confirm('Discard your unsaved changes?'))return;dialog.close();clearPreviewUrl();}
+  function close(){if(busy)return;if(dirty&&!confirm('Discard your unsaved changes?'))return;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();}
   control.addEventListener('click',open);
   dialog.querySelector('[data-close]').addEventListener('click',close);
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
@@ -33,14 +34,13 @@ if(sb&&control){
   input('cover').addEventListener('change',async()=>{
     clearPreviewUrl();const file=input('cover').files[0];status.textContent='';
     if(!file){setImage(input('remove_cover').checked?'':coverUrl(current?.cover_path));return;}
-    if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){input('cover').value='';setImage(coverUrl(current?.cover_path));status.textContent='Choose a JPG, PNG, or WebP image no larger than 5 MB.';return;}
-    try{const bitmap=await createImageBitmap(file);bitmap.close();if(input('cover').files[0]!==file)return;previewUrl=URL.createObjectURL(file);setImage(previewUrl);input('remove_cover').checked=false;}
-    catch{input('cover').value='';setImage(coverUrl(current?.cover_path));status.textContent='That file could not be opened as an image.';}
+    try{const media=await inspectCover(file);if(input('cover').files[0]!==file)return;previewUrl=URL.createObjectURL(file);setImage(previewUrl,media.source);input('remove_cover').checked=false;}
+    catch(error){if(input('cover').files[0]!==file)return;input('cover').value='';setImage(coverUrl(current?.cover_path));status.textContent=error.message||'That file could not be opened.';}
   });
   input('remove_cover').addEventListener('change',()=>{if(input('remove_cover').checked){input('cover').value='';clearPreviewUrl();setImage('');}else setImage(coverUrl(current?.cover_path));});
   dialog.querySelector('[data-preview]').addEventListener('click',()=>{
     preview.replaceChildren(element('p',input('tag').value,'eyebrow'),element('h2',input('title').value||'Untitled entry'));
-    if(!image.hidden){const img=element('img');img.src=image.src;img.alt=input('cover_alt').value;preview.append(img);}
+    if(!image.hidden)preview.append(coverMedia(selectedUrl,input('cover_alt').value,'',selectedSource));
     const body=element('div','','archive-prose');renderBody(body,input('body').value);preview.append(body);preview.hidden=false;preview.scrollIntoView({block:'start',behavior:'smooth'});
   });
   form.addEventListener('submit',async event=>{
@@ -51,12 +51,11 @@ if(sb&&control){
       let path=input('remove_cover').checked?null:(current?.cover_path||null);
       const file=input('cover').files[0];
       if(file){
-        if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5242880)throw Error('Choose a supported image up to 5 MB.');
-        const decoded=await createImageBitmap(file);decoded.close();
+        const media=await inspectCover(file);
         if(pendingFile!==file){
-          const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type];
+          const ext=media.ext;
           const uploadPath=`${user.id}/${crypto.randomUUID()}.${ext}`;
-          const {error}=await sb.storage.from(bucket).upload(uploadPath,file,{contentType:file.type,cacheControl:'3600',upsert:false});
+          const {error}=await sb.storage.from(bucket).upload(uploadPath,file,{contentType:media.type,cacheControl:'3600',upsert:false});
           if(error)throw Error('Cover upload failed. Your entry has not been published. Please try again.');
           pendingPath=uploadPath;pendingFile=file;
         }
@@ -73,7 +72,7 @@ if(sb&&control){
       if(error)throw Error('Couldn’t save the entry. Your text is still here; please try again.');
       if(!data)throw Error('This entry changed in another window. Copy your text, then reload before editing again.');
       const oldPath=current?.cover_path;
-      dirty=false;dialog.close();clearPreviewUrl();
+      dirty=false;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();
       window.dispatchEvent(new CustomEvent('archive-published',{detail:data}));
       if(oldPath&&oldPath!==path)sb.storage.from(bucket).remove([oldPath]).catch(()=>{});
     }catch(error){status.textContent=error.message||'Couldn’t save. Please try again.';}
@@ -83,7 +82,7 @@ if(sb&&control){
     const result=await sb.auth.getUser();user=result.error?null:result.data.user;allowed=false;
     if(user){const {data,error}=await sb.from('archive_editors').select('user_id').eq('user_id',user.id).maybeSingle();allowed=!error&&!!data;}
     control.hidden=!allowed||(control.dataset.editEntry==='existing'&&!current);
-    if(!allowed&&dialog.open){dirty=false;dialog.close();clearPreviewUrl();}
+    if(!allowed&&dialog.open){dirty=false;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();}
   }
   window.addEventListener('archive-entry-loaded',event=>{current=event.detail;control.hidden=!allowed;});
   sb.auth.onAuthStateChange(()=>setTimeout(()=>permission().catch(()=>{control.hidden=true;}),0));

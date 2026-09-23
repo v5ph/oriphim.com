@@ -17,7 +17,7 @@ export const readTime = entry => Math.max(1, Math.ceil(entry.body.trim().split(/
 export const dateLabel = value => new Date(value).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
 /** @param {string|null} path */
 export function coverUrl(path) {
-  if (!path || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.(jpg|png|webp)$/.test(path)) return '';
+  if (!path || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.(jpg|png|webp|html)$/.test(path)) return '';
   return window.sb.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
 /** Render text as paragraphs, never executable HTML. @param {HTMLElement} target @param {string} body */
@@ -36,6 +36,69 @@ export function card(entry) {
   const meta = element('div', '', 'feed-meta');meta.append(element('span', entry.tag),element('span', readTime(entry)));main.append(meta);
   const read = element('a', 'Read entry', 'feed-read');read.href=entryUrl(entry);main.append(read);article.append(main);
   const imageUrl=coverUrl(entry.cover_path);
-  if(imageUrl){const anchor=element('a','','archive-cover');anchor.href=entryUrl(entry);anchor.setAttribute('aria-label','Read '+entry.title);const image=element('img');image.src=imageUrl;image.alt=entry.cover_alt;image.loading='lazy';anchor.append(image);article.append(anchor);}else article.classList.add('archive-no-cover');
+  if(imageUrl){const anchor=element('a','','archive-cover');anchor.href=entryUrl(entry);anchor.setAttribute('aria-label','Read '+entry.title);const media=coverMedia(imageUrl,entry.cover_alt);if(imageUrl.endsWith('.html')){const wrapper=element('div','','archive-cover');wrapper.append(media);article.append(wrapper);}else{anchor.append(media);article.append(anchor);}}else article.classList.add('archive-no-cover');
   return article;
+}
+
+/** Decode a supported cover before either previewing or uploading it. */
+export async function inspectCover(file){
+  if(file.size>5242880)throw Error('Choose a cover no larger than 5 MB.');
+  if(/\.html?$/i.test(file.name)){
+    const source=await file.text();
+    if(!/<(?:!doctype\s+html|html|body|canvas|svg|div|style|script)\b/i.test(source))throw Error('Choose an HTML document containing your animation.');
+    return {ext:'html',type:'text/html',source};
+  }
+  const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type];
+  if(!ext)throw Error('Choose a JPG, PNG, WebP, or HTML animation no larger than 5 MB.');
+  const bitmap=await createImageBitmap(file);bitmap.close();
+  return {ext,type:file.type};
+}
+
+// Opaque-origin frames can execute animation code but cannot access the host,
+// cookies, storage, forms, popups, or external resources. Never add allow-same-origin.
+const animationPolicy="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'";
+class ArchiveAnimation extends HTMLElement{
+  connectedCallback(){
+    this.abort=new AbortController();
+    this.playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.frame=element('iframe');this.frame.title=this.description||'Archive animation';
+    this.frame.setAttribute('sandbox','allow-scripts');this.frame.referrerPolicy='no-referrer';
+    this.frame.setAttribute('allow',"camera 'none'; microphone 'none'; geolocation 'none'; clipboard-read 'none'; clipboard-write 'none'");
+    this.toggle=element('button',this.playing?'Pause animation':'Play animation');this.toggle.type='button';
+    this.message=element('span','', 'archive-animation-status');this.message.setAttribute('role','status');
+    this.replaceChildren(this.frame,this.toggle,this.message);
+    this.toggle.addEventListener('click',()=>{this.playing=!this.playing;this.toggle.textContent=this.playing?'Pause animation':'Play animation';this.update();});
+    this.observer=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.update();});this.observer.observe(this);
+    document.addEventListener('visibilitychange',()=>this.update(),{signal:this.abort.signal});
+  }
+  disconnectedCallback(){this.abort?.abort();this.observer?.disconnect();this.frame?.removeAttribute('srcdoc');}
+  async update(){
+    if(!this.isConnected)return;
+    if(!this.playing||!this.visible||document.hidden){this.frame.removeAttribute('srcdoc');return;}
+    if(this.frame.hasAttribute('srcdoc')||this.loading)return;
+    this.loading=true;this.message.textContent='Loading animation…';
+    try{
+      if(this.htmlSource===undefined){
+        const response=await fetch(this.sourceUrl,{credentials:'omit',signal:this.abort.signal});
+        if(!response.ok)throw Error('Animation unavailable.');
+        const blob=await response.blob();if(blob.size>5242880)throw Error('Animation is too large.');
+        this.htmlSource=await blob.text();
+      }
+      if(this.isConnected&&this.playing&&this.visible&&!document.hidden){
+        this.frame.srcdoc='<!doctype html><meta http-equiv="Content-Security-Policy" content="'+animationPolicy+'"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden}</style>'+this.htmlSource;
+      }
+      this.message.textContent='';
+    }catch(error){if(error.name!=='AbortError'){this.message.textContent='Animation could not load. Try playing it again.';this.playing=false;this.toggle.textContent='Play animation';}}
+    finally{this.loading=false;}
+  }
+}
+customElements.define('archive-animation',ArchiveAnimation);
+/** Both local editor previews and published covers use the same renderer. */
+export function coverMedia(url,description='',className='',source){
+  if(source!==undefined||url.endsWith('.html')){
+    const animation=element('archive-animation','',className);
+    animation.sourceUrl=url;animation.htmlSource=source;animation.description=description;
+    return animation;
+  }
+  const image=element('img','',className);image.src=url;image.alt=description;image.loading='lazy';return image;
 }

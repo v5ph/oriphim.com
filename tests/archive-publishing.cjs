@@ -37,7 +37,7 @@ const owner = 'b1363f93-72fa-440c-897b-22e0fedb442f';
       failSave=true;await page.locator('[data-publish]').click();await page.getByText('Couldn’t save the entry. Your text is still here; please try again.').waitFor();
       assert.equal(await page.locator('[name=title]').inputValue(),'A new research entry');
       await page.locator('[name=cover]').setInputFiles({name:'unsafe.svg',mimeType:'image/svg+xml',buffer:Buffer.from('<svg/>')});
-      await page.getByText('Choose a JPG, PNG, or WebP image no larger than 5 MB.').waitFor();
+      await page.getByText('Choose a JPG, PNG, WebP, or HTML animation no larger than 5 MB.').waitFor();
       const image=await page.locator('.nav-home').screenshot();
       await page.locator('[name=cover]').setInputFiles({name:'cover.png',mimeType:'image/png',buffer:image});
       await page.locator('.archive-cover-preview').waitFor({state:'visible'});
