@@ -22,7 +22,7 @@ export function coverUrl(path) {
 }
 /** Render text as paragraphs, never executable HTML. @param {HTMLElement} target @param {string} body */
 export function renderBody(target, body) {
-  target.replaceChildren(...body.split(/\n\s*\n/).filter(Boolean).map(text => element('p', text)));
+  target.replaceChildren(...body.trim().split(/\n\s*\n/).filter(text => text.trim()).map(text => element('p', text)));
 }
 /** @param {ArchiveEntry} entry */
 export function card(entry) {

@@ -37,3 +37,24 @@
 @media(max-width:600px){.archive-editor{padding:18px;}.archive-article{padding-top:12px;}.archive-toolbar{flex-wrap:wrap;}}
 
 @media(max-width:600px){.feed-card:has(.archive-cover){flex-direction:column;}.archive-cover{width:100%;}.archive-cover img{max-height:340px;}}
+
+/* Only the opening paragraph receives a drop cap, including in previews. */
+.archive-prose > p:first-child{display:flow-root;}
+.archive-prose > p:first-child::first-letter{
+  float:left;
+  font-family:'Jacquard 12',serif;
+  font-size:4em;
+  font-weight:400;
+  line-height:.8;
+  margin:.06em .16em 0 0;
+  text-transform:uppercase;
+  color:var(--ink,#18130f);
+}
+
+@supports (initial-letter:2){
+  .archive-prose > p:first-child::first-letter{
+    initial-letter:2;
+    float:none;
+    margin:0 .16em 0 0;
+  }
+}

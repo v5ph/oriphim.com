@@ -4,6 +4,23 @@ const feed=document.querySelector('[data-dynamic-entries]');
 const recent=document.querySelector('[data-recent-entries]');
 const search=document.getElementById('archiveSearchInput');
 const placeholder=document.getElementById('searchPlaceholder');
+const searchPhrases=['Browse entries','Search the archive','Wisdom?'];
+let phraseIndex=0;
+const suppressPlaceholder=()=>document.activeElement===search||search.value.length>0;
+function syncPlaceholder(){
+  placeholder.hidden=suppressPlaceholder();
+  placeholder.style.opacity='1';
+}
+window.setInterval(()=>{
+  if(suppressPlaceholder()||document.hidden)return;
+  placeholder.style.opacity='0';
+  window.setTimeout(()=>{
+    phraseIndex=(phraseIndex+1)%searchPhrases.length;
+    placeholder.textContent=searchPhrases[phraseIndex];
+    syncPlaceholder();
+  },700);
+},4200);
+
 const tabs=[...document.querySelectorAll('[data-filter]')];
 const legacy=document.querySelector('[data-entry]');
 const empty=document.querySelector('[data-feed-empty]');
@@ -42,11 +59,11 @@ async function refreshRecent(){
   const {data,error}=await sb.from('archive_entries').select('id,title,created_at').order('created_at',{ascending:false}).order('id',{ascending:false}).limit(5);
   recentList(error?[]:data);
 }
-search.addEventListener('input',()=>{placeholder.hidden=!!search.value;generation++;clearTimeout(timer);timer=setTimeout(()=>load(),200);});
-search.addEventListener('focus',()=>placeholder.hidden=true);
-search.addEventListener('blur',()=>placeholder.hidden=!!search.value);
+search.addEventListener('input',()=>{syncPlaceholder();generation++;clearTimeout(timer);timer=setTimeout(()=>load(),200);});
+search.addEventListener('focus',syncPlaceholder);
+search.addEventListener('blur',syncPlaceholder);
 tabs.forEach(tab=>tab.addEventListener('click',()=>{active=tab.dataset.filter;tabs.forEach(other=>{other.classList.toggle('active',other===tab);other.setAttribute('aria-selected',String(other===tab));});clearTimeout(timer);load();}));
 more.addEventListener('click',()=>load(true));
 document.querySelector('[data-archive-retry]').addEventListener('click',()=>{load();refreshRecent();});
-window.addEventListener('archive-published',()=>{search.value='';placeholder.hidden=false;active='all';tabs.forEach(t=>{t.classList.toggle('active',t.dataset.filter==='all');t.setAttribute('aria-selected',String(t.dataset.filter==='all'));});load();refreshRecent();});
+window.addEventListener('archive-published',()=>{search.value='';syncPlaceholder();active='all';tabs.forEach(t=>{t.classList.toggle('active',t.dataset.filter==='all');t.setAttribute('aria-selected',String(t.dataset.filter==='all'));});load();refreshRecent();});
 load();refreshRecent();
