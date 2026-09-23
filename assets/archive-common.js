@@ -36,7 +36,7 @@ export function card(entry) {
   const meta = element('div', '', 'feed-meta');meta.append(element('span', entry.tag),element('span', readTime(entry)));main.append(meta);
   const read = element('a', 'Read entry', 'feed-read');read.href=entryUrl(entry);main.append(read);article.append(main);
   const imageUrl=coverUrl(entry.cover_path);
-  if(imageUrl){const anchor=element('a','','archive-cover');anchor.href=entryUrl(entry);anchor.setAttribute('aria-label','Read '+entry.title);const media=coverMedia(imageUrl,entry.cover_alt);if(imageUrl.endsWith('.html')){const wrapper=element('div','','archive-cover');wrapper.append(media);article.append(wrapper);}else{anchor.append(media);article.append(anchor);}}else article.classList.add('archive-no-cover');
+  if(imageUrl)article.append(expandableCover(imageUrl,entry.cover_alt||entry.title,'archive-cover'));else article.classList.add('archive-no-cover');
   return article;
 }
 
@@ -64,17 +64,18 @@ class ArchiveAnimation extends HTMLElement{
     this.frame=element('iframe');this.frame.title=this.description||'Archive animation';
     this.frame.setAttribute('sandbox','allow-scripts');this.frame.referrerPolicy='no-referrer';
     this.frame.setAttribute('allow',"camera 'none'; microphone 'none'; geolocation 'none'; clipboard-read 'none'; clipboard-write 'none'");
-    this.toggle=element('button',this.playing?'Pause animation':'Play animation');this.toggle.type='button';
+    this.toggle=element('button','Play animation');this.toggle.type='button';this.toggle.hidden=this.playing;
     this.message=element('span','', 'archive-animation-status');this.message.setAttribute('role','status');
     this.replaceChildren(this.frame,this.toggle,this.message);
-    this.toggle.addEventListener('click',()=>{this.playing=!this.playing;this.toggle.textContent=this.playing?'Pause animation':'Play animation';this.update();});
+    this.toggle.addEventListener('click',()=>{this.playing=true;this.toggle.hidden=true;this.update();});
     this.observer=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.update();});this.observer.observe(this);
     document.addEventListener('visibilitychange',()=>this.update(),{signal:this.abort.signal});
   }
   disconnectedCallback(){this.abort?.abort();this.observer?.disconnect();this.frame?.removeAttribute('srcdoc');}
   async update(){
     if(!this.isConnected)return;
-    if(!this.playing||!this.visible||document.hidden){this.frame.removeAttribute('srcdoc');return;}
+    if(!this.playing||document.hidden){this.frame.removeAttribute('srcdoc');return;}
+    if(!this.visible)return;
     if(this.frame.hasAttribute('srcdoc')||this.loading)return;
     this.loading=true;this.message.textContent='Loading animation…';
     try{
@@ -88,7 +89,7 @@ class ArchiveAnimation extends HTMLElement{
         this.frame.srcdoc='<!doctype html><meta http-equiv="Content-Security-Policy" content="'+animationPolicy+'"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden}</style>'+this.htmlSource;
       }
       this.message.textContent='';
-    }catch(error){if(error.name!=='AbortError'){this.message.textContent='Animation could not load. Try playing it again.';this.playing=false;this.toggle.textContent='Play animation';}}
+    }catch(error){if(error.name!=='AbortError'){this.message.textContent='Animation could not load. Try playing it again.';this.playing=false;this.toggle.textContent='Retry animation';this.toggle.hidden=false;}}
     finally{this.loading=false;}
   }
 }
@@ -101,4 +102,25 @@ export function coverMedia(url,description='',className='',source){
     return animation;
   }
   const image=element('img','',className);image.src=url;image.alt=description;image.loading='lazy';return image;
+}
+
+let mediaDialog;
+function openCover(url,description){
+  if(!mediaDialog){
+    mediaDialog=element('dialog','','archive-media-dialog');
+    mediaDialog.setAttribute('aria-label','Cover preview');
+    document.body.append(mediaDialog);
+    mediaDialog.addEventListener('click',event=>{if(event.target===mediaDialog)mediaDialog.close();});
+    mediaDialog.addEventListener('close',()=>mediaDialog.replaceChildren());
+  }
+  const close=element('button','×','archive-media-close');close.type='button';close.setAttribute('aria-label','Close cover preview');
+  close.addEventListener('click',()=>mediaDialog.close());
+  mediaDialog.replaceChildren(close,coverMedia(url,description,'archive-expanded-media'));
+  mediaDialog.showModal();close.focus();
+}
+export function expandableCover(url,description,className){
+  const wrapper=element('div','','archive-expandable '+className);
+  const open=element('button','','archive-media-open');open.type='button';open.setAttribute('aria-label','Enlarge '+(description||'cover'));
+  open.addEventListener('click',()=>openCover(url,description));
+  wrapper.append(coverMedia(url,description),open);return wrapper;
 }

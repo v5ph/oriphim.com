@@ -14,7 +14,7 @@ document.body.dataset.running='yes';
 (async()=>{const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
 try{
  for(const width of [1272,390]){
-  const page=await browser.newPage({viewport:{width,height:850}});let entry=null,uploads=0;page.setDefaultTimeout(12000);
+  const page=await browser.newPage({viewport:{width,height:850}});let entry=null,uploads=0;page.setDefaultTimeout(12000);page.on('pageerror',error=>console.error('PAGE ERROR',error));
   const policy=fs.readFileSync('_headers','utf8').match(/Content-Security-Policy: (.*)/)[1];
   await page.route('**/archive*',async route=>{if(route.request().resourceType()!=='document')return route.continue();const response=await route.fetch();await route.fulfill({response,headers:{...response.headers(),'content-security-policy':policy}});});
   await page.route('**/assets/oriphim-supabase.js*',route=>route.fulfill({contentType:'application/javascript',body:fs.readFileSync('assets/oriphim-supabase.js','utf8')+`\nwindow.sb.auth.getUser=async()=>({data:{user:{id:'${owner}',user_metadata:{oriphim_waitlist:{joined:true}}}},error:null});`}));
@@ -34,18 +34,19 @@ try{
   const selected=page.locator('.archive-cover-selection archive-animation');await selected.scrollIntoViewIfNeeded();
   await page.frameLocator('.archive-cover-selection iframe').locator('body[data-running=yes][data-parent-blocked=yes][data-storage-blocked=yes][data-network-blocked=yes]').waitFor();
   assert.equal(await page.locator('body').getAttribute('data-escaped'),null);
-  await page.locator('[data-preview]').click();await page.frameLocator('.archive-preview iframe').locator('body[data-running=yes]').waitFor();
+  await page.locator('[data-preview]').press('Enter');await page.locator('.archive-preview iframe').scrollIntoViewIfNeeded();await page.frameLocator('.archive-preview iframe').locator('body[data-running=yes]').waitFor();
   await page.locator('[data-publish]').click();await page.locator('.archive-editor').waitFor({state:'hidden'});
   assert.equal(uploads,1);assert.ok(entry.cover_path.endsWith('.html'));
   await page.locator('.archive-cover archive-animation').scrollIntoViewIfNeeded();await page.frameLocator('.archive-cover iframe').locator('body[data-running=yes]').waitFor();
+  await page.locator('.archive-cover .archive-media-open').click();await page.frameLocator('.archive-media-dialog iframe').locator('body[data-running=yes]').waitFor();assert.equal(await page.locator('.archive-media-dialog archive-animation button').isVisible(),false);await page.keyboard.press('Escape');await page.locator('.archive-media-dialog').waitFor({state:'hidden'});await page.locator('.archive-media-dialog iframe').waitFor({state:'detached'});
   await page.goto(base+'/archive/entry?id='+entry.id);
   await page.frameLocator('.archive-article iframe').locator('body[data-running=yes]').waitFor();
-  await page.locator('archive-animation button').click();assert.equal(await page.locator('archive-animation iframe').getAttribute('srcdoc'),null);
-  await page.locator('archive-animation button').click();await page.frameLocator('.archive-article iframe').locator('body[data-running=yes]').waitFor();
+  assert.equal(await page.locator('archive-animation button').isVisible(),false);
   await page.screenshot({path:`/tmp/archive-animation-${width}.png`});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await page.locator('archive-animation').waitFor();assert.equal(await page.locator('archive-animation iframe').getAttribute('srcdoc'),null);
   await page.locator('archive-animation button').click();await page.frameLocator('.archive-article iframe').locator('body[data-running=yes]').waitFor();
+  assert.equal(await page.locator('archive-animation button').isVisible(),false);
   await page.locator('[data-edit-entry]').click();assert.equal(await page.locator('[name=title]').inputValue(),'Animation test');
   await page.locator('[name=remove_cover]').check();await page.locator('[data-publish]').click();await page.locator('.archive-editor').waitFor({state:'hidden'});assert.equal(entry.cover_path,null);
   await page.close();
