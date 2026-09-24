@@ -9,7 +9,7 @@ const ctx=document.querySelector('canvas').getContext('2d');ctx.fillStyle='orang
 try{parent.document.body.dataset.escaped='yes'}catch{document.body.dataset.parentBlocked='yes'}
 try{localStorage.getItem('oriphim.auth')}catch{document.body.dataset.storageBlocked='yes'}
 fetch('https://example.com/forbidden').catch(()=>document.body.dataset.networkBlocked='yes');
-document.body.dataset.running='yes';
+document.body.dataset.instance=String(Math.random());let ticks=0;setInterval(()=>document.body.dataset.ticks=String(++ticks),30);document.body.dataset.running='yes';
 </script></body></html>`;
 (async()=>{const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
 try{
@@ -38,7 +38,20 @@ try{
   await page.locator('[data-publish]').click();await page.locator('.archive-editor').waitFor({state:'hidden'});
   assert.equal(uploads,1);assert.ok(entry.cover_path.endsWith('.html'));
   await page.locator('.archive-cover archive-animation').scrollIntoViewIfNeeded();await page.frameLocator('.archive-cover iframe').locator('body[data-running=yes]').waitFor();
-  await page.locator('.archive-cover .archive-media-open').click();await page.frameLocator('.archive-media-dialog iframe').locator('body[data-running=yes]').waitFor();assert.equal(await page.locator('.archive-media-dialog archive-animation button').isVisible(),false);await page.keyboard.press('Escape');await page.locator('.archive-media-dialog').waitFor({state:'hidden'});await page.locator('.archive-media-dialog iframe').waitFor({state:'detached'});
+  const animationBody=page.frameLocator('.archive-cover iframe').locator('body');
+  const instance=await animationBody.getAttribute('data-instance');
+  await animationBody.locator('canvas').waitFor();
+  await page.locator('.archive-cover .archive-media-open').click();await page.locator('.archive-media-dialog[open]').waitFor();
+  assert.equal(await animationBody.getAttribute('data-instance'),instance,'Enlarging must preserve the running document');
+  assert.equal(await page.locator('.archive-media-dialog archive-animation button').isVisible(),false);
+  const ticks=Number(await animationBody.getAttribute('data-ticks')||0);
+  const liveFrame=await (await page.locator('.archive-cover iframe').elementHandle()).contentFrame();
+  await liveFrame.waitForFunction(previous=>Number(document.body.dataset.ticks)>previous,ticks);
+  await page.keyboard.press('Escape');await page.locator('.archive-media-dialog[open]').waitFor({state:'detached'});
+  assert.equal(await animationBody.getAttribute('data-instance'),instance,'Closing must preserve the running document');
+  assert.ok(Number(await animationBody.getAttribute('data-ticks'))>=ticks);
+  await page.locator('.archive-cover .archive-media-open').click();await page.locator('.archive-media-close').click();
+  assert.equal(await animationBody.getAttribute('data-instance'),instance,'Repeated enlargement must not restart');
   await page.goto(base+'/archive/entry?id='+entry.id);
   await page.frameLocator('.archive-article iframe').locator('body[data-running=yes]').waitFor();
   assert.equal(await page.locator('archive-animation button').isVisible(),false);

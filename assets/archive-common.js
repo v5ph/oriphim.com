@@ -104,23 +104,17 @@ export function coverMedia(url,description='',className='',source){
   const image=element('img','',className);image.src=url;image.alt=description;image.loading='lazy';return image;
 }
 
-let mediaDialog;
-function openCover(url,description){
-  if(!mediaDialog){
-    mediaDialog=element('dialog','','archive-media-dialog');
-    mediaDialog.setAttribute('aria-label','Cover preview');
-    document.body.append(mediaDialog);
-    mediaDialog.addEventListener('click',event=>{if(event.target===mediaDialog)mediaDialog.close();});
-    mediaDialog.addEventListener('close',()=>mediaDialog.replaceChildren());
-  }
-  const close=element('button','×','archive-media-close');close.type='button';close.setAttribute('aria-label','Close cover preview');
-  close.addEventListener('click',()=>mediaDialog.close());
-  mediaDialog.replaceChildren(close,coverMedia(url,description,'archive-expanded-media'));
-  mediaDialog.showModal();close.focus();
-}
 export function expandableCover(url,description,className){
   const wrapper=element('div','','archive-expandable '+className);
+  // Keep the live iframe in one dialog for its entire lifetime. showModal()
+  // promotes it to the top layer without reparenting or reloading its document.
+  const viewer=element('dialog','','archive-media-dialog');
+  viewer.setAttribute('aria-label',description||'Cover preview');
+  const close=element('button','×','archive-media-close');close.type='button';close.setAttribute('aria-label','Close cover preview');
+  close.addEventListener('click',()=>viewer.close());
+  viewer.addEventListener('click',event=>{if(event.target===viewer)viewer.close();});
+  viewer.append(close,coverMedia(url,description,'archive-expanded-media'));
   const open=element('button','','archive-media-open');open.type='button';open.setAttribute('aria-label','Enlarge '+(description||'cover'));
-  open.addEventListener('click',()=>openCover(url,description));
-  wrapper.append(coverMedia(url,description),open);return wrapper;
+  open.addEventListener('click',()=>{viewer.showModal();close.focus();});
+  wrapper.append(viewer,open);return wrapper;
 }
