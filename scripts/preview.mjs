@@ -79,7 +79,8 @@ const resolveFile = async (pathname) => {
 
 const sendFile = (res, file, status = 200) => {
   res.writeHead(status, {
-    "Content-Type": types[extname(file)] || "application/octet-stream"
+    "Content-Type": types[extname(file)] || "application/octet-stream",
+    "Cache-Control": "no-store"
   });
   createReadStream(file).pipe(res);
 };

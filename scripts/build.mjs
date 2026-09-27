@@ -70,6 +70,32 @@ for (const name of [...referenced].sort()) {
   }
 }
 
+// Version module dependencies before hashing their importers. Otherwise an updated
+// entry script can be paired with a stale shared module missing its new exports.
+const moduleVersions = new Map();
+const visitingModules = new Set();
+async function versionModule(file) {
+  if (moduleVersions.has(file)) return moduleVersions.get(file);
+  if (visitingModules.has(file)) throw new Error(`Circular module dependency: ${file}`);
+  visitingModules.add(file);
+  let source = await readFile(file, "utf8");
+  const imports = [...source.matchAll(/(\b(?:from\s*|import\s*\(\s*|import\s*)["'])(\.{1,2}\/[^"'?#]+\.js)(["'])/g)];
+  for (const [match, prefix, url, quote] of imports) {
+    const dependency = resolve(dirname(file), url);
+    if (!dependency.startsWith(dist + "/")) throw new Error(`Module outside build: ${url}`);
+    const version = await versionModule(dependency);
+    source = source.replaceAll(match, `${prefix}${url}?v=${version}${quote}`);
+  }
+  await writeFile(file, source);
+  const version = createHash("sha256").update(source).digest("hex").slice(0, 12);
+  visitingModules.delete(file);
+  moduleVersions.set(file, version);
+  return version;
+}
+for (const name of [...referenced].filter(name => name.endsWith(".js"))) {
+  await versionModule(join(dist, "assets", name));
+}
+
 // Tie each local stylesheet/script URL to its contents so deployments cannot
 // reuse a browser-cached asset from an older version of the page.
 for (const entry of entries.filter((name) => name.endsWith(".html"))) {
