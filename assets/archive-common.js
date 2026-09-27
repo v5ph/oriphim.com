@@ -1,5 +1,5 @@
-/** @typedef {{id:string,entry_number:number,title:string,body:string,tag:string,cover_path:string|null,cover_alt:string,created_at:string,updated_at:string}} ArchiveEntry */
-export const fields = 'id,entry_number,title,body,tag,cover_path,cover_alt,created_at,updated_at';
+/** @typedef {{id:string,entry_number:number,title:string,body:string,tag:string,cover_path:string|null,cover_alt:string,attachments:ArchiveAttachment[],created_at:string,updated_at:string}} ArchiveEntry */
+export const fields = 'id,entry_number,title,body,tag,cover_path,cover_alt,attachments,created_at,updated_at';
 export const tags = ['Announcement', 'Research', 'Build Log'];
 export const bucket = 'archive-covers';
 /** @param {string} tag @param {string} [text] @param {string} [className] */
@@ -117,4 +117,49 @@ export function expandableCover(url,description,className){
   const open=element('button','','archive-media-open');open.type='button';open.setAttribute('aria-label','Enlarge '+(description||'cover'));
   open.addEventListener('click',()=>{viewer.showModal();close.focus();});
   wrapper.append(viewer,open);return wrapper;
+}
+
+/** @typedef {{path:string,name:string,kind:'pdf'|'zip',size:number}} ArchiveAttachment */
+export const attachmentBucket='archive-attachments';
+export const attachmentLimit=10;
+export const attachmentSizeLimit=25*1024*1024;
+export const fileSize=size=>size>=1048576?(size/1048576).toFixed(1)+' MB':Math.max(1,Math.ceil(size/1024))+' KB';
+/** Check extension and file signature; never execute or extract uploaded files. */
+export async function inspectAttachment(file){
+  const kind=file.name.split('.').pop().toLowerCase();
+  if(!['pdf','zip'].includes(kind))throw Error('Choose a PDF or ZIP file.');
+  if(!file.size||file.size>attachmentSizeLimit)throw Error('Each attachment must be between 1 byte and 25 MB.');
+  if(file.name.length>255)throw Error('Use a filename shorter than 256 characters.');
+  const bytes=new Uint8Array(await file.slice(0,8).arrayBuffer());
+  const valid=kind==='pdf'?new TextDecoder().decode(bytes).startsWith('%PDF-'):
+    bytes[0]===0x50&&bytes[1]===0x4b&&((bytes[2]===3&&bytes[3]===4)||(bytes[2]===5&&bytes[3]===6)||(bytes[2]===7&&bytes[3]===8));
+  if(!valid)throw Error('That file does not appear to be a valid '+kind.toUpperCase()+'.');
+  return {kind,type:kind==='pdf'?'application/pdf':'application/zip'};
+}
+export function attachmentUrl(file,download=false){
+  if(!file||!['pdf','zip'].includes(file.kind)||typeof file.path!=='string'||!new RegExp('^[0-9a-f-]{36}/[0-9a-f-]{36}\\.'+file.kind+'$').test(file.path))return '';
+  return window.sb.storage.from(attachmentBucket).getPublicUrl(file.path,download?{download:file.name}:{}).data.publicUrl;
+}
+/** Attachments appear after article text, with native PDF viewing and ZIP downloads. */
+export function renderAttachments(target,files,localUrls=new Map()){
+  if(!files?.length)return;
+  const section=element('section','','archive-attachments');section.setAttribute('aria-label','Post attachments');
+  section.append(element('h2','Attachments'));
+  for(const file of files){
+    const url=localUrls.get(file)||attachmentUrl(file);if(!url)continue;
+    const card=element('section','','archive-attachment');
+    const header=element('div','','archive-attachment-header');
+    header.append(element('h3',file.name),element('span',file.kind.toUpperCase()+' · '+fileSize(file.size)));
+    const actions=element('div','','archive-attachment-links');
+    if(file.kind==='pdf'){
+      const open=element('a','Open PDF');open.href=url;open.target='_blank';open.rel='noopener noreferrer';actions.append(open);
+    }
+    const download=element('a',file.kind==='zip'?'Download ZIP':'Download');download.href=localUrls.get(file)||attachmentUrl(file,true);download.download=file.name;actions.append(download);header.append(actions);card.append(header);
+    if(file.kind==='pdf'){
+      const frame=element('iframe','','archive-pdf');frame.title='PDF: '+file.name;frame.loading='lazy';frame.referrerPolicy='no-referrer';frame.src=url+'#view=FitH';card.append(frame);
+      card.append(element('p','If the preview is unavailable, use Open PDF or Download.','archive-attachment-note'));
+    }
+    section.append(card);
+  }
+  target.append(section);
 }

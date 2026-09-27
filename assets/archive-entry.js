@@ -1,4 +1,4 @@
-import {fields,element,renderBody,coverUrl,expandableCover,dateLabel,readTime} from './archive-common.js';
+import {fields,element,renderBody,coverUrl,expandableCover,dateLabel,readTime,renderAttachments} from './archive-common.js';
 const root=document.querySelector('[data-entry-content]');
 const id=new URLSearchParams(location.search).get('id');
 async function load(){
@@ -11,7 +11,7 @@ async function load(){
     const article=element('article','','archive-article');
     article.append(element('p',`ENTRY No. ${String(data.entry_number).padStart(2,'0')} / ${data.tag} / ${dateLabel(data.created_at)} / ${readTime(data)}`,'eyebrow'),element('h1',data.title));
     const url=coverUrl(data.cover_path);if(url){article.append(expandableCover(url,data.cover_alt||data.title,'archive-article-cover'));}
-    const body=element('div','','archive-prose');renderBody(body,data.body);article.append(body);root.replaceChildren(article);
+    const body=element('div','','archive-prose');renderBody(body,data.body);article.append(body);renderAttachments(article,data.attachments);root.replaceChildren(article);
     document.title=data.title+' | Oriphim Archive';
     for (const selector of ['meta[property="og:title"]','meta[name="twitter:title"]']) document.querySelector(selector)?.setAttribute('content',document.title);
     for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) document.querySelector(selector)?.setAttribute('content',data.body.slice(0,160));

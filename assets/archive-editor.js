@@ -1,12 +1,13 @@
-import {fields,tags,bucket,element,renderBody,coverUrl,coverMedia,inspectCover} from './archive-common.js';
+import {fields,tags,bucket,element,renderBody,coverUrl,coverMedia,inspectCover,attachmentBucket,attachmentLimit,inspectAttachment,renderAttachments,fileSize} from './archive-common.js';
 const sb=window.sb;
 const control=document.querySelector('[data-edit-entry]');
 if(sb&&control){
   let user=null,allowed=false,current=null,busy=false,dirty=false,previewUrl='',pendingPath='',pendingFile=null;
   let entryId=crypto.randomUUID();
+  let attachments=[],checkingAttachments=false,attachmentGeneration=0;
   const dialog=element('dialog','','archive-editor');
   dialog.setAttribute('aria-labelledby','archive-editor-title');
-  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Post<textarea name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs."></textarea></label><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
+  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Post<textarea name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs."></textarea></label><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><label>PDF and ZIP attachments <small>Optional · up to 10 files, 25 MB each. Files become public when uploaded.</small><input name="attachments" type="file" multiple accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed"></label><ul class="archive-attachment-list" aria-label="Selected attachments"></ul><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
   document.body.append(dialog);
   const form=dialog.querySelector('form');
   const input=name=>form.elements.namedItem(name);
@@ -15,18 +16,43 @@ if(sb&&control){
   const preview=dialog.querySelector('.archive-preview');
   const image=dialog.querySelector('.archive-cover-selection');
   let selectedUrl='',selectedSource;
+  const attachmentList=dialog.querySelector('.archive-attachment-list');
+  function releaseAttachments(){attachmentGeneration++;for(const item of attachments)if(item.url)URL.revokeObjectURL(item.url);attachments=[];checkingAttachments=false;}
+  function paintAttachments(){
+    attachmentList.replaceChildren();
+    for(const item of attachments){
+      const row=element('li');row.append(element('span',item.name+' · '+fileSize(item.size)));
+      const remove=element('button','Remove');remove.type='button';remove.disabled=busy;remove.setAttribute('aria-label','Remove '+item.name);
+      remove.addEventListener('click',()=>{attachments=attachments.filter(other=>other!==item);if(item.url)URL.revokeObjectURL(item.url);preview.replaceChildren();preview.hidden=true;dirty=true;paintAttachments();});row.append(remove);attachmentList.append(row);
+    }
+  }
+  input('attachments').addEventListener('change',async()=>{
+    const files=Array.from(input('attachments').files);input('attachments').value='';
+    if(!files.length)return;
+    if(attachments.length+files.length>attachmentLimit){status.textContent='A post can have up to 10 attachments.';return;}
+    const generation=attachmentGeneration;checkingAttachments=true;input('attachments').disabled=true;dialog.querySelector('[data-publish]').disabled=true;status.textContent='Checking attachments…';
+    try{
+      const validated=[];
+      for(const file of files){const info=await inspectAttachment(file);validated.push({file,...info});}
+      if(generation!==attachmentGeneration||!dialog.open)return;
+      for(const {file,kind,type} of validated)attachments.push({name:file.name,size:file.size,kind,file,type,url:URL.createObjectURL(new Blob([file],{type})),path:'',uploaded:false});
+      dirty=true;paintAttachments();status.textContent='';
+    }catch(error){if(generation===attachmentGeneration)status.textContent=error.message||'Could not read that attachment.';}
+    finally{if(generation===attachmentGeneration){checkingAttachments=false;input('attachments').disabled=false;dialog.querySelector('[data-publish]').disabled=busy;}}
+  });
+
   function clearPreviewUrl(){if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl='';}
   function setImage(url,source){selectedUrl=url;selectedSource=source;image.hidden=!url;image.replaceChildren();if(url)image.append(coverMedia(url,input('cover_alt').value||'Selected cover','archive-cover-preview',source));}
   function open(){
     if(!allowed||!user)return;
-    form.reset();clearPreviewUrl();pendingPath='';pendingFile=null;dirty=false;entryId=current?.id||crypto.randomUUID();preview.hidden=true;status.textContent='';
+    form.reset();releaseAttachments();form.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=false);attachments=(current?.attachments||[]).map(item=>({...item}));paintAttachments();clearPreviewUrl();pendingPath='';pendingFile=null;dirty=false;entryId=current?.id||crypto.randomUUID();preview.hidden=true;status.textContent='';
     dialog.querySelector('h2').textContent=current?'Edit entry':'New entry';
     dialog.querySelector('[data-publish]').textContent=current?'Save changes':'Publish entry';
     for(const name of ['title','body','tag','cover_alt'])input(name).value=current?.[name]||(name==='tag'?tags[0]:'');
     dialog.querySelector('.archive-remove-cover').hidden=!current?.cover_path;
     setImage(coverUrl(current?.cover_path));dialog.showModal();input('title').focus();
   }
-  function close(){if(busy)return;if(dirty&&!confirm('Discard your unsaved changes?'))return;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();}
+  function close(){if(busy)return;if(dirty&&!confirm('Discard your unsaved changes?'))return;dialog.close();releaseAttachments();setImage('');preview.replaceChildren();clearPreviewUrl();}
   control.addEventListener('click',open);
   dialog.querySelector('[data-close]').addEventListener('click',close);
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
@@ -41,10 +67,10 @@ if(sb&&control){
   dialog.querySelector('[data-preview]').addEventListener('click',()=>{
     preview.replaceChildren(element('p',input('tag').value,'eyebrow'),element('h2',input('title').value||'Untitled entry'));
     if(!image.hidden)preview.append(coverMedia(selectedUrl,input('cover_alt').value,'',selectedSource));
-    const body=element('div','','archive-prose');renderBody(body,input('body').value);preview.append(body);preview.hidden=false;preview.scrollIntoView({block:'start',behavior:'smooth'});
+    const body=element('div','','archive-prose');renderBody(body,input('body').value);preview.append(body);renderAttachments(preview,attachments,new Map(attachments.filter(item=>item.url).map(item=>[item,item.url])));preview.hidden=false;preview.scrollIntoView({block:'start',behavior:'smooth'});
   });
   form.addEventListener('submit',async event=>{
-    event.preventDefault();if(busy||!allowed||!form.reportValidity())return;
+    event.preventDefault();if(busy||checkingAttachments||!allowed||!form.reportValidity())return;
     if(!input('title').value.trim()||!input('body').value.trim()){status.textContent='Add a title and post before publishing.';return;}
     busy=true;form.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=true);status.textContent='Saving entry…';
     try{
@@ -61,18 +87,27 @@ if(sb&&control){
         }
         path=pendingPath;
       }
-      const values={title:input('title').value.trim(),body:input('body').value.trim(),tag:input('tag').value,cover_path:path,cover_alt:input('cover_alt').value.trim()};
+      for(const item of attachments){
+        if(item.file&&!item.uploaded){
+          item.path=`${user.id}/${crypto.randomUUID()}.${item.kind}`;
+          const {error}=await sb.storage.from(attachmentBucket).upload(item.path,item.file,{contentType:item.type,cacheControl:'3600',upsert:false});
+          if(error)throw Error('Attachment upload failed. Your post and selected files are still here; please try again.');
+          item.uploaded=true;
+        }
+      }
+      const savedAttachments=attachments.map(({path,name,kind,size})=>({path,name,kind,size}));
+      const values={attachments:savedAttachments,title:input('title').value.trim(),body:input('body').value.trim(),tag:input('tag').value,cover_path:path,cover_alt:input('cover_alt').value.trim()};
       let data,error;
       if(current){({data,error}=await sb.from('archive_entries').update(values).eq('id',entryId).eq('updated_at',current.updated_at).select(fields).maybeSingle());}
       else{
         ({data,error}=await sb.from('archive_entries').insert({id:entryId,...values}).select(fields).single());
         // Resolve a lost response before retrying, without publishing duplicates.
-        if(error){const found=await sb.from('archive_entries').select(fields).eq('id',entryId).maybeSingle();if(found.data&&Object.entries(values).every(([key,value])=>found.data[key]===value)){data=found.data;error=null;}}
+        if(error){const found=await sb.from('archive_entries').select(fields).eq('id',entryId).maybeSingle();if(found.data&&Object.entries(values).every(([key,value])=>key==='attachments'?JSON.stringify((found.data.attachments||[]).map(a=>[a.path,a.name,a.kind,a.size]))===JSON.stringify(value.map(a=>[a.path,a.name,a.kind,a.size])):found.data[key]===value)){data=found.data;error=null;}}
       }
       if(error)throw Error('Couldn’t save the entry. Your text is still here; please try again.');
       if(!data)throw Error('This entry changed in another window. Copy your text, then reload before editing again.');
       const oldPath=current?.cover_path;
-      dirty=false;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();
+      dirty=false;dialog.close();releaseAttachments();setImage('');preview.replaceChildren();clearPreviewUrl();
       window.dispatchEvent(new CustomEvent('archive-published',{detail:data}));
       if(oldPath&&oldPath!==path)sb.storage.from(bucket).remove([oldPath]).catch(()=>{});
     }catch(error){status.textContent=error.message||'Couldn’t save. Please try again.';}
@@ -82,7 +117,7 @@ if(sb&&control){
     const result=await sb.auth.getUser();user=result.error?null:result.data.user;allowed=false;
     if(user){const {data,error}=await sb.from('archive_editors').select('user_id').eq('user_id',user.id).maybeSingle();allowed=!error&&!!data;}
     control.hidden=!allowed||(control.dataset.editEntry==='existing'&&!current);
-    if(!allowed&&dialog.open){dirty=false;dialog.close();setImage('');preview.replaceChildren();clearPreviewUrl();}
+    if(!allowed&&dialog.open){dirty=false;dialog.close();releaseAttachments();setImage('');preview.replaceChildren();clearPreviewUrl();}
   }
   window.addEventListener('archive-entry-loaded',event=>{current=event.detail;control.hidden=!allowed;});
   sb.auth.onAuthStateChange(()=>setTimeout(()=>permission().catch(()=>{control.hidden=true;}),0));
