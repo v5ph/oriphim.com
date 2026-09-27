@@ -140,7 +140,7 @@ export function attachmentUrl(file,download=false){
   if(!file||!['pdf','zip'].includes(file.kind)||typeof file.path!=='string'||!new RegExp('^[0-9a-f-]{36}/[0-9a-f-]{36}\\.'+file.kind+'$').test(file.path))return '';
   return window.sb.storage.from(attachmentBucket).getPublicUrl(file.path,download?{download:file.name}:{}).data.publicUrl;
 }
-/** Attachments appear after article text, with native PDF viewing and ZIP downloads. */
+/** Attachments appear after article text, with direct browser PDF links and ZIP downloads. */
 export function renderAttachments(target,files,localUrls=new Map()){
   if(!files?.length)return;
   const section=element('section','','archive-attachments');section.setAttribute('aria-label','Post attachments');
@@ -155,10 +155,6 @@ export function renderAttachments(target,files,localUrls=new Map()){
       const open=element('a','Open PDF');open.href=url;open.target='_blank';open.rel='noopener noreferrer';actions.append(open);
     }
     const download=element('a',file.kind==='zip'?'Download ZIP':'Download');download.href=localUrls.get(file)||attachmentUrl(file,true);download.download=file.name;actions.append(download);header.append(actions);card.append(header);
-    if(file.kind==='pdf'){
-      const frame=element('iframe','','archive-pdf');frame.title='PDF: '+file.name;frame.loading='lazy';frame.referrerPolicy='no-referrer';frame.src=url+'#view=FitH';card.append(frame);
-      card.append(element('p','If the preview is unavailable, use Open PDF or Download.','archive-attachment-note'));
-    }
     section.append(card);
   }
   target.append(section);

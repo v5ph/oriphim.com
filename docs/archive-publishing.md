@@ -42,7 +42,7 @@ Click a cover in the feed or article to open the larger cover dialog. Images and
 
 ## PDF and ZIP attachments
 
-Use **PDF and ZIP attachments** in New/Edit entry to select one or more files. The limit is ten files per post and 25 MB per file. Additional selections append to the list. Remove a file from the list before saving to detach it. PDFs appear after the body in native browser viewers, with Open PDF and Download links for browsers without embedded PDF support. ZIPs appear as named download cards; archives are never extracted or executed. Preview uses local object URLs and does not upload files.
+Use **PDF and ZIP attachments** in New/Edit entry to select one or more files. The limit is ten files per post and 25 MB per file. Additional selections append to the list. Remove a file from the list before saving to detach it. PDFs appear after the body as Open PDF and Download links. Open PDF opens the document directly in a browser tab; there is no embedded viewer. ZIPs appear as named download cards; archives are never extracted or executed. Preview uses local object URLs and does not upload files.
 
 Files use the public `archive-attachments` bucket. Uploads are restricted to allowlisted editors and their own UUID path prefix. Extensions and signatures are checked before uploading, and the bucket restricts MIME types and sizes. The `attachments` JSON column is saved atomically with the post, validated for count, path ownership, type, name, and size. There are no service keys in the client. The CSP permits frames only from the attachment bucket, local content, and local blob previews in addition to existing site content.
 
