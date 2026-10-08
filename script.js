@@ -62,9 +62,9 @@
       .auth-popup__panel{position:relative;z-index:1;width:min(440px,100%);max-height:calc(100dvh - 44px);overflow-y:auto;display:grid;grid-template-columns:1fr;border:1px solid #18130f;background:#ece4d3;color:#18130f;box-shadow:0 18px 60px rgba(24,19,15,.3)}
       .auth-popup__content{padding:26px}
       .auth-popup__top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
-      .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Jacquard 12',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
+      .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Loom',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
       .auth-popup__brand img{width:34px;height:34px;object-fit:contain;display:block}
-      .auth-popup .oriphim-word{display:inline-block;font-family:'Jacquard 12',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
+      .auth-popup .oriphim-word{display:inline-block;font-family:'Loom',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
       .auth-popup__close{width:38px;height:38px;border:1px solid #18130f;background:transparent;color:#18130f;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
       .auth-popup__close:hover{background:#18130f;color:#ece4d3}
       .auth-popup__eyebrow{margin:0 0 12px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#241d16}

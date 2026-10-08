@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Loom';
+  src: url('/assets/Loom-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Shared navigation: product menu centered, Company in the footer. */
 .topbar .wrap{display:grid;align-items:center;grid-template-columns:1fr auto 1fr;min-height:42px;gap:24px;}
 .topbar .navlinks{width:auto;}
@@ -19,4 +27,4 @@ footer .wrap{display:grid;grid-template-columns:1fr auto 1fr;}
 .footer-page-menu:hover{color:var(--ink);text-decoration:underline;}
 .footer-page-menu:focus-visible{outline:1px solid currentColor;outline-offset:3px;}
 
-.topbar .nav-home{grid-column:2;grid-row:1;justify-self:center;font-family:'Jacquard 12',serif;font-size:38px;font-weight:400;line-height:1;text-transform:lowercase;text-decoration:none;border:0;color:var(--ink);}
+.topbar .nav-home{grid-column:2;grid-row:1;justify-self:center;font-family:'Loom',serif;font-size:38px;font-weight:400;line-height:1;text-transform:lowercase;text-decoration:none;border:0;color:var(--ink);}

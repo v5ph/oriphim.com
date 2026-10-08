@@ -13,6 +13,7 @@ const port = portArg >= 0 ? Number(process.argv[portArg + 1]) : 52922;
 const host = "127.0.0.1";
 
 const types = {
+  ".woff2": "font/woff2",
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".jpg": "image/jpeg",
