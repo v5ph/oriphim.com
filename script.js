@@ -63,7 +63,8 @@
       .auth-popup__content{padding:26px}
       .auth-popup__top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
       .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Loom',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
-      .auth-popup__brand img{width:34px;height:34px;object-fit:contain;display:block}
+      .auth-popup__brand img{width:42px;height:26px;object-fit:contain;display:block}
+      .auth-popup__brand img.auth-popup__wordmark{width:auto;height:32px;}
       .auth-popup .oriphim-word{display:inline-block;font-family:'Loom',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
       .auth-popup__close{width:38px;height:38px;border:1px solid #18130f;background:transparent;color:#18130f;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
       .auth-popup__close:hover{background:#18130f;color:#ece4d3}
@@ -174,7 +175,7 @@
       <section class="auth-popup__panel">
         <div class="auth-popup__content">
           <div class="auth-popup__top">
-      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg")}" alt="" aria-hidden="true">oriphim</span>
+      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg")}" alt="" aria-hidden="true"><img class="auth-popup__wordmark" src="${assetUrl("assets/oriphim-wordmark.svg")}" alt="Oriphim"></span>
             <button class="auth-popup__close" type="button" data-auth-close aria-label="Close">x</button>
           </div>
           <p class="auth-popup__eyebrow">${config.eyebrow}</p>

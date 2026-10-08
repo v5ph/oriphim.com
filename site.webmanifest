@@ -9,10 +9,10 @@
   "theme_color": "#f34b03",
   "icons": [
     {
-      "src": "/assets/oriphim-logo.svg",
+      "src": "/assets/oriphim-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/assets/oriphim-red.png",
