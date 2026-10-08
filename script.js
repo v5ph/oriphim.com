@@ -63,7 +63,7 @@
       .auth-popup__content{padding:26px}
       .auth-popup__top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
       .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Loom',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
-      .auth-popup__brand img{width:42px;height:26px;object-fit:contain;display:block}
+      .auth-popup__brand img{width:42px;height:30px;object-fit:contain;display:block}
       .auth-popup__brand img.auth-popup__wordmark{width:auto;height:32px;}
       .auth-popup .oriphim-word{display:inline-block;font-family:'Loom',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
       .auth-popup__close{width:38px;height:38px;border:1px solid #18130f;background:transparent;color:#18130f;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
