@@ -53,7 +53,8 @@ const walk = async (dir) => {
   return out;
 };
 
-const referenced = new Set();
+// Email templates load this font from the public site, outside the page graph.
+const referenced = new Set(["Loom-Regular.woff2"]);
 for (const file of await walk(dist)) {
   const text = await readFile(file, "utf8");
   for (const m of text.matchAll(/assets\/([A-Za-z0-9._-]+\.[A-Za-z0-9]+)/g)) {
