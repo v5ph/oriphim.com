@@ -175,7 +175,7 @@
       <section class="auth-popup__panel">
         <div class="auth-popup__content">
           <div class="auth-popup__top">
-      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg")}" alt="" aria-hidden="true"><img class="auth-popup__wordmark" src="${assetUrl("assets/oriphim-wordmark.svg")}" alt="Oriphim"></span>
+      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg?v=6")}" alt="" aria-hidden="true"><img class="auth-popup__wordmark" src="${assetUrl("assets/oriphim-wordmark.svg?v=6")}" alt="Oriphim"></span>
             <button class="auth-popup__close" type="button" data-auth-close aria-label="Close">x</button>
           </div>
           <p class="auth-popup__eyebrow">${config.eyebrow}</p>
