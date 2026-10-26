@@ -1,6 +1,9 @@
 (() => {
   const pages = [
     ['Home', '/'],
+    ['Install Ori', '/download'],
+    ['Pricing', '/pricing'],
+    ['Account', '/account'],
     ['Archive', '/archive'],
     ['Company', '/company'],
     ['Contact', '/contact'],

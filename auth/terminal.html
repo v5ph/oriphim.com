@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Return to your terminal | Oriphim</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#f34b03">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ori-account.css">
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="129" height="38"></a>
+</div></div>
+<main class="wrap">
+<p class="eyebrow">Ori sign-in</p>
+<h1 id="title">Return to your terminal.</h1>
+<p id="detail">Copy this code and paste it into Ori where it asks for it. It works once, for a few minutes, and only in the terminal that started this sign-in.</p>
+<div class="code" id="codeBox" hidden><output id="code" aria-label="Sign-in code"></output><button type="button" id="copy">Copy</button></div>
+<p id="copied" role="status" aria-live="polite"></p>
+</main>
+<footer><div class="wrap">&copy; 2026 ORIPHIM, INC. &middot; <a href="/contact">Contact</a></div></footer>
+<script>
+  // No Supabase client on this page: it would try to use the code itself.
+  const params = new URLSearchParams(location.search);
+  const code = params.get("code");
+  if (code) {
+    document.getElementById("code").textContent = code;
+    document.getElementById("codeBox").hidden = false;
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("copy").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code);
+        document.getElementById("copied").textContent = "Copied. Paste it into Ori.";
+      } catch {
+        document.getElementById("copied").textContent = "Select the code and copy it.";
+      }
+    });
+  } else {
+    document.getElementById("title").textContent = "Sign-in did not finish.";
+    document.getElementById("detail").textContent =
+      (params.get("error_description") || "No code was returned.") + " Start again from Ori with ori login --manual.";
+  }
+</script>
+</body>
+</html>

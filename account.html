@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Ori account | Oriphim</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f34b03">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ori-account.css">
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="129" height="38"></a>
+</div></div>
+<main class="wrap">
+<p class="eyebrow">Account</p>
+<h1>Your Ori account.</h1>
+<p id="who" aria-live="polite">Checking your sign-in&hellip;</p>
+<div class="notice" id="terminalNote" hidden>When you are done here, return to your terminal. Ori picks up the change with <span class="inline-cmd">/billing</span>; whatever you were typing is still there.</div>
+<div class="notice problem" id="problem" role="alert" hidden></div>
+<div class="panel" id="status" aria-live="polite" hidden></div>
+<div class="actions" id="signedOutActions" hidden>
+  <a class="btn" id="signIn" href="/?auth=sign-in">Sign in</a>
+  <a class="btn-outline" href="/?auth=sign-up">Create account</a>
+</div>
+<div class="actions" id="actions" hidden>
+  <button class="btn" type="button" data-subscribe="month" hidden>Subscribe · $39 / month</button>
+  <button class="btn-outline" type="button" data-subscribe="year" hidden>Subscribe · $390 / year</button>
+  <button class="btn" type="button" id="manage" hidden>Manage billing</button>
+  <a class="btn-outline" href="/download">Install Ori</a>
+</div>
+<p id="message" role="status" aria-live="polite"></p>
+<p>Standard includes 500 cloud credits every month (annual plans too), with no rollover, overages or top-ups. Cancelling keeps access until the end of the paid period, and your results stay readable afterwards. Enterprise is <a href="/contact">by conversation</a>.</p>
+</main>
+<footer><div class="wrap">&copy; 2026 ORIPHIM, INC. &middot; <a href="/contact">Contact</a></div></footer>
+<script src="/assets/supabase-js.js"></script>
+<script src="/assets/oriphim-supabase.js"></script>
+<script src="/assets/ori-account.js"></script>
+<script>
+(async function () {
+  const params = new URLSearchParams(location.search);
+  const want = params.get("subscribe");
+  const fromTerminal = params.get("from") === "terminal";
+  const $ = (id) => document.getElementById(id);
+  const message = $("message");
+  if (fromTerminal) $("terminalNote").hidden = false;
+
+  const current = await oriAccount.session().catch(() => null);
+  if (!current) {
+    $("who").textContent = want ? "Sign in or create an account to choose Standard." : "You are not signed in.";
+    const next = location.pathname + location.search;
+    $("signIn").href = "/?auth=sign-in&next=" + encodeURIComponent(next);
+    $("signedOutActions").hidden = false;
+    return;
+  }
+  $("who").textContent = "Signed in as " + (current.user.email || "your account") + ".";
+
+  async function refresh() {
+    const { summary } = await oriAccount.billing({ action: "status" });
+    const view = oriAccount.describe(summary);
+    oriAccount.paint($("status"), view.lines);
+    $("status").hidden = false;
+    $("problem").hidden = !view.problem;
+    if (view.problem) $("problem").textContent = "Your last payment did not go through. Access continues until " + oriAccount.day(summary.subscription.paid_through) + "; update your card with Manage billing to keep it.";
+    const subscribed = view.paid && summary.subscription && ["active", "past_due"].includes(summary.subscription.status);
+    document.querySelectorAll("[data-subscribe]").forEach((b) => { b.hidden = subscribed; });
+    $("manage").hidden = !summary.subscription;
+    $("actions").hidden = false;
+    return subscribed;
+  }
+
+  async function go(action, body) {
+    message.textContent = action === "checkout" ? "Opening Stripe Checkout…" : "Opening the billing portal…";
+    document.querySelectorAll("#actions button").forEach((b) => { b.disabled = true; });
+    try {
+      const { url } = await oriAccount.billing({ action, from: fromTerminal ? "terminal" : "web", ...body });
+      location.assign(url);
+    } catch (error) {
+      message.textContent = error.message;
+      document.querySelectorAll("#actions button").forEach((b) => { b.disabled = false; });
+    }
+  }
+
+  document.querySelectorAll("[data-subscribe]").forEach((button) => {
+    button.addEventListener("click", () => go("checkout", { interval: button.dataset.subscribe }));
+  });
+  $("manage").addEventListener("click", () => go("portal", {}));
+
+  try {
+    const subscribed = await refresh();
+    if (want && !subscribed && ["month", "year"].includes(want)) go("checkout", { interval: want });
+    if (params.get("checkout") === "cancelled") message.textContent = "Checkout was cancelled; nothing was charged.";
+  } catch (error) {
+    message.textContent = error.message;
+  }
+})();
+</script>
+</body>
+</html>

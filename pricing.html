@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIPHIM Pricing | Standard and Enterprise Plans</title>
-<meta name="description" content="Compare ORIPHIM Standard and Enterprise plans for local-first scientific research, simulation, formal verification, and team workflows.">
+<title>Ori Pricing | Standard $39/month or $390/year | Oriphim</title>
+<meta name="description" content="Ori Standard: $39 a month or $390 a year, with 500 cloud credits every month. Local models use no credits. Enterprise by conversation.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/pricing">
 <meta name="theme-color" content="#f34b03">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
 <meta property="og:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
-<meta property="og:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
+<meta property="og:description" content="Ori Standard: $39/month or $390/year, 500 cloud credits every month. Enterprise by conversation.">
 <meta property="og:url" content="https://oriphim.com/pricing">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
-<meta name="twitter:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
+<meta name="twitter:description" content="Ori Standard: $39/month or $390/year, 500 cloud credits every month. Enterprise by conversation.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -37,25 +37,23 @@
   "@id": "https://oriphim.com/#oriphim",
   "name": "ORIPHIM",
   "applicationCategory": "ScienceApplication",
-  "operatingSystem": "Windows, macOS, Linux",
+  "operatingSystem": "macOS (Apple Silicon)",
   "url": "https://oriphim.com/pricing",
-  "description": "A local-first research workspace for scientific simulation and formal verification.",
+  "description": "Ori turns a described physical system or a paper into a reviewed computational experiment, and records the evidence needed to judge its results.",
   "offers": [
     {
       "@type": "Offer",
-      "name": "ORIPHIM Standard",
+      "name": "Ori Standard (monthly)",
       "price": "39.00",
       "priceCurrency": "USD",
-      "url": "https://oriphim.com/pricing",
-      "availability": "https://schema.org/InStock"
+      "url": "https://oriphim.com/pricing"
     },
     {
       "@type": "Offer",
-      "name": "ORIPHIM Enterprise",
-      "price": "299.00",
+      "name": "Ori Standard (annual)",
+      "price": "390.00",
       "priceCurrency": "USD",
-      "url": "https://oriphim.com/pricing",
-      "availability": "https://schema.org/InStock"
+      "url": "https://oriphim.com/pricing"
     }
   ],
   "publisher": { "@id": "https://oriphim.com/#organization" }
@@ -135,6 +133,7 @@
   .guest-note{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;padding:56px 0;}
   .guest-note h2{font-size:clamp(24px,2.8vw,30px);max-width:16ch;}
   .guest-note p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:46ch;}
+  .guest-note a{color:var(--ink);}
   .faq-title{font-size:clamp(26px,3vw,32px);margin-bottom:20px;}
   .faq-list{border-top:0;}
   .faq-item{border-bottom:0;padding:15px 0;}
@@ -204,10 +203,10 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span> <span class="tagline-line">Become a <span class="tagline-theorist">theorist</span>.</span></p>
+        <p class="tagline"><span class="tagline-line">One plan for Ori.</span> <span class="tagline-line">Enterprise by conversation.</span></p>
         <div class="toggle" id="billingToggle">
-          <button type="button" data-period="monthly" class="active">Monthly</button>
-          <button type="button" data-period="annual">Annual</button>
+          <button type="button" data-period="month" class="active">Monthly</button>
+          <button type="button" data-period="year">Annual</button>
         </div>
       </div>
     </div>
@@ -218,74 +217,60 @@
       <div class="pricing-grid fade">
         <div class="price-card">
           <div class="price-name">Standard</div>
-          <p class="price-tag">For individual research and simulation.</p>
+          <p class="price-tag">Ori in your terminal, for individual research and simulation.</p>
           <div class="price-amount-row">
             <span class="price-amount" id="stdPrice">$39</span>
-            <span class="price-per" id="stdPer">/ mo</span>
+            <span class="price-per" id="stdPer">/ month</span>
           </div>
-          <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime</div>
-          <div class="price-cta"><a href="/?auth=sign-up" class="btn">Choose Standard</a></div>
+          <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime, access continues to the end of the paid period</div>
+          <div class="price-cta"><a href="/account?subscribe=month" class="btn" id="stdCheckout">Choose Standard</a></div>
           <ul class="plan-highlights">
-            <li>Unlimited local chat and experiments</li>
-            <li>Document ingestion and report export</li>
-            <li>500 cloud messages per month</li>
+            <li>500 cloud credits every month, on monthly and annual plans</li>
+            <li>Local models and your own endpoint, without using credits</li>
+            <li>Experiments run on your Mac; results and reports are yours to keep</li>
           </ul>
-          <details class="plan-details"><summary>All Standard features</summary>
-          <div class="price-list-label">What's included</div>
+          <details class="plan-details"><summary>What Standard includes</summary>
+          <div class="price-list-label">Included</div>
           <ul class="price-features">
-            <li>Unlimited local AI chat and notebook - runs on your own hardware, so "unlimited" is a real word here.</li>
-            <li>Unlimited verified experiments, every domain: physics, chemistry, quantum, logistics, research, general simulation.</li>
-            <li>"Run the paper" - full document ingestion (PDF, Office, CSV), equation extraction, symbolic verification, NIST / PubChem grounding.</li>
-            <li>Reproducible report export (<code>report.html</code>), no watermark.</li>
-            <li><span class="oriphim-word">Oriphim</span> Cloud access with a fair-use quota (500 messages / mo) - metered and enforced server-side from day one.</li>
-            <li>Bring your own endpoint - Groq, Ollama, any OpenAI-compatible API, your own key.</li>
-            <li>Standard support (email, best-effort).</li>
+            <li>Ori for macOS on Apple Silicon: describe a system or attach a paper, answer a few questions, review the brief, approve it, run it.</li>
+            <li>Every experiment records its evidence and provenance, and says what was verified, what was validated, and what was not assessed.</li>
+            <li>Offline HTML reports with figures, evidence and provenance.</li>
+            <li>500 cloud credits each month for Oriphim's hosted model. Annual plans receive 500 each month, not 6,000 at once.</li>
+            <li>Local models (for example through Ollama) or any OpenAI-compatible endpoint with your own key. These use no cloud credits; Ori never bundles model weights.</li>
+            <li>Running an approved experiment is local computation and uses no cloud credits.</li>
+            <li>Up to seven days offline between subscription checks.</li>
+            <li>Email support.</li>
+          </ul>
+          <div class="price-list-label">How credits work</div>
+          <ul class="price-features">
+            <li>A credit is weighted by the work: a message is about 1 credit, drafting a brief about 6, plus about 1 per 25,000 characters of attached paper. Ori shows the cost before it starts.</li>
+            <li>Monthly credits expire at the end of each month. No rollover, no overage charges, no top-ups.</li>
+            <li>When they run out, hosted use pauses until the next month; local models and your own endpoint keep working.</li>
+            <li>No free trial. Promotional credits from earlier Oriphim accounts are kept and used after the month&rsquo;s credits.</li>
           </ul>
           </details>
         </div>
 
         <div class="price-card enterprise">
           <div class="price-name">Enterprise</div>
-          <p class="price-tag">For organizations with dedicated support needs.</p>
+          <p class="price-tag">For organizations with procurement, support or deployment needs.</p>
           <div class="price-amount-row">
-            <span class="price-amount">$299</span>
-            <span class="price-per">/ mo</span>
+            <span class="price-amount">Contact us</span>
           </div>
-          <div class="price-billing-note">Self-serve &middot; custom pricing on request</div>
-          <div class="price-cta"><a href="/?auth=sign-up" class="btn-outline">Talk to us</a></div>
+          <div class="price-billing-note">Priced per organization &middot; invoicing available</div>
+          <div class="price-cta"><a href="/contact" class="btn-outline">Talk to us</a></div>
           <ul class="plan-highlights">
-            <li>Everything in Standard, uncapped cloud quota</li>
-            <li>Dedicated onboarding and priority support</li>
-            <li>Invoicing and annual contracts</li>
+            <li>Everything in Standard</li>
+            <li>Terms, invoicing and support arranged with your team</li>
           </ul>
-          <details class="plan-details"><summary>Enterprise features &amp; roadmap</summary>
-          <div class="price-list-label">Live now</div>
-          <ul class="price-features">
-            <li>Everything in Standard, with an uncapped <span class="oriphim-word">Oriphim</span> Cloud quota.</li>
-            <li>Signed data-residency attestation and a network-egress audit doc - Oriphim already runs fully local and offline; this documents what's already true, for procurement.</li>
-            <li>Dedicated onboarding and priority support.</li>
-            <li>Invoicing, annual contracts, PO-friendly billing.</li>
-            <li>Priority input on the roadmap.</li>
-          </ul>
-          <div class="roadmap-box">
-            <div class="roadmap-label">Committed roadmap - not shipped yet</div>
-            <ul class="price-features">
-              <li>Multi-seat org accounts, roles and permissions.</li>
-              <li>SSO / SAML.</li>
-              <li>Admin console and audit log.</li>
-              <li>Headless API / CI integration for automated design regression checks.</li>
-            </ul>
-            <p class="roadmap-note">You're an early Enterprise partner: this is what's live today, and your input shapes what ships next.</p>
-          </div>
-          </details>
         </div>
       </div>
     </div>
   </section>
   <section class="section-pad">
     <div class="wrap guest-note fade">
-      <h2>Try Guest Mode first.</h2>
-      <p>Guest mode is the free, unauthenticated way in - it runs locally in your browser, no account and no card required. Standard and Enterprise are what you step into once it's real work.</p>
+      <h2>Install first, subscribe when ready.</h2>
+      <p>Installing Ori and signing in are free. Starting new work needs Standard. If your subscription ends, every result you made stays readable and exportable. <a href="/download">Install Ori</a></p>
     </div>
   </section>
 
@@ -293,9 +278,9 @@
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="eyebrow">Oriphim Research</div>
-      <h2>Two tiers, no vapor.</h2>
+      <h2>Describe it. Review it. Run it.</h2>
       <div class="cta-row-band">
-        <a href="/?auth=sign-up" class="btn">Choose Standard</a>
+        <a href="/account?subscribe=month" class="btn" id="bandCheckout">Choose Standard</a>
       </div>
     </div>
   </section>
@@ -429,17 +414,21 @@
 
     billingToggle.querySelectorAll("button").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
+    const annual = button.dataset.period === "year";
+    for (const link of document.querySelectorAll("#stdCheckout, #bandCheckout")) {
+      link.href = `/account?subscribe=${annual ? "year" : "month"}`;
+    }
 
-    if (button.dataset.period === "annual") {
-      stdPrice.textContent = "$32.50";
-      stdPer.textContent = "/ mo";
-      stdBillingNote.textContent = "$390 billed yearly - about two months free";
+    if (annual) {
+      stdPrice.textContent = "$390";
+      stdPer.textContent = "/ year";
+      stdBillingNote.textContent = "Billed yearly - 500 cloud credits arrive each month";
       return;
     }
 
     stdPrice.textContent = "$39";
-    stdPer.textContent = "/ mo";
-    stdBillingNote.textContent = "Billed monthly - cancel anytime";
+    stdPer.textContent = "/ month";
+    stdBillingNote.textContent = "Billed monthly - cancel anytime, access continues to the end of the paid period";
   });
 </script>
 <script src="assets/supabase-js.js"></script>
