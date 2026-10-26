@@ -159,7 +159,7 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["https://127.0.0.1:3000", "oriphim://auth/callback"]
+additional_redirect_urls = ["https://127.0.0.1:3000", "oriphim://auth/callback", "http://127.0.0.1:*/callback/**", "https://oriphim.com/auth/terminal", "https://oriphim.com/**"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -247,6 +247,12 @@ otp_expiry = 3600
 [auth.email.template.confirmation]
 subject = "Welcome to Oriphim — confirm your email"
 content_path = "./supabase/templates/confirmation.html"
+
+# Ori signs in with a typed code as well as the link: the template must show {{ .Token }}.
+# Hosted projects must also install this template in Authentication > Email Templates.
+[auth.email.template.magic_link]
+subject = "Your Oriphim sign-in code"
+content_path = "./supabase/templates/magic-link.html"
 
 # Uncomment to customize email template
 # [auth.email.template.invite]
@@ -417,3 +423,8 @@ enabled = true
 # declarative_schema_path = "./schemas"
 # JSON string passed through to pg-delta SQL formatting.
 # format_options = "{\"keywordCase\":\"upper\",\"indent\":2,\"maxWidth\":80,\"commaStyle\":\"trailing\"}"
+
+# Stripe signs webhook calls; there is no user JWT. The function verifies the
+# Stripe signature itself (functions live in the ori-terminal repository).
+[functions.stripe-webhook]
+verify_jwt = false
