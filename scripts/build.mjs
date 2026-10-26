@@ -8,8 +8,7 @@ const dist = join(root, "dist");
 
 // Everything that ships except assets/ — which is derived below from what the
 // pages actually reference, so unused images never reach the Cloudflare deploy.
-// about.html is redirect-only (see _redirects) and styles.css is unlinked, so
-// neither is copied.
+// styles.css is unlinked, so it is not copied.
 const entries = [
   "index.html",
   "company.html",

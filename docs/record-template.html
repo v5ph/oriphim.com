@@ -1,0 +1,72 @@
+<!--
+Template for the home page's statement chapter and record band, saved 2026-10-21.
+The example content is the chryso-r4 check of a third-party paper. It was taken off
+the page because Oriphim has no permission to feature that paper. Replace every value
+with your own run before putting these blocks back into index.html:
+
+  - statement chapter: goes inside <div class="story">, between the hero and #how.
+  - record band: goes after </div> closing the story, before #offer.
+  - restore the hero link: <a href="#record" class="link-line">See a real check</a>.
+
+The styles (.chapter-statement, .band-record, .record-*, .folder, .download, .record-log)
+and the scroll-lit script are still in index.html and assets/landing-responsive.css.
+Ship the run folder as a slim zip: no .venv, __pycache__ or .pytest_cache; Cloudflare
+Pages rejects files over 25 MB.
+-->
+
+    <section class="chapter chapter-statement" data-chapter data-shape="0" data-dim aria-label="A recent check">
+      <div class="statement-body">
+        <p class="statement" data-scroll-lit>Three claims from a published paper on making gold with fusion neutrons. <span class="ori-word">Ori</span> rebuilt the calculation, ran it, and checked it. All three land within 1% of the printed numbers.</p>
+        <a class="statement-source" href="#record">Rutkowski, Harter &amp; Parisi · arXiv:2507.13461 · p. 17 · <span class="ori-word">Ori</span> run chryso-r4 →</a>
+      </div>
+    </section>
+
+  <section class="band band-record" id="record" aria-labelledby="record-title">
+    <div class="wrap">
+      <div class="band-head">
+        <div><div class="eyebrow">The record</div><h2 id="record-title">A real check, start to finish.</h2></div>
+        <p class="band-note">Every Claim Check ends as a folder of plain code you can rerun without Oriphim. <a href="/assets/chryso-r4.zip" download>Download this one.</a></p>
+      </div>
+
+      <article class="record-card">
+        <header class="record-meta"><span>20 Oct 2026</span><span>Revision r1</span><span>Signed by Phil V</span><span class="record-pass">5 / 5 checks pass</span></header>
+        <h3>Gold transmutation activity cooldown</h3>
+        <p class="record-paper">Rutkowski, Harter &amp; Parisi, <a href="https://arxiv.org/abs/2507.13461v3" target="_blank" rel="noopener noreferrer">Scalable Chrysopoeia via (n, 2n) Reactions Driven by Deuterium-Tritium Fusion Neutrons</a>, arXiv:2507.13461 (2025).</p>
+        <p class="record-claim">The claim, p. 17: gold made this way stays radioactive, and the paper gives how many years it takes to cool below three regulatory limits.</p>
+        <div class="record-table" role="table" aria-label="Paper against this run">
+          <div class="rt-row rt-head" role="row"><span role="columnheader">Cooldown to</span><span role="columnheader">Paper</span><span role="columnheader"><span class="ori-word">Ori</span></span><span role="columnheader">Band</span><span role="columnheader">Result</span></div>
+          <div class="rt-row" role="row"><span role="cell">Class A low-level waste limit</span><span role="cell">6.8 yr</span><span role="cell">6.766 yr</span><span role="cell">±0.136</span><span role="cell" class="rt-match">matches</span></div>
+          <div class="rt-row" role="row"><span role="cell">Class 7 exempt limit</span><span role="cell">13.7 yr</span><span role="cell">13.76 yr</span><span role="cell">±0.274</span><span role="cell" class="rt-match">matches</span></div>
+          <div class="rt-row" role="row"><span role="cell">Banana-equivalent activity</span><span role="cell">17.7 yr</span><span role="cell">17.55 yr</span><span role="cell">±0.354</span><span role="cell" class="rt-match">matches</span></div>
+        </div>
+        <p class="record-note">Bands are ±2%: <span class="ori-word">Ori</span> proposed them and the reviewer confirmed them before the run, because the paper printed none.</p>
+      </article>
+
+      <div class="record-grid">
+        <div class="folder">
+          <div class="folder-title">~/ORIPHIM/chryso-r4/</div>
+          <dl>
+            <div><dt>README.md</dt><dd>The claim, the answer, and how to rerun it.</dd></div>
+            <div><dt>report.md</dt><dd><span class="ori-word">Ori</span>'s write-up: what was asked, what ran, what came out.</dd></div>
+            <div><dt>figure.html</dt><dd>The chart. Opens in any browser.</dd></div>
+            <div><dt>sim/model.py</dt><dd>The calculation, as plain Python.</dd></div>
+            <div><dt>params.json</dt><dd>Every input, with its unit and the page it came from.</dd></div>
+            <div><dt>*-model-calls.json</dt><dd>Every prompt and reply, verbatim.</dd></div>
+          </dl>
+          <pre class="folder-run"><code>pip install -r requirements.txt
+python run.py
+pytest</code></pre>
+          <a class="download" href="/assets/chryso-r4.zip" download>Download the folder <span>zip · 860 KB</span></a>
+        </div>
+        <figure class="app-shot app-shot-dark">
+          <img src="/assets/ori-app-run.webp" alt="The Ori desktop app on this run: Ori's plain-language account of the gold isotope decay simulation on the left, the state history plot and revision r1 (5 pass, 0 fail) on the right" width="2000" height="1290" loading="lazy" decoding="async">
+          <figcaption>This run in <span class="ori-word">Ori</span>: what was simulated, in plain words, beside the state history.</figcaption>
+        </figure>
+      </div>
+
+      <ol class="record-log" aria-label="Earlier entries">
+        <li><span class="log-date">07 Sep 2026</span><span class="log-title">Prescribed-field particle motion</span><span class="log-body">The equation as printed converged at order 0.0392 where the scheme should give 2. The Lorentz-consistent form gave 2.0010. <span class="ori-word">Ori</span> flagged the two variants before running. Development run, not a full reproduction.</span><span class="log-result">Flagged</span></li>
+      </ol>
+    </div>
+  </section>
+
