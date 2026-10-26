@@ -158,7 +158,10 @@
   .faq p{font-size:13.5px;line-height:1.65;color:var(--ink-soft);margin-top:10px;}
   .faq a,.account-note a,.req-card a,.step a{color:var(--ink);}
   @media (max-width:860px){.steps{grid-template-columns:1fr;}}
-  @media (max-width:560px){.cmd{flex-direction:column;}.cmd button{border-left:0;border-top:1px solid var(--paper-dim);padding:12px;}}
+  .cmd code{min-width:0;}
+  .spec-row .v,.step p,.req-card li,.faq p{overflow-wrap:anywhere;}
+  pre.block{max-width:100%;}
+  @media (max-width:560px){.cmd{flex-direction:column;}.cmd code{font-size:12.5px;}.cmd button{border-left:0;border-top:1px solid var(--paper-dim);padding:12px;}.inline-cmd{white-space:normal;overflow-wrap:anywhere;}.download-version{padding:0 8px;}.account-note > div{min-width:0;width:100%;}}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
