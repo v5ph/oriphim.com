@@ -7,8 +7,8 @@
 <meta name="description" content="Claim Checks from Oriphim: Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds, doesn't, or can't be told from the text.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/">
-<meta name="theme-color" content="#f34b03">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#120d0e">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
@@ -32,17 +32,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #c2391b;
-    --bg-deep: #9c2c12;
-    --bg-soft: #cf4a26;
-    --paper: #ece4d3;
-    --paper-dim: #ddd4bf;
-    --ink: #18130f;
-    --ink-soft: #241d16;
-    --line: rgba(24,19,15,.32);
-    --line-soft: rgba(24,19,15,.16);
+    /* Black ground to match the wallpaper; red takes black's old jobs.
+       Both ends sit a notch in from pure black and white so the page doesn't glow. */
+    --bg: #120d0e;
+    --bg-deep: #0e0b0c;
+    --bg-soft: #1f191a;
+    --paper: #e2dfd8;
+    --paper-dim: #c9c6bf;
+    /* All text is off-white; red stays on as the accent for rules, lines and the "doesn't hold" verdict. */
+    --red: #c2391b;
+    --ink: #e2dfd8;
+    --ink-soft: #b3afa7;
+    --line: rgba(194,57,27,.32);
+    --line-soft: rgba(194,57,27,.16);
     --olive: #333c27;
-    --cream: #f4eee0;
+    --cream: #e9e6df;
+    /* Signals from the wallpaper's RGB dither: used sparingly, one meaning each. */
+    --green: #4ee37f;
+    --blue: #5a86f0;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -238,39 +245,6 @@
     padding-bottom:2px;
   }
 
-  /* ---------- specimen plate (interactive voxel surface) ---------- */
-  .voxel-plate{
-    position:relative;
-    width:min(520px, 72vw);
-    aspect-ratio:1;
-    margin:0 auto;
-    background:transparent;
-    overflow:visible;
-    isolation:isolate;
-  }
-  .voxel-sphere{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    display:block;
-    background:transparent;
-    image-rendering:pixelated;
-    pointer-events:none;
-    opacity:.92;
-    z-index:1;
-  }
-  .voxel-grab{
-    position:absolute;
-    border-radius:50%;
-    background:transparent;
-    pointer-events:auto;
-    touch-action:none;
-    cursor:grab;
-    z-index:3;
-  }
-  .voxel-grab:active{cursor:grabbing;}
-
   /* ---------- section shell ---------- */
   section{padding:52px 0;}
   .section-head{
@@ -283,7 +257,7 @@
     font-size:13.5px; color:var(--ink-soft); max-width:34ch; line-height:1.6;
     font-family:'Inter',system-ui,sans-serif;
   }
-  .evidence-section{border-top:1px solid rgba(24,19,15,.18);}
+  .evidence-section{border-top:1px solid rgba(194,57,27,.18);}
   .evidence-section .section-head{align-items:flex-start;}
   .evidence-section .section-head h2{max-width:20ch;}
   .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink);}
@@ -334,7 +308,7 @@
 
   /* ---------- cta band ---------- */
   .cta-band{
-    background:var(--ink);
+    background:var(--bg);
     color:var(--paper);
     padding:80px 0;
     text-align:center;
@@ -342,13 +316,10 @@
     overflow:hidden;
     isolation:isolate;
   }
-  .topo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.72;pointer-events:none;}
-  .cta-band::before{content:"";position:absolute;inset:0;background:rgba(24,19,15,.34);pointer-events:none;z-index:1;}
-  .cta-band .wrap{z-index:2;}
+  .topo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.48;pointer-events:none;}
+    .cta-band .wrap{z-index:2;}
   .cta-band h2{color:var(--paper); font-size:clamp(30px,4vw,44px); max-width:16ch; margin:0 auto 30px;}
   .cta-band .eyebrow{color:var(--paper-dim); margin-bottom:18px;}
-  .cta-band .btn{background:var(--paper); color:var(--ink); border-color:var(--paper);}
-  .cta-band .btn:hover{background:transparent; color:var(--paper);}
 
   /* ---------- footer ---------- */
   footer{padding:18px 0 26px;}
@@ -369,7 +340,6 @@
   @media (max-width: 860px){
     .hero-grid{grid-template-columns:1fr;}
     .hero{padding:30px 0 38px;}
-    .voxel-plate{width:min(440px, 78vw);}
     .narrative-grid{grid-template-columns:1fr;gap:28px;}
     .tier-grid{grid-template-columns:1fr;}
     .vol-grid{grid-template-columns:1fr 1fr;}
@@ -382,10 +352,10 @@
     .meta-row{display:none;}
     .navlinks{display:none;}
     .hero{padding:24px 0 32px;}
-    .voxel-plate{width:min(320px, 84vw);}
   }
+
   @media (prefers-reduced-motion: reduce){
-    .topo-canvas{opacity:.52;}
+    .topo-canvas{opacity:.34;}
   }
 
   h1,h2,h3,h4{font-family:'Geist Mono',monospace;font-weight:560;text-transform:none;}
@@ -419,7 +389,7 @@
       "@id": "https://oriphim.com/#oriphim",
       "name": "ORIPHIM",
       "applicationCategory": "ScienceApplication",
-      "operatingSystem": "Windows, macOS, Linux",
+      "operatingSystem": "macOS (Apple Silicon)",
       "url": "https://oriphim.com/",
       "description": "A research system that rebuilds a paper's computational experiment from the text, runs it with convergence and conservation checks, and compares the measured result against the printed one.",
       "publisher": { "@id": "https://oriphim.com/#organization" },
@@ -443,28 +413,19 @@
 </head>
 <body class="story-layout">
 
+<header class="wall-hero" aria-labelledby="hero-title">
+<canvas id="wallpaper" aria-hidden="true"></canvas>
 <div class="topbar">
   <div class="wrap">
-    <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="129" height="38"></a>
+    <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="134" height="38"></a>
 
     
 
-    <a href="/?auth=sign-in" class="signin-btn">Sign In</a>
+    <div class="topbar-actions"><a href="/pricing" class="nav-btn">Pricing</a><a href="/?auth=sign-in" class="signin-btn">Sign In</a></div>
   </div>
 </div>
 
-<main>
-  <div class="story" data-story>
-    <div class="story-stage" aria-hidden="true">
-      <div class="story-orb" data-story-orb>
-        <div class="voxel-plate" data-shape-piece>
-          <canvas class="voxel-sphere" data-voxel-sphere></canvas>
-          <div class="voxel-grab" data-voxel-grab></div>
-        </div>
-      </div>
-    </div>
-
-    <section class="chapter chapter-hero" data-chapter aria-labelledby="hero-title">
+  <div class="wall-copy">
       <div class="hero-lead">
         <div class="eyebrow">Claim Checks</div>
         <h1 id="hero-title">Check the claim before you build on it.</h1>
@@ -473,10 +434,20 @@
       <div class="hero-side">
         <p class="two-tone"><b><span class="ori-word">Ori</span> rebuilds a paper's computational experiment, runs it, and puts the result next to the printed number.</b> You get one of three answers: it holds, it doesn't, or the paper doesn't say enough to tell.</p>
       </div>
-      <a class="scroll-cue" href="#how" aria-label="Scroll to how it works">Scroll <span aria-hidden="true">↓</span></a>
-    </section>
+  </div>
+</header>
 
-    <section class="chapter chapter-how" id="how" data-chapter aria-labelledby="how-title">
+<nav class="info-bar" aria-label="Oriphim">
+  <div class="wrap">
+    <a href="/contact">Contact</a>
+    <a href="/pricing">Claim Checks</a>
+    <a href="/archive">Archive</a>
+  </div>
+</nav>
+
+<main>
+  <div class="story">
+    <section class="chapter chapter-how" id="how" aria-labelledby="how-title">
       <div class="side-left">
         <div class="eyebrow">How it works</div>
         <h2 id="how-title" class="two-tone"><b>One claim, start to finish.</b> Nothing runs until you sign the brief.</h2>
@@ -491,7 +462,7 @@
       </div>
     </section>
 
-    <section class="chapter chapter-limits" data-chapter data-eye aria-labelledby="limits-title">
+    <section class="chapter chapter-limits" aria-labelledby="limits-title">
       <div class="side-left">
         <div class="eyebrow">Limits</div>
         <h2 id="limits-title">Trust the numbers, not the abstract.</h2>
@@ -500,28 +471,13 @@
       </div>
       <div class="side-right">
         <dl class="verdict-list">
-          <div><dt>Holds</dt><dd>The rerun lands inside the band agreed before the run.</dd></div>
-          <div><dt>Doesn't hold</dt><dd>It lands outside, and the report says by how much.</dd></div>
-          <div><dt>Can't tell</dt><dd>The paper leaves out something a rerun needs, and the report names it.</dd></div>
+          <div data-verdict="holds"><dt>Holds</dt><dd>The rerun lands inside the band agreed before the run.</dd></div>
+          <div data-verdict="fails"><dt>Doesn't hold</dt><dd>It lands outside, and the report says by how much.</dd></div>
+          <div data-verdict="unclear"><dt>Can't tell</dt><dd>The paper leaves out something a rerun needs, and the report names it.</dd></div>
         </dl>
       </div>
     </section>
   </div>
-
-  <section class="band band-archive" id="archive" aria-labelledby="archive-title">
-    <div class="wrap">
-      <div class="band-head">
-        <div><div class="eyebrow">The archive</div><h2 id="archive-title">Open research, worked in public.</h2></div>
-        <p class="band-note">Physics and maths problems explored with <span class="ori-word">Ori</span>, written up as they go, beside the build log.</p>
-      </div>
-      <ol class="archive-list" data-home-archive>
-        <li><a href="/archive"><span class="al-date">Sep 23, 2026</span><span class="al-tag">Research</span><span class="al-main"><b>Hierarchical Tetrahedral Decomposition of the Unit Cube</b><span>How many tetrahedra can decompose a unit cube when the decomposition is driven by point density rather than imposed uniformly?</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
-        <li><a href="/archive"><span class="al-date">Sep 22, 2026</span><span class="al-tag">Build Log</span><span class="al-main"><b>On what's being built.</b><span>A researcher finds a paper that matters to their work, in a field they don't know well. Oriphim is built to do the rebuilding for them.</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
-        <li><a href="/archive/catalogue-01"><span class="al-date">Jul 23, 2026</span><span class="al-tag">Announcement</span><span class="al-main"><b>The Archive is live.</b><span>Build notes, research notes, and honest status updates: what's shipped, what's roadmap, and everything in between.</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
-      </ol>
-      <div class="cta-row archive-cta"><a href="/archive" class="btn">Read the archive</a></div>
-    </div>
-  </section>
 
   <section class="band band-offer" id="offer" aria-labelledby="offer-title">
     <div class="wrap">
@@ -551,10 +507,11 @@
 <footer>
   <div class="wrap">
     <span>&copy; 2026 ORIPHIM, INC.</span>
-    <nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/#offer">Claim Checks</a><a href="/contact">Contact</a><a href="/company">Company</a></nav>
+    <nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/contact">Contact</a><a href="/company">Company</a></nav>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div>
   </div>
 </footer>
+
 
 <script>
   const topoCanvas = document.querySelector('[data-topo-map]');
@@ -663,7 +620,7 @@
           }
         }
 
-        ctx.strokeStyle = index % 4 === 0 ? 'rgba(243,75,3,.56)' : 'rgba(236,228,211,.38)';
+        ctx.strokeStyle = index % 8 === 4 ? 'rgba(90,134,240,.6)' : index % 4 === 0 ? 'rgba(243,75,3,.7)' : 'rgba(194,57,27,.55)';
         ctx.lineWidth = index % 4 === 0 ? 1.35 : 0.9;
         ctx.stroke();
       }
@@ -685,894 +642,12 @@
       requestAnimationFrame(animateTopo);
     }
   }
-
-  (() => {
-    document.querySelectorAll('[data-shape-piece]').forEach((piece) => {
-      const cv = piece.querySelector('[data-voxel-sphere]');
-      const grab = piece.querySelector('[data-voxel-grab]');
-      if (!cv) return;
-
-      const ctx = cv.getContext('2d');
-      const off = document.createElement('canvas');
-      const octx = off.getContext('2d');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      const CELL = 2;
-      const VOX = 72;
-      const CHROMA = 1.0;
-      const SPIN = 0.45;
-      const RATE = 1.25;
-      const SIZE = 0.41;
-      const A = { amp: 0.3, den: 0.6, flow: 0.6, turb: 1 };
-
-      let gw = 0;
-      let gh = 0;
-      let img = null;
-      let buf32 = null;
-      let buf8 = null;
-      let depth = null;
-      let val = null;
-      let chb = null;
-
-      const BAYER = new Float32Array(64);
-      (() => {
-        const m = [
-          0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,
-          60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,
-          15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21
-        ];
-        for (let i = 0; i < 64; i += 1) BAYER[i] = (m[i] + 0.5) / 64;
-      })();
-
-      const h3 = (i, j, k) => {
-        let n = Math.imul(i | 0, 374761393) ^ Math.imul(j | 0, 668265263) ^ Math.imul(k | 0, 1442695041);
-        n = Math.imul(n ^ (n >>> 13), 1274126177);
-        return ((n ^ (n >>> 16)) >>> 0) * 2.3283064365386963e-10;
-      };
-
-      // Baked periodic noise volume, trilinearly sampled — per-point live fbm
-      // (hash lookups per octave, per axis) was the main source of frame
-      // stutter once point counts got high, so the field is computed once.
-      const VN = 64, VNM = VN - 1;
-      const VOL = new Float32Array(VN * VN * VN);
-      (() => {
-        const oct = (i, j, k, Gd, sd) => {
-          const x = i * Gd / VN, y = j * Gd / VN, z = k * Gd / VN;
-          const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
-          let fx = x - xi, fy = y - yi, fz = z - zi;
-          fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy); fz = fz * fz * (3 - 2 * fz);
-          const X0 = xi % Gd, Y0 = yi % Gd, Z0 = zi % Gd;
-          const X1 = (X0 + 1) % Gd, Y1 = (Y0 + 1) % Gd, Z1 = (Z0 + 1) % Gd;
-          const c000 = h3(X0 + sd, Y0, Z0), c100 = h3(X1 + sd, Y0, Z0),
-                c010 = h3(X0 + sd, Y1, Z0), c110 = h3(X1 + sd, Y1, Z0),
-                c001 = h3(X0 + sd, Y0, Z1), c101 = h3(X1 + sd, Y0, Z1),
-                c011 = h3(X0 + sd, Y1, Z1), c111 = h3(X1 + sd, Y1, Z1);
-          const a = c000 + (c100 - c000) * fx, b = c010 + (c110 - c010) * fx,
-                c = c001 + (c101 - c001) * fx, d = c011 + (c111 - c011) * fx;
-          const e = a + (b - a) * fy, f = c + (d - c) * fy;
-          return e + (f - e) * fz;
-        };
-        let p = 0;
-        for (let k = 0; k < VN; k += 1) for (let j = 0; j < VN; j += 1) for (let i = 0; i < VN; i += 1) {
-          VOL[p++] = 0.52 * oct(i, j, k, 4, 17) + 0.30 * oct(i, j, k, 8, 911) + 0.18 * oct(i, j, k, 16, 7727);
-        }
-      })();
-
-      const fbm = (x, y, z) => {
-        let fx = x * VN, fy = y * VN, fz = z * VN;
-        let i = Math.floor(fx), j = Math.floor(fy), k = Math.floor(fz);
-        let tx = fx - i, ty = fy - j, tz = fz - k;
-        tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty); tz = tz * tz * (3 - 2 * tz);
-        i &= VNM; j &= VNM; k &= VNM;
-        const i1 = (i + 1) & VNM, j1 = (j + 1) & VNM, k1 = (k + 1) & VNM;
-        const b0 = k * VN * VN, b1 = k1 * VN * VN, r0 = j * VN, r1 = j1 * VN;
-        const c000 = VOL[b0 + r0 + i], c100 = VOL[b0 + r0 + i1],
-              c010 = VOL[b0 + r1 + i], c110 = VOL[b0 + r1 + i1],
-              c001 = VOL[b1 + r0 + i], c101 = VOL[b1 + r0 + i1],
-              c011 = VOL[b1 + r1 + i], c111 = VOL[b1 + r1 + i1];
-        const a = c000 + (c100 - c000) * tx, b = c010 + (c110 - c010) * tx,
-              c = c001 + (c101 - c001) * tx, d = c011 + (c111 - c011) * tx;
-        const e = a + (b - a) * ty, f = c + (d - c) * ty;
-        return e + (f - e) * tz;
-      };
-
-      const NPT = 52000;
-      const PT = new Float32Array(NPT * 3);
-      const TETRA = new Float32Array(NPT * 3);
-      const TETRA_NORMAL = new Float32Array(NPT * 3);
-      const TETRA_EDGE = new Float32Array(NPT);
-      const ORDER = new Uint32Array(NPT);
-      (() => {
-        const ga = Math.PI * (3 - Math.sqrt(5));
-        for (let i = 0; i < NPT; i += 1) {
-          const y = 1 - 2 * (i + 0.5) / NPT;
-          const r = Math.sqrt(Math.max(0, 1 - y * y));
-          const th = i * ga;
-          PT[i * 3] = Math.cos(th) * r;
-          PT[i * 3 + 1] = y;
-          PT[i * 3 + 2] = Math.sin(th) * r;
-          ORDER[i] = i;
-        }
-
-
-        // ---- shape 2: the 64-tetrahedron grid ----------------------------
-        // A stella octangula — two interlocked tetrahedra — with every
-        // triangular face subdivided into a strut grid, sampled as points
-        // along each rod. Axis-aligned and shown square-on (no corner slant),
-        // hollow so you can see straight through the cage.
-        (() => {
-          const FREQ = 3;                            // little triangles per face edge — keeps the centre readable
-          const SC = 0.68;                           // size — the star points reach ~|1.2|
-          const TA = [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]];
-          const TB = [[-1,-1,-1],[-1,1,1],[1,-1,1],[1,1,-1]];
-          const FACES = [[0,1,2],[0,1,3],[0,2,3],[1,2,3]];
-
-          const E = [];                              // flat [ax,ay,az, bx,by,bz, ...] world coords
-          const seen = new Set();
-          const qz = (v) => Math.round(v * 2048);
-          const addEdge = (a, b) => {
-            const ka = qz(a[0]) + ',' + qz(a[1]) + ',' + qz(a[2]);
-            const kb = qz(b[0]) + ',' + qz(b[1]) + ',' + qz(b[2]);
-            const k = ka < kb ? ka + '|' + kb : kb + '|' + ka;
-            if (seen.has(k)) return;
-            seen.add(k);
-            E.push(a[0], a[1], a[2], b[0], b[1], b[2]);
-          };
-          const addFace = (V0, V1, V2) => {
-            const P = (i, j) => {
-              const a = (FREQ - i - j) / FREQ, b = i / FREQ, c = j / FREQ;
-              return [
-                (V0[0]*a + V1[0]*b + V2[0]*c) * SC,
-                (V0[1]*a + V1[1]*b + V2[1]*c) * SC,
-                (V0[2]*a + V1[2]*b + V2[2]*c) * SC
-              ];
-            };
-            for (let i = 0; i <= FREQ; i += 1)
-              for (let j = 0; i + j <= FREQ; j += 1) {
-                const p = P(i, j);
-                if (i + 1 + j <= FREQ) addEdge(p, P(i + 1, j));
-                if (i + j + 1 <= FREQ) addEdge(p, P(i, j + 1));
-                if (i >= 1) addEdge(p, P(i - 1, j + 1));
-              }
-          };
-          for (const T of [TA, TB])
-            for (const f of FACES)
-              addFace(T[f[0]], T[f[1]], T[f[2]]);
-
-          // deterministic shuffle so a point-budget shortfall stays spatially uniform
-          let sd = 0x1a2b3c4d;
-          const rr = () => { sd = Math.imul(sd ^ (sd >>> 15), 0x2545f491); return ((sd >>> 0) % 1000000) / 1000000; };
-          for (let e = (E.length / 6) - 1; e > 0; e -= 1) {
-            const t = (rr() * (e + 1)) | 0;
-            for (let o = 0; o < 6; o += 1) { const tmp = E[e*6+o]; E[e*6+o] = E[t*6+o]; E[t*6+o] = tmp; }
-          }
-
-          const nEdges = E.length / 6;
-          let total = 0;
-          const len = new Float32Array(nEdges);
-          for (let e = 0; e < nEdges; e += 1) {
-            const L = Math.hypot(E[e*6+3]-E[e*6], E[e*6+4]-E[e*6+1], E[e*6+5]-E[e*6+2]);
-            len[e] = L; total += L;
-          }
-
-          const RODR = 0.020;                         // rod radius in world units
-          let w = 0;
-          for (let e = 0; e < nEdges && w < NPT; e += 1) {
-            const ax = E[e*6], ay = E[e*6+1], az = E[e*6+2];
-            const bx = E[e*6+3], by = E[e*6+4], bz = E[e*6+5];
-            let dxs = bx-ax, dys = by-ay, dzs = bz-az;
-            const dl = Math.hypot(dxs, dys, dzs) || 1; dxs /= dl; dys /= dl; dzs /= dl;
-            // orthonormal basis across the rod
-            let u1x = dys, u1y = -dxs, u1z = 0;
-            let u1l = Math.hypot(u1x, u1y, u1z);
-            if (u1l < 0.2) { u1x = 0; u1y = dzs; u1z = -dys; u1l = Math.hypot(u1x, u1y, u1z); }
-            u1x /= u1l; u1y /= u1l; u1z /= u1l;
-            const u2x = dys*u1z - dzs*u1y, u2y = dzs*u1x - dxs*u1z, u2z = dxs*u1y - dys*u1x;
-            // one steady normal for the whole strut (its "upward" perpendicular) so
-            // every rod is an evenly-lit bar — struts differ by orientation, not noise
-            let snx = -dxs*dys, sny = 1 - dys*dys, snz = -dzs*dys;
-            let snl = Math.hypot(snx, sny, snz);
-            if (snl < 0.15) { snx = 1 - dxs*dxs; sny = -dys*dxs; snz = -dzs*dxs; snl = Math.hypot(snx, sny, snz); }
-            snx /= snl; sny /= snl; snz /= snl;
-            let cnt = Math.max(40, Math.round(NPT * (len[e] / total)));
-            if (w + cnt > NPT) cnt = NPT - w;
-            for (let c = 0; c < cnt; c += 1) {
-              const t = (c + 0.5) / cnt;
-              // even disk fill around the centreline (golden-angle spiral) → a solid rod
-              const ang = c * 2.399963229728653 + h3(e, 7, 1) * 6.2831853;
-              const rr2 = Math.sqrt(((c * 7 + 3) % 19) / 19) * RODR;
-              const ca = Math.cos(ang), sa = Math.sin(ang);
-              const ox = u1x*ca + u2x*sa, oy = u1y*ca + u2y*sa, oz = u1z*ca + u2z*sa;
-              TETRA[w*3]     = ax + (bx-ax) * t + ox * rr2;
-              TETRA[w*3 + 1] = ay + (by-ay) * t + oy * rr2;
-              TETRA[w*3 + 2] = az + (bz-az) * t + oz * rr2;
-              // a gentle round-off: mostly the strut normal, a touch of the outward dir
-              let mnx = snx + ox*0.28, mny = sny + oy*0.28, mnz = snz + oz*0.28;
-              const mnl = Math.hypot(mnx, mny, mnz) || 1;
-              TETRA_NORMAL[w*3] = mnx/mnl; TETRA_NORMAL[w*3+1] = mny/mnl; TETRA_NORMAL[w*3+2] = mnz/mnl;
-              TETRA_EDGE[w] = 1;
-              w += 1;
-            }
-          }
-          // top up to exactly NPT by cycling the points already written
-          const filled = Math.max(1, w);
-          for (let c = 0; w < NPT; c += 1) {
-            const src = c % filled;
-            TETRA[w*3] = TETRA[src*3]; TETRA[w*3+1] = TETRA[src*3+1]; TETRA[w*3+2] = TETRA[src*3+2];
-            TETRA_NORMAL[w*3] = TETRA_NORMAL[src*3]; TETRA_NORMAL[w*3+1] = TETRA_NORMAL[src*3+1]; TETRA_NORMAL[w*3+2] = TETRA_NORMAL[src*3+2];
-            TETRA_EDGE[w] = 1;
-            w += 1;
-          }
-        })();
-        let seed = 0x9e3779b9;
-        const rnd = () => {
-          seed = Math.imul(seed ^ (seed >>> 15), 0x2545f491);
-          return ((seed >>> 0) % 1000000) / 1000000;
-        };
-        for (let i = NPT - 1; i > 0; i -= 1) {
-          const j = (rnd() * (i + 1)) | 0;
-          const t = ORDER[i];
-          ORDER[i] = ORDER[j];
-          ORDER[j] = t;
-        }
-      })();
-
-      const resize = () => {
-        const rect = piece.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const W = Math.max(1, rect.width);
-        const H = Math.max(1, rect.height);
-        cv.width = Math.round(W * dpr);
-        cv.height = Math.round(H * dpr);
-        gw = Math.max(8, Math.ceil(W / CELL));
-        gh = Math.max(8, Math.ceil(H / CELL));
-        off.width = gw;
-        off.height = gh;
-        img = octx.createImageData(gw, gh);
-        const ab = new ArrayBuffer(gw * gh * 4);
-        buf32 = new Uint32Array(ab);
-        buf8 = new Uint8ClampedArray(ab);
-        depth = new Float32Array(gw * gh);
-        val = new Float32Array(gw * gh);
-        chb = new Float32Array(gw * gh);
-        ctx.imageSmoothingEnabled = false;
-
-        if (grab) {
-          const dia = Math.min(W, H) * SIZE * 2 * 1.25;
-          grab.style.width = `${dia}px`;
-          grab.style.height = `${dia}px`;
-          grab.style.left = `${W * 0.5 - dia * 0.5}px`;
-          grab.style.top = `${H * 0.5 - dia * 0.5}px`;
-        }
-      };
-
-      const LX = -0.44;
-      const LY = 0.55;
-      const LZ = 0.71;
-      const TAU = Math.PI * 2;
-      const M = new Float32Array([1,0,0, 0,1,0, 0,0,1]);
-
-      const rotX = (a) => {
-        const c = Math.cos(a);
-        const s = Math.sin(a);
-        const a3 = M[3];
-        const a4 = M[4];
-        const a5 = M[5];
-        const a6 = M[6];
-        const a7 = M[7];
-        const a8 = M[8];
-        M[3] = c * a3 - s * a6;
-        M[4] = c * a4 - s * a7;
-        M[5] = c * a5 - s * a8;
-        M[6] = s * a3 + c * a6;
-        M[7] = s * a4 + c * a7;
-        M[8] = s * a5 + c * a8;
-      };
-
-      const rotY = (a) => {
-        const c = Math.cos(a);
-        const s = Math.sin(a);
-        const a0 = M[0];
-        const a1 = M[1];
-        const a2 = M[2];
-        const a6 = M[6];
-        const a7 = M[7];
-        const a8 = M[8];
-        M[0] = c * a0 + s * a6;
-        M[1] = c * a1 + s * a7;
-        M[2] = c * a2 + s * a8;
-        M[6] = -s * a0 + c * a6;
-        M[7] = -s * a1 + c * a7;
-        M[8] = -s * a2 + c * a8;
-      };
-
-      rotX(-0.30);
-
-      let dragging = false;
-      let lx = 0;
-      let ly = 0;
-      let vx = 0;
-      let vy = 0;
-      let ldt = 1;
-      let idle = 1;
-
-      if (grab) {
-        const K = 0.007;
-        grab.addEventListener('pointerdown', (event) => {
-          dragging = true;
-          lx = event.clientX;
-          ly = event.clientY;
-          vx = 0;
-          vy = 0;
-          idle = 0;
-          try { grab.setPointerCapture(event.pointerId); } catch {}
-          event.preventDefault();
-        });
-        const stop = () => {
-          dragging = false;
-        };
-        grab.addEventListener('pointerup', stop);
-        grab.addEventListener('pointercancel', stop);
-        grab.addEventListener('pointerleave', stop);
-        grab.addEventListener('pointermove', (event) => {
-          if (!dragging) return;
-          const dx = event.clientX - lx;
-          const dy = event.clientY - ly;
-          rotY(dx * K);
-          rotX(dy * K);
-          const inv = 1 / Math.max(ldt, 0.008);
-          vx = Math.max(-8, Math.min(8, dx * K * inv));
-          vy = Math.max(-8, Math.min(8, dy * K * inv));
-          lx = event.clientX;
-          ly = event.clientY;
-          event.preventDefault();
-        });
-      }
-
-      const lfo = (t, p1, p2, ph) => {
-        const v = 0.5 + 0.5 * (0.68 * Math.sin(t * TAU / p1 + ph) + 0.32 * Math.sin(t * TAU / p2 + ph * 1.7));
-        return v < 0 ? 0 : (v > 1 ? 1 : v);
-      };
-
-      const clamp01 = (x) => x < 0 ? 0 : (x > 1 ? 1 : x);
-      const smoothstep = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
-      // Bumped above 1 only during the eye transition — coarsens the
-      // voxel grid so the sphere/eye swap reads as a hard pixel dissolve.
-      let renderCoarse = 1;
-
-      const frame = (ft, animationTime) => {
-        const cx = gw * 0.5;
-        const cy = gh * 0.5;
-        const R = Math.min(gw, gh) * SIZE;
-        const G = VOX / renderCoarse;
-        // The eye swap enlarges the sphere's pixels with the same coarsened grid.
-        const s = Math.max(1, Math.ceil(R / G));
-        const half = s * 0.5;
-        const m0 = M[0];
-        const m1 = M[1];
-        const m2 = M[2];
-        const m3 = M[3];
-        const m4 = M[4];
-        const m5 = M[5];
-        const m6 = M[6];
-        const m7 = M[7];
-        const m8 = M[8];
-        const tetraMix=0; // The former tetrahedron slot now contains Hopf fibres.
-        const tw = 1.7 * (A.turb*(1-tetraMix)+tetraMix);
-        const amp = A.amp * 0.55 * (1-tetraMix);
-        const F = 0.32;
-        const active = Math.max(1200, (NPT * A.den) | 0);
-
-        val.fill(0);
-        depth.fill(-1e9);
-
-        for (let k = 0; k < active; k += 1) {
-          const i = ORDER[k] * 3;
-          const sourceIndex = ORDER[k];
-          const ux=PT[i],uy=PT[i+1],uz=PT[i+2];
-          const dx = ux * .82;
-          const dy = uy * .82;
-          const dz = uz * .82;
-          const wx = m0 * dx + m1 * dy + m2 * dz;
-          const wy = m3 * dx + m4 * dy + m5 * dz;
-          const wz = m6 * dx + m7 * dy + m8 * dz;
-          const nx=m0*ux+m1*uy+m2*uz,ny=m3*ux+m4*uy+m5*uz,nz=m6*ux+m7*uy+m8*uz;
-          if (nz < -0.28) continue;
-
-          const sx = ux * F;
-          const sy = uy * F;
-          const sz = uz * F;
-          const frozenFt=ft*(1-tetraMix);
-          const q = fbm(sx, sy, sz + frozenFt * 0.3);
-          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
-          f = f * f * (3 - 2 * f);
-          const rr = 1 + amp * (f - 0.5) * 2;
-          const X = Math.round(wx * rr * G) / G;
-          const Y = Math.round(wy * rr * G) / G;
-          const Z = Math.round(wz * rr * G) / G;
-          const ax = nx < 0 ? -nx : nx;
-          const ay = ny < 0 ? -ny : ny;
-          const az = nz < 0 ? -nz : nz;
-          let face;
-          if (az >= ax && az >= ay) face = 1.00;
-          else if (ay >= ax) face = wy > 0 ? 0.86 : 0.30;
-          else face = wx > 0 ? 0.60 : 0.46;
-          // This axis-bucketed tint fakes shading for the sphere point
-          // clouds, but the tetrahedron's facets aren't axis-aligned, so it flickers
-          // between buckets within a single flat face. Fade it out as tetra takes over.
-          face = face + (1 - face) * tetraMix;
-
-          const lam = Math.max(0, nx * LX + ny * LY + nz * LZ);
-          const rim = Math.pow(1 - az, 5) * 0.85 * (1 - tetraMix);
-          let v = face * (0.16 + 0.92 * lam) * (0.34 + 0.95 * f) + rim;
-          let cm = (f - 0.5) + (lam - 0.5) * 0.35;
-          if (tetraMix > 0) {
-            // the lattice is solid struts, not a churning cloud: bright bars, shaded
-            // only by orientation + depth, and near-monochrome so thin rods survive
-            // the dither instead of dissolving into RGB speckle.
-            const lat = (0.86 + 0.52 * lam) * (0.80 + 0.20 * (Z + 1) * 0.5);
-            v = v * (1 - tetraMix) + lat * tetraMix;
-            cm *= 1 - tetraMix;
-          }
-          if (tetraMix > 0 && TETRA_EDGE[sourceIndex] < 0.05) v *= 1 - 0.5 * tetraMix;
-          v *= (0.58 + 0.42 * (Z + 1) * 0.5) * (1 - tetraMix) + tetraMix;
-          const spx = cx + X * R;
-          const spy = cy - Y * R;
-          const x0 = (spx - half) | 0;
-          const y0 = (spy - half) | 0;
-          const ve = v * 0.74;
-
-          for (let yy = y0; yy < y0 + s; yy += 1) {
-            if (yy < 0 || yy >= gh) continue;
-            const ro = yy * gw;
-            const edgeY = yy === y0 && s > 2;
-            for (let xx = x0; xx < x0 + s; xx += 1) {
-              if (xx < 0 || xx >= gw) continue;
-              const idx = ro + xx;
-              if (Z > depth[idx]) {
-                depth[idx] = Z;
-                val[idx] = (edgeY || (xx === x0 && s > 2)) ? ve : v;
-                chb[idx] = cm;
-              }
-            }
-          }
-        }
-
-        for (let py = 0, p = 0; py < gh; py += 1) {
-          const brow = (py & 7) << 3;
-          for (let px = 0; px < gw; px += 1, p += 1) {
-            const isVox = depth[p] > -1e8;
-            if (!isVox) {
-              buf32[p] = 0;
-              continue;
-            }
-            let v = val[p];
-            v = v < 0 ? 0 : (v > 1 ? 1 : v);
-            v = Math.pow(v, 0.88);
-            const bi = brow | (px & 7);
-            const tR = BAYER[bi];
-            let r;
-            let g;
-            let b;
-            if (isVox) {
-              const tG = BAYER[(bi + 21) & 63];
-              const tB = BAYER[(bi + 42) & 63];
-              const o = chb[p] * CHROMA * 0.20;
-              r = (v + o > tR) ? 255 : 0;
-              g = (v > tG) ? 255 : 0;
-              b = (v - o > tB) ? 255 : 0;
-            } else {
-              r = g = b = (v > tR) ? 255 : 0;
-            }
-            buf32[p] = 0xff000000 | (b << 16) | (g << 8) | r;
-          }
-        }
-
-        img.data.set(buf8);
-        octx.putImageData(img, 0, 0);
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(off, 0, 0, cv.width, cv.height);
-      };
-
-      /* ================================================================
-         EYE / BANDS mode — double-click the orb to swap the shape point
-         cloud for a gazing fluid eyeball caged by seven tumbling bands;
-         double-click again to swap back. Shares this piece's rotation
-         matrix (M), offscreen buffers, dither, drag/fling and RAF loop —
-         only the geometry and shading below are its own.
-         ================================================================ */
-      let eyeMode = false;
-      let gazeT = 0;
-
-      // Dedicated 3-octave value noise so the eye's churn matches its
-      // reference exactly — the shape cloud uses a baked periodic volume.
-      const eyeNoise3 = (x, y, z) => {
-        const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
-        let fx = x - xi, fy = y - yi, fz = z - zi;
-        fx = fx*fx*(3-2*fx); fy = fy*fy*(3-2*fy); fz = fz*fz*(3-2*fz);
-        const c000 = h3(xi,yi,zi),     c100 = h3(xi+1,yi,zi),
-              c010 = h3(xi,yi+1,zi),   c110 = h3(xi+1,yi+1,zi),
-              c001 = h3(xi,yi,zi+1),   c101 = h3(xi+1,yi,zi+1),
-              c011 = h3(xi,yi+1,zi+1), c111 = h3(xi+1,yi+1,zi+1);
-        const x00 = c000+(c100-c000)*fx, x10 = c010+(c110-c010)*fx,
-              x01 = c001+(c101-c001)*fx, x11 = c011+(c111-c011)*fx;
-        const y0 = x00+(x10-x00)*fy, y1 = x01+(x11-x01)*fy;
-        return y0+(y1-y0)*fz;
-      };
-      const eyeFbm = (x, y, z) => {
-        let v = eyeNoise3(x,y,z)*0.5;
-        v += eyeNoise3(x*2.03+7.1, y*2.03-3.4, z*2.03+1.7)*0.29;
-        v += eyeNoise3(x*4.11-5.3, y*4.11+9.2, z*4.11-2.6)*0.15;
-        return v*1.064;
-      };
-
-      const EYE_R = 0.55;
-      const EYE_NPT = 20000;            // subset of the shared 52k fib-sphere
-
-      // type 0 = smooth twisting ribbon, 1 = studded chain w/ braided lattice
-      const BANDS = [
-        {r:0.74, w:0.085, type:0, twist:1.0, ph:0.0,  seg:430, wid:9,  rx:0.061, ry:0.043, rz:0.028, a:0.4,b:1.1,c:0.2, nd:0},
-        {r:0.80, w:0.060, type:1, twist:2.0, ph:0.9,  seg:440, wid:7,  rx:0.035, ry:0.070, rz:0.049, a:1.9,b:0.3,c:1.4, nd:52},
-        {r:0.88, w:0.095, type:0, twist:1.0, ph:2.1,  seg:450, wid:10, rx:0.074, ry:0.026, rz:0.058, a:2.7,b:1.8,c:0.6, nd:0},
-        {r:0.94, w:0.058, type:1, twist:3.0, ph:1.3,  seg:460, wid:7,  rx:0.024, ry:0.062, rz:0.081, a:0.8,b:2.4,c:2.9, nd:58},
-        {r:1.00, w:0.080, type:0, twist:2.0, ph:3.0,  seg:470, wid:9,  rx:0.067, ry:0.055, rz:0.019, a:1.2,b:0.7,c:1.9, nd:0},
-        {r:1.06, w:0.055, type:1, twist:2.0, ph:0.4,  seg:480, wid:7,  rx:0.047, ry:0.033, rz:0.072, a:2.2,b:2.9,c:0.9, nd:62},
-        {r:1.12, w:0.070, type:0, twist:1.0, ph:1.7,  seg:490, wid:8,  rx:0.030, ry:0.078, rz:0.040, a:0.1,b:1.5,c:2.4, nd:0}
-      ];
-      const BM = BANDS.map(() => new Float32Array(9));
-      const buildBandMatrix = (o, a, b, c) => {
-        const ca=Math.cos(a), sa=Math.sin(a), cb=Math.cos(b), sb=Math.sin(b), cc=Math.cos(c), sc=Math.sin(c);
-        o[0]=cc*cb;  o[1]=cc*sb*sa-sc*ca;  o[2]=cc*sb*ca+sc*sa;
-        o[3]=sc*cb;  o[4]=sc*sb*sa+cc*ca;  o[5]=sc*sb*ca-cc*sa;
-        o[6]=-sb;    o[7]=cb*sa;           o[8]=cb*ca;
-      };
-      for (let i = 0; i < BANDS.length; i += 1) buildBandMatrix(BM[i], BANDS[i].a, BANDS[i].b, BANDS[i].c);
-
-      const renderEye = (ft) => {
-        const cxg = gw * 0.5, cyg = gh * 0.5;
-        const R = Math.min(gw, gh) * SIZE;
-        const G = (VOX / renderCoarse) * 0.97;
-        const sSize = Math.max(1, Math.ceil(R / G));
-        const half = sSize * 0.5;
-        const m0=M[0],m1=M[1],m2=M[2],m3=M[3],m4=M[4],m5=M[5],m6=M[6],m7=M[7],m8=M[8];
-        const tw = 1.7 * A.turb, amp = A.amp * 0.34, F = 2.15;
-        const eyeActive = Math.min(EYE_NPT, Math.max(2000, (EYE_NPT * (0.55 + 0.45 * A.den)) | 0));
-
-        val.fill(0);
-        depth.fill(-1e9);
-
-        const splat = (wx, wy, wz, v, cm) => {
-          const X = Math.round(wx * G) / G, Y = Math.round(wy * G) / G, Z = Math.round(wz * G) / G;
-          const x0 = (cxg + X * R - half) | 0, y0 = (cyg - Y * R - half) | 0;
-          for (let yy = y0; yy < y0 + sSize; yy += 1) {
-            if (yy < 0 || yy >= gh) continue;
-            const ro = yy * gw;
-            for (let xx = x0; xx < x0 + sSize; xx += 1) {
-              if (xx < 0 || xx >= gw) continue;
-              const idx = ro + xx;
-              if (Z > depth[idx]) { depth[idx] = Z; val[idx] = v; chb[idx] = cm; }
-            }
-          }
-        };
-
-        // gaze holds on the viewer in VIEW space, with a slow wander
-        let gx = 0.10*Math.sin(gazeT*0.37) + 0.04*Math.sin(gazeT*1.13);
-        let gy = 0.08*Math.sin(gazeT*0.29 + 1.7);
-        let gz = 1;
-        const gl = Math.hypot(gx,gy,gz); gx/=gl; gy/=gl; gz/=gl;
-        let e1x = -gy, e1y = gx, e1z = 0;
-        const e1l = Math.hypot(e1x,e1y,e1z) || 1; e1x/=e1l; e1y/=e1l; e1z/=e1l;
-        const e2x = gy*e1z-gz*e1y, e2y = gz*e1x-gx*e1z, e2z = gx*e1y-gy*e1x;
-        const COS_P = Math.cos(0.40), COS_I = Math.cos(0.78);
-        let hx = gx-0.42, hy = gy+0.46, hz = gz+0.10;
-        const hl = Math.hypot(hx,hy,hz); hx/=hl; hy/=hl; hz/=hl;
-
-        // ---- eyeball ----
-        for (let k = 0; k < eyeActive; k += 1) {
-          const i = ORDER[k] * 3;
-          const dx = PT[i], dy = PT[i+1], dz = PT[i+2];
-          const nx = m0*dx+m1*dy+m2*dz, ny = m3*dx+m4*dy+m5*dz, nz = m6*dx+m7*dy+m8*dz;
-          if (nz < -0.28) continue;
-
-          const sx = dx*F, sy = dy*F, sz = dz*F;
-          const q = eyeFbm(sx, sy, sz + ft*0.3);
-          let f = eyeFbm(sx + tw*q, sy + tw*q*0.8 + ft*0.15, sz - tw*q);
-          f = f*f*(3-2*f);
-          const rr = EYE_R * (1 + amp*(f-0.5)*2);
-
-          const ax = nx<0?-nx:nx, ay = ny<0?-ny:ny, az = nz<0?-nz:nz;
-          let face;
-          if (az>=ax && az>=ay) face = 1.00;
-          else if (ay>=ax)      face = ny>0?0.86:0.30;
-          else                  face = nx>0?0.60:0.46;
-          const lam = Math.max(0, nx*LX+ny*LY+nz*LZ);
-          const rim = Math.pow(1-az,5)*0.80;
-
-          let v, cm;
-          const c = nx*gx+ny*gy+nz*gz;
-          if (c > COS_P) {
-            v = 0.03 + 0.05*f; cm = -0.5;
-          } else if (c > COS_I) {
-            const t = (c-COS_I)/(COS_P-COS_I);
-            const p1 = nx*e1x+ny*e1y+nz*e1z, p2 = nx*e2x+ny*e2y+nz*e2z;
-            const phi = Math.atan2(p2, p1);
-            const fib = h3(Math.round(phi*46), 3, 9);
-            v = (0.10 + 0.62*fib) * (0.35 + 0.75*(1-t)) * (0.5 + 0.7*f);
-            cm = 0.55 - t*0.5;
-          } else {
-            v = face*(0.16+0.92*lam)*(0.34+0.95*f) + rim;
-            cm = (f-0.5)+(lam-0.5)*0.35;
-          }
-          const hgl = nx*hx+ny*hy+nz*hz;
-          if (hgl > 0.988) v = 1.5;
-
-          v *= 0.62 + 0.38*(nz*rr+1.3)/2.6;
-          splat(nx*rr, ny*rr, nz*rr, v, cm);
-        }
-
-        // ---- bands ----
-        for (let bi = 0; bi < BANDS.length; bi += 1) {
-          const B = BANDS[bi], O = BM[bi];
-          const t0=m0*O[0]+m1*O[3]+m2*O[6], t1=m0*O[1]+m1*O[4]+m2*O[7], t2=m0*O[2]+m1*O[5]+m2*O[8];
-          const t3=m3*O[0]+m4*O[3]+m5*O[6], t4=m3*O[1]+m4*O[4]+m5*O[7], t5=m3*O[2]+m4*O[5]+m5*O[8];
-          const t6=m6*O[0]+m7*O[3]+m8*O[6], t7=m6*O[1]+m7*O[4]+m8*O[7], t8=m6*O[2]+m7*O[5]+m8*O[8];
-          const seg = B.seg, wid = B.wid, hw = B.w;
-          for (let a = 0; a < seg; a += 1) {
-            const th = a/seg*TAU;
-            const ct = Math.cos(th), st = Math.sin(th);
-            const bx = ct*B.r, by = st*B.r;
-            const tw2 = B.twist*th + B.ph;
-            const cw = Math.cos(tw2), sw = Math.sin(tw2);
-            const dxl = sw*ct, dyl = sw*st, dzl = cw;
-            const txv = -st, tyv = ct, tzv = 0;
-            let nxl = tyv*dzl-tzv*dyl, nyl = tzv*dxl-txv*dzl, nzl = txv*dyl-tyv*dxl;
-            const nl = Math.hypot(nxl,nyl,nzl) || 1; nxl/=nl; nyl/=nl; nzl/=nl;
-            const NX = t0*nxl+t1*nyl+t2*nzl, NY = t3*nxl+t4*nyl+t5*nzl, NZ = t6*nxl+t7*nyl+t8*nzl;
-            const lam = Math.abs(NX*LX+NY*LY+NZ*LZ);
-            const azn = NZ<0?-NZ:NZ;
-            for (let w = 0; w < wid; w += 1) {
-              const s = (w/(wid-1))*2-1;
-              const px = bx+dxl*hw*s, py = by+dyl*hw*s, pz = dzl*hw*s;
-              const X = t0*px+t1*py+t2*pz, Y = t3*px+t4*py+t5*pz, Z = t6*px+t7*py+t8*pz;
-              let v = 0.16 + 0.95*lam;
-              v *= 0.72 + 0.34*Math.cos(s*1.35);
-              let cm = (lam-0.5)*0.7;
-              if (B.type === 1) {
-                const u = th/TAU*B.nd;
-                const uu = u+s*0.75, vv = u-s*0.75;
-                const fu = uu-Math.floor(uu), fv = vv-Math.floor(vv);
-                const line = Math.min(Math.min(fu,1-fu), Math.min(fv,1-fv));
-                if (line < 0.085) v *= 0.42;
-                else v *= 0.92 + 0.30*line;
-                cm += 0.25;
-              }
-              v *= 0.66 + 0.34*(Z+1.4)/2.8;
-              v += Math.pow(1-azn,6)*0.55;
-              splat(X, Y, Z, v, cm);
-            }
-          }
-        }
-
-        // ---- quantize + blit (shared dither) ----
-        for (let py = 0, p = 0; py < gh; py += 1) {
-          const brow = (py & 7) << 3;
-          for (let px = 0; px < gw; px += 1, p += 1) {
-            if (depth[p] <= -1e8) { buf32[p] = 0; continue; }
-            let v = val[p];
-            v = v < 0 ? 0 : (v > 1 ? 1 : v);
-            v = Math.pow(v, 0.88);
-            const bi = brow | (px & 7);
-            const tR = BAYER[bi], tG = BAYER[(bi+21)&63], tB = BAYER[(bi+42)&63];
-            const o = chb[p] * CHROMA * 0.20;
-            const r = (v+o > tR) ? 255 : 0, g = (v > tG) ? 255 : 0, b = (v-o > tB) ? 255 : 0;
-            buf32[p] = 0xff000000 | (b<<16) | (g<<8) | r;
-          }
-        }
-        img.data.set(buf8);
-        octx.putImageData(img, 0, 0);
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(off, 0, 0, cv.width, cv.height);
-      };
-
-      // sphere/eye swap, with a short hard-pixel dissolve: double-click toggles it,
-      // and the page's scroll can ask for a state (wantEye) that is applied once any swap ends.
-      const swap = { active: false, t: 0, dur: 0.5, target: false };
-      let wantEye = null;
-      const renderActive = (ft, at) => { if (eyeMode) renderEye(ft); else frame(ft, at); };
-      let lastToggle = 0;
-      const toggleEye = (event) => {
-        if (event) { event.preventDefault(); event.stopPropagation(); }
-        const now = performance.now();
-        if (now - lastToggle < 260) return;   // one flip per double-click, not per bubble
-        lastToggle = now;
-        wantEye = null;
-        if (swap.active) return;
-        if (reduceMotion) { eyeMode = !eyeMode; renderActive(ftAcc, animationTime); return; }
-        swap.active = true; swap.t = 0; swap.target = !eyeMode;
-      };
-      if (grab) grab.addEventListener('dblclick', toggleEye);
-      piece.addEventListener('dblclick', toggleEye);
-
-      let cyc = 0;
-      let ftAcc = 0;
-      let animationTime = 0;
-      let last = performance.now();
-      const loop = (now) => {
-        const dt = Math.min(0.05, (now - last) / 1000);
-        last = now;
-        ldt = dt;
-        cyc += dt * RATE;
-        A.amp = 0.08 + 0.64 * lfo(cyc, 47, 29.3, 0.0);
-        A.den = 0.30 + 0.70 * lfo(cyc, 31, 19.7, 1.9);
-        A.flow = 0.20 + 1.25 * lfo(cyc, 59, 37.1, 3.4);
-        A.turb = 0.45 + 1.40 * lfo(cyc, 41, 23.9, 5.2);
-        ftAcc += dt * (eyeMode ? 0.40 : 0.08) * A.flow;
-        animationTime += dt;
-
-        // eye swap: coarsen the grid to the midpoint, flip mode, refine back
-        if (swap.active) {
-          swap.t += dt;
-          const h = swap.dur * 0.5;
-          if (swap.t < h) {
-            renderCoarse = 1 + 6 * (swap.t / h);
-          } else {
-            if (eyeMode !== swap.target) eyeMode = swap.target;
-            renderCoarse = 1 + 6 * Math.max(0, 1 - (swap.t - h) / h);
-          }
-          if (swap.t >= swap.dur) { swap.active = false; renderCoarse = 1; }
-        }
-        if (!swap.active && wantEye !== null && wantEye !== eyeMode) {
-          swap.active = true; swap.t = 0; swap.target = wantEye;
-        }
-        if (eyeMode || swap.active) {
-          gazeT += dt;
-          for (let i = 0; i < BANDS.length; i += 1) {
-            const B = BANDS[i];
-            B.a += dt * B.rx; B.b += dt * B.ry; B.c += dt * B.rz;
-            buildBandMatrix(BM[i], B.a, B.b, B.c);
-          }
-        }
-
-        if (dragging) {
-          idle = 0;
-        } else {
-          if (vx || vy) {
-            rotY(vx * dt);
-            rotX(vy * dt);
-            const k = Math.exp(-2.4 * dt);
-            vx *= k;
-            vy *= k;
-            if (Math.abs(vx) < 0.004) vx = 0;
-            if (Math.abs(vy) < 0.004) vy = 0;
-          }
-          idle = Math.min(1, idle + dt * 0.7);
-          rotY(dt * 0.10 * SPIN * idle);
-        }
-
-        renderActive(ftAcc, animationTime);
-        requestAnimationFrame(loop);
-      };
-
-      resize();
-      frame(0,0);
-      piece.__setEye=(on)=>{
-        wantEye=!!on;
-        if(reduceMotion&&wantEye!==eyeMode){eyeMode=wantEye;renderActive(ftAcc,animationTime);}
-      };
-      if (window.ResizeObserver) {
-        new ResizeObserver(() => {
-          resize();
-          frame(ftAcc, animationTime);
-        }).observe(piece);
-      } else {
-        window.addEventListener('resize', () => {
-          resize();
-          frame(ftAcc, animationTime);
-        });
-      }
-
-      if (!reduceMotion) requestAnimationFrame(loop);
-    });
-  })();
-
-  (()=>{
-    const story=document.querySelector('[data-story]');
-    if(!story)return;
-    const topbar=document.querySelector('.topbar');
-    const syncTopbarHeight=()=>document.body.style.setProperty('--topbar-h',`${Math.ceil(topbar?.getBoundingClientRect().height||79)}px`);
-    syncTopbarHeight();
-    if(topbar&&window.ResizeObserver)new ResizeObserver(syncTopbarHeight).observe(topbar);
-    else window.addEventListener('resize',syncTopbarHeight);
-    const chapters=[...story.querySelectorAll('[data-chapter]')];
-    const piece=story.querySelector('[data-shape-piece]');
-    let active=-1;
-    const showChapter=(index)=>{
-      if(index===active)return;
-      active=index;
-      chapters.forEach((chapter,i)=>chapter.classList.toggle('is-active',i===index));
-      story.toggleAttribute('data-dim',chapters[index].hasAttribute('data-dim'));
-      piece?.__setEye?.(chapters[index].hasAttribute('data-eye'));
-    };
-    // Statement words light up one by one as the statement scrolls through the viewport.
-    const lit=story.querySelector('[data-scroll-lit]');
-    const words=[];
-    if(lit){
-      const text=lit.textContent.trim();
-      lit.setAttribute('aria-label',text);
-      lit.textContent='';
-      text.split(/\s+/).forEach((word,i)=>{
-        const span=document.createElement('span');
-        span.className=/^Ori\b/.test(word)?'lit-word ori-word':'lit-word';
-        span.setAttribute('aria-hidden','true');
-        span.textContent=word;
-        if(i)lit.append(' ');
-        lit.append(span);
-        words.push(span);
-      });
-    }
-    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const lightWords=()=>{
-      if(!words.length)return;
-      if(reduceMotion){words.forEach(word=>word.classList.add('is-lit'));return;}
-      const rect=lit.getBoundingClientRect();
-      const start=window.innerHeight*0.85;
-      const end=window.innerHeight*0.35;
-      const progress=Math.min(1,Math.max(0,(start-rect.top)/(start-end+rect.height*0.5)));
-      const count=Math.round(progress*words.length);
-      words.forEach((word,i)=>word.classList.toggle('is-lit',i<count));
-    };
-    // The last chapter whose top has crossed the middle of the viewport owns the orb.
-    const pickChapter=()=>{
-      const middle=window.innerHeight/2;
-      let next=0;
-      chapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<=middle)next=i;});
-      showChapter(next);
-    };
-    let queued=false;
-    window.addEventListener('scroll',()=>{
-      if(queued)return;
-      queued=true;
-      requestAnimationFrame(()=>{queued=false;pickChapter();lightWords();});
-    },{passive:true});
-    window.addEventListener('resize',()=>{pickChapter();lightWords();});
-    pickChapter();
-    lightWords();
-  })();
-
-
-
 </script>
 
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
 <script src="/script.js"></script>
-<script>
-  // Replace the archive section's fallback entries with the latest three from the archive.
-  (async()=>{
-    const list=document.querySelector('[data-home-archive]');
-    const sb=window.sb;
-    if(!list||!sb)return;
-    try{
-      const {data,error}=await sb.from('archive_entries').select('id,title,body,tag,created_at').order('created_at',{ascending:false}).order('id',{ascending:false}).limit(3);
-      if(error||!data?.length)return;
-      const make=(tag,text,className)=>{const el=document.createElement(tag);if(className)el.className=className;el.textContent=text;return el;};
-      list.replaceChildren(...data.map(entry=>{
-        const excerpt=String(entry.body||'').replace(/[#*_`>\[\]()]/g,'').replace(/\s+/g,' ').trim();
-        const link=document.createElement('a');
-        link.href='/archive/entry?id='+encodeURIComponent(entry.id);
-        const main=make('span','','al-main');
-        main.append(make('b',entry.title),make('span',excerpt.length>170?excerpt.slice(0,170).replace(/\s+\S*$/,'')+'…':excerpt));
-        link.append(make('span',new Date(entry.created_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),'al-date'),make('span',entry.tag||'','al-tag'),main,make('span','→','al-go'));
-        link.lastChild.setAttribute('aria-hidden','true');
-        const item=document.createElement('li');
-        item.append(link);
-        return item;
-      }));
-    }catch{}
-  })();
-</script>
 <script src="/assets/waitlist.js" defer></script>
+<script src="/assets/ori-wall.js"></script>
 </body>
 </html>

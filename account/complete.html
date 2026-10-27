@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout complete | Oriphim</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#120d0e">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ori-account.css">
+<link rel="stylesheet" href="/assets/theme.css">
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="134" height="38"></a>
+</div></div>
+<main class="wrap">
+<p class="eyebrow">Checkout</p>
+<h1 id="title">Confirming your payment&hellip;</h1>
+<p id="detail" aria-live="polite">Stripe has sent you back. Access starts when Stripe confirms the payment to Oriphim directly, usually within a minute. You can leave this page; nothing is lost.</p>
+<div class="panel" id="status" hidden></div>
+<div class="notice" id="terminal" hidden><strong>Return to your terminal.</strong> Ori picks up your subscription with <span class="inline-cmd">/billing</span> (or <span class="inline-cmd">ori account</span>), and whatever you were working on is still there.</div>
+<div class="actions">
+  <a class="btn" href="/download" id="install" hidden>Install Ori</a>
+  <a class="btn-outline" href="/account">Your account</a>
+</div>
+</main>
+<footer><div class="wrap">&copy; 2026 ORIPHIM, INC. &middot; <a href="/contact">Contact</a></div></footer>
+<script src="/assets/supabase-js.js"></script>
+<script src="/assets/oriphim-supabase.js"></script>
+<script src="/assets/ori-account.js"></script>
+<script>
+(async function () {
+  const params = new URLSearchParams(location.search);
+  const id = params.get("session_id") || "";
+  const fromTerminal = params.get("from") === "terminal";
+  const $ = (x) => document.getElementById(x);
+  const current = await oriAccount.session().catch(() => null);
+  if (!current) {
+    $("title").textContent = "Sign in to see your subscription.";
+    $("detail").textContent = "Your payment is handled by Stripe either way. Sign in with the same account to check it.";
+    return;
+  }
+  const started = Date.now();
+  async function check() {
+    let data;
+    try {
+      data = await oriAccount.billing({ action: "checkout_status", session_id: id });
+    } catch (error) {
+      $("title").textContent = "We could not check this payment.";
+      $("detail").textContent = error.message + " Your account page shows the confirmed state.";
+      return;
+    }
+    const view = oriAccount.describe(data.summary);
+    oriAccount.paint($("status"), view.lines);
+    $("status").hidden = false;
+    if (view.paid) {
+      $("title").textContent = "You're subscribed to Standard.";
+      $("detail").textContent = "Payment confirmed. 500 cloud credits are available this month.";
+      $("terminal").hidden = !fromTerminal;
+      $("install").hidden = fromTerminal;
+      return;
+    }
+    if (data.checkout.status === "open" || data.checkout.payment_status === "unpaid") {
+      $("title").textContent = "Payment not completed.";
+      $("detail").textContent = "Nothing was charged. You can choose a plan again from your account page.";
+      return;
+    }
+    if (Date.now() - started > 90000) {
+      $("title").textContent = "Payment received — confirmation pending.";
+      $("detail").textContent = "Stripe has accepted the payment and Oriphim is waiting for its confirmation. This can take a few minutes; your account page and Ori's /billing will show it as soon as it arrives.";
+      $("terminal").hidden = !fromTerminal;
+      return;
+    }
+    setTimeout(check, 2500);
+  }
+  check();
+})();
+</script>
+</body>
+</html>

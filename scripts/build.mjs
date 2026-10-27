@@ -20,6 +20,10 @@ const entries = [
   "download.html",
   "sign-in.html",
   "sign-up.html",
+  "account.html",
+  "account/complete.html",
+  "auth/terminal.html",
+  "install.sh",
   "404.html",
   "robots.txt",
   "sitemap.xml",
@@ -33,11 +37,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 for (const entry of entries) {
-  // These pages are temporarily hidden; preserve their sources without publishing them.
-  if (["pricing.html", "download.html"].includes(entry)) {
-    await writeFile(join(dist, entry), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/"><title>Oriphim</title></head><body><a href="/">Continue to Oriphim</a></body></html>');
-    continue;
-  }
+  await mkdir(dirname(join(dist, entry)), { recursive: true });
   await cp(join(root, entry), join(dist, entry), { recursive: true, force: true });
 }
 

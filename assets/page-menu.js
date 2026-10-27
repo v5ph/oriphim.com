@@ -1,6 +1,7 @@
 (() => {
   const pages = [
     ['Home', '/'],
+    ['Pricing', '/pricing'],
     ['Archive', '/archive'],
     ['Company', '/company'],
     ['Contact', '/contact'],

@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIPHIM Pricing | Standard and Enterprise Plans</title>
-<meta name="description" content="Compare ORIPHIM Standard and Enterprise plans for local-first scientific research, simulation, formal verification, and team workflows.">
+<title>Pricing | Claim Checks and Ori licences | Oriphim</title>
+<meta name="description" content="Start with a Claim Check: $8,000 fixed, delivered in 10 business days. Then license Ori for your team: Team $4,000, Lab $8,000, Enterprise from $15,000 a month, billed annually.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/pricing">
-<meta name="theme-color" content="#f34b03">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#120d0e">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
-<meta property="og:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
+<meta property="og:title" content="ORIPHIM Pricing | Claim Checks and Ori licences">
+<meta property="og:description" content="A Claim Check is $8,000 fixed. Ori licences start at $4,000 a month for a team of five, billed annually.">
 <meta property="og:url" content="https://oriphim.com/pricing">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ORIPHIM Pricing | Standard and Enterprise Plans">
-<meta name="twitter:description" content="Compare ORIPHIM plans for local-first research, simulation, verification, and team workflows.">
+<meta name="twitter:title" content="ORIPHIM Pricing | Claim Checks and Ori licences">
+<meta name="twitter:description" content="A Claim Check is $8,000 fixed. Ori licences start at $4,000 a month for a team of five, billed annually.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -37,26 +37,13 @@
   "@id": "https://oriphim.com/#oriphim",
   "name": "ORIPHIM",
   "applicationCategory": "ScienceApplication",
-  "operatingSystem": "Windows, macOS, Linux",
+  "operatingSystem": "macOS (Apple Silicon)",
   "url": "https://oriphim.com/pricing",
-  "description": "A local-first research workspace for scientific simulation and formal verification.",
+  "description": "Ori is software your team runs: give it a paper, a dataset or a model, and it derives the governing equations, builds and runs the model on your own hardware, and stress-tests the result.",
   "offers": [
-    {
-      "@type": "Offer",
-      "name": "ORIPHIM Standard",
-      "price": "39.00",
-      "priceCurrency": "USD",
-      "url": "https://oriphim.com/pricing",
-      "availability": "https://schema.org/InStock"
-    },
-    {
-      "@type": "Offer",
-      "name": "ORIPHIM Enterprise",
-      "price": "299.00",
-      "priceCurrency": "USD",
-      "url": "https://oriphim.com/pricing",
-      "availability": "https://schema.org/InStock"
-    }
+    { "@type": "Offer", "name": "Claim Check", "price": "8000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Ori Team licence (per month, billed annually)", "price": "4000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Ori Lab licence (per month, billed annually)", "price": "8000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" }
   ],
   "publisher": { "@id": "https://oriphim.com/#organization" }
 }
@@ -135,6 +122,7 @@
   .guest-note{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;padding:56px 0;}
   .guest-note h2{font-size:clamp(24px,2.8vw,30px);max-width:16ch;}
   .guest-note p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);max-width:46ch;}
+  .guest-note a{color:var(--ink);}
   .faq-title{font-size:clamp(26px,3vw,32px);margin-bottom:20px;}
   .faq-list{border-top:0;}
   .faq-item{border-bottom:0;padding:15px 0;}
@@ -144,7 +132,7 @@
   .faq-item[open] summary::after{transform:rotate(45deg);}
   .faq-item p{font-size:14px;line-height:1.65;color:var(--ink-soft);max-width:64ch;margin-top:14px;}
   .cta-band{background:var(--ink);color:var(--paper);padding:48px 0;text-align:center;position:relative;overflow:hidden;isolation:isolate;}
-  .topo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.72;pointer-events:none;}
+  .topo-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.48;pointer-events:none;}
   .cta-band::before{content:"";position:absolute;inset:0;background:rgba(24,19,15,.34);pointer-events:none;z-index:1;}
   .cta-band .wrap{z-index:2;}
   .cta-band h2{color:var(--paper);font-size:clamp(30px,4vw,44px);max-width:18ch;margin:0 auto 30px;}
@@ -154,6 +142,7 @@
   .cta-band .btn-outline{color:var(--paper);border-color:var(--paper);}
   .cta-band .btn-outline:hover{background:var(--paper);color:var(--ink);}
   .cta-row-band{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+  .link-inline{color:var(--ink);text-underline-offset:3px;margin-left:6px;}
   footer{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);border-top:0;padding:15px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
   .footer-x{display:inline-grid;place-items:center;width:28px;height:28px;color:var(--ink-soft);text-decoration:none;border:1px solid currentColor;}
@@ -163,7 +152,7 @@
   
   @media(max-width:860px){.pricing-grid{grid-template-columns:1fr;}}
   @media(max-width:560px){.navlinks{display:none;}.wrap{padding:0 24px;}.price-card{padding:22px 18px 20px;}.price-amount{font-size:44px;}}
-  @media(prefers-reduced-motion:reduce){.topo-canvas{opacity:.52;}}
+  @media(prefers-reduced-motion:reduce){.topo-canvas{opacity:.34;}}
 
   h1,h2,h3,h4{font-family:'Geist Mono',monospace;font-weight:560;text-transform:none;}
 
@@ -183,19 +172,45 @@
   .roadmap-box{border:0;border-top:1px solid var(--line);padding:20px 0 0;}
   .tagline{font-style:normal;line-height:1.6;}
   @media(max-width:680px){.price-card,.price-card.enterprise{padding:24px;}.price-tag{min-height:0;}}
+
+  /* Pricing, short: two steps with their prices, the tiers in a line each, everything else folded away. */
+  .pricing-hero .lede{font-family:'Geist Mono',monospace;font-size:17px;color:var(--ink-soft);}
+  .steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink);border:1px solid var(--ink);max-width:960px;margin:0 auto;}
+  .step-card{border:0;padding:30px 30px 28px;}
+  .step-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
+  .step-card .price-amount-row{margin-top:14px;}
+  .step-card .price-tag{margin-top:16px;max-width:42ch;}
+  .price-from{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-right:2px;}
+  .anchor-line{max-width:960px;margin:22px auto 0;font-family:'Geist Mono',monospace;font-size:15px;line-height:1.55;color:var(--ink);}
+  .tier-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);max-width:960px;margin:0 auto;}
+  .tier-grid .price-card{border:0;padding:24px 24px 22px;}
+  .tier-grid .price-name{font-size:18px;}
+  .tier-grid .price-amount-row{margin-top:10px;}
+  .tier-grid .price-amount{font-size:30px;}
+  .tier-grid .price-features{margin-top:16px;gap:8px;}
+  .tier-grid .price-features li{font-size:13.5px;}
+  .billing-line{max-width:960px;margin:14px auto 0;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6;color:var(--ink-soft);}
+  .details-wrap{max-width:1024px;}
+  .details-wrap>.faq-item:first-child{border-top:1px solid var(--line);}
+  .details-wrap .faq-item{border-bottom:1px solid var(--line);padding:16px 0;}
+  .details-wrap .faq-item summary{font-size:15px;}
+  .details-wrap .faq-item p b{color:var(--ink);font-weight:500;}
+  .details-wrap .faq-item p + p{margin-top:10px;}
+  @media(max-width:760px){.steps-grid,.tier-grid{grid-template-columns:1fr;}.step-card{padding:24px;}}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
 <script src="/assets/page-menu.js" defer></script>
 <link rel="stylesheet" href="/assets/waitlist.css">
 <link rel="preload" href="/assets/Loom-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/theme.css">
 </head>
 <body>
 <div class="topbar">
   <div class="wrap">
-    <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="129" height="38"></a>
+    <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-wordmark.svg?v=6" alt="" width="134" height="38"></a>
     
-    <a href="/?auth=sign-in" class="signin-btn">Sign In</a>
+    <div class="topbar-actions"><a href="/pricing" class="nav-btn" aria-current="page">Pricing</a><a href="/?auth=sign-in" class="signin-btn">Sign In</a></div>
   </div>
 </div>
 
@@ -204,104 +219,96 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="tagline"><span class="tagline-line">Enhance your endeavor.</span> <span class="tagline-line">Become a <span class="tagline-theorist">theorist</span>.</span></p>
-        <div class="toggle" id="billingToggle">
-          <button type="button" data-period="monthly" class="active">Monthly</button>
-          <button type="button" data-period="annual">Annual</button>
-        </div>
+        <p class="lede">Start with one check. Then license Ori for your team.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="pricing-grid fade">
-        <div class="price-card">
-          <div class="price-name">Standard</div>
-          <p class="price-tag">For individual research and simulation.</p>
-          <div class="price-amount-row">
-            <span class="price-amount" id="stdPrice">$39</span>
-            <span class="price-per" id="stdPer">/ mo</span>
-          </div>
-          <div class="price-billing-note" id="stdBillingNote">Billed monthly &middot; cancel anytime</div>
-          <div class="price-cta"><a href="/?auth=sign-up" class="btn">Choose Standard</a></div>
-          <ul class="plan-highlights">
-            <li>Unlimited local chat and experiments</li>
-            <li>Document ingestion and report export</li>
-            <li>500 cloud messages per month</li>
-          </ul>
-          <details class="plan-details"><summary>All Standard features</summary>
-          <div class="price-list-label">What's included</div>
-          <ul class="price-features">
-            <li>Unlimited local AI chat and notebook - runs on your own hardware, so "unlimited" is a real word here.</li>
-            <li>Unlimited verified experiments, every domain: physics, chemistry, quantum, logistics, research, general simulation.</li>
-            <li>"Run the paper" - full document ingestion (PDF, Office, CSV), equation extraction, symbolic verification, NIST / PubChem grounding.</li>
-            <li>Reproducible report export (<code>report.html</code>), no watermark.</li>
-            <li><span class="oriphim-word">Oriphim</span> Cloud access with a fair-use quota (500 messages / mo) - metered and enforced server-side from day one.</li>
-            <li>Bring your own endpoint - Groq, Ollama, any OpenAI-compatible API, your own key.</li>
-            <li>Standard support (email, best-effort).</li>
-          </ul>
-          </details>
+      <div class="steps-grid">
+        <div class="price-card step-card">
+          <div class="step-num">01 &middot; Try it</div>
+          <div class="price-name">Claim Check</div>
+          <div class="price-amount-row"><span class="price-amount">$8,000</span><span class="price-per">fixed</span></div>
+          <p class="price-tag">I check one claim your work depends on, in Ori. In 10 business days you get the report and the run folder.</p>
+          <div class="price-cta"><a href="/contact#verification-title" class="btn">Request a Claim Check</a></div>
         </div>
-
-        <div class="price-card enterprise">
-          <div class="price-name">Enterprise</div>
-          <p class="price-tag">For organizations with dedicated support needs.</p>
-          <div class="price-amount-row">
-            <span class="price-amount">$299</span>
-            <span class="price-per">/ mo</span>
-          </div>
-          <div class="price-billing-note">Self-serve &middot; custom pricing on request</div>
-          <div class="price-cta"><a href="/?auth=sign-up" class="btn-outline">Talk to us</a></div>
-          <ul class="plan-highlights">
-            <li>Everything in Standard, uncapped cloud quota</li>
-            <li>Dedicated onboarding and priority support</li>
-            <li>Invoicing and annual contracts</li>
-          </ul>
-          <details class="plan-details"><summary>Enterprise features &amp; roadmap</summary>
-          <div class="price-list-label">Live now</div>
-          <ul class="price-features">
-            <li>Everything in Standard, with an uncapped <span class="oriphim-word">Oriphim</span> Cloud quota.</li>
-            <li>Signed data-residency attestation and a network-egress audit doc - Oriphim already runs fully local and offline; this documents what's already true, for procurement.</li>
-            <li>Dedicated onboarding and priority support.</li>
-            <li>Invoicing, annual contracts, PO-friendly billing.</li>
-            <li>Priority input on the roadmap.</li>
-          </ul>
-          <div class="roadmap-box">
-            <div class="roadmap-label">Committed roadmap - not shipped yet</div>
-            <ul class="price-features">
-              <li>Multi-seat org accounts, roles and permissions.</li>
-              <li>SSO / SAML.</li>
-              <li>Admin console and audit log.</li>
-              <li>Headless API / CI integration for automated design regression checks.</li>
-            </ul>
-            <p class="roadmap-note">You're an early Enterprise partner: this is what's live today, and your input shapes what ships next.</p>
-          </div>
-          </details>
+        <div class="price-card step-card">
+          <div class="step-num">02 &middot; Run it yourself</div>
+          <div class="price-name">Licence</div>
+          <div class="price-amount-row"><span class="price-from">From</span><span class="price-amount">$4,000</span><span class="price-per">/ month</span></div>
+          <p class="price-tag">Your team runs Ori on its own hardware. The first month includes onboarding: up to four live sessions with me.</p>
+          <div class="price-cta"><a href="/contact" class="btn">Talk to me about a licence</a></div>
         </div>
       </div>
+      <p class="anchor-line">One physicist costs about $20,000 a month and takes two months to hire. The Team licence is about a fifth of that.</p>
     </div>
   </section>
-  <section class="section-pad">
-    <div class="wrap guest-note fade">
-      <h2>Try Guest Mode first.</h2>
-      <p>Guest mode is the free, unauthenticated way in - it runs locally in your browser, no account and no card required. Standard and Enterprise are what you step into once it's real work.</p>
+
+  <section>
+    <div class="wrap">
+      <div class="tier-grid">
+        <div class="price-card">
+          <div class="price-name">Team</div>
+          <div class="price-amount-row"><span class="price-amount">$4,000</span><span class="price-per">/ month</span></div>
+          <ul class="price-features"><li>Up to 5 users</li><li>Email support in 2 business days</li></ul>
+        </div>
+        <div class="price-card">
+          <div class="price-name">Lab</div>
+          <div class="price-amount-row"><span class="price-amount">$8,000</span><span class="price-per">/ month</span></div>
+          <ul class="price-features"><li>Up to 15 users</li><li>Next-business-day support</li></ul>
+        </div>
+        <div class="price-card">
+          <div class="price-name">Enterprise</div>
+          <div class="price-amount-row"><span class="price-from">From</span><span class="price-amount">$15,000</span><span class="price-per">/ month</span></div>
+          <ul class="price-features"><li>Unlimited users</li><li>Air-gapped install</li></ul>
+        </div>
+      </div>
+      <p class="billing-line">Billed annually, or quarterly. Every tier includes unlimited runs, every shipped domain, updates, and the Oriphim verification stamp.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap details-wrap">
+      <details class="faq-item"><summary>What does each tier include?</summary>
+        <p><b>Team</b>, for one team working on one program: up to 5 users and every shipped domain, unlimited runs on your own hardware, the Oriphim verification stamp on your run bundles, updates, and email support within 2 business days.</p>
+        <p><b>Lab</b>, for several programs or a team growing past 5: up to 15 users and everything in Team, next-business-day support, early access to new domains, and a quarterly roadmap call.</p>
+        <p><b>Enterprise</b>, for organisations with security or deployment requirements: unlimited users and everything in Lab, offline or air-gapped install, a security review, custom licence and IP terms, and named-contact support with a one-business-day response.</p>
+      </details>
+      <details class="faq-item"><summary>What does the stamp mean?</summary>
+        <p>A stamped run bundle records exactly which checks Ori ran and how each one came out: convergence under refinement, conservation, agreement between integrators, sensitivity to free parameters, and comparison with any reported results. It also lists what was not assessed, and anyone with the bundle can rerun it and get the same numbers.</p>
+        <p>It is not my endorsement of your conclusions, and it never says a model is correct. That is verification: whether the model solves its own equations correctly. Validation, whether the model matches reality, needs your data and your judgment. The judgment stays with your team.</p>
+      </details>
+      <details class="faq-item"><summary>What does support cover?</summary>
+        <p>Support means Ori itself: installing it, using it, reading its output, and fixing anything that breaks. It doesn&rsquo;t cover me checking your models, joining your reviews, or signing off on your results. An independent check on a specific claim is a Claim Check, priced and scoped on its own.</p>
+      </details>
+      <details class="faq-item"><summary>Why does it cost this?</summary>
+        <p>A physicist in the US earns a median of about $172,000 a year. Wages are about 70% of what an employer spends on a person, so that comes to roughly $20,000 a month, and hiring one usually takes two months or more. Ori doesn&rsquo;t replace that person. It lets the people you already have rebuild, run and stress-test a model in days rather than weeks, and hand reviewers a bundle they can rerun themselves.</p>
+        <p>The decisions these models feed, a go/no-go, a funding round, a partnership, usually run into the millions. The question is what one unchecked model would cost you.</p>
+      </details>
+      <details class="faq-item"><summary>Terms</summary>
+        <p><b>Billing.</b> Licences are billed annually up front, or quarterly. Claim Checks are 50% on signing and 50% on delivery.</p>
+        <p><b>Your data and code.</b> Ori runs on your hardware. Your papers, models and results stay with you. Nothing is sent to me or to anyone else unless you send it.</p>
+        <p><b>What you keep.</b> Every run folder is standalone code that reruns without Ori, even if you stop licensing it.</p>
+        <p><b>Where the numbers come from.</b> Physicist pay is the BLS May 2025 median for SOC 19-2012 (reported via WageDex; confirm on bls.gov). The 70% wage share is BLS Employer Costs for Employee Compensation, December 2025, private industry. Hiring time is from a recruiter source (Paraform) and is indicative only.</p>
+      </details>
     </div>
   </section>
 
   <section class="cta-band">
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="eyebrow">Oriphim Research</div>
-      <h2>Two tiers, no vapor.</h2>
+      <div class="eyebrow">Where most teams start</div>
+      <h2>Start with one claim.</h2>
       <div class="cta-row-band">
-        <a href="/?auth=sign-up" class="btn">Choose Standard</a>
+        <a href="/contact#verification-title" class="btn">Request a Claim Check</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/#offer">Claim Checks</a><a href="/contact">Contact</a><a href="/company">Company</a></nav>
+<footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/contact">Contact</a><a href="/company">Company</a></nav>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 
 <script>
@@ -394,7 +401,7 @@
           }
         }
 
-        ctx.strokeStyle = index % 4 === 0 ? "rgba(243,75,3,.56)" : "rgba(236,228,211,.38)";
+        ctx.strokeStyle = index % 8 === 4 ? "rgba(90,134,240,.6)" : index % 4 === 0 ? "rgba(243,75,3,.7)" : "rgba(194,57,27,.55)";
         ctx.lineWidth = index % 4 === 0 ? 1.35 : 0.9;
         ctx.stroke();
       });
@@ -418,29 +425,6 @@
   }
 
 
-  const billingToggle = document.getElementById("billingToggle");
-  const stdPrice = document.getElementById("stdPrice");
-  const stdPer = document.getElementById("stdPer");
-  const stdBillingNote = document.getElementById("stdBillingNote");
-
-  billingToggle?.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
-    if (!button) return;
-
-    billingToggle.querySelectorAll("button").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-
-    if (button.dataset.period === "annual") {
-      stdPrice.textContent = "$32.50";
-      stdPer.textContent = "/ mo";
-      stdBillingNote.textContent = "$390 billed yearly - about two months free";
-      return;
-    }
-
-    stdPrice.textContent = "$39";
-    stdPer.textContent = "/ mo";
-    stdBillingNote.textContent = "Billed monthly - cancel anytime";
-  });
 </script>
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
