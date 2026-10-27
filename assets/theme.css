@@ -1,0 +1,67 @@
+/* Site theme: the landing page's black, off-white and red, applied to every other page.
+   Loaded last, so these tokens replace each page's own. The landing page keeps its own
+   copy of the palette (its --paper is the text on the wallpaper, not a surface). */
+:root{
+  --bg:#120d0e;
+  --bg-deep:#0e0b0c;
+  --bg-soft:#1f191a;
+  /* ink is text and rules; paper is the surface cards and panels sit on. */
+  --ink:#e2dfd8;
+  --ink-soft:#b3afa7;
+  --paper:#120d0e;
+  --paper-dim:#1f191a;
+  --cream:#1f191a;
+  --line:rgba(194,57,27,.32);
+  --line-soft:rgba(194,57,27,.16);
+  --red:#c2391b;
+  --green:#4ee37f;
+  --blue:#5a86f0;
+  color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);}
+
+/* The wordmark is drawn dark; flip it for the black ground. */
+.nav-home img,img[src*="oriphim-logo.svg"]{filter:invert(1);}
+
+/* Buttons: solid black with an off-white border, inverting on hover. */
+.btn,.btn-primary,.btn-outline,.block-button,.signin-btn,.nav-btn,.contact-submit button,
+.cta-band .btn,.cta-band .btn-outline,.toggle button.active,
+.archive-toolbar button,[data-load-more]{
+  background:var(--bg);color:var(--ink);border:1px solid var(--ink);
+}
+.btn:hover,.btn-primary:hover,.btn-outline:hover,.block-button:hover,.signin-btn:hover,.nav-btn:hover,.nav-btn[aria-current="page"],.contact-submit button:hover,
+.cta-band .btn:hover,.cta-band .btn-outline:hover,
+.archive-toolbar button:hover,[data-load-more]:hover{
+  background:var(--ink);color:var(--bg);
+}
+.toggle button.active{background:var(--ink);color:var(--bg);}
+
+/* Header menus. */
+.subnav{background:var(--bg);border-color:var(--ink);}
+.subnav a{background:var(--bg);color:var(--ink);}
+.subnav a:hover{background:var(--ink);color:var(--bg);}
+
+/* The topography band: black, red contours, faded red rules. */
+.cta-band{background:var(--bg);color:var(--ink);border-top:1px solid rgba(194,57,27,.55);border-bottom:1px solid rgba(194,57,27,.55);}
+.cta-band::before{background:none;}
+.cta-band h2{color:var(--ink);}
+.cta-band .eyebrow,.cta-band p{color:var(--ink-soft);}
+
+/* Code and command blocks sit a step up from the page, with an off-white rule. */
+pre.block,.cmd,.code{background:var(--bg-soft);color:var(--ink);border:1px solid var(--ink);}
+.code button,.cmd button{color:var(--ink);border-color:rgba(226,223,216,.35);}
+.inline-cmd{background:var(--bg-soft);color:var(--ink);}
+.notice{background:var(--bg-soft);color:var(--ink);border-color:var(--ink);}
+.notice.problem{background:var(--bg);color:#e0583a;border-color:#e0583a;}
+
+/* Form fields. */
+input,textarea,select{background:var(--bg-soft);color:var(--ink);border-color:rgba(226,223,216,.35);}
+input::placeholder,textarea::placeholder{color:rgba(226,223,216,.45);}
+
+/* Footer: off-white on black, like the landing. */
+footer,footer .wrap,.footer-x{color:var(--ink);}
+.footer-page-menu:hover{color:var(--ink);}
+.footer-x:hover{color:var(--bg);background:var(--ink);}
+
+/* Keyboard focus is the one place green appears outside the verdicts. */
+a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px;}

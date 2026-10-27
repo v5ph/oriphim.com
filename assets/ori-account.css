@@ -3,6 +3,7 @@
 body{min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;}
 .wrap{max-width:860px;margin:0 auto;padding:0 32px;}
 .topbar{padding:13px 0;}
+.topbar .nav-home img{display:block;width:auto;height:38px;}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1180px;}
 h1,h2,h3{font-family:'Geist Mono',monospace;font-weight:560;}
 h1{font-size:clamp(30px,4.4vw,46px);line-height:1.08;margin:48px 0 14px;}

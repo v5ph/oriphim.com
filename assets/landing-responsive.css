@@ -1,27 +1,41 @@
-/* Landing: one specimen pinned in the centre, changing shape as the chapters scroll past. */
-body.story-layout{--topbar-h:79px;overflow-x:hidden;}
-body.story-layout .topbar{position:sticky;top:0;background:var(--bg);}
+/* Landing: the wallpaper fills the first screen, the copy sits either side of its eye,
+   and a plain bar divides it from the rest of the page. Nothing else moves. */
+body.story-layout{overflow-x:hidden;}
+.wall-hero{position:relative;z-index:2;height:100svh;min-height:600px;background:var(--bg);color:var(--paper);overflow:hidden;isolation:isolate;display:flex;flex-direction:column;}
+#wallpaper{position:absolute;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;pointer-events:none;z-index:0;}
+.wall-hero .topbar{position:relative;z-index:2;background:transparent;}
+/* The header spans the hero's own edges, so the logo sits in the corner above the copy. */
+.wall-hero .topbar .wrap{max-width:none;padding:0 4vw;}
+.wall-hero .nav-home img{filter:invert(1);}
+/* Buttons: solid black with a white border, so they hold up over the dither too. */
+.btn,.signin-btn,.nav-btn{background:var(--bg);color:var(--paper);border:1px solid var(--paper);text-shadow:none;}
+.btn:hover,.signin-btn:hover,.nav-btn:hover{background:var(--paper);color:var(--bg);}
+.signin-btn,.nav-btn{font-weight:500;}
+.wall-copy{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;align-items:center;padding:0 4vw 56px;text-shadow:0 1px 14px rgba(11,5,6,.9);}
+.wall-copy .eyebrow{margin-bottom:18px;color:var(--paper-dim);}
+.wall-copy h1{color:var(--paper);font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
+.wall-copy .cta-row{margin-top:28px;}
+.wall-copy .link-line{color:var(--paper);border-color:var(--paper);}
+.wall-copy .two-tone{color:rgba(226,223,216,.84);}
+.wall-copy .two-tone b{color:var(--paper);}
+/* Solid plates behind the copy, in the buttons' black and white, so nothing has to be read through the dither. */
+.wall-copy .hero-lead,.wall-copy .hero-side .two-tone{background:var(--bg);border:1px solid var(--paper);padding:20px 22px;text-shadow:none;}
+.wall-copy .hero-lead{padding:24px 26px 26px;}
+
+/* The separation bar: black like the wallpaper, ruled white above and below. */
+.info-bar{position:relative;z-index:2;background:var(--bg);color:var(--paper);border-top:1px solid var(--paper);border-bottom:1px solid var(--paper);}
+/* Its top edge splits into the wallpaper's three channels. */
+.info-bar{border-top:0;}
+.info-bar::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(var(--red) 0 1px,var(--green) 1px 2px,var(--blue) 2px 3px);}
+.info-bar .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;padding:0;font:12px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;}
+.info-bar a{display:flex;align-items:center;justify-content:center;padding:20px 12px;color:var(--paper);text-decoration:none;text-align:center;overflow-wrap:anywhere;}
 body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
 .story{position:relative;}
 .chapter,.band{scroll-margin-top:var(--topbar-h);}
-/* The stage spans the whole story, so its sticky orb can never ride past the last chapter. */
-.story-stage{position:absolute;inset:0;z-index:0;pointer-events:none;}
-.story-orb{
-  position:sticky;top:var(--topbar-h);
-  height:calc(100svh - var(--topbar-h));
-  display:grid;place-items:center;
-}
-.story-orb .voxel-plate{width:min(620px,40vw,calc(100svh - var(--topbar-h) - 64px));margin:0;pointer-events:auto;}
 
-.chapter{
-  position:relative;z-index:1;
-  min-height:calc(100svh - var(--topbar-h));
-  padding:56px 4vw;
-  display:grid;align-items:center;
-  pointer-events:none;
-}
-.chapter>*{pointer-events:auto;}
+.chapter{position:relative;z-index:1;padding:104px 4vw;display:grid;align-items:start;}
+.chapter + .chapter{border-top:1px solid var(--line);}
 .chapter .eyebrow{margin-bottom:18px;}
 .chapter h1,.chapter h2{font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
 .chapter p{font-size:clamp(14.5px,1.1vw,17px);line-height:1.6;max-width:48ch;}
@@ -29,32 +43,18 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .chapter p + p{margin-top:16px;}
 .chapter .cta-row{margin-top:28px;flex-wrap:wrap;}
 
-.two-tone{color:rgba(24,19,15,.66);}
+.two-tone{color:rgba(226,223,216,.55);}
 .two-tone b{color:var(--ink);font-weight:inherit;}
 
-/* 01: copy either side of the centred orb. */
-.chapter-hero{grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;}
+/* 01: copy either side of the wallpaper's eye. */
 .hero-lead{grid-column:1;}
 .hero-side{grid-column:3;}
 .hero-side .two-tone{font-size:clamp(15px,1.2vw,18px);line-height:1.55;}
-.scroll-cue{position:absolute;left:4vw;bottom:22px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.6;}
-.scroll-cue:hover{opacity:1;}
 
-/* Statement: one sentence over the dimmed orb, lit word by word as it scrolls through. */
-.story-orb{transition:opacity 600ms ease;}
-.story[data-dim] .story-orb{opacity:.14;}
-.chapter-statement{min-height:150svh;justify-items:center;}
-.statement-body{max-width:min(1040px,86vw);}
-.chapter .statement{max-width:none;font:400 clamp(30px,3.6vw,56px)/1.18 'Geist Mono',monospace;letter-spacing:-.01em;color:var(--ink);}
-.lit-word{opacity:.22;transition:opacity 260ms ease;}
-.lit-word.is-lit{opacity:1;}
-.statement-source{display:inline-block;margin-top:30px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;opacity:.75;}
-.statement-source:hover{opacity:1;}
-
-/* 02 and 03: the same frame as the hero, copy either side of the centred orb. */
-.chapter-how,.chapter-limits{grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;}
+/* 02 and 03: heading and copy on the left, the list on the right. */
+.chapter-how,.chapter-limits{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;}
 .side-left{grid-column:1;}
-.side-right{grid-column:3;}
+.side-right{grid-column:2;}
 .side-right .step-list,.side-right .verdict-list{margin-top:0;}
 .side-right .step-list li,.side-right .verdict-list>div{grid-template-columns:1fr;gap:5px;padding:14px 0;}
 .chapter-how h2,.chapter-limits h2{max-width:13ch;}
@@ -69,7 +69,7 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .app-shot img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid rgba(24,19,15,.6);box-shadow:0 30px 60px -18px rgba(24,19,15,.55);}
 .app-shot figcaption{margin-top:14px;font:11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--ink-soft);}
 
-/* Bands below the story scroll normally over a flat background. */
+/* Bands scroll normally over a flat background. */
 .band{position:relative;z-index:1;padding:104px 0;border-top:1px solid var(--line);}
 .band-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:44px;}
 .band-head .eyebrow{margin-bottom:16px;}
@@ -77,10 +77,10 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .band-note{max-width:42ch;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
 
 /* The record: the app's own dark surface, with one real check laid out in full. */
-.band-record{--rec-line:rgba(236,228,211,.18);--rec-dim:rgba(236,228,211,.62);--rec-pass:#8fd19e;background:var(--ink);color:var(--paper);border-top:0;}
+.band-record{--rec-line:rgba(226,223,216,.18);--rec-dim:rgba(226,223,216,.62);--rec-pass:#8fd19e;background:var(--ink);color:var(--paper);border-top:0;}
 .band-record h2,.band-record h3{color:var(--paper);}
 .band-record .eyebrow,.band-record .band-note{color:var(--rec-dim);}
-.record-card{border:1px solid var(--rec-line);border-radius:10px;padding:34px 36px 30px;background:rgba(236,228,211,.03);}
+.record-card{border:1px solid var(--rec-line);border-radius:10px;padding:34px 36px 30px;background:rgba(226,223,216,.03);}
 .record-meta{display:flex;flex-wrap:wrap;gap:8px 26px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--rec-dim);}
 .record-pass{color:var(--rec-pass);}
 .record-card h3{font-size:clamp(24px,2.4vw,32px);line-height:1.15;margin:16px 0 10px;}
@@ -114,48 +114,40 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .log-body{font-size:14px;line-height:1.6;color:var(--rec-dim);}
 .log-result{color:#f0a37e;}
 
-/* Archive: the latest entries as a dated list, then a way in. */
-.archive-list{list-style:none;border-top:1px solid var(--ink);}
-.archive-list a{display:grid;grid-template-columns:130px 130px minmax(0,1fr) 32px;gap:24px;align-items:baseline;padding:22px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;transition:background .18s ease;}
-.archive-list a:hover{background:rgba(236,228,211,.14);}
-.al-date,.al-tag{font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
-.al-main b{display:block;font:560 clamp(17px,1.5vw,21px)/1.3 'Geist Mono',monospace;}
-.al-main span{display:block;margin-top:6px;font-size:14px;line-height:1.55;color:var(--ink-soft);max-width:72ch;}
-.al-go{font:18px 'IBM Plex Mono',monospace;justify-self:end;transition:transform .18s ease;}
-.archive-list a:hover .al-go{transform:translateX(4px);}
-.archive-cta{margin-top:34px;}
-
 .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
-.offer-grid article{background:var(--paper);padding:34px 30px 38px;}
+.offer-grid article{background:var(--bg);padding:34px 30px 38px;}
 .offer-num{font:11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);}
 .offer-grid h3{font-size:22px;margin:14px 0;}
 .offer-grid p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
-.band-offer{border-top:0;}
 
-.cta-band{z-index:1;padding:110px 0;}
+.cta-band{z-index:1;padding:56px 0;border-top:1px solid rgba(194,57,27,.55);border-bottom:1px solid rgba(194,57,27,.55);}
+.cta-band h2{margin-bottom:20px;}
+.cta-band .cta-copy{margin-bottom:24px;}
 .cta-copy{max-width:58ch;margin:0 auto 30px;color:var(--paper-dim);line-height:1.7;}
 
-/* Tablet and phone: the orb sits at the top of the page and the chapters stack. */
+/* Footer: white on the black ground, like the separator bar. */
+footer .wrap,.footer-x{color:var(--paper);}
+.footer-page-menu:hover{color:var(--paper);}
+.footer-x:hover{color:var(--bg);background:var(--paper);}
+
+/* Tablet and phone: the hero copy stacks around the eye and the chapters stack. */
 @media (max-width:980px){
-  .story-stage{position:relative;inset:auto;}
-  .story-orb{position:relative;top:auto;height:auto;padding-top:28px;}
-  .story-orb .voxel-plate{width:min(380px,72vw,40svh);}
-  .chapter,.chapter-hero,.chapter-how,.chapter-limits{min-height:0;display:block;padding:36px clamp(20px,6vw,48px);}
+  .wall-hero .topbar .wrap{padding:0 clamp(20px,6vw,48px);}
+  /* The eye stays in the middle: the lead above it, the side copy below. */
+  .wall-copy{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;align-items:start;padding:12px clamp(20px,6vw,48px) 28px;gap:0;}
+  .wall-copy .hero-lead,.wall-copy .hero-side{grid-column:1;}
+  .wall-copy .hero-side{grid-row:3;}
+  .wall-copy h1{font-size:clamp(26px,6vw,40px);max-width:20ch;}
+  .wall-copy .eyebrow{margin-bottom:10px;}
+  .wall-copy .cta-row{margin-top:16px;gap:18px;}
+  .info-bar a{padding:16px 8px;}
+  .chapter,.chapter-how,.chapter-limits{display:block;padding:56px clamp(20px,6vw,48px);}
   .chapter h1,.chapter h2{font-size:clamp(28px,6vw,42px);max-width:20ch;}
-  .hero-side,.side-right{margin-top:28px;}
-  .chapter-statement{min-height:0;padding-top:56px;padding-bottom:56px;}
-  .chapter .statement{font-size:clamp(24px,6.4vw,34px);}
-  .chapter-hero{padding-top:16px;}
-  .scroll-cue{display:none;}
+  .side-right{margin-top:28px;}
   .band{padding:72px 0;}
   .record-grid{grid-template-columns:1fr;}
   .record-log li{grid-template-columns:1fr;gap:6px;}
   .offer-grid{grid-template-columns:1fr;}
-  .archive-list a{grid-template-columns:1fr auto;gap:6px 16px;}
-  .al-date{grid-column:1;}
-  .al-tag{grid-column:2;justify-self:end;}
-  .al-main{grid-column:1/-1;}
-  .al-go{display:none;}
 }
 @media (max-width:640px){
   .step-list li,.verdict-list>div{grid-template-columns:1fr;gap:4px;}
@@ -168,6 +160,13 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 }
 @media (max-width:480px){
   body.story-layout .topbar .wrap{padding-left:20px;padding-right:20px;gap:10px;}
-  body.story-layout .topbar .nav-home{font-size:32px;}
   body.story-layout .signin-btn{font-size:10px;padding:8px 10px;max-width:26vw;}
 }
+
+/* Verdicts carry the signal colours; the words still say it for anyone who can't tell red from green. */
+.verdict-list [data-verdict="holds"] dt{color:var(--green);}
+.verdict-list [data-verdict="fails"] dt{color:#e0583a;}
+.verdict-list [data-verdict="unclear"] dt{color:var(--blue);}
+
+/* Keyboard focus is the one place green appears outside the verdicts. */
+a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
