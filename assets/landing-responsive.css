@@ -1,104 +1,173 @@
-/* Keep the desktop composition, with readable copy and reserved tab controls. */
-body.tab-layout{height:100svh;}
-body.tab-layout .tab-panel{width:clamp(250px,23vw,410px);max-height:calc(100% - 120px);overflow-y:auto;scrollbar-width:thin;}
-body.tab-layout .tab-panel h1,body.tab-layout .tab-panel h2{font-size:clamp(28px,2.8vw,44px);line-height:1.12;}
-body.tab-layout .tab-panel p{font-size:clamp(14px,1vw,16px);line-height:1.6;}
-body.tab-layout .tab-panel[data-tab-panel="2"]{width:min(38vw,610px);}
-body.tab-layout .tab-report.product-demo{max-height:calc(100% - 120px);overflow-y:auto;scrollbar-width:thin;}
-body.tab-layout .product-demo .pd-viewport{height:clamp(220px,calc(100svh - 490px),460px);}
-body.tab-layout .section-tabs button{min-width:44px;min-height:44px;}
-body.tab-layout .section-tabs{bottom:12px;gap:8px;}
-body.tab-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-/* On narrow or short windows, let the document grow instead of clipping content. */
-@media(max-width:980px),(max-height:700px){
-  body.tab-layout{height:auto;min-height:100svh;overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;}
-  body.tab-layout main{flex:1;}
-  body.tab-layout .tab-experience{display:grid;grid-template-columns:minmax(0,1fr);height:auto;min-height:calc(100svh - var(--topbar-h) - 64px);overflow:visible;padding:0 clamp(20px,5vw,48px);align-content:start;}
-  body.tab-layout .tab-orb-stage{position:relative;grid-row:1;inset:auto;height:clamp(170px,30svh,320px);transform:none!important;}
-  body.tab-layout .tab-orb-stage .voxel-plate{width:min(72vw,30svh,360px);pointer-events:auto;}
-  body.tab-layout .tab-experience:has([data-tab="1"][aria-current="true"]) .tab-orb-stage{height:clamp(150px,24svh,240px);}
-  body.tab-layout .tab-experience:has([data-tab="1"][aria-current="true"]) .voxel-plate{width:min(58vw,24svh,240px);}
-  body.tab-layout .tab-panel,body.tab-layout .tab-panel[data-side="left"],body.tab-layout .tab-panel[data-side="right"]{display:none;position:relative;grid-row:2;top:auto;left:auto;width:100%;max-width:680px;margin:0 auto;max-height:none;overflow:visible;padding:12px 0 20px;transform:none;}
-  body.tab-layout .tab-panel.is-active{display:block;transform:none;}
-  body.tab-layout .tab-panel[data-tab-panel="1"]{display:none;}
-  body.tab-layout .tab-panel h1,body.tab-layout .tab-panel h2{font-size:clamp(27px,4.5vw,42px);max-width:24ch;}
-  body.tab-layout .tab-panel p{font-size:clamp(14px,1.8vw,16px);max-width:none;margin-top:18px;}
-  body.tab-layout .tab-panel .cta-row{margin-top:22px;flex-wrap:wrap;}
-  body.tab-layout .tab-report.product-demo{display:none;position:relative;grid-row:2;inset:auto;transform:none;width:100%;max-width:720px;max-height:none;overflow:visible;margin:12px auto 20px;}
-  body.tab-layout .tab-report.product-demo.is-active{display:block;transform:none;}
-  body.tab-layout .product-demo .pd-viewport{height:clamp(290px,44svh,380px);}
-  body.tab-layout .section-tabs{position:relative;grid-row:3;left:auto;bottom:auto;transform:none;justify-content:center;margin:4px 0 14px;}
-  body.tab-layout>footer{display:block;height:auto;padding:14px 0;}
-  body.tab-layout>footer .wrap{padding-left:24px;padding-right:24px;}
-}
-@media(max-width:480px){
-  body.tab-layout .topbar .wrap{padding-left:20px;padding-right:20px;gap:10px;}
-  body.tab-layout .topbar .nav-home{font-size:32px;}
-  body.tab-layout .signin-btn{font-size:10px;padding:8px 10px;max-width:26vw;}
-  body.tab-layout .product-demo .pd-rail{width:64px;padding-left:6px;padding-right:6px;font-size:7px;}
-  body.tab-layout .product-demo .pd-scene{left:64px;padding:12px 9px;}
-  body.tab-layout .product-demo .pd-document{left:-52px;right:5px;}
-  body.tab-layout .product-demo .pd-heading{overflow-wrap:anywhere;}
-  body.tab-layout .product-demo .pd-chrome{gap:8px;}
-  body.tab-layout .product-demo .pd-row{grid-template-columns:48px minmax(0,1fr);}
-  body.tab-layout .product-demo .pd-row span{overflow-wrap:anywhere;}
-  body.tab-layout .pd-playback{flex-wrap:wrap;}
-  body.tab-layout>footer .wrap{grid-template-columns:1fr auto;row-gap:12px;}
-  body.tab-layout .footer-company{justify-self:end;}
-  body.tab-layout .footer-actions{grid-column:1/-1;justify-self:center;}
-}
-@media(prefers-reduced-motion:reduce){body.tab-layout .tab-panel,body.tab-layout .tab-report{transition:none;}}
+/* Landing: one specimen pinned in the centre, changing shape as the chapters scroll past. */
+body.story-layout{--topbar-h:79px;overflow-x:hidden;}
+body.story-layout .topbar{position:sticky;top:0;background:var(--bg);}
+body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-/* Fit desktop copy beside the original animation without moving either column. */
-@media (min-width:981px) and (min-height:701px) and (max-height:850px){
-  body.tab-layout .tab-panel{max-height:calc(100% - 88px);}
-  body.tab-layout .tab-panel h1,body.tab-layout .tab-panel h2{font-size:clamp(36px,5svh,42px);line-height:1.04;}
-  body.tab-layout .tab-panel p{font-size:13px;line-height:1.45;margin-top:14px;}
-  body.tab-layout .tab-panel .eyebrow{margin-bottom:12px;}
-  body.tab-layout .tab-panel .cta-row{margin-top:16px;gap:12px;}
+.story{position:relative;}
+.chapter,.band{scroll-margin-top:var(--topbar-h);}
+/* The stage spans the whole story, so its sticky orb can never ride past the last chapter. */
+.story-stage{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.story-orb{
+  position:sticky;top:var(--topbar-h);
+  height:calc(100svh - var(--topbar-h));
+  display:grid;place-items:center;
 }
+.story-orb .voxel-plate{width:min(620px,40vw,calc(100svh - var(--topbar-h) - 64px));margin:0;pointer-events:auto;}
 
-/* The first section frames the centered animation with copy on either side. */
-@media (min-width:761px) and (min-height:701px){
-  body.tab-layout .tab-panel[data-tab-panel="0"]{
-    display:grid;
-    grid-template-columns:minmax(0,23vw) minmax(0,1fr) minmax(0,23vw);
-    grid-template-rows:auto auto;
-    left:3vw;
-    width:94vw;
-    max-height:none;
-    overflow:visible;
-    pointer-events:none;
-  }
-  body.tab-layout .tab-panel[data-tab-panel="0"] h1{grid-column:1;grid-row:1;align-self:end;}
-  body.tab-layout .tab-panel[data-tab-panel="0"] p{grid-column:3;grid-row:1 / 3;align-self:center;margin-top:0;}
-  body.tab-layout .tab-panel[data-tab-panel="0"] .cta-row{grid-column:1;grid-row:2;align-self:start;}
-  body.tab-layout .tab-panel[data-tab-panel="0"].is-active>*{pointer-events:auto;}
+.chapter{
+  position:relative;z-index:1;
+  min-height:calc(100svh - var(--topbar-h));
+  padding:56px 4vw;
+  display:grid;align-items:center;
+  pointer-events:none;
 }
+.chapter>*{pointer-events:auto;}
+.chapter .eyebrow{margin-bottom:18px;}
+.chapter h1,.chapter h2{font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
+.chapter p{font-size:clamp(14.5px,1.1vw,17px);line-height:1.6;max-width:48ch;}
+.chapter h2 + p{margin-top:22px;}
+.chapter p + p{margin-top:16px;}
+.chapter .cta-row{margin-top:28px;flex-wrap:wrap;}
 
-/* Keep the first section split in tablet-sized windows, too. */
-@media (min-width:761px) and (max-width:980px) and (min-height:701px){
-  body.tab-layout .tab-experience:has([data-tab="0"][aria-current="true"]){
-    display:block;height:calc(100svh - var(--topbar-h) - 64px);min-height:0;padding:0;
-  }
-  body.tab-layout .tab-experience:has([data-tab="0"][aria-current="true"]) .tab-orb-stage{
-    position:absolute;inset:0;height:auto;display:grid;place-items:center;
-  }
-  body.tab-layout .tab-experience:has([data-tab="0"][aria-current="true"]) .voxel-plate{width:40vw;pointer-events:auto;}
-  body.tab-layout .tab-panel[data-tab-panel="0"]{
-    position:absolute;top:50%;left:3vw;width:94vw;max-width:none;margin:0;padding:0;
-    grid-template-columns:minmax(0,25vw) minmax(0,1fr) minmax(0,25vw);
-    transform:translateY(-50%);
-  }
-  body.tab-layout .tab-panel[data-tab-panel="0"] h1{font-size:clamp(28px,3.6vw,36px);line-height:1.06;}
-  body.tab-layout .tab-panel[data-tab-panel="0"] p{font-size:13px;line-height:1.5;}
-  body.tab-layout .tab-panel[data-tab-panel="0"] .cta-row{margin-top:22px;gap:16px;}
-  body.tab-layout .tab-experience:has([data-tab="0"][aria-current="true"]) .section-tabs{
-    position:absolute;left:3vw;bottom:12px;margin:0;transform:none;justify-content:flex-start;
-  }
+.two-tone{color:rgba(24,19,15,.66);}
+.two-tone b{color:var(--ink);font-weight:inherit;}
+
+/* 01: copy either side of the centred orb. */
+.chapter-hero{grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;}
+.hero-lead{grid-column:1;}
+.hero-side{grid-column:3;}
+.hero-side .two-tone{font-size:clamp(15px,1.2vw,18px);line-height:1.55;}
+.scroll-cue{position:absolute;left:4vw;bottom:22px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.6;}
+.scroll-cue:hover{opacity:1;}
+
+/* Statement: one sentence over the dimmed orb, lit word by word as it scrolls through. */
+.story-orb{transition:opacity 600ms ease;}
+.story[data-dim] .story-orb{opacity:.14;}
+.chapter-statement{min-height:150svh;justify-items:center;}
+.statement-body{max-width:min(1040px,86vw);}
+.chapter .statement{max-width:none;font:400 clamp(30px,3.6vw,56px)/1.18 'Geist Mono',monospace;letter-spacing:-.01em;color:var(--ink);}
+.lit-word{opacity:.22;transition:opacity 260ms ease;}
+.lit-word.is-lit{opacity:1;}
+.statement-source{display:inline-block;margin-top:30px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;opacity:.75;}
+.statement-source:hover{opacity:1;}
+
+/* 02 and 03: the same frame as the hero, copy either side of the centred orb. */
+.chapter-how,.chapter-limits{grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;}
+.side-left{grid-column:1;}
+.side-right{grid-column:3;}
+.side-right .step-list,.side-right .verdict-list{margin-top:0;}
+.side-right .step-list li,.side-right .verdict-list>div{grid-template-columns:1fr;gap:5px;padding:14px 0;}
+.chapter-how h2,.chapter-limits h2{max-width:13ch;}
+
+.step-list,.verdict-list{list-style:none;margin:26px 0 0;border-top:1px solid var(--line);counter-reset:step;max-width:620px;}
+.step-list li,.verdict-list>div{display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+.step-list b,.verdict-list dt{font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);}
+.step-list b::before{counter-increment:step;content:"0" counter(step) "\00a0\00a0";opacity:.55;}
+.step-list span,.verdict-list dd{font-size:14px;line-height:1.55;color:var(--ink-soft);}
+
+.app-shot{margin:0;}
+.app-shot img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid rgba(24,19,15,.6);box-shadow:0 30px 60px -18px rgba(24,19,15,.55);}
+.app-shot figcaption{margin-top:14px;font:11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--ink-soft);}
+
+/* Bands below the story scroll normally over a flat background. */
+.band{position:relative;z-index:1;padding:104px 0;border-top:1px solid var(--line);}
+.band-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:44px;}
+.band-head .eyebrow{margin-bottom:16px;}
+.band-head h2{font-size:clamp(30px,3.6vw,48px);line-height:1.06;max-width:16ch;}
+.band-note{max-width:42ch;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
+
+/* The record: the app's own dark surface, with one real check laid out in full. */
+.band-record{--rec-line:rgba(236,228,211,.18);--rec-dim:rgba(236,228,211,.62);--rec-pass:#8fd19e;background:var(--ink);color:var(--paper);border-top:0;}
+.band-record h2,.band-record h3{color:var(--paper);}
+.band-record .eyebrow,.band-record .band-note{color:var(--rec-dim);}
+.record-card{border:1px solid var(--rec-line);border-radius:10px;padding:34px 36px 30px;background:rgba(236,228,211,.03);}
+.record-meta{display:flex;flex-wrap:wrap;gap:8px 26px;font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--rec-dim);}
+.record-pass{color:var(--rec-pass);}
+.record-card h3{font-size:clamp(24px,2.4vw,32px);line-height:1.15;margin:16px 0 10px;}
+.record-paper{font-size:14px;line-height:1.6;color:var(--rec-dim);max-width:80ch;}
+.record-paper a{color:var(--paper);text-underline-offset:3px;}
+.record-claim{margin:18px 0 26px;font-size:16px;line-height:1.6;max-width:64ch;}
+.record-table{border-top:1px solid var(--rec-line);}
+.rt-row{display:grid;grid-template-columns:minmax(0,2.2fr) repeat(4,minmax(0,1fr));gap:16px;padding:14px 0;border-bottom:1px solid var(--rec-line);align-items:baseline;font:15px 'Geist Mono',monospace;}
+.rt-head{font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--rec-dim);padding:12px 0;}
+.rt-row span:first-child{font-family:'Inter',system-ui,sans-serif;font-size:14.5px;}
+.rt-head span:first-child{font:inherit;}
+.rt-match{color:var(--rec-pass);}
+.record-note{margin-top:16px;font:11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--rec-dim);}
+.record-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:32px;margin-top:32px;align-items:start;}
+.folder{border:1px solid var(--rec-line);border-radius:10px;padding:26px 28px;}
+.folder-title{font:12px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:var(--paper);margin-bottom:14px;}
+.folder dl>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;padding:9px 0;border-top:1px solid var(--rec-line);align-items:baseline;}
+.folder dt{font:13px 'Geist Mono',monospace;color:var(--paper);overflow-wrap:anywhere;}
+.folder dd{font-size:13.5px;line-height:1.5;color:var(--rec-dim);}
+.download{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px;padding:13px 16px;border:1px solid var(--paper);border-radius:6px;font:500 12.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);text-decoration:none;transition:background .18s ease,color .18s ease;}
+.download span{font-weight:400;opacity:.65;text-transform:none;}
+.download:hover{background:var(--paper);color:var(--ink);}
+.band-record .band-note a{color:var(--paper);text-underline-offset:3px;}
+.folder-run{margin-top:20px;padding:14px 16px;border-radius:6px;background:#0c0907;font:12.5px/1.7 'Geist Mono',monospace;color:var(--paper);overflow-x:auto;}
+.app-shot-dark img{border-color:var(--rec-line);box-shadow:none;}
+.app-shot-dark figcaption{color:var(--rec-dim);}
+.record-log{list-style:none;margin-top:48px;border-top:1px solid var(--rec-line);}
+.record-log li{display:grid;grid-template-columns:120px minmax(0,240px) minmax(0,1fr) auto;gap:24px;padding:18px 0;border-bottom:1px solid var(--rec-line);align-items:baseline;}
+.log-date,.log-result{font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--rec-dim);}
+.log-title{font:560 15px/1.35 'Geist Mono',monospace;}
+.log-body{font-size:14px;line-height:1.6;color:var(--rec-dim);}
+.log-result{color:#f0a37e;}
+
+/* Archive: the latest entries as a dated list, then a way in. */
+.archive-list{list-style:none;border-top:1px solid var(--ink);}
+.archive-list a{display:grid;grid-template-columns:130px 130px minmax(0,1fr) 32px;gap:24px;align-items:baseline;padding:22px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;transition:background .18s ease;}
+.archive-list a:hover{background:rgba(236,228,211,.14);}
+.al-date,.al-tag{font:11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+.al-main b{display:block;font:560 clamp(17px,1.5vw,21px)/1.3 'Geist Mono',monospace;}
+.al-main span{display:block;margin-top:6px;font-size:14px;line-height:1.55;color:var(--ink-soft);max-width:72ch;}
+.al-go{font:18px 'IBM Plex Mono',monospace;justify-self:end;transition:transform .18s ease;}
+.archive-list a:hover .al-go{transform:translateX(4px);}
+.archive-cta{margin-top:34px;}
+
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
+.offer-grid article{background:var(--paper);padding:34px 30px 38px;}
+.offer-num{font:11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);}
+.offer-grid h3{font-size:22px;margin:14px 0;}
+.offer-grid p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+.band-offer{border-top:0;}
+
+.cta-band{z-index:1;padding:110px 0;}
+.cta-copy{max-width:58ch;margin:0 auto 30px;color:var(--paper-dim);line-height:1.7;}
+
+/* Tablet and phone: the orb sits at the top of the page and the chapters stack. */
+@media (max-width:980px){
+  .story-stage{position:relative;inset:auto;}
+  .story-orb{position:relative;top:auto;height:auto;padding-top:28px;}
+  .story-orb .voxel-plate{width:min(380px,72vw,40svh);}
+  .chapter,.chapter-hero,.chapter-how,.chapter-limits{min-height:0;display:block;padding:36px clamp(20px,6vw,48px);}
+  .chapter h1,.chapter h2{font-size:clamp(28px,6vw,42px);max-width:20ch;}
+  .hero-side,.side-right{margin-top:28px;}
+  .chapter-statement{min-height:0;padding-top:56px;padding-bottom:56px;}
+  .chapter .statement{font-size:clamp(24px,6.4vw,34px);}
+  .chapter-hero{padding-top:16px;}
+  .scroll-cue{display:none;}
+  .band{padding:72px 0;}
+  .record-grid{grid-template-columns:1fr;}
+  .record-log li{grid-template-columns:1fr;gap:6px;}
+  .offer-grid{grid-template-columns:1fr;}
+  .archive-list a{grid-template-columns:1fr auto;gap:6px 16px;}
+  .al-date{grid-column:1;}
+  .al-tag{grid-column:2;justify-self:end;}
+  .al-main{grid-column:1/-1;}
+  .al-go{display:none;}
 }
-
-/* Give the first section's supporting copy a readable size beside the animation. */
-@media (min-width:761px) and (min-height:701px){
-  body.tab-layout .tab-panel[data-tab-panel="0"] p{font-size:clamp(15px,1.42vw,18px);line-height:1.55;}
+@media (max-width:640px){
+  .step-list li,.verdict-list>div{grid-template-columns:1fr;gap:4px;}
+  .wrap{padding:0 20px;}
+  .record-card{padding:24px 18px;}
+  .rt-row{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:10px;font-size:13px;}
+  .rt-row span:first-child{font-size:13px;}
+  .rt-row span:nth-child(4){display:none;}
+  .folder dl>div{grid-template-columns:1fr;gap:2px;}
+}
+@media (max-width:480px){
+  body.story-layout .topbar .wrap{padding-left:20px;padding-right:20px;gap:10px;}
+  body.story-layout .topbar .nav-home{font-size:32px;}
+  body.story-layout .signin-btn{font-size:10px;padding:8px 10px;max-width:26vw;}
 }

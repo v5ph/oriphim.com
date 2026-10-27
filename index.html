@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIPHIM | Defensible Engineering Simulation and Verification</title>
-<meta name="description" content="ORIPHIM derives, runs, verifies, and validates engineering simulations, producing defensible evidence with explicit error budgets, assumptions, and limits.">
+<title>ORIPHIM | Check a paper's claim before you build on it</title>
+<meta name="description" content="Claim Checks from Oriphim: Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds, doesn't, or can't be told from the text.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/">
 <meta name="theme-color" content="#f34b03">
@@ -12,16 +12,16 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="ORIPHIM | Defensible Engineering Simulation and Verification">
-<meta property="og:description" content="Simulation that can be defended: governing equations, deterministic computation, verification, validation, and explicit limits.">
+<meta property="og:title" content="ORIPHIM | Check a paper's claim before you build on it">
+<meta property="og:description" content="Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds.">
 <meta property="og:url" content="https://oriphim.com/">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ORIPHIM | Defensible Engineering Simulation and Verification">
-<meta name="twitter:description" content="Simulation that can be defended: deterministic computation, verification, validation, and explicit limits.">
+<meta name="twitter:title" content="ORIPHIM | Check a paper's claim before you build on it">
+<meta name="twitter:description" content="Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -90,6 +90,7 @@
     letter-spacing:.03em;
     text-transform:lowercase;
   }
+  .ori-word{font-family:'Loom',serif;font-weight:400;font-size:1.2em;line-height:.8;text-transform:lowercase;letter-spacing:0;}
   .oriphim-word{display:inline-block;font-family:'Geist Mono',monospace;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em;}
   .nav-trigger .oriphim-word{font-size:1.85em;line-height:.5;vertical-align:-.11em;}
   h1 .oriphim-word{font-size:1.18em;}
@@ -297,43 +298,6 @@
   .narrative-copy p + p{margin-top:22px;}
   .narrative-copy strong{color:var(--ink);}
   .limits-section{background:var(--paper);}
-  body.tab-layout{--topbar-h:79px;--footer-h:44px;height:100svh;overflow:hidden;}
-  .tab-experience{position:relative;height:calc(100svh - var(--topbar-h) - var(--footer-h));min-height:0;overflow:hidden;}
-  .tab-orb-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;}
-  .tab-orb-stage .voxel-plate{width:min(760px,48vw,calc(100svh - var(--topbar-h) - var(--footer-h) - 48px));margin:0;pointer-events:auto;}
-  .tab-panel{position:absolute;top:50%;width:20vw;transform:translateY(calc(-50% + 8px));opacity:0;visibility:hidden;pointer-events:none;transition:opacity 260ms ease,transform 260ms ease;}
-  .tab-panel[data-side="right"]{left:77vw;}.tab-panel[data-side="left"]{left:3vw;}
-  .tab-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(-50%);transition-delay:320ms;}
-  .tab-panel .eyebrow{margin-bottom:18px;}.tab-panel h1,.tab-panel h2{font-size:clamp(30px,3vw,46px);line-height:1.04;max-width:13ch;}.tab-panel p{font-size:clamp(13px,1vw,15px);line-height:1.6;margin-top:20px;max-width:48ch;}.tab-panel .cta-row{margin-top:26px;}
-
-  .tab-report{
-    position:absolute; top:50%; left:76vw; width:min(258px,22vw);
-    transform:translateY(calc(-50% + 8px)) rotate(-2deg);
-    background:var(--paper); border:1px solid var(--ink); color:var(--ink);
-    padding:20px 22px 18px; box-shadow:10px 14px 0 rgba(24,19,15,.14);
-    opacity:0; visibility:hidden; pointer-events:none; z-index:4;
-    transition:opacity 260ms ease, transform 260ms ease;
-  }
-  .tab-report.is-active{opacity:1; visibility:visible; transform:translateY(-50%) rotate(-2deg); transition-delay:320ms;}
-  .tab-report .eyebrow{font-size:10px;}
-  .tab-report .report-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
-  .tab-report .report-id{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft);}
-  .tab-report h3{font-family:'Geist Mono',monospace; font-size:17px; line-height:1.25; max-width:20ch; margin-bottom:16px;}
-  .tab-report .report-rows{display:flex; flex-direction:column; gap:8px; margin-bottom:16px; border-top:1px solid var(--line-soft); padding-top:12px;}
-  .tab-report .report-row{display:flex; justify-content:space-between; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.02em; color:var(--ink-soft);}
-  .tab-report .report-row b{color:var(--ink); font-weight:500;}
-  .tab-report .report-plot{display:block; width:100%; height:auto; margin-bottom:14px;}
-  .tab-report .report-plot polyline{fill:none; stroke:var(--bg-deep); stroke-width:1.6;}
-  .tab-report .report-plot line{stroke:var(--line-soft); stroke-width:1;}
-  .tab-report .report-sign{display:flex; justify-content:space-between; align-items:baseline; gap:10px; border-top:1px solid var(--line-soft); padding-top:12px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
-  .tab-report .report-sign b{font-family:'Geist Mono',monospace; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink);}
-
-  .section-tabs{position:absolute;left:32px;bottom:32px;display:flex;gap:20px;z-index:5;}
-  .section-tabs button{appearance:none;border:0;border-bottom:1px solid transparent;background:transparent;padding:4px 0;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;opacity:.45;cursor:pointer;}
-  .section-tabs button[aria-current="true"]{opacity:1;border-bottom-color:var(--bg-deep);}
-  main>.hero,main>.evidence-section,main>.cta-band{display:none;}
-  body.tab-layout>footer{height:var(--footer-h);display:flex;align-items:center;padding:0;position:relative;z-index:6;}
-  body.tab-layout>footer .wrap{width:100%;padding-top:0;}
 
   /* ---------- volumes grid ---------- */
   .vol-grid{
@@ -402,30 +366,6 @@
   .fade{opacity:1;transform:none;transition:none;}
   
 
-  @media (max-width: 980px){
-    /* stacked one-screen layout is too tight for a reserved footer strip */
-    body.tab-layout{--footer-h:0px;}
-    body.tab-layout>footer{display:none;}
-    .tab-experience{height:calc(100svh - var(--topbar-h) - var(--footer-h));min-height:0;}
-    .tab-orb-stage{inset:0 0 auto;height:42vh;transform:none!important;}
-    .tab-orb-stage .voxel-plate{width:min(390px,78vw,38svh);pointer-events:none;}
-    .tab-panel,.tab-panel[data-side="right"],.tab-panel[data-side="left"]{top:44vh;left:8vw;width:84vw;transform:translateY(8px);}
-    .tab-panel.is-active{transform:translateY(0);}
-    .tab-panel{max-height:calc(100svh - var(--topbar-h) - var(--footer-h) - 44vh - 60px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:4px;}
-    .tab-panel h1,.tab-panel h2{font-size:clamp(28px,8vw,42px);}.tab-panel p{font-size:13.5px;line-height:1.55;margin-top:16px;}.tab-panel .cta-row{margin-top:20px;}
-    .section-tabs{left:50%;bottom:18px;transform:translateX(-50%);}
-    .tab-report{display:none;}
-  }
-  @media (max-height: 700px) and (min-width: 981px){
-    .tab-panel h1,.tab-panel h2{font-size:clamp(26px,2.5vw,38px);}
-    .tab-panel p{font-size:12.5px;line-height:1.48;margin-top:14px;}
-    .tab-panel .eyebrow{margin-bottom:12px;}
-    .tab-panel .cta-row{margin-top:18px;}
-    .section-tabs{bottom:18px;}
-    .tab-report{padding:16px 18px 14px;}
-    .tab-report h3{font-size:15px;margin-bottom:12px;}
-    .tab-report .report-rows{gap:6px;margin-bottom:12px;padding-top:10px;}
-  }
   @media (max-width: 860px){
     .hero-grid{grid-template-columns:1fr;}
     .hero{padding:30px 0 38px;}
@@ -472,7 +412,7 @@
         "width": 192,
         "height": 192
       },
-      "description": "Oriphim publishes ORIPHIM, a research system for defensible engineering simulation, verification, and validation."
+      "description": "Oriphim runs Claim Checks: its research agent Ori rebuilds a paper's computational experiment and reports whether the published claim holds."
     },
     {
       "@type": "SoftwareApplication",
@@ -481,7 +421,7 @@
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "Windows, macOS, Linux",
       "url": "https://oriphim.com/",
-      "description": "A research system that derives governing equations, runs deterministic simulations, verifies numerical accuracy, and quantifies validation discrepancy against reality.",
+      "description": "A research system that rebuilds a paper's computational experiment from the text, runs it with convergence and conservation checks, and compares the measured result against the printed one.",
       "publisher": { "@id": "https://oriphim.com/#organization" },
       "featureList": [
         "Derive governing equations from described physical systems",
@@ -494,10 +434,6 @@
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/product-demo.css">
-<script src="assets/product-demo.js" defer></script>
-<script src="assets/hopf-shape.js"></script>
-<script src="assets/gyroid-shape.js"></script>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
 <script src="/assets/page-menu.js" defer></script>
@@ -505,7 +441,7 @@
 <link rel="stylesheet" href="/assets/landing-responsive.css">
 <link rel="preload" href="/assets/Loom-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
-<body class="tab-layout">
+<body class="story-layout">
 
 <div class="topbar">
   <div class="wrap">
@@ -518,115 +454,96 @@
 </div>
 
 <main>
-  <section class="tab-experience" data-tab-experience aria-label="ORIPHIM overview">
-    <div class="tab-orb-stage" data-tab-orb-stage aria-hidden="true">
-      <div class="voxel-plate" data-shape-piece>
-        <canvas class="voxel-sphere" data-voxel-sphere></canvas>
-        <div class="voxel-grab" data-voxel-grab></div>
-      </div>
-    </div>
-    <article class="tab-panel is-active" data-tab-panel="0" data-side="left">
-      <h1>Explore fearlessly. Verify rigorously.</h1>
-      <p>Oriphim takes a system you describe, builds the governing equations, runs the model, and tests it against every check reality permits: convergence, conservation, error budgets, and sensitivity across every free parameter. You get a clear statement: what the numbers actually support, and what they don't. That's how you can afford to explore wild ideas without betting your credibility.</p>
-      <div class="cta-row"><a href="/?auth=sign-up" class="btn">Request Access</a><a href="/archive" class="link-line">Read the archive</a></div>
-    </article>
-    <aside class="tab-report product-demo" data-tab-report="1" aria-label="Animated Oriphim product demonstration">
-      <div class="pd-label"><span>THE WORKSPACE</span><span>IN MOTION ↗</span></div>
-      <div class="pd-window" data-phase="0">
-        <div class="pd-chrome"><span class="pd-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Oriphim</span><span class="pd-project">toroidal-ap</span></div>
-        <div class="pd-tabs" aria-hidden="true"><span>▥</span><span>+</span><span class="pd-session">toroidal-ap <i>×</i></span></div>
-        <div class="pd-viewport" aria-hidden="true">
-          <div class="pd-rail"><span>~/ORIPHIM</span><b>⌑ research</b><span class="pd-selected">toroidal-ap</span><small>brief.md<br>runs/<br>figure.html</small></div>
-          <div class="pd-scene pd-compose">
-            <div class="pd-banner"><b>oriphim 0.1.0</b><span>verification engine</span></div>
-            <p class="pd-dim">describe a system, or attach a paper.<br><b>?</b> for help.</p>
-            <div class="pd-attachment"><span>⌁ &nbsp; plasma-coupling.pdf</span><span>×</span></div>
-            <div class="pd-input"><b>› </b><span class="pd-typed">Reconstruct the particle experiment in this paper.</span><span class="pd-caret">▊</span></div>
-            <div class="pd-log"><p>reading source document …</p><p>anchoring equations to pages …</p><p>preparing draft brief …</p></div>
-          </div>
-          <div class="pd-scene pd-review">
-            <div class="pd-heading">DRAFT BRIEF <span>rev 0 · unsigned</span></div>
-            <div class="pd-row"><b>system</b><span>single particle</span></div><div class="pd-row"><b>field</b><span>toroidal</span></div><div class="pd-row"><b>variants</b><span>printed / consistent</span></div>
-            <p class="pd-warning">! &nbsp; transcription conflict</p><p class="pd-dim">two named equation variants.<br>review before execution.</p>
-            <div class="pd-input pd-approval"><b>› </b><span>approve</span><span class="pd-caret">▊</span></div>
-            <div class="pd-document"><div class="pd-document-title">toroidal-ap · brief.md <span>↗</span></div><div class="pd-document-body"><b>Draft brief</b><p>Prescribed-field particle motion</p><hr><p>Initial velocity basis</p><small>Explicit assumption in the fixture.</small><p class="pd-doc-source">source · §5.1</p></div></div>
-          </div>
-          <div class="pd-scene pd-evidence">
-            <div class="pd-heading">MEASURED <span>recorded suite</span></div>
-            <p class="pd-completed">251 completed · 9 failed</p>
-            <div class="pd-table"><span>temporal order</span><div><small>§5.1 · ε=0.1</small><b>printed</b><b>consistent</b></div><div><span>resolved</span><strong>0.0392</strong><strong>2.0010</strong></div></div>
-            <p class="pd-warning">! &nbsp; limits retained</p><p class="pd-dim">Longer runs retain failed checks.<br>Exact paper reference not run.</p>
-            <div class="pd-heading pd-tier">VERIFICATION</div><p class="pd-dim">validation not attempted</p>
-            <div class="pd-input"><b>› </b><span>open</span><span class="pd-caret">▊</span></div>
-          </div>
-          <svg class="pd-cursor" width="20" height="25" viewBox="0 0 23 28"><path d="M3 2L20 16L12 17L8 24Z" fill="#f6f4f1" stroke="#54200f" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="pd-click"></span>
-        </div>
-        <div class="pd-bottom"><span>● local engine</span><span class="pd-status">ready</span><span class="pd-footer-icons">⌁ &nbsp; ⚙</span></div>
-      </div>
-      <div class="pd-playback"><div class="pd-progress" aria-hidden="true"><i></i><i></i><i></i></div><span class="pd-demo-caption">App workflow demo</span><button type="button" class="pd-pause" aria-label="Pause product demo">Ⅱ</button><button type="button" class="pd-replay" aria-label="Replay product demo">↺</button></div>
-      <p class="pd-source">Evidence: recorded development run, 07 Sep 2026.<br>Not a complete paper reproduction.</p>
-      <span class="pd-sr">Demonstration: describe a question, review a brief, inspect evidence. Recorded temporal orders: printed 0.0392; Lorentz-consistent 2.0010 at resolved epsilon 0.1. Physical validation was not attempted.</span>
-    </aside>
-    <article class="tab-panel" data-tab-panel="1" data-side="left">
-      <div class="eyebrow">The Deliverable</div><h2>A package, in the form the review board already reads.</h2>
-      <p>Objectives and margin summary. Load cases and boundary conditions. Modelling and mesh. Solver checks — mesh quality, ground checks, force balance. Margins per part with the critical case. Hand calcs, fatigue, bolted joints. Hours instead of months. A named engineer reviews it, corrects it, and signs it. Oriphim captures every correction.</p>
-    </article>
-    <article class="tab-panel" data-tab-panel="2" data-side="right">
-      <div class="eyebrow">Limits</div><h2>Trust the numbers, not the hype.</h2>
-      <p>Oriphim won't tell you a model is correct. Verification reports what accuracy the mathematics reached and whether conclusions survive real perturbations. Validation reports how far the model diverges from reality under stated conditions. Both are defensible claims. Neither gets dressed up as "good agreement." And every number comes from code and simulation, never from a language model filling in gaps.</p>
-    </article>
-    <nav class="section-tabs" aria-label="Sections">
-      <button type="button" data-tab="0" aria-current="true">01</button><button type="button" data-tab="1">02</button><button type="button" data-tab="2">03</button>
-    </nav>
-  </section>
-  <section class="hero" id="oriphim">
-    <div class="wrap hero-grid">
-      <div class="voxel-plate fade" data-voxel-piece aria-label="Interactive voxel sphere">
-        <canvas class="voxel-sphere" data-voxel-sphere aria-hidden="true"></canvas>
-        <div class="voxel-grab" data-voxel-grab aria-hidden="true"></div>
-      </div>
-
-      <div class="hero-copy">
-        <div class="eyebrow">ORIPHIM RESEARCH - ENTRY No. 01</div>
-        <h1>Simulation that can be defended.</h1>
-        <p class="lede"><span class="oriphim-word">Oriphim</span> takes a described physical system, derives the governing equations, builds and runs the model, subjects it to every check the available reality permits, and states plainly what the numbers do and do not license you to conclude.</p>
-        <div class="cta-row">
-          <a href="/?auth=sign-up" class="btn">Request Access</a>
-          <a href="/archive" class="link-line">Read the archive</a>
+  <div class="story" data-story>
+    <div class="story-stage" aria-hidden="true">
+      <div class="story-orb" data-story-orb>
+        <div class="voxel-plate" data-shape-piece>
+          <canvas class="voxel-sphere" data-voxel-sphere></canvas>
+          <div class="voxel-grab" data-voxel-grab></div>
         </div>
       </div>
-
     </div>
-  </section>
-  <section class="evidence-section" id="distinction">
+
+    <section class="chapter chapter-hero" data-chapter aria-labelledby="hero-title">
+      <div class="hero-lead">
+        <div class="eyebrow">Claim Checks</div>
+        <h1 id="hero-title">Check the claim before you build on it.</h1>
+        <div class="cta-row"><a href="/contact#verification-title" class="btn">Request a Claim Check</a><a href="/archive" class="link-line">Read the archive</a></div>
+      </div>
+      <div class="hero-side">
+        <p class="two-tone"><b><span class="ori-word">Ori</span> rebuilds a paper's computational experiment, runs it, and puts the result next to the printed number.</b> You get one of three answers: it holds, it doesn't, or the paper doesn't say enough to tell.</p>
+      </div>
+      <a class="scroll-cue" href="#how" aria-label="Scroll to how it works">Scroll <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="chapter chapter-how" id="how" data-chapter aria-labelledby="how-title">
+      <div class="side-left">
+        <div class="eyebrow">How it works</div>
+        <h2 id="how-title" class="two-tone"><b>One claim, start to finish.</b> Nothing runs until you sign the brief.</h2>
+      </div>
+      <div class="side-right">
+        <ol class="step-list">
+          <li><b>Rebuild</b><span><span class="ori-word">Ori</span> reads the equations, parameters and assumptions out of the paper and ties each one to the page it came from.</span></li>
+          <li><b>Sign</b><span>You review the brief: the goal, the numbers, and how close counts as a match. One signature, then it runs.</span></li>
+          <li><b>Run</b><span>The calculation runs as plain code, with the domain's own convergence and conservation checks.</span></li>
+          <li><b>Compare</b><span>Each result sits beside the printed number, inside or outside the band agreed before the run.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="chapter chapter-limits" data-chapter data-eye aria-labelledby="limits-title">
+      <div class="side-left">
+        <div class="eyebrow">Limits</div>
+        <h2 id="limits-title">Trust the numbers, not the abstract.</h2>
+        <p>Oriphim never tells you a paper is right. A match means two calculations agree, not that the world does. The report says what was measured, how accurate the computation was, and how far that lands from the printed result.</p>
+        <p>A language model drafts the brief and the prose. Every number comes from code that ran, and every model call is kept in the folder.</p>
+      </div>
+      <div class="side-right">
+        <dl class="verdict-list">
+          <div><dt>Holds</dt><dd>The rerun lands inside the band agreed before the run.</dd></div>
+          <div><dt>Doesn't hold</dt><dd>It lands outside, and the report says by how much.</dd></div>
+          <div><dt>Can't tell</dt><dd>The paper leaves out something a rerun needs, and the report names it.</dd></div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <section class="band band-archive" id="archive" aria-labelledby="archive-title">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">The Distinction</div>
-          <h2>Verification and validation are not the same claim.</h2>
-        </div>
+      <div class="band-head">
+        <div><div class="eyebrow">The archive</div><h2 id="archive-title">Open research, worked in public.</h2></div>
+        <p class="band-note">Physics and maths problems explored with <span class="ori-word">Ori</span>, written up as they go, beside the build log.</p>
       </div>
-
-      <div class="tier-grid">
-        <article class="tier-card fade"><h3>Verification</h3><p>Was the mathematics solved correctly? Numerical error budgets, convergence under refinement, conservation, integrator cross-agreement, dimensional consistency, and sensitivity of the conclusion to every free parameter. This tier needs no reference data. It is available for any system you can describe. Most published computational work has never received it.</p></article>
-        <article class="tier-card fade"><h3>Validation</h3><p>How far is the model from reality? Discrepancy against measurement, with uncertainty carried on both sides — not one representative run compared to an experimental mean and called reasonable. This tier needs reality to compare against: a published benchmark, an inter-laboratory result, or your own test campaign.</p></article>
-      </div>
-      <p class="tier-note">Oriphim says which tier a report belongs to, on the report. It does not produce a report it cannot stand behind.</p>
+      <ol class="archive-list" data-home-archive>
+        <li><a href="/archive"><span class="al-date">Sep 23, 2026</span><span class="al-tag">Research</span><span class="al-main"><b>Hierarchical Tetrahedral Decomposition of the Unit Cube</b><span>How many tetrahedra can decompose a unit cube when the decomposition is driven by point density rather than imposed uniformly?</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
+        <li><a href="/archive"><span class="al-date">Sep 22, 2026</span><span class="al-tag">Build Log</span><span class="al-main"><b>On what's being built.</b><span>A researcher finds a paper that matters to their work, in a field they don't know well. Oriphim is built to do the rebuilding for them.</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
+        <li><a href="/archive/catalogue-01"><span class="al-date">Jul 23, 2026</span><span class="al-tag">Announcement</span><span class="al-main"><b>The Archive is live.</b><span>Build notes, research notes, and honest status updates: what's shipped, what's roadmap, and everything in between.</span></span><span class="al-go" aria-hidden="true">→</span></a></li>
+      </ol>
+      <div class="cta-row archive-cta"><a href="/archive" class="btn">Read the archive</a></div>
     </div>
   </section>
-  <section class="evidence-section"><div class="wrap narrative-grid"><div><div class="eyebrow">The Deliverable</div><h2>A package, in the form the review board already reads.</h2></div><div class="narrative-copy fade"><p>Objectives and margin summary. Load cases and boundary conditions. How the components were modelled and meshed. Solver checks — mesh quality, ground checks, force balance. Margins per part with the critical case shown. Hand calcs. Fatigue and fracture where the program requires it. Bolted joints.</p><p>Hours instead of months. A named person reviews it, corrects it, and signs it. Oriphim captures every correction.</p><p><strong>Judgment stays with the engineer.</strong> Where a credibility framework requires a practitioner's signature, that requirement is the product specification, not a constraint on it.</p></div></div></section>
 
-  <section class="evidence-section limits-section"><div class="wrap narrative-grid"><div><div class="eyebrow">Limits</div><h2>Oriphim does not claim a model is correct.</h2></div><div class="narrative-copy fade"><p>At the verification tier it claims the model was solved to a stated accuracy, and that the conclusions are or are not stable under stated perturbations. At the validation tier it claims the model is wrong by a quantified amount under stated conditions.</p><p>Both are defensible. Neither is “good agreement.”</p><p><strong>No number is written by a language model.</strong> A model may propose a brief and write interpretive prose. Every number in a report comes from deterministic computation.</p></div></div></section>
-
-  <section class="evidence-section"><div class="wrap narrative-grid"><div><div class="eyebrow">Scope</div><h2>Bounded by what you can describe.</h2></div><div class="narrative-copy fade"><p>Verification is available for any system you can pose — a warped accretion disc has no mesh, no machinery and no CAD model, and Oriphim handles it natively. Validation is earned one domain at a time, and Oriphim states the limit explicitly wherever reality is not available to compare against.</p><p>FEA is one solver backend. CAD is one geometry input. Both matter when a system has geometry and are irrelevant when it doesn't.</p></div></div></section>
+  <section class="band band-offer" id="offer" aria-labelledby="offer-title">
+    <div class="wrap">
+      <div class="band-head">
+        <div><div class="eyebrow">Claim Checks</div><h2 id="offer-title">One paper, one claim, a plain answer.</h2></div>
+        <p class="band-note">For anyone who needs to know a published result holds before they build on it.</p>
+      </div>
+      <div class="offer-grid">
+        <article><span class="offer-num">01</span><h3>You send</h3><p>The paper, and the result you need to rely on. A sentence is enough. <span class="ori-word">Ori</span> drafts a brief stating the goal and what counts as a pass, and you sign it before anything runs.</p></article>
+        <article><span class="offer-num">02</span><h3>You get back</h3><p>The verdict, the numbers beside the printed ones, and the folder: a readable report, the chart, and code you can rerun yourself.</p></article>
+        <article><span class="offer-num">03</span><h3>After that</h3><p>Keep working with <span class="ori-word">Ori</span> on a retainer to extend the result, or license the verified environment for your own team, with updates and a verification stamp.</p></article>
+      </div>
+    </div>
+  </section>
 
   <section class="cta-band">
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="eyebrow">Oriphim Research</div>
-      <h2>Bring the idea. Oriphim brings the evidence.</h2>
-      <p style="max-width:58ch;margin:0 auto 30px;color:var(--paper-dim);line-height:1.7;">You articulate the system and the questions, at whatever level of formality you have. You do not supply the equations. That work is Oriphim's.</p>
-      <a href="/?auth=sign-up" class="btn">Request Access</a>
+      <div class="eyebrow">Request a Claim Check</div>
+      <h2>Send us the paper.</h2>
+      <p class="cta-copy">Tell us who you are, which paper, and which claim matters. We'll reply with what a check would involve.</p>
+      <a href="/contact#verification-title" class="btn">Request a Claim Check</a>
     </div>
   </section>
 </main>
@@ -634,7 +551,7 @@
 <footer>
   <div class="wrap">
     <span>&copy; 2026 ORIPHIM, INC.</span>
-    <a class="footer-company" href="/company">Company</a>
+    <nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/#offer">Claim Checks</a><a href="/contact">Contact</a><a href="/company">Company</a></nav>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div>
   </div>
 </footer>
@@ -760,8 +677,9 @@
     });
 
     if (!reduceMotion) {
+      // The contours drift at 40% of their original speed.
       const animateTopo = (time) => {
-        renderTopo(time);
+        renderTopo(time * 0.4);
         requestAnimationFrame(animateTopo);
       };
       requestAnimationFrame(animateTopo);
@@ -860,8 +778,6 @@
 
       const NPT = 52000;
       const PT = new Float32Array(NPT * 3);
-      const hopf = window.createHopfShape(NPT);
-      const gyroid = window.createGyroidShape(NPT);
       const TETRA = new Float32Array(NPT * 3);
       const TETRA_NORMAL = new Float32Array(NPT * 3);
       const TETRA_EDGE = new Float32Array(NPT);
@@ -1120,77 +1036,17 @@
 
       const clamp01 = (x) => x < 0 ? 0 : (x > 1 ? 1 : x);
       const smoothstep = (x) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
-      // Stable point coverage dissolves absent fibres without painting black
-      // pixels into the depth buffer. The thresholds never change per frame.
-      const morphCoverage = new Float32Array(NPT);
-      for (let i=0;i<NPT;i++) morphCoverage[i]=h3(i,83,197);
-      const morphEase = x => { const t=clamp01(x); return t*t*t*(t*(t*6-15)+10); };
-      const morphOut = new Float32Array(3);
-      const shapeA = new Float32Array(3);
-      const shapeB = new Float32Array(3);
-      const morphState = { from: 0, to: 0, elapsed: 0, duration: 0.9 };
-
-      const writeShape = (shape, pointIndex, sx, sy, sz, animationTime, out) => {
-        if (shape === 0) { out[0]=sx*.82; out[1]=sy*.82; out[2]=sz*.82; return; }
-        if (shape === 1) { const i=pointIndex*3; out[0]=gyroid.points[i]; out[1]=gyroid.points[i+1]; out[2]=gyroid.points[i+2]; return; }
-        const hi = pointIndex * 3;
-        out[0]=hopf.points[hi];out[1]=hopf.points[hi+1];out[2]=hopf.points[hi+2];
-      };
-
-      const morphPoint = (pointIndex, sx, sy, sz, animationTime, mt) => {
-        // Outside an active transition mt is pinned at 0 or 1 essentially all the time
-        // (transitions last 0.9s), so most frames only need one shape evaluated, not both.
-        if (mt <= 0) { writeShape(morphState.from,pointIndex,sx,sy,sz,animationTime,morphOut); return; }
-        if (mt >= 1) { writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,morphOut); return; }
-        writeShape(morphState.from,pointIndex,sx,sy,sz,animationTime,shapeA);
-        writeShape(morphState.to,pointIndex,sx,sy,sz,animationTime,shapeB);
-        // Keep the Hopf/sphere exchange open and round: interpolate radius
-        // separately from direction rather than collapsing through the centre.
-        if ((morphState.from===2 && morphState.to===0) || (morphState.from===0 && morphState.to===2)) {
-          const ar=Math.sqrt(shapeA[0]**2+shapeA[1]**2+shapeA[2]**2);
-          const br=Math.sqrt(shapeB[0]**2+shapeB[1]**2+shapeB[2]**2);
-          if (ar>1e-6 && br>1e-6) {
-            const ax=shapeA[0]/ar,ay=shapeA[1]/ar,az=shapeA[2]/ar;
-            const bx=shapeB[0]/br,by=shapeB[1]/br,bz=shapeB[2]/br;
-            const dot=Math.max(-1,Math.min(1,ax*bx+ay*by+az*bz));
-            // Nearly opposite directions need an explicit arc to avoid a flip.
-            if (dot < -.95) {
-              let tx=bx-ax*dot,ty=by-ay*dot,tz=bz-az*dot;
-              let tl=Math.sqrt(tx*tx+ty*ty+tz*tz);
-              if(tl<1e-6){tx=-ay;ty=ax;tz=0;tl=Math.sqrt(tx*tx+ty*ty);if(tl<1e-6){tx=1;ty=0;tl=1;}}
-              const angle=Math.acos(dot)*mt,c=Math.cos(angle),sn=Math.sin(angle),r=ar+(br-ar)*mt;
-              morphOut[0]=(ax*c+tx/tl*sn)*r;morphOut[1]=(ay*c+ty/tl*sn)*r;morphOut[2]=(az*c+tz/tl*sn)*r;
-            } else {
-              const x=ax+(bx-ax)*mt,y=ay+(by-ay)*mt,z=az+(bz-az)*mt;
-              const scale=(ar+(br-ar)*mt)/Math.sqrt(x*x+y*y+z*z);
-              morphOut[0]=x*scale;morphOut[1]=y*scale;morphOut[2]=z*scale;
-            }
-            return;
-          }
-        }
-        morphOut[0]=shapeA[0]+(shapeB[0]-shapeA[0])*mt;
-        morphOut[1]=shapeA[1]+(shapeB[1]-shapeA[1])*mt;
-        morphOut[2]=shapeA[2]+(shapeB[2]-shapeA[2])*mt;
-      };
-
-      // Bumped above 1 only during the double-click transition — coarsens the
-      // voxel grid so the shape/eye swap reads as a hard pixel dissolve.
+      // Bumped above 1 only during the eye transition — coarsens the
+      // voxel grid so the sphere/eye swap reads as a hard pixel dissolve.
       let renderCoarse = 1;
 
       const frame = (ft, animationTime) => {
         const cx = gw * 0.5;
         const cy = gh * 0.5;
         const R = Math.min(gw, gh) * SIZE;
-        const mt=morphEase(morphState.elapsed/morphState.duration);
-        const hopfMix=(morphState.from===2?1-mt:0)+(morphState.to===2?mt:0);
-        const gyroidMix=(morphState.from===1?1-mt:0)+(morphState.to===1?mt:0);
-        const surfaceMix=hopfMix+gyroidMix;
-        if (gyroidMix > 0) gyroid.prepare(animationTime);
-        if (hopfMix > 0) hopf.prepare(animationTime);
-        const G = (VOX + (R / 1.8 - VOX) * surfaceMix) / renderCoarse;
-        // All shapes enlarge their pixels with the same eye-swap grid.
-        // Keep the surface render's existing two-pixel minimum at rest.
-        const s = Math.max(surfaceMix === 1 ? 2 : 1, Math.ceil(R / G));
+        const G = VOX / renderCoarse;
+        // The eye swap enlarges the sphere's pixels with the same coarsened grid.
+        const s = Math.max(1, Math.ceil(R / G));
         const half = s * 0.5;
         const m0 = M[0];
         const m1 = M[1];
@@ -1202,11 +1058,10 @@
         const m7 = M[7];
         const m8 = M[8];
         const tetraMix=0; // The former tetrahedron slot now contains Hopf fibres.
-        const sphereMix=(morphState.from===0?1-mt:0)+(morphState.to===0?mt:0);
         const tw = 1.7 * (A.turb*(1-tetraMix)+tetraMix);
-        const amp = A.amp * (0.20+0.35*sphereMix) * (1-tetraMix) * (1-surfaceMix);
+        const amp = A.amp * 0.55 * (1-tetraMix);
         const F = 0.32;
-        const active = Math.max(1200, (NPT * (A.den*(1-surfaceMix)+hopfMix+gyroid.density*gyroidMix)) | 0);
+        const active = Math.max(1200, (NPT * A.den) | 0);
 
         val.fill(0);
         depth.fill(-1e9);
@@ -1214,36 +1069,23 @@
         for (let k = 0; k < active; k += 1) {
           const i = ORDER[k] * 3;
           const sourceIndex = ORDER[k];
-          // Missing Hopf fibres have zero coverage, not zero brightness.
-          // Skip them before depth testing so they cannot cast a false silhouette.
-          if (hopfMix > 0 && !hopf.visible[sourceIndex] && morphCoverage[sourceIndex] < hopfMix) continue;
-          morphPoint(sourceIndex, PT[i], PT[i + 1], PT[i + 2], animationTime, mt);
-          const dx = morphOut[0];
-          const dy = morphOut[1];
-          const dz = morphOut[2];
+          const ux=PT[i],uy=PT[i+1],uz=PT[i+2];
+          const dx = ux * .82;
+          const dy = uy * .82;
+          const dz = uz * .82;
           const wx = m0 * dx + m1 * dy + m2 * dz;
           const wy = m3 * dx + m4 * dy + m5 * dz;
           const wz = m6 * dx + m7 * dy + m8 * dz;
-          const ux=PT[i],uy=PT[i+1],uz=PT[i+2];
-          const bnx=m0*ux+m1*uy+m2*uz,bny=m3*ux+m4*uy+m5*uz,bnz=m6*ux+m7*uy+m8*uz;
-          const ni=sourceIndex*3;
-          const gn0=gyroid.normals[ni],gn1=gyroid.normals[ni+1],gn2=gyroid.normals[ni+2];
-          const gnx=m0*gn0+m1*gn1+m2*gn2,gny=m3*gn0+m4*gn1+m5*gn2,gnz=m6*gn0+m7*gn1+m8*gn2;
-          const nx=bnx+(gnx-bnx)*gyroidMix,ny=bny+(gny-bny)*gyroidMix,nz=bnz+(gnz-bnz)*gyroidMix;
-          // the lattice is a see-through cage — keep its far struts; only the solid shells cull
-          if (nz < (-0.28 - 1.72 * hopfMix + .23 * gyroidMix)) continue;
+          const nx=m0*ux+m1*uy+m2*uz,ny=m3*ux+m4*uy+m5*uz,nz=m6*ux+m7*uy+m8*uz;
+          if (nz < -0.28) continue;
 
           const sx = ux * F;
           const sy = uy * F;
           const sz = uz * F;
           const frozenFt=ft*(1-tetraMix);
-          // Surface-to-surface morphs do not need the sphere's noise volume.
-          let f = 0.5;
-          if (sphereMix > 0) {
-            const q = fbm(sx, sy, sz + frozenFt * 0.3);
-            f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
-            f = f * f * (3 - 2 * f);
-          }
+          const q = fbm(sx, sy, sz + frozenFt * 0.3);
+          let f = fbm(sx + tw * q, sy + tw * q * 0.8 + frozenFt * 0.15, sz - tw * q);
+          f = f * f * (3 - 2 * f);
           const rr = 1 + amp * (f - 0.5) * 2;
           const X = Math.round(wx * rr * G) / G;
           const Y = Math.round(wy * rr * G) / G;
@@ -1274,26 +1116,11 @@
           }
           if (tetraMix > 0 && TETRA_EDGE[sourceIndex] < 0.05) v *= 1 - 0.5 * tetraMix;
           v *= (0.58 + 0.42 * (Z + 1) * 0.5) * (1 - tetraMix) + tetraMix;
-          if (gyroidMix > 0) {
-            const gx=gyroid.points[ni]*(.41/.42),gy=gyroid.points[ni+1]*(.41/.42),gz=gyroid.points[ni+2]*(.41/.42);
-            const gl=Math.max(0,gnx*(-.44)+gny*.55+gnz*.71);
-            const gr=Math.pow(1-Math.abs(gnz),5)*.75;
-            const pat=.5+.5*Math.sin(2.3*(gx+gy)+1.9*gz-gyroid.flowTime*1.6);
-            const gv=((.12+.95*gl)*(.55+.62*pat)+gr)*gyroid.glow*(.66+.34*(wz*(.41/.42)+1.2)/2.4);
-            v=v*(1-gyroidMix)+gv*gyroidMix;
-            cm=cm*(1-gyroidMix)+((pat-.5)*1.3+(gl-.5)*.4)*gyroidMix;
-          }
-          if (hopfMix > 0 && hopf.visible[sourceIndex]) {
-            const hv = hopf.brightness[sourceIndex] * (0.66 + 0.34 * (wz * (.41/.27) + 1.6) / 3.2);
-            v = v * (1-hopfMix) + hv * hopfMix;
-            cm = cm * (1-hopfMix) + hopf.chroma[sourceIndex] * hopfMix;
-
-          }
           const spx = cx + X * R;
           const spy = cy - Y * R;
           const x0 = (spx - half) | 0;
           const y0 = (spy - half) | 0;
-          const ve = v * (0.74 + 0.26 * surfaceMix);   // no per-splat edge shadow on the lattice rods
+          const ve = v * 0.74;
 
           for (let yy = y0; yy < y0 + s; yy += 1) {
             if (yy < 0 || yy >= gh) continue;
@@ -1549,8 +1376,10 @@
         ctx.drawImage(off, 0, 0, cv.width, cv.height);
       };
 
-      // double-click swap, with a short hard-pixel dissolve
+      // sphere/eye swap, with a short hard-pixel dissolve: double-click toggles it,
+      // and the page's scroll can ask for a state (wantEye) that is applied once any swap ends.
       const swap = { active: false, t: 0, dur: 0.5, target: false };
+      let wantEye = null;
       const renderActive = (ft, at) => { if (eyeMode) renderEye(ft); else frame(ft, at); };
       let lastToggle = 0;
       const toggleEye = (event) => {
@@ -1558,6 +1387,7 @@
         const now = performance.now();
         if (now - lastToggle < 260) return;   // one flip per double-click, not per bubble
         lastToggle = now;
+        wantEye = null;
         if (swap.active) return;
         if (reduceMotion) { eyeMode = !eyeMode; renderActive(ftAcc, animationTime); return; }
         swap.active = true; swap.t = 0; swap.target = !eyeMode;
@@ -1580,9 +1410,8 @@
         A.turb = 0.45 + 1.40 * lfo(cyc, 41, 23.9, 5.2);
         ftAcc += dt * (eyeMode ? 0.40 : 0.08) * A.flow;
         animationTime += dt;
-        morphState.elapsed=Math.min(morphState.duration,morphState.elapsed+dt);
 
-        // double-click swap: coarsen the grid to the midpoint, flip mode, refine back
+        // eye swap: coarsen the grid to the midpoint, flip mode, refine back
         if (swap.active) {
           swap.t += dt;
           const h = swap.dur * 0.5;
@@ -1593,6 +1422,9 @@
             renderCoarse = 1 + 6 * Math.max(0, 1 - (swap.t - h) / h);
           }
           if (swap.t >= swap.dur) { swap.active = false; renderCoarse = 1; }
+        }
+        if (!swap.active && wantEye !== null && wantEye !== eyeMode) {
+          swap.active = true; swap.t = 0; swap.target = wantEye;
         }
         if (eyeMode || swap.active) {
           gazeT += dt;
@@ -1625,11 +1457,9 @@
 
       resize();
       frame(0,0);
-      piece.__setShape=(next)=>{
-        const shape=Math.max(0,Math.min(2,Number(next)||0));
-        if(shape===morphState.to)return;
-        morphState.from=morphState.to;morphState.to=shape;morphState.elapsed=reduceMotion?morphState.duration:0;
-        if(reduceMotion){morphState.from=shape;frame(ftAcc,animationTime);}
+      piece.__setEye=(on)=>{
+        wantEye=!!on;
+        if(reduceMotion&&wantEye!==eyeMode){eyeMode=wantEye;renderActive(ftAcc,animationTime);}
       };
       if (window.ResizeObserver) {
         new ResizeObserver(() => {
@@ -1648,39 +1478,67 @@
   })();
 
   (()=>{
-    const experience=document.querySelector('[data-tab-experience]');
-    if(!experience)return;
+    const story=document.querySelector('[data-story]');
+    if(!story)return;
     const topbar=document.querySelector('.topbar');
     const syncTopbarHeight=()=>document.body.style.setProperty('--topbar-h',`${Math.ceil(topbar?.getBoundingClientRect().height||79)}px`);
     syncTopbarHeight();
     if(topbar&&window.ResizeObserver)new ResizeObserver(syncTopbarHeight).observe(topbar);
     else window.addEventListener('resize',syncTopbarHeight);
-    const buttons=[...experience.querySelectorAll('[data-tab]')];
-    const panels=[...experience.querySelectorAll('[data-tab-panel]')];
-    const reports=[...experience.querySelectorAll('[data-tab-report]')];
-    const stage=experience.querySelector('[data-tab-orb-stage]');
-    const piece=experience.querySelector('[data-shape-piece]');
-    let active=0;
-    const showTab=(index,focus=false)=>{
-      const next=(index+buttons.length)%buttons.length;
-      if(next===active&&panels[next].classList.contains('is-active'))return;
-      active=next;
-      panels.forEach((panel,i)=>{const on=i===active;panel.classList.toggle('is-active',on);panel.setAttribute('aria-hidden',on?'false':'true');});
-      reports.forEach(report=>{report.classList.toggle('is-active',Number(report.dataset.tabReport)===active);});
-      buttons.forEach((button,i)=>{if(i===active)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');});
-      piece?.__setShape?.(active);
-      if(focus)buttons[active].focus();
+    const chapters=[...story.querySelectorAll('[data-chapter]')];
+    const piece=story.querySelector('[data-shape-piece]');
+    let active=-1;
+    const showChapter=(index)=>{
+      if(index===active)return;
+      active=index;
+      chapters.forEach((chapter,i)=>chapter.classList.toggle('is-active',i===index));
+      story.toggleAttribute('data-dim',chapters[index].hasAttribute('data-dim'));
+      piece?.__setEye?.(chapters[index].hasAttribute('data-eye'));
     };
-    buttons.forEach((button,i)=>{
-      button.addEventListener('click',()=>showTab(i));
-      button.addEventListener('keydown',event=>{
-        if(event.key==='ArrowRight'||event.key==='ArrowDown'){event.preventDefault();showTab(active+1,true);}
-        if(event.key==='ArrowLeft'||event.key==='ArrowUp'){event.preventDefault();showTab(active-1,true);}
-        if(event.key==='Home'){event.preventDefault();showTab(0,true);}
-        if(event.key==='End'){event.preventDefault();showTab(buttons.length-1,true);}
+    // Statement words light up one by one as the statement scrolls through the viewport.
+    const lit=story.querySelector('[data-scroll-lit]');
+    const words=[];
+    if(lit){
+      const text=lit.textContent.trim();
+      lit.setAttribute('aria-label',text);
+      lit.textContent='';
+      text.split(/\s+/).forEach((word,i)=>{
+        const span=document.createElement('span');
+        span.className=/^Ori\b/.test(word)?'lit-word ori-word':'lit-word';
+        span.setAttribute('aria-hidden','true');
+        span.textContent=word;
+        if(i)lit.append(' ');
+        lit.append(span);
+        words.push(span);
       });
-    });
-    showTab(0);
+    }
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lightWords=()=>{
+      if(!words.length)return;
+      if(reduceMotion){words.forEach(word=>word.classList.add('is-lit'));return;}
+      const rect=lit.getBoundingClientRect();
+      const start=window.innerHeight*0.85;
+      const end=window.innerHeight*0.35;
+      const progress=Math.min(1,Math.max(0,(start-rect.top)/(start-end+rect.height*0.5)));
+      const count=Math.round(progress*words.length);
+      words.forEach((word,i)=>word.classList.toggle('is-lit',i<count));
+    };
+    // The last chapter whose top has crossed the middle of the viewport owns the orb.
+    const pickChapter=()=>{
+      const middle=window.innerHeight/2;
+      let next=0;
+      chapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<=middle)next=i;});
+      showChapter(next);
+    };
+    let queued=false;
+    window.addEventListener('scroll',()=>{
+      if(queued)return;
+      queued=true;
+      requestAnimationFrame(()=>{queued=false;pickChapter();lightWords();});
+    },{passive:true});
+    window.addEventListener('resize',()=>{pickChapter();lightWords();});
+    pickChapter();
+    lightWords();
   })();
 
 
@@ -1690,6 +1548,31 @@
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>
 <script src="/script.js"></script>
+<script>
+  // Replace the archive section's fallback entries with the latest three from the archive.
+  (async()=>{
+    const list=document.querySelector('[data-home-archive]');
+    const sb=window.sb;
+    if(!list||!sb)return;
+    try{
+      const {data,error}=await sb.from('archive_entries').select('id,title,body,tag,created_at').order('created_at',{ascending:false}).order('id',{ascending:false}).limit(3);
+      if(error||!data?.length)return;
+      const make=(tag,text,className)=>{const el=document.createElement(tag);if(className)el.className=className;el.textContent=text;return el;};
+      list.replaceChildren(...data.map(entry=>{
+        const excerpt=String(entry.body||'').replace(/[#*_`>\[\]()]/g,'').replace(/\s+/g,' ').trim();
+        const link=document.createElement('a');
+        link.href='/archive/entry?id='+encodeURIComponent(entry.id);
+        const main=make('span','','al-main');
+        main.append(make('b',entry.title),make('span',excerpt.length>170?excerpt.slice(0,170).replace(/\s+\S*$/,'')+'…':excerpt));
+        link.append(make('span',new Date(entry.created_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),'al-date'),make('span',entry.tag||'','al-tag'),main,make('span','→','al-go'));
+        link.lastChild.setAttribute('aria-hidden','true');
+        const item=document.createElement('li');
+        item.append(link);
+        return item;
+      }));
+    }catch{}
+  })();
+</script>
 <script src="/assets/waitlist.js" defer></script>
 </body>
 </html>
