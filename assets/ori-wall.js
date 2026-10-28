@@ -276,11 +276,16 @@
 
   function splat(wx,wy,wz,v,cm){
     const X=Math.round(wx*G)/G, Y=Math.round(wy*G)/G, Z=Math.round(wz*G)/G;
-    const xx=(cxg+X*R)|0, yy=(cyg-Y*R)|0;
+    // X*R is a whole number give or take float error, so round it; truncating
+    // dropped any row or column where the error landed just above the integer.
+    const xx=(cxg|0)+Math.round(X*R), yy=(cyg|0)-Math.round(Y*R);
     if(xx<0||xx>=rw||yy<0||yy>=rh) return;
     const idx=yy*rw+xx;
     if(Z>depth[idx]){ depth[idx]=Z; val[idx]=v; chb[idx]=cm; }
   }
+
+  // On wide screens the eye sits right of centre, leaving the left for the copy.
+  function eyeX(){ return innerWidth>980 && rw>rh*1.2 ? 0.68 : 0.5; }
 
   // ---- the field: panels, cloud, blooms, vignette -----------------------
   // Everything that is not the figure, on the shading grid. It does double
@@ -288,7 +293,7 @@
   // visibly wash over the eye as they drift.
   function buildField(t){
     const d1=t*CLOUD_DRIFT, d2=t*CLOUD_DRIFT*0.61;
-    const cx=rw*0.5, cy=rh*0.5, hd=1/Math.hypot(cx,cy);
+    const cx=rw*eyeX(), cy=rh*0.5, hd=1/Math.hypot(cx,cy);
     const cs=CLOUD_PX*CELL_PX;              // cloud frequency per shading cell
 
     // --- the cloud, on the coarse grid only
@@ -376,7 +381,7 @@
   // ---- shade: figure into the shading grid ------------------------------
   let gazeT=0;
   function shade(ft){
-    cxg=rw*0.5; cyg=rh*0.5;
+    cxg=rw*eyeX(); cyg=rh*0.5;
     R=Math.min(rw,rh)*SIZE;
     G=R;                                     // one voxel per shading cell
     const m0=M[0],m1=M[1],m2=M[2],m3=M[3],m4=M[4],m5=M[5],m6=M[6],m7=M[7],m8=M[8];

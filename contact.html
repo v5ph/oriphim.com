@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact | Oriphim</title>
-<meta name="description" content="Start a research verification or join the Oriphim early-access waitlist.">
+<meta name="description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/contact">
 <meta name="theme-color" content="#120d0e">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
 <meta property="og:title" content="Contact | Oriphim">
-<meta property="og:description" content="Start a research verification or join the Oriphim early-access waitlist.">
+<meta property="og:description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
 <meta property="og:url" content="https://oriphim.com/contact">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact | Oriphim">
-<meta name="twitter:description" content="Start a research verification or join the Oriphim early-access waitlist.">
+<meta name="twitter:description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -48,35 +48,39 @@
 <main class="wrap contact-main">
   <header class="contact-intro">
     <img src="/assets/oriphim-logo.svg?v=6" alt="Oriphim" width="42" height="30">
-    <h1>Research without barriers.</h1>
+    <h1>For teams whose work rests on a model.</h1>
   </header>
-  <div class="contact-grid">
-    <section aria-labelledby="verification-title">
-      <p class="contact-kicker">For researchers &amp; teams</p>
-      <h2 id="verification-title">Request a Claim Check</h2>
-      <form id="verification-form">
-        <div class="field-pair">
-          <label for="verification-name">Name<input id="verification-name" name="name" autocomplete="name" required maxlength="120"></label>
-          <label for="verification-institution">Institution<input id="verification-institution" name="institution" autocomplete="organization" required maxlength="160"></label>
-        </div>
-        <label for="verification-area">Research area<input id="verification-area" name="research_area" required maxlength="160" placeholder="e.g. Plasma physics"></label>
-        <label for="verification-brief">Which paper, and which claim?<textarea id="verification-brief" name="description" required maxlength="1500" rows="3" placeholder="A link or DOI, and the result you need to rely on. A sentence is enough."></textarea></label>
-        <div class="contact-submit"><button type="submit">Book a call <span aria-hidden="true">↗</span></button><p>Choose a time on Calendly.</p></div>
-        <p class="contact-status" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-    <section aria-labelledby="early-access-title">
-      <p class="contact-kicker">For independent explorers</p>
-      <h2 id="early-access-title">Join early access</h2>
-      <form id="early-access-form">
-        <label for="early-access-email">Email<input id="early-access-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>
-        <label for="early-access-interest">Research interest<input id="early-access-interest" name="research_interest" required maxlength="160" placeholder="e.g. Complex systems"></label>
-        <label for="early-access-explore">What would you want to explore?<textarea id="early-access-explore" name="exploration" required maxlength="1500" rows="3" placeholder="Tell us what you’re curious about."></textarea></label>
-        <div class="contact-submit"><button type="submit">Join waitlist <span aria-hidden="true">→</span></button><p>Email me about early access and Oriphim updates.</p></div>
-        <p class="contact-status" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-  </div>
+  <section class="contact-single" aria-labelledby="verification-title">
+    <h2 id="verification-title">Tell me what you need</h2>
+    <form id="contact-form" data-questions="contactQuestions">
+      <div class="field-pair">
+        <label for="contact-name">Name<input id="contact-name" name="name" autocomplete="name" required maxlength="120"></label>
+        <label for="contact-email">Work email<input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></label>
+      </div>
+      <div class="field-pair">
+        <label for="contact-company">Company<input id="contact-company" name="company" autocomplete="organization" required maxlength="160"></label>
+        <label for="contact-stage">Stage<select id="contact-stage" name="stage" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Pre-seed</option>
+          <option>Seed</option>
+          <option>Series A or later</option>
+          <option>Established company or lab</option>
+        </select></label>
+      </div>
+      <div class="field-pair">
+        <label for="contact-interest">Interested in<select id="contact-interest" name="interest" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>A free Claim Check</option>
+          <option>A licence quote</option>
+          <option>Both</option>
+        </select></label>
+        <label for="contact-seats">Seats, if licensing<input id="contact-seats" name="seats" type="number" inputmode="numeric" min="1" max="10000" placeholder="e.g. 5"></label>
+      </div>
+      <label for="contact-brief">Which claim or model does your work rest on?<textarea id="contact-brief" name="description" required maxlength="1500" rows="3" placeholder="A paper, a model or a result, and the number you need to rely on. A sentence is enough."></textarea></label>
+      <div class="contact-submit"><button type="submit">Book a call <span aria-hidden="true">↗</span></button><p>One free Claim Check per company. Licences are priced per seat, quoted within two business days.</p></div>
+      <p class="contact-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
 </main>
 <footer><div class="wrap"><span>&copy; 2026 ORIPHIM, INC.</span><nav class="footer-nav" aria-label="Footer"><a href="/archive">Archive</a><a href="/contact" aria-current="page">Contact</a><a href="/company">Company</a></nav>
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>

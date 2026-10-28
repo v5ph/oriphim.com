@@ -11,16 +11,15 @@ body.story-layout{overflow-x:hidden;}
 .btn,.signin-btn,.nav-btn{background:var(--bg);color:var(--paper);border:1px solid var(--paper);text-shadow:none;}
 .btn:hover,.signin-btn:hover,.nav-btn:hover{background:var(--paper);color:var(--bg);}
 .signin-btn,.nav-btn{font-weight:500;}
-.wall-copy{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:minmax(0,26vw) minmax(0,1fr) minmax(0,23vw);gap:2vw;align-items:center;padding:0 4vw 56px;text-shadow:0 1px 14px rgba(11,5,6,.9);}
+.wall-copy{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:minmax(0,34vw) minmax(0,1fr);gap:2vw;align-items:center;padding:0 4vw 56px;text-shadow:0 1px 14px rgba(11,5,6,.9);}
 .wall-copy .eyebrow{margin-bottom:18px;color:var(--paper-dim);}
 .wall-copy h1{color:var(--paper);font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
 .wall-copy .cta-row{margin-top:28px;}
 .wall-copy .link-line{color:var(--paper);border-color:var(--paper);}
 .wall-copy .two-tone{color:rgba(226,223,216,.84);}
 .wall-copy .two-tone b{color:var(--paper);}
-/* Solid plates behind the copy, in the buttons' black and white, so nothing has to be read through the dither. */
-.wall-copy .hero-lead,.wall-copy .hero-side .two-tone{background:var(--bg);border:1px solid var(--paper);padding:20px 22px;text-shadow:none;}
-.wall-copy .hero-lead{padding:24px 26px 26px;}
+/* A black gradient from the left edge, so the copy reads clear of the dither without a box around it. */
+.wall-hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(18,13,14,.96) 0%,rgba(18,13,14,.88) 28%,rgba(18,13,14,.45) 46%,rgba(18,13,14,0) 62%);}
 
 /* The separation bar: black like the wallpaper, ruled white above and below. */
 .info-bar{position:relative;z-index:2;background:var(--bg);color:var(--paper);border-top:1px solid var(--paper);border-bottom:1px solid var(--paper);}
@@ -46,24 +45,45 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .two-tone{color:rgba(226,223,216,.55);}
 .two-tone b{color:var(--ink);font-weight:inherit;}
 
-/* 01: copy either side of the wallpaper's eye. */
+/* 01: one column of copy on the left; ori-wall.js moves the eye to the right on wide screens. */
 .hero-lead{grid-column:1;}
-.hero-side{grid-column:3;}
-.hero-side .two-tone{font-size:clamp(15px,1.2vw,18px);line-height:1.55;}
+.hero-sub{margin-top:18px;font-size:clamp(15px,1.2vw,18px);line-height:1.55;color:var(--paper);max-width:34ch;}
 
-/* 02 and 03: heading and copy on the left, the list on the right. */
-.chapter-how,.chapter-limits{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;}
-.side-left{grid-column:1;}
-.side-right{grid-column:2;}
-.side-right .step-list,.side-right .verdict-list{margin-top:0;}
-.side-right .step-list li,.side-right .verdict-list>div{grid-template-columns:1fr;gap:5px;padding:14px 0;}
-.chapter-how h2,.chapter-limits h2{max-width:13ch;}
+/* 02: the terminal is the page's main picture, with the four steps as one line of captions under it. */
+.chapter-how,.chapter-limits{display:block;}
+.chapter-how h2,.chapter-limits h2{max-width:none;}
+.cli-demo{margin:44px 0 0;border:1px solid var(--paper);background:var(--bg-deep);}
+.cli-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line);font:11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);}
+.cli-bar i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(226,223,216,.4);}
+.cli-bar span{margin-left:10px;}
+.cli-body{margin:0;padding:24px 26px 28px;overflow-x:auto;font:13.5px/1.75 'IBM Plex Mono',monospace;color:var(--ink);white-space:pre;}
+.cli-body .ln{transition:opacity .35s ease;}
+.cli-demo.is-typing .ln{opacity:0;}
+.cli-demo.is-typing .ln.is-shown{opacity:1;}
+.c-dim{color:rgba(226,223,216,.5);}
+.c-key{color:#e0583a;}
+.c-holds{color:var(--green);font-weight:600;}
+/* Files look the same in the terminal and in the folder below. */
+.file{display:inline-block;padding:1px 9px;border:1px solid rgba(226,223,216,.4);font:13px/1.6 'IBM Plex Mono',monospace;color:var(--ink);}
+.how-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--paper);border-top:0;counter-reset:step;}
+.how-steps li{padding:18px 20px;display:grid;gap:6px;}
+.how-steps li + li{border-left:1px solid var(--line);}
+.how-steps b{font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);}
+.how-steps b::before{counter-increment:step;content:"0" counter(step) "\00a0\00a0";opacity:.55;}
+.how-steps span{font-size:14px;line-height:1.5;color:var(--ink-soft);}
 
-.step-list,.verdict-list{list-style:none;margin:26px 0 0;border-top:1px solid var(--line);counter-reset:step;max-width:620px;}
-.step-list li,.verdict-list>div{display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline;}
-.step-list b,.verdict-list dt{font:500 11.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);}
-.step-list b::before{counter-increment:step;content:"0" counter(step) "\00a0\00a0";opacity:.55;}
-.step-list span,.verdict-list dd{font-size:14px;line-height:1.55;color:var(--ink-soft);}
+/* 03: the three verdicts, big and in their signal colours. */
+.verdict-cols{margin-top:44px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.verdict-cols>div{padding:34px 28px 34px 0;}
+.verdict-cols>div + div{padding-left:28px;border-left:1px solid var(--line);}
+.verdict-cols strong{display:block;font:560 clamp(30px,3.4vw,50px)/1 'Geist Mono',monospace;letter-spacing:-.02em;text-transform:uppercase;}
+.verdict-cols p{margin-top:16px;font-size:15px;line-height:1.5;color:var(--ink-soft);max-width:28ch;}
+.verdict-cols [data-verdict="holds"] strong{color:var(--green);}
+.verdict-cols [data-verdict="fails"] strong{color:#e0583a;}
+.verdict-cols [data-verdict="unclear"] strong{color:var(--blue);}
+.verdict-cols [data-verdict="standin"] strong{color:var(--ink);}
+.c-fill{color:var(--blue);}
+.chapter .fine-print{margin-top:22px;font:12px/1.6 'IBM Plex Mono',monospace;color:rgba(226,223,216,.5);max-width:none;}
 
 .app-shot{margin:0;}
 .app-shot img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid rgba(24,19,15,.6);box-shadow:0 30px 60px -18px rgba(24,19,15,.55);}
@@ -114,11 +134,13 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .log-body{font-size:14px;line-height:1.6;color:var(--rec-dim);}
 .log-result{color:#f0a37e;}
 
-.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink);border:1px solid var(--ink);}
-.offer-grid article{background:var(--bg);padding:34px 30px 38px;}
-.offer-num{font:11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);}
-.offer-grid h3{font-size:22px;margin:14px 0;}
-.offer-grid p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);}
+/* 04: the folder, as the same file chips the terminal prints. */
+.band-offer .wrap{max-width:none;padding:0 4vw;}
+.band-offer h2{font-size:clamp(30px,3.6vw,48px);line-height:1.06;}
+.file-row{list-style:none;margin:40px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:14px;}
+.file-row .file{padding:14px 22px;font-size:15px;border-color:var(--paper);}
+.offer-line{margin-top:30px;font-size:15px;line-height:1.6;color:var(--ink-soft);}
+.offer-line a{color:var(--ink);text-underline-offset:3px;}
 
 .cta-band{z-index:1;padding:56px 0;border-top:1px solid rgba(194,57,27,.55);border-bottom:1px solid rgba(194,57,27,.55);}
 .cta-band h2{margin-bottom:20px;}
@@ -135,8 +157,8 @@ footer .wrap,.footer-x{color:var(--paper);}
   .wall-hero .topbar .wrap{padding:0 clamp(20px,6vw,48px);}
   /* The eye stays in the middle: the lead above it, the side copy below. */
   .wall-copy{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;align-items:start;padding:12px clamp(20px,6vw,48px) 28px;gap:0;}
-  .wall-copy .hero-lead,.wall-copy .hero-side{grid-column:1;}
-  .wall-copy .hero-side{grid-row:3;}
+  .wall-copy .hero-lead{grid-column:1;}
+  .wall-hero::after{background:linear-gradient(180deg,rgba(18,13,14,.96) 0%,rgba(18,13,14,.85) 38%,rgba(18,13,14,0) 62%);}
   .wall-copy h1{font-size:clamp(26px,6vw,40px);max-width:20ch;}
   .wall-copy .eyebrow{margin-bottom:10px;}
   .wall-copy .cta-row{margin-top:16px;gap:18px;}
@@ -147,7 +169,14 @@ footer .wrap,.footer-x{color:var(--paper);}
   .band{padding:72px 0;}
   .record-grid{grid-template-columns:1fr;}
   .record-log li{grid-template-columns:1fr;gap:6px;}
-  .offer-grid{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .how-steps li:nth-child(3){border-left:0;}
+  .how-steps li:nth-child(n+3){border-top:1px solid var(--line);}
+  .band-offer .wrap{padding:0 clamp(20px,6vw,48px);}
+  .verdict-cols{grid-template-columns:1fr;}
+  .verdict-cols>div,.verdict-cols>div + div{padding:24px 0;border-left:0;}
+  .verdict-cols>div + div{border-top:1px solid var(--line);}
+  .cli-body{font-size:12px;padding:18px 16px 20px;}
 }
 @media (max-width:640px){
   .step-list li,.verdict-list>div{grid-template-columns:1fr;gap:4px;}

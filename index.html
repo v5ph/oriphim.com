@@ -429,10 +429,8 @@
       <div class="hero-lead">
         <div class="eyebrow">Claim Checks</div>
         <h1 id="hero-title">Check the claim before you build on it.</h1>
+        <p class="hero-sub"><span class="ori-word">Ori</span> reruns a paper's computation and tells you if the printed number holds.</p>
         <div class="cta-row"><a href="/contact#verification-title" class="btn">Request a Claim Check</a><a href="/archive" class="link-line">Read the archive</a></div>
-      </div>
-      <div class="hero-side">
-        <p class="two-tone"><b><span class="ori-word">Ori</span> rebuilds a paper's computational experiment, runs it, and puts the result next to the printed number.</b> You get one of three answers: it holds, it doesn't, or the paper doesn't say enough to tell.</p>
       </div>
   </div>
 </header>
@@ -446,50 +444,55 @@
 </nav>
 
 <main>
-  <div class="story">
-    <section class="chapter chapter-how" id="how" aria-labelledby="how-title">
-      <div class="side-left">
-        <div class="eyebrow">How it works</div>
-        <h2 id="how-title" class="two-tone"><b>One claim, start to finish.</b> Nothing runs until you sign the brief.</h2>
-      </div>
-      <div class="side-right">
-        <ol class="step-list">
-          <li><b>Rebuild</b><span><span class="ori-word">Ori</span> reads the equations, parameters and assumptions out of the paper and ties each one to the page it came from.</span></li>
-          <li><b>Sign</b><span>You review the brief: the goal, the numbers, and how close counts as a match. One signature, then it runs.</span></li>
-          <li><b>Run</b><span>The calculation runs as plain code, with the domain's own convergence and conservation checks.</span></li>
-          <li><b>Compare</b><span>Each result sits beside the printed number, inside or outside the band agreed before the run.</span></li>
-        </ol>
-      </div>
-    </section>
+  <section class="chapter chapter-how" id="how" aria-labelledby="how-title">
+    <div class="eyebrow">How it works</div>
+    <h2 id="how-title">Nothing runs until you sign the brief.</h2>
+    <figure class="cli-demo" aria-label="A Claim Check in the Ori terminal: the brief is drafted, signed, run, and compared with the printed number.">
+      <div class="cli-bar" aria-hidden="true"><i></i><i></i><i></i><span>ori &middot; orszag-1971</span></div>
+<pre class="cli-body"><code><span class="ln"><span class="c-dim">$</span> ori</span>
+<span class="ln"><span class="c-dim">&rsaquo;</span> Check orszag-1971.pdf: does the critical Reynolds number hold?</span>
+<span class="ln"><span class="c-key">read</span>     14 pages &middot; 3 equations &middot; 2 parameters</span>
+<span class="ln"><span class="c-key">brief</span>    stability-check</span>
+<span class="ln">  goal   critical Reynolds number, plane Poiseuille flow <span class="c-dim">(p. 6)</span></span>
+<span class="ln">  method Orr&ndash;Sommerfeld, Chebyshev collocation <span class="c-dim">(eq. 14, p. 4)</span></span>
+<span class="ln">  grid   N = 64, 128 modes <span class="c-fill">inferred &middot; not in paper</span></span>
+<span class="ln">  pass   within 0.1% of the printed 5772.22</span>
+<span class="ln"><span class="c-dim">&rsaquo;</span> /approve stability-check</span>
+<span class="ln"><span class="c-key">run</span>      N = 64    Re<sub>c</sub> = 5772.31</span>
+<span class="ln"><span class="c-key">run</span>      N = 128   Re<sub>c</sub> = 5772.23   <span class="c-dim">converged</span></span>
+<span class="ln"><span class="c-key">compare</span>  printed 5772.22 &middot; rerun 5772.23 &middot; &Delta; 0.0002%</span>
+<span class="ln"><span class="c-key">verdict</span>  <span class="c-holds">HOLDS</span></span>
+<span class="ln"><span class="c-key">wrote</span>    <span class="file">report.pdf</span> <span class="file">chart.png</span> <span class="file">run.py</span> <span class="file">brief.signed</span></span></code></pre>
+    </figure>
+    <ol class="how-steps">
+      <li><b>Rebuild</b><span>Equations and parameters, tied to the page.</span></li>
+      <li><b>Sign</b><span>You approve the goal and the pass band.</span></li>
+      <li><b>Run</b><span>Plain code, with convergence checks.</span></li>
+      <li><b>Compare</b><span>Your rerun beside the printed number.</span></li>
+    </ol>
+  </section>
 
-    <section class="chapter chapter-limits" aria-labelledby="limits-title">
-      <div class="side-left">
-        <div class="eyebrow">Limits</div>
-        <h2 id="limits-title">Trust the numbers, not the abstract.</h2>
-        <p>Oriphim never tells you a paper is right. A match means two calculations agree, not that the world does. The report says what was measured, how accurate the computation was, and how far that lands from the printed result.</p>
-        <p>A language model drafts the brief and the prose. Every number comes from code that ran, and every model call is kept in the folder.</p>
-      </div>
-      <div class="side-right">
-        <dl class="verdict-list">
-          <div data-verdict="holds"><dt>Holds</dt><dd>The rerun lands inside the band agreed before the run.</dd></div>
-          <div data-verdict="fails"><dt>Doesn't hold</dt><dd>It lands outside, and the report says by how much.</dd></div>
-          <div data-verdict="unclear"><dt>Can't tell</dt><dd>The paper leaves out something a rerun needs, and the report names it.</dd></div>
-        </dl>
-      </div>
-    </section>
-  </div>
+  <section class="chapter chapter-limits" aria-labelledby="limits-title">
+    <div class="eyebrow">Any source</div>
+    <h2 id="limits-title">Missing details don't stop the run.</h2>
+    <div class="verdict-cols">
+      <div data-verdict="holds"><strong>Stated</strong><p>Every equation and value the paper gives, cited to its page.</p></div>
+      <div data-verdict="unclear"><strong>Inferred</strong><p>Grids, seeds and settings it leaves out, filled from the field's practice and marked in the brief.</p></div>
+      <div data-verdict="standin"><strong>Stand-in</strong><p>No dataset? A seeded one with the same shape, so the experiment still runs.</p></div>
+    </div>
+    <p class="fine-print">Fills are never tuned toward the printed number, and the report says which results rest on them.</p>
+  </section>
 
   <section class="band band-offer" id="offer" aria-labelledby="offer-title">
     <div class="wrap">
-      <div class="band-head">
-        <div><div class="eyebrow">Claim Checks</div><h2 id="offer-title">One paper, one claim, a plain answer.</h2></div>
-        <p class="band-note">For anyone who needs to know a published result holds before they build on it.</p>
-      </div>
-      <div class="offer-grid">
-        <article><span class="offer-num">01</span><h3>You send</h3><p>The paper, and the result you need to rely on. A sentence is enough. <span class="ori-word">Ori</span> drafts a brief stating the goal and what counts as a pass, and you sign it before anything runs.</p></article>
-        <article><span class="offer-num">02</span><h3>You get back</h3><p>The verdict, the numbers beside the printed ones, and the folder: a readable report, the chart, and code you can rerun yourself.</p></article>
-        <article><span class="offer-num">03</span><h3>After that</h3><p>Keep working with <span class="ori-word">Ori</span> on a retainer to extend the result, or license the verified environment for your own team, with updates and a verification stamp.</p></article>
-      </div>
+      <h2 id="offer-title">You get a folder, not an opinion.</h2>
+      <ul class="file-row">
+        <li class="file">report.pdf</li>
+        <li class="file">chart.png</li>
+        <li class="file">run.py</li>
+        <li class="file">brief.signed</li>
+      </ul>
+      <p class="offer-line">Need ongoing checks or the environment in-house? Retainer or licence. <a href="/pricing">&rarr; Pricing</a></p>
     </div>
   </section>
 
@@ -498,7 +501,7 @@
     <div class="wrap">
       <div class="eyebrow">Request a Claim Check</div>
       <h2>Send us the paper.</h2>
-      <p class="cta-copy">Tell us who you are, which paper, and which claim matters. We'll reply with what a check would involve.</p>
+      <p class="cta-copy">Which paper, which claim. We'll reply with scope and price.</p>
       <a href="/contact#verification-title" class="btn">Request a Claim Check</a>
     </div>
   </section>
@@ -649,5 +652,6 @@
 <script src="/script.js"></script>
 <script src="/assets/waitlist.js" defer></script>
 <script src="/assets/ori-wall.js"></script>
+<script src="/assets/cli-demo.js"></script>
 </body>
 </html>

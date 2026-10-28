@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pricing | Claim Checks and Ori licences | Oriphim</title>
-<meta name="description" content="Start with a Claim Check: $8,000 fixed, delivered in 10 business days. Then license Ori for your team: Team $4,000, Lab $8,000, Enterprise from $15,000 a month, billed annually.">
+<meta name="description" content="Your first Claim Check is free: one claim checked in Ori, delivered in 10 business days. Then license Ori Enterprise for your team, priced per seat.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/pricing">
 <meta name="theme-color" content="#120d0e">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
 <meta property="og:title" content="ORIPHIM Pricing | Claim Checks and Ori licences">
-<meta property="og:description" content="A Claim Check is $8,000 fixed. Ori licences start at $4,000 a month for a team of five, billed annually.">
+<meta property="og:description" content="Your first Claim Check is free. Then license Ori Enterprise for your team, priced per seat.">
 <meta property="og:url" content="https://oriphim.com/pricing">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ORIPHIM Pricing | Claim Checks and Ori licences">
-<meta name="twitter:description" content="A Claim Check is $8,000 fixed. Ori licences start at $4,000 a month for a team of five, billed annually.">
+<meta name="twitter:description" content="Your first Claim Check is free. Then license Ori Enterprise for your team, priced per seat.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -41,9 +41,7 @@
   "url": "https://oriphim.com/pricing",
   "description": "Ori is software your team runs: give it a paper, a dataset or a model, and it derives the governing equations, builds and runs the model on your own hardware, and stress-tests the result.",
   "offers": [
-    { "@type": "Offer", "name": "Claim Check", "price": "8000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
-    { "@type": "Offer", "name": "Ori Team licence (per month, billed annually)", "price": "4000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
-    { "@type": "Offer", "name": "Ori Lab licence (per month, billed annually)", "price": "8000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" }
+    { "@type": "Offer", "name": "First Claim Check", "price": "0.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" }
   ],
   "publisher": { "@id": "https://oriphim.com/#organization" }
 }
@@ -196,7 +194,10 @@
   .details-wrap .faq-item summary{font-size:15px;}
   .details-wrap .faq-item p b{color:var(--ink);font-weight:500;}
   .details-wrap .faq-item p + p{margin-top:10px;}
-  @media(max-width:760px){.steps-grid,.tier-grid{grid-template-columns:1fr;}.step-card{padding:24px;}}
+  .single-tier{max-width:960px;margin:0 auto;border:1px solid var(--line);padding:26px 30px 24px;}
+  .single-tier .price-features{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;}
+  .single-tier .price-features li{font-size:13.5px;}
+  @media(max-width:760px){.steps-grid,.tier-grid,.single-tier .price-features{grid-template-columns:1fr;}.step-card{padding:24px;}}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
@@ -219,7 +220,7 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="lede">Start with one check. Then license Ori for your team.</p>
+        <p class="lede">Your first check is free. Then license Ori for your team.</p>
       </div>
     </div>
   </section>
@@ -230,65 +231,59 @@
         <div class="price-card step-card">
           <div class="step-num">01 &middot; Try it</div>
           <div class="price-name">Claim Check</div>
-          <div class="price-amount-row"><span class="price-amount">$8,000</span><span class="price-per">fixed</span></div>
-          <p class="price-tag">I check one claim your work depends on, in Ori. In 10 business days you get the report and the run folder.</p>
-          <div class="price-cta"><a href="/contact#verification-title" class="btn">Request a Claim Check</a></div>
+          <div class="price-amount-row"><span class="price-amount">Free</span><span class="price-per">your first claim</span></div>
+          <p class="price-tag">I check one claim your work depends on, in Ori. In 10 business days you get the report and the run folder. One per organisation, by application.</p>
+          <div class="price-cta"><a href="/contact#verification-title" class="btn">Apply for a free Claim Check</a></div>
         </div>
         <div class="price-card step-card">
           <div class="step-num">02 &middot; Run it yourself</div>
-          <div class="price-name">Licence</div>
-          <div class="price-amount-row"><span class="price-from">From</span><span class="price-amount">$4,000</span><span class="price-per">/ month</span></div>
+          <div class="price-name">Enterprise</div>
+          <div class="price-amount-row"><span class="price-per">Priced per seat, in blocks of 5</span></div>
           <p class="price-tag">Your team runs Ori on its own hardware. The first month includes onboarding: up to four live sessions with me.</p>
-          <div class="price-cta"><a href="/contact" class="btn">Talk to me about a licence</a></div>
+          <div class="price-cta"><a href="/contact#verification-title" class="btn">Get a quote</a></div>
         </div>
       </div>
-      <p class="anchor-line">One physicist costs about $20,000 a month and takes two months to hire. The Team licence is about a fifth of that.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="tier-grid">
-        <div class="price-card">
-          <div class="price-name">Team</div>
-          <div class="price-amount-row"><span class="price-amount">$4,000</span><span class="price-per">/ month</span></div>
-          <ul class="price-features"><li>Up to 5 users</li><li>Email support in 2 business days</li></ul>
-        </div>
-        <div class="price-card">
-          <div class="price-name">Lab</div>
-          <div class="price-amount-row"><span class="price-amount">$8,000</span><span class="price-per">/ month</span></div>
-          <ul class="price-features"><li>Up to 15 users</li><li>Next-business-day support</li></ul>
-        </div>
-        <div class="price-card">
-          <div class="price-name">Enterprise</div>
-          <div class="price-amount-row"><span class="price-from">From</span><span class="price-amount">$15,000</span><span class="price-per">/ month</span></div>
-          <ul class="price-features"><li>Unlimited users</li><li>Air-gapped install</li></ul>
-        </div>
+      <div class="price-card single-tier">
+        <div class="price-list-label">One tier. Everything included.</div>
+        <ul class="price-features">
+          <li>Every shipped domain</li>
+          <li>Unlimited runs on your own hardware</li>
+          <li>Offline or air-gapped install</li>
+          <li>The Oriphim verification stamp on your run bundles</li>
+          <li>Every update, and early access to new domains</li>
+          <li>Support within one business day</li>
+          <li>Your models and results stay yours</li>
+          <li>Larger teams pay less per seat</li>
+        </ul>
       </div>
-      <p class="billing-line">Billed annually, or quarterly. Every tier includes unlimited runs, every shipped domain, updates, and the Oriphim verification stamp.</p>
+      <p class="billing-line">Billed annually, or quarterly.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap details-wrap">
-      <details class="faq-item"><summary>What does each tier include?</summary>
-        <p><b>Team</b>, for one team working on one program: up to 5 users and every shipped domain, unlimited runs on your own hardware, the Oriphim verification stamp on your run bundles, updates, and email support within 2 business days.</p>
-        <p><b>Lab</b>, for several programs or a team growing past 5: up to 15 users and everything in Team, next-business-day support, early access to new domains, and a quarterly roadmap call.</p>
-        <p><b>Enterprise</b>, for organisations with security or deployment requirements: unlimited users and everything in Lab, offline or air-gapped install, a security review, custom licence and IP terms, and named-contact support with a one-business-day response.</p>
+      <details class="faq-item"><summary>Why is the first Claim Check free?</summary>
+        <p>Because the fastest way to see what Ori does is to watch it work on your own problem. I take on a small number of free checks for funded teams with a computational claim Ori can run. When it&rsquo;s delivered, we talk about whether a licence makes sense.</p>
       </details>
       <details class="faq-item"><summary>What does the stamp mean?</summary>
         <p>A stamped run bundle records exactly which checks Ori ran and how each one came out: convergence under refinement, conservation, agreement between integrators, sensitivity to free parameters, and comparison with any reported results. It also lists what was not assessed, and anyone with the bundle can rerun it and get the same numbers.</p>
         <p>It is not my endorsement of your conclusions, and it never says a model is correct. That is verification: whether the model solves its own equations correctly. Validation, whether the model matches reality, needs your data and your judgment. The judgment stays with your team.</p>
       </details>
       <details class="faq-item"><summary>What does support cover?</summary>
-        <p>Support means Ori itself: installing it, using it, reading its output, and fixing anything that breaks. It doesn&rsquo;t cover me checking your models, joining your reviews, or signing off on your results. An independent check on a specific claim is a Claim Check, priced and scoped on its own.</p>
+        <p>Support means Ori itself: installing it, using it, reading its output, and fixing anything that breaks. It doesn&rsquo;t cover me checking your models, joining your reviews, or signing off on your results. If you want an independent check on another claim, ask me.</p>
       </details>
-      <details class="faq-item"><summary>Why does it cost this?</summary>
+      <details class="faq-item"><summary>How is a licence priced?</summary>
+        <p>Per seat, sold in blocks of 5, and each block costs less than the one before, so a larger team pays less per seat. Every seat gets the whole product. Tell me how many people will use Ori and I&rsquo;ll send a quote, usually within two business days.</p>
         <p>A physicist in the US earns a median of about $172,000 a year. Wages are about 70% of what an employer spends on a person, so that comes to roughly $20,000 a month, and hiring one usually takes two months or more. Ori doesn&rsquo;t replace that person. It lets the people you already have rebuild, run and stress-test a model in days rather than weeks, and hand reviewers a bundle they can rerun themselves.</p>
         <p>The decisions these models feed, a go/no-go, a funding round, a partnership, usually run into the millions. The question is what one unchecked model would cost you.</p>
       </details>
       <details class="faq-item"><summary>Terms</summary>
-        <p><b>Billing.</b> Licences are billed annually up front, or quarterly. Claim Checks are 50% on signing and 50% on delivery.</p>
+        <p><b>Billing.</b> Licences are billed annually up front, or quarterly.</p>
         <p><b>Your data and code.</b> Ori runs on your hardware. Your papers, models and results stay with you. Nothing is sent to me or to anyone else unless you send it.</p>
         <p><b>What you keep.</b> Every run folder is standalone code that reruns without Ori, even if you stop licensing it.</p>
         <p><b>Where the numbers come from.</b> Physicist pay is the BLS May 2025 median for SOC 19-2012 (reported via WageDex; confirm on bls.gov). The 70% wage share is BLS Employer Costs for Employee Compensation, December 2025, private industry. Hiring time is from a recruiter source (Paraform) and is indicative only.</p>
@@ -300,9 +295,9 @@
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="eyebrow">Where most teams start</div>
-      <h2>Start with one claim.</h2>
+      <h2>Start with one claim. It&rsquo;s on me.</h2>
       <div class="cta-row-band">
-        <a href="/contact#verification-title" class="btn">Request a Claim Check</a>
+        <a href="/contact#verification-title" class="btn">Apply for a free Claim Check</a>
       </div>
     </div>
   </section>
