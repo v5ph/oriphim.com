@@ -1,28 +1,25 @@
 (() => {
   const config = window.oriphimContact || {};
+  const address = config.email || 'hello@oriphim.com';
   document.querySelectorAll('form[data-questions]').forEach(form => {
-    const button = form.querySelector('button');
     const status = form.querySelector('.contact-status');
-    if (!config.calendlyUrl) {
-      button.disabled = true;
-      form.querySelector('.contact-submit p').textContent = 'Booking will open soon.';
-    }
     form.addEventListener('submit', event => {
       event.preventDefault();
-      if (!config.calendlyUrl || !form.reportValidity()) return;
-      try {
-        const destination = new URL(config.calendlyUrl);
-        if (destination.protocol !== 'https:' || !(destination.hostname === 'calendly.com' || destination.hostname.endsWith('.calendly.com'))) throw Error('Invalid booking destination');
-        const fields = new FormData(form);
-        destination.searchParams.set('name', fields.get('name').trim());
-        destination.searchParams.set('email', fields.get('email').trim());
-        for (const [field, parameter] of Object.entries(config[form.dataset.questions] || {})) {
-          destination.searchParams.set(parameter, String(fields.get(field) || '').trim());
-        }
-        window.location.assign(destination.href);
-      } catch {
-        status.textContent = 'Booking is unavailable right now. Please try again later.';
+      if (!form.reportValidity()) return;
+      const fields = new FormData(form);
+      const value = name => String(fields.get(name) || '').trim();
+      const lines = [`Name: ${value('name')}`, `Email: ${value('email')}`];
+      for (const [field, label] of Object.entries(config[form.dataset.questions] || {})) {
+        if (value(field)) lines.push(`${label}: ${value(field)}`);
       }
+      const interest = value('interest') || 'Claim Check';
+      const subject = `${interest} request: ${value('company')}`;
+      window.location.href = `mailto:${address}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+      status.replaceChildren(
+        'Your email app should open with the request filled in. Just press send. If nothing opened, email ',
+        Object.assign(document.createElement('a'), { href: `mailto:${address}`, textContent: address }),
+        '.'
+      );
     });
   });
 })();

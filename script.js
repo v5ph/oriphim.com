@@ -62,14 +62,14 @@
       .auth-popup__panel{position:relative;z-index:1;width:min(440px,100%);max-height:calc(100dvh - 44px);overflow-y:auto;display:grid;grid-template-columns:1fr;border:1px solid #e2dfd8;background:#120d0e;color:#e2dfd8;box-shadow:0 18px 60px rgba(0,0,0,.5)}
       .auth-popup__content{padding:26px}
       .auth-popup__top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
-      .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Loom',Georgia,serif;font-size:32px;line-height:1;text-transform:lowercase}
+      .auth-popup__brand{display:flex;align-items:center;gap:10px;font-family:'Redaction 35',Georgia,serif;font-size:36px;line-height:1;text-transform:lowercase}
       .auth-popup__brand img{width:42px;height:30px;object-fit:contain;display:block;filter:invert(1)}
-      .auth-popup__brand img.auth-popup__wordmark{width:auto;height:38px;}
-      .auth-popup .oriphim-word{display:inline-block;font-family:'Loom',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:.03em;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
+      .auth-popup__wordmark{font-weight:400;letter-spacing:-.01em;white-space:nowrap}
+      .auth-popup .oriphim-word{display:inline-block;font-family:'Redaction 35',Georgia,serif;font-size:1.32em;font-weight:400;letter-spacing:0;text-transform:lowercase;line-height:.62;vertical-align:-.08em}
       .auth-popup__close{width:38px;height:38px;border:1px solid #e2dfd8;background:transparent;color:#e2dfd8;font-family:'IBM Plex Mono','Courier New',monospace;font-size:18px;line-height:1;cursor:pointer}
       .auth-popup__close:hover{background:#e2dfd8;color:#120d0e}
       .auth-popup__eyebrow{margin:0 0 12px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b3afa7}
-      .auth-popup h2{margin:0 0 20px;font-family:'Geist Mono',monospace;font-size:38px;font-weight:560;line-height:.96;color:#e2dfd8;text-transform:none}
+      .auth-popup h2{margin:0 0 20px;font-family:'Redaction 35',Georgia,serif;font-size:42px;font-weight:400;letter-spacing:-.005em;line-height:1;color:#e2dfd8;text-transform:none}
       .auth-popup form{display:grid;gap:12px}
       .auth-popup label{display:grid;gap:8px;font-family:'IBM Plex Mono','Courier New',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#b3afa7}
       .auth-popup input{width:100%;min-height:44px;border:1px solid #e2dfd8;background:#1f191a;color:#e2dfd8;padding:12px 13px;font:inherit;outline:none}
@@ -175,7 +175,7 @@
       <section class="auth-popup__panel">
         <div class="auth-popup__content">
           <div class="auth-popup__top">
-      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg?v=6")}" alt="" aria-hidden="true"><img class="auth-popup__wordmark" src="${assetUrl("assets/oriphim-wordmark.svg?v=6")}" alt="Oriphim"></span>
+      <span class="auth-popup__brand"><img src="${assetUrl("assets/oriphim-logo.svg?v=6")}" alt="" aria-hidden="true"><span class="auth-popup__wordmark" role="img" aria-label="Oriphim">oriphim.</span></span>
             <button class="auth-popup__close" type="button" data-auth-close aria-label="Close">x</button>
           </div>
           <p class="auth-popup__eyebrow">${config.eyebrow}</p>

@@ -53,7 +53,8 @@ const walk = async (dir) => {
 };
 
 // Email templates load this font from the public site, outside the page graph.
-const referenced = new Set(["Loom-Regular.woff2"]);
+// The Redaction 35 licence (OFL) ships beside the font file even though no page links it.
+const referenced = new Set(["Loom-Regular.woff2", "Redaction35-OFL.txt"]);
 for (const file of await walk(dist)) {
   const text = await readFile(file, "utf8");
   for (const m of text.matchAll(/assets\/([A-Za-z0-9._-]+\.[A-Za-z0-9]+)/g)) {

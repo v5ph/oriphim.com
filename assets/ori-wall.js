@@ -20,7 +20,7 @@
   const SIZE   = 0.42;    // figure radius vs the short side; bands reach 1.12x
   const FIG    = 0.90;    // how present the figure is
   const EYE_GAIN  = 1.55; // the eyeball, relative to the bands
-  const IRIS_GAIN = 0.78; // the iris, relative to the sclera. An eye reads
+  const IRIS_GAIN = 0.52; // the iris, relative to the sclera. An eye reads
                           // as an eye when sclera > iris > pupil, in that order.
   const FACE_FLOOR= 0.35; // lifts the sphere's unlit faces out of the dark
   const FIELD  = 0.26;    // brightness of the panel field on its own
@@ -34,7 +34,21 @@
   // It does not drift: it fixates, jumps, and fixates again. And it does not
   // do that constantly. Most of the time it rests, almost still; now and then
   // it wakes into a bout of scanning and works over a region, then settles.
-  const SCAN    = 0.30;                   // how wide it ranges when scanning
+  // The eye is seen from low and to the side, as in an isometric view, and rests
+  // looking up and to the right: 35 degrees above the horizontal, about 40 degrees
+  // off the line of sight. The pupil sits in the upper right of the ball and the
+  // cornea shows in profile there. These are offsets before the gaze is
+  // normalised, with the line of sight at z = 1.
+  const GAZE_X  = 0.70, GAZE_Y = 0.50;
+  const IRIS_ANG  = 0.62; // iris half-angle, radians. Smaller than a frontal eye
+                          // needs: in three-quarter view it has to sit on the ball.
+  const PUPIL_ANG = 0.27; // pupil half-angle at rest
+  const CORNEA_ANG  = 0.95; // the clear dome over the iris
+  const CORNEA_RISE = 0.15; // how far it stands proud of the sclera
+  const RING_CLEAR   = 0.30;  // rings thin out over this radius around the pupil, figure units
+  const RING_FEATHER = 0.26;  // and are back to full strength this much further out
+  const RING_GHOST   = 0.82;  // share of ring pixels dropped at the pupil, so the iris shows through
+  const SCAN    = 0.17;                   // how wide it ranges when scanning
   const FIX_MIN = 0.14, FIX_MAX = 0.80;   // seconds held between jumps
   const REGION  = 2.2;                    // seconds before it moves on
   const REST    = 9.0, REST_VAR = 13.0;   // seconds of stillness between bouts
@@ -54,12 +68,18 @@
 
   // ---- the drifting panels ----------------------------------------------
   // sized in CSS pixels, so they stay put when BLOCK changes
-  const PANEL_PX  = 55;
+  // Isometric: the panels are rhombi with edges at 30 degrees above and below the
+  // horizontal, the grid an isometric view lays on its floor, and they slide up
+  // and to the right along one of those edges, the way the eye is looking. Set
+  // ISO_PANELS false for the old flat rectangles.
+  const ISO_PANELS= true;
+  const PANEL_L   = 46;    // rhombus edge, CSS pixels
+  const PANEL_PX  = 55;    // flat rectangles, if ISO_PANELS is off
   const PANEL_PY  = 40;
   const PANEL_AMT = 0.38;  // how hard they modulate the figure
   const PANEL_RATE= 0.085; // how fast each panel breathes
-  const PANEL_DX  = 2.6;   // drift, CSS pixels per second
-  const PANEL_DY  = -1.1;
+  const PANEL_V   = 3.0;   // drift, CSS pixels per second
+  const ISO_C = Math.cos(Math.PI/6), ISO_S = 0.5;   // cos and sin of 30 degrees
 
   // ---- the cloud ---------------------------------------------------------
   const CLOUD_PX    = 0.0055; // cloud frequency, per CSS pixel
@@ -223,7 +243,10 @@
     const v=0.5+0.5*(0.68*Math.sin(t*TAU/p1+ph)+0.32*Math.sin(t*TAU/p2+ph*1.7));
     return v<0?0:(v>1?1:v);
   }
-  const LX=-0.44, LY=0.55, LZ=0.71;
+  // The key light is high and to the right, the way the eye is looking: its
+  // iris faces the light, and the underside and lower left fall into shadow,
+  // which is what makes the view read as low and from the side.
+  const LX=0.38, LY=0.56, LZ=0.74;
 
   // ---- gaze: fixations and saccades --------------------------------------
   // A real eye holds still, then jumps. Between jumps it only tremors. It also
@@ -274,18 +297,27 @@
     SAC.pupil+=(SAC.dil-SAC.pupil)*Math.min(1,dt*2.6);
   }
 
-  function splat(wx,wy,wz,v,cm){
+  // gh is a screen-door transparency, 0 to 1: that share of pixels is left alone,
+  // chosen by a fixed hash of the pixel so it never shimmers. The dither is
+  // already a grain, so thinning a layer this way reads as the grain, not a fade.
+  function splat(wx,wy,wz,v,cm,gh){
     const X=Math.round(wx*G)/G, Y=Math.round(wy*G)/G, Z=Math.round(wz*G)/G;
     // X*R is a whole number give or take float error, so round it; truncating
     // dropped any row or column where the error landed just above the integer.
     const xx=(cxg|0)+Math.round(X*R), yy=(cyg|0)-Math.round(Y*R);
     if(xx<0||xx>=rw||yy<0||yy>=rh) return;
+    if(gh>0 && h3(xx,yy,5)<gh) return;
     const idx=yy*rw+xx;
     if(Z>depth[idx]){ depth[idx]=Z; val[idx]=v; chb[idx]=cm; }
   }
 
-  // On wide screens the eye sits right of centre, leaving the left for the copy.
-  function eyeX(){ return innerWidth>980 && rw>rh*1.2 ? 0.68 : 0.5; }
+  // On wide screens the eye sits left of centre, a touch low, leaving the right for the copy.
+  const wide = () => innerWidth>980 && rw>rh*1.2;
+  function eyeX(){ return wide() ? 0.29 : 0.5; }
+  // Stacked, the copy fills the top of the screen and fades out over its lower
+  // part, so the eye drops below that fade, and on a phone grows to fill the width.
+  function eyeY(){ return wide() ? 0.54 : 0.68; }
+  function eyeScale(){ return wide() ? 1 : (innerWidth<=600 ? 1.14 : 1); }
 
   // ---- the field: panels, cloud, blooms, vignette -----------------------
   // Everything that is not the figure, on the shading grid. It does double
@@ -293,7 +325,7 @@
   // visibly wash over the eye as they drift.
   function buildField(t){
     const d1=t*CLOUD_DRIFT, d2=t*CLOUD_DRIFT*0.61;
-    const cx=rw*eyeX(), cy=rh*0.5, hd=1/Math.hypot(cx,cy);
+    const cx=rw*eyeX(), cy=rh*eyeY(), hd=1/Math.hypot(cx,cy);
     const cs=CLOUD_PX*CELL_PX;              // cloud frequency per shading cell
 
     // --- the cloud, on the coarse grid only
@@ -312,11 +344,33 @@
     // A panel's brightness is the same across the whole panel, so it is
     // computed once per panel rather than once per cell: that is a few hundred
     // sines a frame instead of a few hundred thousand.
-    const pw=PANEL_PX/CELL_PX, phh=PANEL_PY/CELL_PX;
-    const dx=t*PANEL_DX/CELL_PX, dy=t*PANEL_DY/CELL_PX;
-    const pi0=Math.floor(dx/pw), pj0=Math.floor(dy/phh);
-    const pn=Math.ceil(rw/pw)+3, pm=Math.ceil(rh/phh)+3;
-    if(!buildField.tab || buildField.tab.length<pn*pm) buildField.tab=new Float32Array(pn*pm);
+    //
+    // A cell (x,y), shifted back by the drift, maps to lattice coordinates (u,v)
+    // through a 2x2 matrix: the integer parts pick the panel, the fractions place
+    // the cell inside it. Rectangles are u=x/w, v=y/h. Isometric panels have u
+    // running along the up-right edge (30 degrees above horizontal) and v along
+    // the down-right edge, so a rhombus is one unit of each.
+    let m00,m01,m10,m11, ox,oy;
+    if(ISO_PANELS){
+      const pl=PANEL_L/CELL_PX;
+      m00=1/(2*ISO_C*pl); m01=-1/(2*ISO_S*pl);
+      m10=m00;            m11=-m01;
+      ox= t*PANEL_V*ISO_C/CELL_PX;            // slide up and to the right,
+      oy=-t*PANEL_V*ISO_S/CELL_PX;            // along the u edge
+    } else {
+      m00=CELL_PX/PANEL_PX; m01=0; m10=0; m11=CELL_PX/PANEL_PY;
+      ox=-t*2.6/CELL_PX; oy=t*1.1/CELL_PX;    // the old drift, left and down
+    }
+    // the table has to cover the lattice cells the screen touches this frame
+    let umin=1e9,umax=-1e9,vmin=1e9,vmax=-1e9;
+    for(let k=0;k<4;k++){
+      const X=(k&1)?rw:0, Y=(k&2)?rh:0;
+      const u=m00*(X-ox)+m01*(Y-oy), v=m10*(X-ox)+m11*(Y-oy);
+      if(u<umin)umin=u; if(u>umax)umax=u; if(v<vmin)vmin=v; if(v>vmax)vmax=v;
+    }
+    const pi0=Math.floor(umin), pj0=Math.floor(vmin);
+    const pn=Math.floor(umax)-pi0+2, pm=Math.floor(vmax)-pj0+2;
+    if(!buildField.tab || buildField.tab.length<pn*pm) buildField.tab=new Float32Array(pn*pm*2);
     const tab=buildField.tab;
     for(let j=0;j<pm;j++){
       for(let i=0;i<pn;i++){
@@ -341,14 +395,15 @@
     const inv=1/CSTEP;
     for(let y=0,p=0; y<rh; y++){
       const ndy=(y-cy)*hd;
-      const pv=(y+dy)/phh, pj=Math.floor(pv), fv=pv-pj;
-      const prow=(pj-pj0)*pn;
+      const wy=y-oy, ru=m01*wy, rv=m11*wy;      // this row's share of u and v
       const cyf=y*inv, cj=cyf|0, ty=cyf-cj;
       const r0=cj*cw, r1=r0+cw;
       for(let x=0; x<rw; x++, p++){
         // --- panels: brightness from the table, edges softened per cell
-        const pu=(x+dx)/pw, pi=Math.floor(pu), fu=pu-pi;
-        let pan=tab[prow+(pi-pi0)];
+        const wx=x-ox;
+        const pu=m00*wx+ru, pi=Math.floor(pu), fu=pu-pi;
+        const pv=m10*wx+rv, pj=Math.floor(pv), fv=pv-pj;
+        let pan=tab[(pj-pj0)*pn+(pi-pi0)];
         // soften the panel borders so the field reads as plates, not a grid
         const edge=Math.min(Math.min(fu,1-fu), Math.min(fv,1-fv))*4;
         pan *= 0.70 + 0.30*(edge<1 ? edge*edge*(3-2*edge) : 1);
@@ -381,8 +436,8 @@
   // ---- shade: figure into the shading grid ------------------------------
   let gazeT=0;
   function shade(ft){
-    cxg=rw*eyeX(); cyg=rh*0.5;
-    R=Math.min(rw,rh)*SIZE;
+    cxg=rw*eyeX(); cyg=rh*eyeY();
+    R=Math.min(rw,rh)*SIZE*eyeScale();
     G=R;                                     // one voxel per shading cell
     const m0=M[0],m1=M[1],m2=M[2],m3=M[3],m4=M[4],m5=M[5],m6=M[6],m7=M[7],m8=M[8];
     const tw=1.7*A.turb, amp=A.amp*0.34, F=2.15;
@@ -395,15 +450,20 @@
     depth.fill(-1e9);
 
     // the gaze, plus the ocular tremor that never stops even in fixation
-    let gx=SAC.x+0.0030*Math.sin(gazeT*47.3)+0.0016*Math.sin(gazeT*83.1);
-    let gy=SAC.y+0.0030*Math.sin(gazeT*61.7+1.3)+0.0016*Math.sin(gazeT*97.9);
+    let gx=GAZE_X+SAC.x+0.0030*Math.sin(gazeT*47.3)+0.0016*Math.sin(gazeT*83.1);
+    let gy=GAZE_Y+SAC.y+0.0030*Math.sin(gazeT*61.7+1.3)+0.0016*Math.sin(gazeT*97.9);
     let gz=1;
     const gl=Math.hypot(gx,gy,gz); gx/=gl; gy/=gl; gz/=gl;
     let e1x=-gy, e1y=gx, e1z=0;
     const e1l=Math.hypot(e1x,e1y,e1z)||1; e1x/=e1l; e1y/=e1l; e1z/=e1l;
     const e2x=gy*e1z-gz*e1y, e2y=gz*e1x-gx*e1z, e2z=gx*e1y-gy*e1x;
-    const COS_P=Math.cos(0.40*SAC.pupil), COS_I=Math.cos(0.78);
-    let hx=gx-0.42, hy=gy+0.46, hz=gz+0.10;
+    // where the pupil falls on screen, in figure units (y up). The rings are
+    // thinned over a disc around it so the iris is never lost behind a strap.
+    const pcx=gx*EYE_R*(1+CORNEA_RISE), pcy=gy*EYE_R*(1+CORNEA_RISE);
+    const GH_IN2=RING_CLEAR*RING_CLEAR, GH_OUT=RING_CLEAR+RING_FEATHER, GH_OUT2=GH_OUT*GH_OUT;
+    const COS_P=Math.cos(PUPIL_ANG*SAC.pupil), COS_I=Math.cos(IRIS_ANG), COS_C=Math.cos(CORNEA_ANG);
+    // the glint sits where the normal is halfway between light and viewer
+    let hx=LX, hy=LY, hz=LZ+1;
     const hl=Math.hypot(hx,hy,hz); hx/=hl; hy/=hl; hz/=hl;
 
     // ---- eyeball ---------------------------------------------------------
@@ -421,7 +481,18 @@
         f=f*f*(3-2*f);
         FCACHE[pi]=f;
       } else f=FCACHE[pi];
-      const rr=EYE_R*(1+amp*(f-0.5)*2);
+      // The ball churns, but the cornea does not: it is a smooth dome over the
+      // iris, standing proud of the sclera. Side-on that dome is what makes the
+      // silhouette read as an eye rather than a sphere with a spot on it.
+      const c=nx*gx+ny*gy+nz*gz;
+      let calm=1, rise=1;
+      if(c > COS_C){
+        const s=(c-COS_C)/(1-COS_C);
+        const sm=s*s*(3-2*s);
+        calm=1-0.85*sm;
+        rise=1+CORNEA_RISE*sm;
+      }
+      const rr=EYE_R*(1+amp*calm*(f-0.5)*2)*rise;
 
       const ax=nx<0?-nx:nx, ay=ny<0?-ny:ny, az=nz<0?-nz:nz;
       let face;
@@ -436,21 +507,23 @@
       const rim=e2*e2*e*0.80;          // integer powers: multiply, never pow
 
       let v, cm;
-      const c=nx*gx+ny*gy+nz*gz;
       if(c > COS_P){
         v=0.03+0.05*f; cm=-0.5;                        // pupil
       } else if(c > COS_I){
         const tt=(c-COS_I)/(COS_P-COS_I);
         const p1=nx*e1x+ny*e1y+nz*e1z, p2=nx*e2x+ny*e2y+nz*e2z;
         const fib=h3(Math.round(Math.atan2(p2,p1)*46), 3, 9);
-        v=(0.10+0.62*fib)*(0.35+0.75*(1-tt))*(0.5+0.7*f)*IRIS_GAIN;
-        cm=0.55-tt*0.5;                                // iris fibres
+        const limb=tt<0.16 ? 0.30+0.70*(tt/0.16) : 1;  // dark ring where iris meets sclera
+        v=(0.22+0.62*fib)*(0.55+0.75*tt)*(0.62+0.55*f)*limb*IRIS_GAIN;
+        cm=1.25-tt*0.7;                                // iris fibres, warm
       } else {
         v=face*(0.16+0.92*lam)*(0.34+0.95*f)+rim;      // sclera
         cm=(f-0.5)+(lam-0.5)*0.35;
       }
       v*=EYE_GAIN;
-      if(nx*hx+ny*hy+nz*hz > 0.988) v=1.6;             // glint
+      if(nx*hx+ny*hy+nz*hz > 0.9965){                  // glint: a small dot, driven past white
+        v=3.0; cm=0;                                   // so the field cannot dim it, and no warm cast
+      }
 
       v*=0.62+0.38*(nz*rr+1.3)/2.6;
       splat(nx*rr, ny*rr, nz*rr, v, cm);
@@ -504,7 +577,15 @@
           v*=0.66+0.34*(Z+1.4)/2.8;
           const ea=1-azn, ea3=ea*ea*ea;
           v+=ea3*ea3*0.55;
-          splat(X,Y,Z, v, cm);
+          let gh=0;
+          if(Z>0){                                      // in front of the eye, over the iris
+            const ddx=X-pcx, ddy=Y-pcy, dd=ddx*ddx+ddy*ddy;
+            if(dd<GH_OUT2){
+              if(dd<=GH_IN2) gh=RING_GHOST;
+              else { const q=(Math.sqrt(dd)-RING_CLEAR)/RING_FEATHER; gh=RING_GHOST*(1-q*q*(3-2*q)); }
+            }
+          }
+          splat(X,Y,Z, v, cm, gh);
         }
       }
     }

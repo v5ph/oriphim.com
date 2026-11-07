@@ -1,4 +1,4 @@
-/* Landing: the wallpaper fills the first screen, the copy sits either side of its eye,
+/* Landing: the wallpaper fills the first screen, the eye on the left and the copy on the right,
    and a plain bar divides it from the rest of the page. Nothing else moves. */
 body.story-layout{overflow-x:hidden;}
 .wall-hero{position:relative;z-index:2;height:100svh;min-height:600px;background:var(--bg);color:var(--paper);overflow:hidden;isolation:isolate;display:flex;flex-direction:column;}
@@ -11,15 +11,15 @@ body.story-layout{overflow-x:hidden;}
 .btn,.signin-btn,.nav-btn{background:var(--bg);color:var(--paper);border:1px solid var(--paper);text-shadow:none;}
 .btn:hover,.signin-btn:hover,.nav-btn:hover{background:var(--paper);color:var(--bg);}
 .signin-btn,.nav-btn{font-weight:500;}
-.wall-copy{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:minmax(0,34vw) minmax(0,1fr);gap:2vw;align-items:center;padding:0 4vw 56px;text-shadow:0 1px 14px rgba(11,5,6,.9);}
+.wall-copy{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,34vw);gap:2vw;align-items:center;padding:0 4vw 56px;text-shadow:0 1px 14px rgba(11,5,6,.9);}
 .wall-copy .eyebrow{margin-bottom:18px;color:var(--paper-dim);}
-.wall-copy h1{color:var(--paper);font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
+.wall-copy h1{color:var(--paper);font-size:clamp(38px,3.8vw,60px);line-height:1.04;max-width:14ch;}
 .wall-copy .cta-row{margin-top:28px;}
 .wall-copy .link-line{color:var(--paper);border-color:var(--paper);}
 .wall-copy .two-tone{color:rgba(226,223,216,.84);}
 .wall-copy .two-tone b{color:var(--paper);}
-/* A black gradient from the left edge, so the copy reads clear of the dither without a box around it. */
-.wall-hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(18,13,14,.96) 0%,rgba(18,13,14,.88) 28%,rgba(18,13,14,.45) 46%,rgba(18,13,14,0) 62%);}
+/* A black gradient from the right edge, so the copy reads clear of the dither without a box around it. */
+.wall-hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(270deg,rgba(18,13,14,.96) 0%,rgba(18,13,14,.88) 28%,rgba(18,13,14,.45) 46%,rgba(18,13,14,0) 62%);}
 
 /* The separation bar: black like the wallpaper, ruled white above and below. */
 .info-bar{position:relative;z-index:2;background:var(--bg);color:var(--paper);border-top:1px solid var(--paper);border-bottom:1px solid var(--paper);}
@@ -36,7 +36,7 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .chapter{position:relative;z-index:1;padding:104px 4vw;display:grid;align-items:start;}
 .chapter + .chapter{border-top:1px solid var(--line);}
 .chapter .eyebrow{margin-bottom:18px;}
-.chapter h1,.chapter h2{font-size:clamp(32px,3.3vw,52px);line-height:1.05;max-width:14ch;}
+.chapter h1,.chapter h2{font-size:clamp(38px,3.8vw,60px);line-height:1.04;max-width:14ch;}
 .chapter p{font-size:clamp(14.5px,1.1vw,17px);line-height:1.6;max-width:48ch;}
 .chapter h2 + p{margin-top:22px;}
 .chapter p + p{margin-top:16px;}
@@ -45,8 +45,8 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .two-tone{color:rgba(226,223,216,.55);}
 .two-tone b{color:var(--ink);font-weight:inherit;}
 
-/* 01: one column of copy on the left; ori-wall.js moves the eye to the right on wide screens. */
-.hero-lead{grid-column:1;}
+/* 01: one column of copy on the right; ori-wall.js puts the eye on the left on wide screens. */
+.hero-lead{grid-column:2;}
 .hero-sub{margin-top:18px;font-size:clamp(15px,1.2vw,18px);line-height:1.55;color:var(--paper);max-width:34ch;}
 
 /* 02: the terminal is the page's main picture, with the four steps as one line of captions under it. */
@@ -159,12 +159,12 @@ footer .wrap,.footer-x{color:var(--paper);}
   .wall-copy{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;align-items:start;padding:12px clamp(20px,6vw,48px) 28px;gap:0;}
   .wall-copy .hero-lead{grid-column:1;}
   .wall-hero::after{background:linear-gradient(180deg,rgba(18,13,14,.96) 0%,rgba(18,13,14,.85) 38%,rgba(18,13,14,0) 62%);}
-  .wall-copy h1{font-size:clamp(26px,6vw,40px);max-width:20ch;}
+  .wall-copy h1{font-size:clamp(32px,7vw,46px);max-width:20ch;}
   .wall-copy .eyebrow{margin-bottom:10px;}
   .wall-copy .cta-row{margin-top:16px;gap:18px;}
   .info-bar a{padding:16px 8px;}
   .chapter,.chapter-how,.chapter-limits{display:block;padding:56px clamp(20px,6vw,48px);}
-  .chapter h1,.chapter h2{font-size:clamp(28px,6vw,42px);max-width:20ch;}
+  .chapter h1,.chapter h2{font-size:clamp(32px,7vw,48px);max-width:20ch;}
   .side-right{margin-top:28px;}
   .band{padding:72px 0;}
   .record-grid{grid-template-columns:1fr;}

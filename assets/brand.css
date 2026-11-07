@@ -1,0 +1,64 @@
+/* Brand type. Redaction 35 sets the headlines and the "oriphim." wordmark.
+   Loaded last on every page, so it overrides the per-page heading fonts without
+   editing each stylesheet. Body copy, labels and code stay in Inter / Plex / Geist Mono.
+
+   Redaction is Copyright 2019 MCKL Inc., dual-licensed SIL OFL 1.1 and LGPL 2.1.
+   The licence text ships alongside the font as assets/Redaction35-OFL.txt. */
+
+@font-face{
+  font-family:'Redaction 35';
+  src:url('/assets/Redaction35-Regular.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --display:'Redaction 35','Iowan Old Style','Palatino Linotype',Georgia,serif;
+}
+
+/* ---------- headlines ----------
+   One weight is shipped, so pin it: a mono face at 560 or 650 would otherwise
+   ask the browser to fake a bold. Letter-spacing is reset because the old values
+   (down to -.05em) were tuned for a monospace. */
+h1,h2,h3,h4,
+.contact-intro h1,
+.archive-article h1,
+.archive-editor h2,
+.archive-attachments>h2,
+.page-menu h2,
+.waitlist-popup h2,
+.spec-row .sr-label,
+.verdict-cols strong,
+.price-name{
+  font-family:var(--display);
+  font-weight:400;
+  font-style:normal;
+  font-synthesis:none;
+  letter-spacing:-.005em;
+}
+
+/* ---------- logo ----------
+   "oriphim." set as text, in the header on every page. */
+.nav-home,
+.topbar .nav-home{
+  font-family:var(--display);
+  font-size:38px;
+  font-weight:400;
+  font-synthesis:none;
+  letter-spacing:-.01em;
+  line-height:1;
+  text-transform:lowercase;
+  text-decoration:none;
+  white-space:nowrap;
+  color:var(--ink);
+}
+
+/* "oriphim" written inside a sentence or an eyebrow takes the same face, without the full stop. */
+.oriphim-word{
+  font-family:var(--display);
+  font-weight:400;
+  font-synthesis:none;
+  letter-spacing:0;
+  text-transform:lowercase;
+}
