@@ -56,13 +56,90 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .cli-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line);font:11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);}
 .cli-bar i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(226,223,216,.4);}
 .cli-bar span{margin-left:10px;}
-.cli-body{margin:0;padding:24px 26px 28px;overflow-x:auto;font:13.5px/1.75 'IBM Plex Mono',monospace;color:var(--ink);white-space:pre;}
-.cli-body .ln{transition:opacity .35s ease;}
-.cli-demo.is-typing .ln{opacity:0;}
-.cli-demo.is-typing .ln.is-shown{opacity:1;}
-.c-dim{color:rgba(226,223,216,.5);}
-.c-key{color:#e0583a;}
-.c-holds{color:var(--green);font-weight:600;}
+/* The terminal: drawn the way Ori draws itself. Colours are the dark theme's roles
+   (ori/palettes.py), the layout is tui.py's: a log that scrolls up from the bottom,
+   the working indicator, the prompt box and the status line docked underneath.
+   Without script every line is shown; the playback in cli-demo.js only adds the typing. */
+.tui{--t-accent:#cf3f22;--t-bright:#f07a5c;--t-muted:#8f8983;--t-subtle:#5f5955;--t-user:#b8b2aa;--t-ok:#5fd38a;--t-link:#86adff;
+  --tr:34;display:flex;flex-direction:column;height:calc(var(--tr) * 1.55em);padding:18px 24px 14px;overflow:hidden;
+  font:13px/1.55 'IBM Plex Mono',monospace;color:var(--ink);font-variant-ligatures:none;}
+/* The log starts at the top and, once it is longer than the screen, shows its end: column-reverse anchors it to the bottom. */
+.tui-log{flex:1 1 auto;min-height:0;display:flex;flex-direction:column-reverse;overflow-x:hidden;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:var(--t-subtle) transparent;
+  overflow-anchor:none;} /* new lines keep the reader's place by script (cli-demo.js), the same in every browser */
+.tui-log::-webkit-scrollbar{width:8px;}
+.tui-log::-webkit-scrollbar-track{background:transparent;}
+.tui-log::-webkit-scrollbar-thumb{background:var(--t-subtle);border-radius:4px;}
+.tui-log:focus-visible{outline:1px solid var(--t-muted);outline-offset:3px;}
+.tui-in{flex:none;margin-bottom:auto;}
+/* Once the log is longer than the screen its first line scrolls off; a short fade says so instead of cutting a row in half. */
+.tui-log.can-up{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 2.4em);mask-image:linear-gradient(to bottom,transparent 0,#000 2.4em);}
+.tui-log.can-down{-webkit-mask-image:linear-gradient(to top,transparent 0,#000 1.8em);mask-image:linear-gradient(to top,transparent 0,#000 1.8em);}
+.tui-log.can-up.can-down{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 2.4em,#000 calc(100% - 1.8em),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 2.4em,#000 calc(100% - 1.8em),transparent 100%);}
+.tui b{font-weight:600;}
+.t-accent{color:var(--t-accent);}
+.t-b{font-weight:700;}
+.t-muted{color:var(--t-muted);}
+.t-subtle{color:var(--t-subtle);}
+.t-ok{color:var(--t-ok);}
+.t-link{color:var(--t-link);}
+.t-cmd{color:var(--t-accent);font-weight:700;}
+.t-ring{display:inline-block;}
+.t-pre,.tui pre{margin:0;font:inherit;white-space:pre;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;}
+.tui pre::-webkit-scrollbar{display:none;}
+.t-head{display:flex;gap:2ch;margin-bottom:1.55em;}
+.t-logo{color:var(--t-bright);font-weight:700;line-height:1.55;}
+.t-meta{display:flex;flex-direction:column;min-width:0;}
+.t-meta>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-hint{color:var(--t-muted);margin-bottom:.4em;}
+.t-after{margin-top:1.55em;}
+.t-you{margin:1.55em 0 0;padding:0 1ch;border:1px solid var(--t-subtle);border-radius:6px;color:var(--t-user);white-space:pre-wrap;overflow-wrap:anywhere;}
+.t-op{padding-left:5ch;text-indent:-3ch;color:var(--t-muted);white-space:pre-wrap;}
+.t-op.t-in{color:inherit;}
+.t-ori{margin-top:1.55em;}
+.t-first{padding-left:2ch;text-indent:-2ch;white-space:pre-wrap;}
+.t-line{padding-left:2ch;white-space:pre-wrap;}
+.t-ori .t-pre{padding-left:2ch;}
+.t-ori>.t-op{margin-top:0;}
+.t-head+.t-op,.t-you+.t-op,.t-op+.t-op{margin-top:0;}
+.t-you+.t-op{margin-top:.2em;}
+.tui-dock{flex:none;padding-top:.4em;}
+.t-work{display:grid;min-height:3.1em;align-content:end;}
+.t-frame{grid-area:1/1;display:none;}
+.t-final{display:block;}
+.t-frame .t-pre{padding-left:2ch;}
+.t-compact{display:none;}
+.t-frame .t-pre:last-child{overflow:hidden;text-overflow:ellipsis;}
+.t-box{display:flex;gap:1ch;align-items:baseline;margin-top:.2em;padding:0 1ch;border:1px solid var(--t-subtle);border-radius:6px;}
+.t-typed{white-space:pre;overflow:hidden;}
+.t-caret{display:inline-block;width:.55em;height:1.05em;margin-left:-1ch;background:var(--ink);opacity:.8;transform:translateY(.18em);}
+.t-status{display:flex;justify-content:space-between;gap:2ch;padding:0 2ch;white-space:nowrap;}
+.t-s-right{flex:0 100 auto;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.t-s-left{flex:0 1 auto;min-width:8ch;overflow:hidden;text-overflow:ellipsis;}
+.t-s-left.is-link{cursor:pointer;}
+.t-s-fresh{color:#e0b341;}
+/* playback */
+.cli-demo.is-playing .ln,.cli-demo.is-playing .t-final{display:none;}
+.cli-demo.is-playing .ln.is-shown{display:block;animation:t-in .25s ease both;}
+.cli-demo.is-playing .t-head.is-shown{display:flex;}
+.cli-demo.is-playing .t-you.is-shown{display:block;}
+.cli-demo.is-playing .t-frame.is-on{display:block;}
+.cli-demo.is-playing .t-s-run{display:none;}
+.cli-demo.is-playing.run-known .t-s-run{display:inline;}
+.cli-demo:not(.is-playing) .t-hint:not(.t-after){display:none;}
+.cli-demo.is-playing .t-caret{animation:t-blink 1.1s steps(1) infinite;}
+@keyframes t-in{from{opacity:0}to{opacity:1}}
+@keyframes t-blink{50%{opacity:0}}
+@media (max-width:980px){
+  .tui{--tr:38;padding:16px 16px 12px;font-size:12px;}
+}
+@media (max-width:600px){
+  .tui{--tr:46;padding:14px 12px 10px;font-size:11.5px;}
+  .t-full{display:none;}
+  .t-compact{display:block;}
+  .t-logo{font-size:inherit;}
+}
+@media (prefers-reduced-motion:reduce){.t-caret{animation:none;}}
 /* Files look the same in the terminal and in the folder below. */
 .file{display:inline-block;padding:1px 9px;border:1px solid rgba(226,223,216,.4);font:13px/1.6 'IBM Plex Mono',monospace;color:var(--ink);}
 .how-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--paper);border-top:0;counter-reset:step;}
@@ -82,7 +159,10 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .verdict-cols [data-verdict="fails"] strong{color:#e0583a;}
 .verdict-cols [data-verdict="unclear"] strong{color:var(--blue);}
 .verdict-cols [data-verdict="standin"] strong{color:var(--ink);}
-.c-fill{color:var(--blue);}
+.who-cols{grid-template-columns:repeat(4,minmax(0,1fr));}
+.who-cols strong{font-size:clamp(18px,1.6vw,24px);line-height:1.15;color:var(--ink);}
+.chapter-for,.chapter-next{display:block;}
+.chapter-for h2,.chapter-next h2{max-width:none;}
 .chapter .fine-print{margin-top:22px;font:12px/1.6 'IBM Plex Mono',monospace;color:rgba(226,223,216,.5);max-width:none;}
 
 .app-shot{margin:0;}
@@ -139,7 +219,7 @@ body.story-layout .signin-btn{max-width:24vw;overflow:hidden;text-overflow:ellip
 .band-offer h2{font-size:clamp(30px,3.6vw,48px);line-height:1.06;}
 .file-row{list-style:none;margin:40px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:14px;}
 .file-row .file{padding:14px 22px;font-size:15px;border-color:var(--paper);}
-.offer-line{margin-top:30px;font-size:15px;line-height:1.6;color:var(--ink-soft);}
+.offer-line{max-width:64ch;margin-top:30px;font-size:15px;line-height:1.6;color:var(--ink-soft);}
 .offer-line a{color:var(--ink);text-underline-offset:3px;}
 
 .cta-band{z-index:1;padding:56px 0;border-top:1px solid rgba(194,57,27,.55);border-bottom:1px solid rgba(194,57,27,.55);}
@@ -173,10 +253,9 @@ footer .wrap,.footer-x{color:var(--paper);}
   .how-steps li:nth-child(3){border-left:0;}
   .how-steps li:nth-child(n+3){border-top:1px solid var(--line);}
   .band-offer .wrap{padding:0 clamp(20px,6vw,48px);}
-  .verdict-cols{grid-template-columns:1fr;}
+  .verdict-cols,.who-cols{grid-template-columns:1fr;}
   .verdict-cols>div,.verdict-cols>div + div{padding:24px 0;border-left:0;}
   .verdict-cols>div + div{border-top:1px solid var(--line);}
-  .cli-body{font-size:12px;padding:18px 16px 20px;}
 }
 @media (max-width:640px){
   .step-list li,.verdict-list>div{grid-template-columns:1fr;gap:4px;}

@@ -32,3 +32,5 @@ footer .wrap{align-items:center;gap:18px;}
 .footer-x svg{width:14px;height:14px;}
 .footer-x:hover{background:var(--paper);}
 @media(max-width:760px){.wrap{padding-left:24px;padding-right:24px;}.contact-main{padding-top:18px;}.contact-intro{margin-bottom:28px;gap:12px;}.contact-intro img{width:32px;height:30px;}.contact-single h2{font-size:26px;}footer .wrap{gap:10px;}.footer-actions{gap:8px;}}
+
+form [hidden]{display:none !important;}
