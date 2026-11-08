@@ -13,20 +13,29 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/brand.css">
 <link rel="preload" href="/assets/Redaction35-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/Redaction50-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
   <a class="nav-home" href="/" aria-label="Oriphim home">oriphim.</a>
 </div></div>
 <main class="wrap">
-<p class="eyebrow">Ori sign-in</p>
+<p class="eyebrow"><span class="ori-word">Ori</span> sign-in</p>
 <h1 id="title">Return to your terminal.</h1>
-<p id="detail">Copy this code and paste it into Ori where it asks for it. It works once, for a few minutes, and only in the terminal that started this sign-in.</p>
+<p id="detail">Copy this code and paste it into <span class="ori-word">Ori</span> where it asks for it. It works once, for a few minutes, and only in the terminal that started this sign-in.</p>
 <div class="code" id="codeBox" hidden><output id="code" aria-label="Sign-in code"></output><button type="button" id="copy">Copy</button></div>
 <p id="copied" role="status" aria-live="polite"></p>
 </main>
 <footer><div class="wrap">&copy; 2026 ORIPHIM, INC. &middot; <a href="/contact">Contact</a></div></footer>
 <script>
+  // Sets text with the word "Ori" in its own face. Builds nodes, never HTML.
+  const setOri = (el, text) => el.replaceChildren(...text.split(/\bOri\b/).flatMap((part, i) => {
+    if (!i) return [part];
+    const s = document.createElement("span");
+    s.className = "ori-word";
+    s.textContent = "Ori";
+    return [s, part];
+  }));
   // No Supabase client on this page: it would try to use the code itself.
   const params = new URLSearchParams(location.search);
   const code = params.get("code");
@@ -37,15 +46,15 @@
     document.getElementById("copy").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(code);
-        document.getElementById("copied").textContent = "Copied. Paste it into Ori.";
+        setOri(document.getElementById("copied"), "Copied. Paste it into Ori.");
       } catch {
         document.getElementById("copied").textContent = "Select the code and copy it.";
       }
     });
   } else {
     document.getElementById("title").textContent = "Sign-in did not finish.";
-    document.getElementById("detail").textContent =
-      (params.get("error_description") || "No code was returned.") + " Start again from Ori with ori login --manual.";
+    setOri(document.getElementById("detail"),
+      (params.get("error_description") || "No code was returned.") + " Start again from Ori with ori login --manual.");
   }
 </script>
 </body>

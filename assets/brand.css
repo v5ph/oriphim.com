@@ -1,9 +1,11 @@
-/* Brand type. Redaction 35 sets the headlines and the "oriphim." wordmark.
+/* Brand type. Redaction 35 sets the headlines and the "oriphim." wordmark;
+   Redaction 50 sets the word "Ori" wherever it is written.
    Loaded last on every page, so it overrides the per-page heading fonts without
    editing each stylesheet. Body copy, labels and code stay in Inter / Plex / Geist Mono.
 
    Redaction is Copyright 2019 MCKL Inc., dual-licensed SIL OFL 1.1 and LGPL 2.1.
-   The licence text ships alongside the font as assets/Redaction35-OFL.txt. */
+   The licence texts ship alongside the fonts as assets/Redaction35-OFL.txt and
+   assets/Redaction50-OFL.txt. */
 
 @font-face{
   font-family:'Redaction 35';
@@ -13,8 +15,17 @@
   font-display:swap;
 }
 
+@font-face{
+  font-family:'Redaction 50';
+  src:url('/assets/Redaction50-Regular.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
   --display:'Redaction 35','Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --ori:'Redaction 50','Redaction 35','Iowan Old Style','Palatino Linotype',Georgia,serif;
 }
 
 /* ---------- headlines ----------
@@ -62,3 +73,21 @@ h1,h2,h3,h4,
   letter-spacing:0;
   text-transform:lowercase;
 }
+
+/* ---------- "Ori" ----------
+   The product's name, wherever it is written: <span class="ori-word">Ori</span>.
+   Lowercase like the wordmark; the size bump offsets Redaction's small x-height.
+   Letter-spacing and weight are pinned so it looks the same inside an uppercase
+   eyebrow, a button or a headline. To keep the capital, delete the text-transform line. */
+.ori-word{
+  font-family:var(--ori);
+  font-size:1.2em;
+  font-weight:400;
+  font-style:normal;
+  font-synthesis:none;
+  line-height:.8;
+  letter-spacing:0;
+  text-transform:lowercase;
+}
+/* Headlines are already Redaction, so no size bump there. */
+h1 .ori-word,h2 .ori-word,h3 .ori-word,h4 .ori-word{font-size:1em;line-height:inherit}

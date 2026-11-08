@@ -36,7 +36,7 @@
   // it wakes into a bout of scanning and works over a region, then settles.
   // The eye is seen from low and to the side, as in an isometric view, and rests
   // looking up and to the right: 35 degrees above the horizontal, about 40 degrees
-  // off the line of sight. The pupil sits in the upper right of the ball and the
+  // off the line of sight. That is the view; everything below returns to it. The pupil sits in the upper right of the ball and the
   // cornea shows in profile there. These are offsets before the gaze is
   // normalised, with the line of sight at z = 1.
   const GAZE_X  = 0.70, GAZE_Y = 0.50;
@@ -49,6 +49,17 @@
   const RING_FEATHER = 0.26;  // and are back to full strength this much further out
   const RING_GHOST   = 0.82;  // share of ring pixels dropped at the pupil, so the iris shows through
   const SCAN    = 0.17;                   // how wide it ranges when scanning
+  // Now and then it looks well away from rest instead of just scanning: sometimes
+  // round at the observer, sometimes elsewhere on the lit side, then it settles
+  // back to the resting gaze above. GAZE_LIM is how far it may ever turn from
+  // the viewer, as an offset at z = 1: about 48 degrees. The iris is 35 degrees
+  // across from its centre, so at the limit all of it is still on the near side
+  // of the ball. It can never turn around.
+  const GAZE_LIM = 1.10;
+  const LOOK_P   = 0.65;                  // share of regions that are a wide look
+  const LOOK_AT  = 0.50;                  // of those, share aimed at the observer
+  const LOOK_HOLD = 1.5;                  // seconds a wide look is held, plus up to as much again
+  const E1R_X = -GAZE_Y/Math.hypot(GAZE_X,GAZE_Y), E1R_Y = GAZE_X/Math.hypot(GAZE_X,GAZE_Y);  // iris fibre frame at rest
   const FIX_MIN = 0.14, FIX_MAX = 0.80;   // seconds held between jumps
   const REGION  = 2.2;                    // seconds before it moves on
   const REST    = 9.0, REST_VAR = 13.0;   // seconds of stillness between bouts
@@ -253,7 +264,15 @@
   // works over one region for a while before moving on, which is what reads as
   // examining something rather than merely looking around.
   const SAC={x:0,y:0, fx:0,fy:0, tx:0,ty:0, t0:-9, dur:0.06,
-             hold:0, rx:0,ry:0, rhold:0, pupil:1, awake:0, until:4, dil:1};
+             hold:0, rx:0,ry:0, rhold:0, pupil:1, awake:0, until:4, dil:1, home:0};
+  // SAC.x and SAC.y are offsets from the resting gaze. This pulls a target back
+  // inside the cone the eye may turn through, measured from the line of sight,
+  // and leaves the answer in CL.
+  const CL=[0,0];
+  function limit(x,y){
+    const ax=GAZE_X+x, ay=GAZE_Y+y, m=Math.hypot(ax,ay), k=m>GAZE_LIM ? GAZE_LIM/m : 1;
+    CL[0]=ax*k-GAZE_X; CL[1]=ay*k-GAZE_Y;
+  }
   function gazeStep(t,dt){
     // wake into a scanning bout, then settle back into stillness
     if(t>=SAC.until){
@@ -261,17 +280,39 @@
       SAC.until = t + (SAC.awake ? BOUT+Math.random()*BOUT_VAR
                                  : REST+Math.random()*REST_VAR);
       if(SAC.awake) SAC.rhold=0;            // choose something to look at
+      else {                                // settling: go back to the resting gaze
+        SAC.home=1;
+        SAC.hold=Math.min(SAC.hold, t+0.3+Math.random()*0.7);
+      }
     }
     const on=SAC.awake;
 
     if(on && t>=SAC.rhold){                 // pick something new to examine
-      SAC.rx=(Math.random()*2-1)*SCAN;
-      SAC.ry=(Math.random()*2-1)*SCAN*0.78;
-      SAC.rhold=t+REGION+Math.random()*REGION*1.9;
+      let ox, oy;                           // absolute gaze offset; 0,0 is straight at the viewer
+      if(Math.random()<LOOK_P){
+        if(Math.random()<LOOK_AT){          // look round at the observer
+          ox=(Math.random()*2-1)*0.10;
+          oy=(Math.random()*2-1)*0.08;
+        } else {                            // or elsewhere on the lit side
+          ox=-0.20+Math.random()*1.30;
+          oy=-0.10+Math.random()*1.00;
+        }
+        SAC.rhold=t+LOOK_HOLD+Math.random()*LOOK_HOLD;
+      } else {                              // a small scan around where it rests
+        ox=GAZE_X+(Math.random()*2-1)*SCAN;
+        oy=GAZE_Y+(Math.random()*2-1)*SCAN*0.78;
+        SAC.rhold=t+REGION+Math.random()*REGION*1.9;
+      }
+      limit(ox-GAZE_X, oy-GAZE_Y);
+      SAC.rx=CL[0]; SAC.ry=CL[1];
     }
     if(t>=SAC.hold){                        // launch the next saccade
       SAC.fx=SAC.x; SAC.fy=SAC.y;
-      if(on){
+      if(SAC.home){                         // settle onto the resting gaze
+        SAC.home=0;
+        SAC.tx=(Math.random()*2-1)*0.012;
+        SAC.ty=(Math.random()*2-1)*0.012;
+      } else if(on){
         const big=Math.random()<0.18 ? 2.2 : 1;
         SAC.tx=SAC.rx+(Math.random()*2-1)*SCAN*0.38*big;
         SAC.ty=SAC.ry+(Math.random()*2-1)*SCAN*0.30*big;
@@ -279,6 +320,8 @@
         SAC.tx=SAC.x+(Math.random()*2-1)*0.012;
         SAC.ty=SAC.y+(Math.random()*2-1)*0.012;
       }
+      limit(SAC.tx, SAC.ty);
+      SAC.tx=CL[0]; SAC.ty=CL[1];
       const amp=Math.hypot(SAC.tx-SAC.fx, SAC.ty-SAC.fy);
       SAC.dur=0.035+amp*0.22;               // a longer jump takes longer
       SAC.t0=t;
@@ -453,8 +496,16 @@
     let gx=GAZE_X+SAC.x+0.0030*Math.sin(gazeT*47.3)+0.0016*Math.sin(gazeT*83.1);
     let gy=GAZE_Y+SAC.y+0.0030*Math.sin(gazeT*61.7+1.3)+0.0016*Math.sin(gazeT*97.9);
     let gz=1;
+    // a last guard on how far it can turn from the viewer, whatever the state machine did
+    const gm=Math.hypot(gx,gy);
+    if(gm>GAZE_LIM){ gx*=GAZE_LIM/gm; gy*=GAZE_LIM/gm; }
     const gl=Math.hypot(gx,gy,gz); gx/=gl; gy/=gl; gz/=gl;
-    let e1x=-gy, e1y=gx, e1z=0;
+    // The iris fibres are laid out in a frame around the gaze. It is the resting
+    // frame carried along to the current gaze, so it is identical at rest, turns
+    // smoothly as the eye moves, and cannot spin when the eye looks straight
+    // at the viewer, where a frame built from the gaze itself has no direction.
+    const e1d=E1R_X*gx+E1R_Y*gy;
+    let e1x=E1R_X-gx*e1d, e1y=E1R_Y-gy*e1d, e1z=-gz*e1d;
     const e1l=Math.hypot(e1x,e1y,e1z)||1; e1x/=e1l; e1y/=e1l; e1z/=e1l;
     const e2x=gy*e1z-gz*e1y, e2y=gz*e1x-gx*e1z, e2z=gx*e1y-gy*e1x;
     // where the pupil falls on screen, in figure units (y up). The rings are
@@ -521,7 +572,7 @@
         cm=(f-0.5)+(lam-0.5)*0.35;
       }
       v*=EYE_GAIN;
-      if(nx*hx+ny*hy+nz*hz > 0.9965){                  // glint: a small dot, driven past white
+      if(c > COS_C && nx*hx+ny*hy+nz*hz > 0.9965){     // glint: a small dot, driven past white; only on the cornea
         v=3.0; cm=0;                                   // so the field cannot dim it, and no warm cast
       }
 

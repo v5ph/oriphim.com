@@ -171,6 +171,7 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/brand.css">
 <link rel="preload" href="/assets/Redaction35-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/Redaction50-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 <div class="topbar">
@@ -184,9 +185,9 @@
 <main>
   <div class="wrap">
     <section class="hero fade">
-      <p class="eyebrow">Ori for macOS</p>
-      <h1>Install Ori.</h1>
-      <p>Ori is <span class="oriphim-word">Oriphim</span> in your terminal: describe a physical system or attach a paper, review the brief, approve it, and run it on your Mac with the evidence kept.</p>
+      <p class="eyebrow"><span class="ori-word">Ori</span> for macOS</p>
+      <h1>Install <span class="ori-word">Ori</span>.</h1>
+      <p><span class="ori-word">Ori</span> is <span class="oriphim-word">Oriphim</span> in your terminal: describe a physical system or attach a paper, review the brief, approve it, and run it on your Mac with the evidence kept.</p>
     </section>
 
     <div class="download-block fade">
@@ -219,10 +220,10 @@
         <h2>Your first experiment.</h2>
       </div>
       <div class="steps fade">
-        <div class="step"><h3>Open Ori in a project folder</h3><p>Run <span class="inline-cmd">ori</span>. Ori reads an <span class="inline-cmd">ORI.md</span> there as standing notes about the project.</p></div>
+        <div class="step"><h3>Open <span class="ori-word">Ori</span> in a project folder</h3><p>Run <span class="inline-cmd">ori</span>. <span class="ori-word">Ori</span> reads an <span class="inline-cmd">ORI.md</span> there as standing notes about the project.</p></div>
         <div class="step"><h3>Sign in</h3><p>Type <span class="inline-cmd">/account login</span> (Google), <span class="inline-cmd">/account login github</span>, or <span class="inline-cmd">/account login email you@example.com</span> for a code. Your draft waits while the browser is open.</p></div>
         <div class="step"><h3>Subscribe</h3><p><span class="inline-cmd">/billing subscribe month</span> or <span class="inline-cmd">year</span> opens Stripe Checkout. Access starts when the payment is confirmed. See <a href="/pricing">pricing</a>.</p></div>
-        <div class="step"><h3>Describe, review, approve, run</h3><p>Describe the system or <span class="inline-cmd">/attach</span> a paper. Ori asks what it needs, drafts a brief, and runs nothing until you sign that exact revision with <span class="inline-cmd">/approve NAME</span>.</p></div>
+        <div class="step"><h3>Describe, review, approve, run</h3><p>Describe the system or <span class="inline-cmd">/attach</span> a paper. <span class="ori-word">Ori</span> asks what it needs, drafts a brief, and runs nothing until you sign that exact revision with <span class="inline-cmd">/approve NAME</span>.</p></div>
       </div>
     </div>
   </section>
@@ -272,7 +273,7 @@
         <h2>Use a local model or your own endpoint.</h2>
       </div>
       <div>
-        <p>Ori can interpret with a model on your Mac or any OpenAI-compatible endpoint instead of Oriphim&rsquo;s hosted model. These use no cloud credits and keep working when the month&rsquo;s credits are used. Ori never bundles model weights: download a model with your runtime first. A Standard subscription is still required.</p>
+        <p><span class="ori-word">Ori</span> can interpret with a model on your Mac or any OpenAI-compatible endpoint instead of Oriphim&rsquo;s hosted model. These use no cloud credits and keep working when the month&rsquo;s credits are used. <span class="ori-word">Ori</span> never bundles model weights: download a model with your runtime first. A Standard subscription is still required.</p>
 <pre class="block"># a local runtime such as Ollama, already serving a model
 /model local http://127.0.0.1:11434/v1 your-model-name
 
@@ -295,18 +296,18 @@ ori model byok https://api.example.com/v1 model-name
         <details><summary>zsh: command not found: ori</summary>
           <p><span class="inline-cmd">~/.local/bin</span> is not on your PATH yet. The installer prints the exact line for your shell; for zsh it is:</p>
 <pre class="block">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</pre></details>
-        <details><summary>&ldquo;Ori needs an Apple Silicon Mac&rdquo;</summary>
-          <p>Ori is built for Apple Silicon only. A Terminal running under Rosetta on an Apple Silicon Mac is detected and handled; Intel Macs are not supported.</p></details>
+        <details><summary>&ldquo;<span class="ori-word">Ori</span> needs an Apple Silicon Mac&rdquo;</summary>
+          <p><span class="ori-word">Ori</span> is built for Apple Silicon only. A Terminal running under Rosetta on an Apple Silicon Mac is detected and handled; Intel Macs are not supported.</p></details>
         <details><summary>&ldquo;integrity check failed&rdquo; or a download error</summary>
           <p>Nothing was installed or changed. Run the command again. Behind a proxy, set <span class="inline-cmd">HTTPS_PROXY</span> before running it. If it keeps failing, report it with the output.</p></details>
-        <details><summary>&ldquo;exists and is not a link Ori made&rdquo;</summary>
-          <p>Something else is installed at <span class="inline-cmd">~/.local/bin/ori</span>. Ori will not overwrite it; move it aside and run the installer again.</p></details>
+        <details><summary>&ldquo;exists and is not a link <span class="ori-word">Ori</span> made&rdquo;</summary>
+          <p>Something else is installed at <span class="inline-cmd">~/.local/bin/ori</span>. <span class="ori-word">Ori</span> will not overwrite it; move it aside and run the installer again.</p></details>
         <details><summary>An update caused a problem</summary>
           <p><span class="inline-cmd">ori rollback</span> switches back to the previous version, which is kept. <span class="inline-cmd">ori update --pin VERSION</span> stays on one version. Running experiments always finish on the version they started with.</p></details>
-        <details><summary>Signed in, but Ori says the subscription is not active</summary>
+        <details><summary>Signed in, but <span class="ori-word">Ori</span> says the subscription is not active</summary>
           <p>After Checkout, access starts when Stripe confirms the payment, usually within a minute. <span class="inline-cmd">/billing</span> shows the confirmed state. Payment problems and renewal dates are shown there and on your <a href="/account">account page</a>.</p></details>
         <details><summary>Reporting a problem</summary>
-          <p>Run <span class="inline-cmd">ori doctor --json &gt; ori-doctor.json</span> and send it through the <a href="/contact">contact page</a> with what you did and what you saw. It describes your installation and dependencies, not your research. Ori sends no usage or research telemetry; diagnostics leave your Mac only when you send them.</p></details>
+          <p>Run <span class="inline-cmd">ori doctor --json &gt; ori-doctor.json</span> and send it through the <a href="/contact">contact page</a> with what you did and what you saw. It describes your installation and dependencies, not your research. <span class="ori-word">Ori</span> sends no usage or research telemetry; diagnostics leave your Mac only when you send them.</p></details>
       </div>
     </div>
   </section>
@@ -334,6 +335,14 @@ ori model byok https://api.example.com/v1 model-name
 <script>
   const copyButton = document.getElementById("copyInstall");
   const copyStatus = document.getElementById("copyStatus");
+  // Sets text with the word "Ori" in its own face. Builds nodes, never HTML.
+  const setOri = (el, text) => el.replaceChildren(...text.split(/\bOri\b/).flatMap((part, i) => {
+    if (!i) return [part];
+    const s = document.createElement("span");
+    s.className = "ori-word";
+    s.textContent = "Ori";
+    return [s, part];
+  }));
   copyButton.addEventListener("click", async () => {
     const command = document.getElementById("installCommand").textContent;
     try {
@@ -345,7 +354,7 @@ ori model byok https://api.example.com/v1 model-name
   });
 
   if (!/Mac/i.test(navigator.userAgent || "")) {
-    copyStatus.textContent = "Ori runs on Apple Silicon Macs. Open this page on your Mac to install.";
+    setOri(copyStatus, "Ori runs on Apple Silicon Macs. Open this page on your Mac to install.");
   }
 
   // The release channel is published with each release; until the first one,

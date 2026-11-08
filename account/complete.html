@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/assets/theme.css">
 <link rel="stylesheet" href="/assets/brand.css">
 <link rel="preload" href="/assets/Redaction35-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/Redaction50-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
@@ -22,9 +23,9 @@
 <h1 id="title">Confirming your payment&hellip;</h1>
 <p id="detail" aria-live="polite">Stripe has sent you back. Access starts when Stripe confirms the payment to Oriphim directly, usually within a minute. You can leave this page; nothing is lost.</p>
 <div class="panel" id="status" hidden></div>
-<div class="notice" id="terminal" hidden><strong>Return to your terminal.</strong> Ori picks up your subscription with <span class="inline-cmd">/billing</span> (or <span class="inline-cmd">ori account</span>), and whatever you were working on is still there.</div>
+<div class="notice" id="terminal" hidden><strong>Return to your terminal.</strong> <span class="ori-word">Ori</span> picks up your subscription with <span class="inline-cmd">/billing</span> (or <span class="inline-cmd">ori account</span>), and whatever you were working on is still there.</div>
 <div class="actions">
-  <a class="btn" href="/download" id="install" hidden>Install Ori</a>
+  <a class="btn" href="/download" id="install" hidden>Install <span class="ori-word">Ori</span></a>
   <a class="btn-outline" href="/account">Your account</a>
 </div>
 </main>
@@ -38,6 +39,14 @@
   const id = params.get("session_id") || "";
   const fromTerminal = params.get("from") === "terminal";
   const $ = (x) => document.getElementById(x);
+  // Sets text with the word "Ori" in its own face. Builds nodes, never HTML.
+  const setOri = (el, text) => el.replaceChildren(...text.split(/\bOri\b/).flatMap((part, i) => {
+    if (!i) return [part];
+    const s = document.createElement("span");
+    s.className = "ori-word";
+    s.textContent = "Ori";
+    return [s, part];
+  }));
   const current = await oriAccount.session().catch(() => null);
   if (!current) {
     $("title").textContent = "Sign in to see your subscription.";
@@ -71,7 +80,7 @@
     }
     if (Date.now() - started > 90000) {
       $("title").textContent = "Payment received — confirmation pending.";
-      $("detail").textContent = "Stripe has accepted the payment and Oriphim is waiting for its confirmation. This can take a few minutes; your account page and Ori's /billing will show it as soon as it arrives.";
+      setOri($("detail"), "Stripe has accepted the payment and Oriphim is waiting for its confirmation. This can take a few minutes; your account page and Ori's /billing will show it as soon as it arrives.");
       $("terminal").hidden = !fromTerminal;
       return;
     }
