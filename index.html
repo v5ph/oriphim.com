@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIPHIM | Check a paper's claim before you build on it</title>
-<meta name="description" content="Claim Checks from Oriphim: Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds, doesn't, or can't be told from the text.">
+<title>ORIPHIM | Go after the hard problems</title>
+<meta name="description" content="Ori is a research tool for physical science: it rebuilds your model, notes or paper, runs it with convergence, conservation and sensitivity checks, and hands back an Evidence Pack anyone can rerun.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/">
 <meta name="theme-color" content="#120d0e">
@@ -12,16 +12,16 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
-<meta property="og:title" content="ORIPHIM | Check a paper's claim before you build on it">
-<meta property="og:description" content="Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds.">
+<meta property="og:title" content="ORIPHIM | Go after the hard problems">
+<meta property="og:description" content="Go after the hard problems. Simulation that checks itself, so you can push bounds and trust what you find.">
 <meta property="og:url" content="https://oriphim.com/">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ORIPHIM | Check a paper's claim before you build on it">
-<meta name="twitter:description" content="Ori rebuilds a paper's computational experiment, runs it, and reports whether the published claim holds.">
+<meta name="twitter:title" content="ORIPHIM | Go after the hard problems">
+<meta name="twitter:description" content="Go after the hard problems. Simulation that checks itself, so you can push bounds and trust what you find.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -381,7 +381,7 @@
         "width": 192,
         "height": 192
       },
-      "description": "Oriphim runs Claim Checks: its research agent Ori rebuilds a paper's computational experiment and reports whether the published claim holds."
+      "description": "Oriphim builds Ori, a research tool that rebuilds a physical model, runs it with checks, and hands back an Evidence Pack anyone can rerun."
     },
     {
       "@type": "SoftwareApplication",
@@ -390,7 +390,7 @@
       "applicationCategory": "ScienceApplication",
       "operatingSystem": "macOS (Apple Silicon)",
       "url": "https://oriphim.com/",
-      "description": "A research system that rebuilds a paper's computational experiment from the text, runs it with convergence and conservation checks, and compares the measured result against the printed one.",
+      "description": "A research system that rebuilds a physical model from a description, code or paper, runs it with convergence, conservation and sensitivity checks, and reports what holds up and what wasn't assessed.",
       "publisher": { "@id": "https://oriphim.com/#organization" },
       "featureList": [
         "Derive governing equations from described physical systems",
@@ -429,10 +429,10 @@
 
   <div class="wall-copy">
       <div class="hero-lead">
-        <div class="eyebrow">Claim Checks</div>
-        <h1 id="hero-title">Check the claim before you build on it.</h1>
-        <p class="hero-sub"><span class="ori-word">Ori</span> reruns a paper's computation and tells you if the printed number holds.</p>
-        <div class="cta-row"><a href="/contact#verification-title" class="btn">Request a Claim Check</a><a href="/archive" class="link-line">Read the archive</a></div>
+        <div class="eyebrow">Ori</div>
+        <h1 id="hero-title">Go after the hard problems.</h1>
+        <p class="hero-sub">Simulation that checks itself, so you can push bounds and trust what you find.</p>
+        <div class="cta-row"><a href="/contact#verification-title" class="btn">Try Ori on your question</a><a href="#how" class="link-line">How it works</a></div>
       </div>
   </div>
 </header>
@@ -440,71 +440,119 @@
 <nav class="info-bar" aria-label="Oriphim">
   <div class="wrap">
     <a href="/contact">Contact</a>
-    <a href="/pricing">Claim Checks</a>
+    <a href="/pricing">Groundwork</a>
     <a href="/archive">Archive</a>
   </div>
 </nav>
 
 <main>
+  <section class="chapter chapter-for" aria-labelledby="for-title">
+    <div class="eyebrow">Who it's for</div>
+    <h2 id="for-title">For anyone whose work rests on a model.</h2>
+    <div class="verdict-cols who-cols">
+      <div><strong>Researchers</strong><p>Test an idea before you commit to it.</p></div>
+      <div><strong>Labs and teams</strong><p>Reproduce the paper you're building on.</p></div>
+      <div><strong>Startups</strong><p>Firm up the physics your product depends on.</p></div>
+      <div><strong>Reviewers</strong><p>Rerun a result yourself instead of taking it on trust.</p></div>
+    </div>
+  </section>
+
   <section class="chapter chapter-how" id="how" aria-labelledby="how-title">
     <div class="eyebrow">How it works</div>
-    <h2 id="how-title">Nothing runs until you sign the brief.</h2>
-    <figure class="cli-demo" aria-label="A Claim Check in the Ori terminal: the brief is drafted, signed, run, and compared with the printed number.">
-      <div class="cli-bar" aria-hidden="true"><i></i><i></i><i></i><span>ori &middot; orszag-1971</span></div>
-<pre class="cli-body"><code><span class="ln"><span class="c-dim">$</span> ori</span>
-<span class="ln"><span class="c-dim">&rsaquo;</span> Check orszag-1971.pdf: does the critical Reynolds number hold?</span>
-<span class="ln"><span class="c-key">read</span>     14 pages &middot; 3 equations &middot; 2 parameters</span>
-<span class="ln"><span class="c-key">brief</span>    stability-check</span>
-<span class="ln">  goal   critical Reynolds number, plane Poiseuille flow <span class="c-dim">(p. 6)</span></span>
-<span class="ln">  method Orr&ndash;Sommerfeld, Chebyshev collocation <span class="c-dim">(eq. 14, p. 4)</span></span>
-<span class="ln">  grid   N = 64, 128 modes <span class="c-fill">inferred &middot; not in paper</span></span>
-<span class="ln">  pass   within 0.1% of the printed 5772.22</span>
-<span class="ln"><span class="c-dim">&rsaquo;</span> /approve stability-check</span>
-<span class="ln"><span class="c-key">run</span>      N = 64    Re<sub>c</sub> = 5772.31</span>
-<span class="ln"><span class="c-key">run</span>      N = 128   Re<sub>c</sub> = 5772.23   <span class="c-dim">converged</span></span>
-<span class="ln"><span class="c-key">compare</span>  printed 5772.22 &middot; rerun 5772.23 &middot; &Delta; 0.0002%</span>
-<span class="ln"><span class="c-key">verdict</span>  <span class="c-holds">HOLDS</span></span>
-<span class="ln"><span class="c-key">wrote</span>    <span class="file">report.pdf</span> <span class="file">chart.png</span> <span class="file">run.py</span> <span class="file">brief.signed</span></span></code></pre>
+    <h2 id="how-title">Nothing runs until you sign off.</h2>
+    <figure class="cli-demo" aria-label="An illustrative session in the Ori terminal: Ori reads a paper and drafts a brief, you sign that exact revision, it runs on your Mac and lists every check with its outcome.">
+      <div class="cli-bar" aria-hidden="true"><i></i><i></i><i></i><span>ori &middot; illustrative example</span></div>
+      <div class="tui">
+        <div class="tui-log can-up" role="region" aria-label="Terminal output, scrollable" tabindex="0">
+          <div class="tui-in">
+          <div class="t-head ln" data-id="head"><pre class="t-logo" aria-hidden="true">█▀█ █▀█ █
+█▄█ █▀▄ █</pre><div class="t-meta"><span class="t-muted">0.1.0a1</span><span class="t-link">~/research/stability</span><span class="t-muted">user@lab.acme</span></div></div>
+          <div class="t-hint ln" data-id="hint">Fit this data and tell me how sure you really are.</div>
+          <div class="t-you ln" data-id="you1"><span class="t-accent">&rsaquo;</span> Check the critical Reynolds number in @orszag-1971.pdf</div>
+          <div class="t-op ln" data-id="op1"><span class="t-subtle">&#9151;</span>  Attached orszag-1971.pdf</div>
+          <div class="t-op ln" data-id="op2"><span class="t-subtle">&#9151;</span>  Drafting the brief &middot; Oriphim model</div>
+          <div class="t-ori ln" data-id="brief1"><div class="t-first"><span class="t-accent t-b">&#9679;</span> <b>Plane Poiseuille critical Reynolds number</b><span class="t-muted">  revision 1 &middot; unsigned draft</span></div><div class="t-line">Find the critical Reynolds number of plane Poiseuille flow and compare it with the printed 5772.22.</div><div class="t-op t-in"><span class="t-subtle">&#9151;</span>  <span class="t-muted">/brief shows every field. Say what to change, or sign this exact revision with /approve NAME.</span></div></div>
+          <div class="t-ori ln" data-id="claims"><div class="t-first"><span class="t-accent t-b">&#9679;</span> <b>claims in the paper (2 kept): orszag-1971.pdf:</b></div><pre class="t-pre t-full"><span class="t-muted">  id  value    origin       reach</span>
+  c1  5772.22  computation  runnable (compute)
+  c2  0.264    computation  runnable (compute)</pre><pre class="t-pre t-compact"><span class="t-muted">  id  value    reach</span>
+  c1  5772.22  runnable (compute)
+  c2  0.264    runnable (compute)</pre><div class="t-op t-in"><span class="t-subtle">&#9151;</span>  <span class="t-muted">main claim: c1</span></div></div>
+          <div class="t-you ln" data-id="you2"><span class="t-accent">&rsaquo;</span> <span class="t-cmd">/approve</span> user.acme</div>
+          <div class="t-ori ln" data-id="brief2"><div class="t-first"><span class="t-accent t-b">&#9679;</span> <b>Plane Poiseuille critical Reynolds number</b><span class="t-muted">  revision 1 &middot; signed by user.acme</span></div><div class="t-line">Find the critical Reynolds number of plane Poiseuille flow and compare it with the printed 5772.22.</div><div class="t-op t-in"><span class="t-subtle">&#9151;</span>  <span class="t-muted">/brief shows every field. /run executes it on this Mac.</span></div></div>
+          <div class="t-you ln" data-id="you3"><span class="t-accent">&rsaquo;</span> <span class="t-cmd">/run</span></div>
+          <div class="t-op ln" data-id="op3"><span class="t-subtle">&#9151;</span>  Running the experiment &middot; on this Mac</div>
+          <div class="t-ori ln" data-id="assess"><div class="t-first"><span class="t-accent t-b">&#9679;</span> Evidence assessment: inconclusive. Numerical credibility: verified.</div><div class="t-line">No fixed decision criteria connect these checks to the hypothesis.</div><div class="t-line">No verified conclusion about the hypothesis follows from this record.</div></div>
+          <div class="t-ori ln" data-id="result"><div class="t-first"><span class="t-accent t-b">&#9679;</span> <b>Run complete</b><span class="t-muted">  on this Mac</span></div><pre class="t-pre"><span class="t-ok">&check;</span> <span class="t-muted">verification</span>  finite_solution  <span class="t-ok">pass</span>
+<span class="t-ok">&check;</span> <span class="t-muted">verification</span>  determinism      <span class="t-ok">pass</span>
+<span class="t-ok">&check;</span> <span class="t-muted">verification</span>  ladder:re_c      <span class="t-ok">pass</span>
+<span class="t-ok">&check;</span> <span class="t-muted">verification</span>  sensitivity      <span class="t-ok">pass</span>
+<span class="t-ok">&check;</span> <span class="t-muted">verification</span>  units            <span class="t-ok">pass</span>
+<span class="t-ok">&check;</span> <span class="t-muted">verification</span>  reproduces:re_c  <span class="t-ok">pass</span></pre><div class="t-line t-muted">No reference data was available. This report makes no claim about agreement with reality.</div><div class="t-op t-in"><span class="t-subtle">&#9151;</span>  <span class="t-muted">ask about the results &middot; /report &middot; /open</span></div></div>
+          <div class="t-hint t-after ln" data-id="suggest">Push this parameter until the result breaks.</div>
+          </div>
+        </div>
+        <div class="tui-dock" aria-hidden="true">
+          <div class="t-work">
+            <div class="t-frame" data-id="b1"><div class="t-pre t-full"><span class="t-accent t-ring">&#9716;</span> <b>reading</b>  <span class="t-subtle">&#9675; domain  &#9675; thesis  &#9675; claims  &#9675; writing  &#9675; checks</span></div><div class="t-pre t-compact"><span class="t-accent t-ring">&#9716;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span>  <b>reading</b></div><div class="t-pre">reading orszag-1971.pdf (1.1 MB)  <span class="t-muted">3s &middot; esc to stop</span></div></div>
+            <div class="t-frame" data-id="b2"><div class="t-pre t-full"><span class="t-ok">&check;</span> <span class="t-muted">reading</span>  <span class="t-ok">&check;</span> <span class="t-muted">domain</span>  <span class="t-subtle">&ndash; thesis</span>  <span class="t-accent t-ring">&#9716;</span> <b>claims</b>  <span class="t-subtle">&#9675; writing  &#9675; checks</span></div><div class="t-pre t-compact"><span class="t-ok">&check;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&check;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&ndash;</span><span class="t-subtle">&#9472;</span><span class="t-accent t-ring">&#9716;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span>  <b>claims</b></div><div class="t-pre">2 sub-claim(s) kept  <span class="t-muted">9s &middot; ~5.8k tokens &middot; esc to stop</span></div></div>
+            <div class="t-frame" data-id="b3"><div class="t-pre t-full"><span class="t-ok">&check;</span> <span class="t-muted">reading</span>  <span class="t-ok">&check;</span> <span class="t-muted">domain</span>  <span class="t-subtle">&ndash; thesis</span>  <span class="t-ok">&check;</span> <span class="t-muted">claims</span>  <span class="t-accent t-ring">&#9716;</span> <b>writing</b>  <span class="t-subtle">&#9675; checks</span></div><div class="t-pre t-compact"><span class="t-ok">&check;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&check;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&ndash;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&check;</span><span class="t-subtle">&#9472;</span><span class="t-accent t-ring">&#9716;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span>  <b>writing</b></div><div class="t-pre">writing the brief  <span class="t-muted">14s &middot; ~9.4k tokens &middot; esc to stop</span></div></div>
+            <div class="t-frame" data-id="r1"><div class="t-pre t-full"><span class="t-ok">&#9679;</span> <span class="t-muted">preflight</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-accent t-ring">&#9716;</span> <b>solve</b> <span class="t-subtle">&#9472;&#9472; &#9675; parse &#9472;&#9472; &#9675; adapt &#9472;&#9472; &#9675; checks &#9472;&#9472; &#9675; report</span></div><div class="t-pre t-compact"><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-accent t-ring">&#9716;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span>  <b>solve</b></div><div class="t-pre"><span class="t-accent">⣝⣕⣀⣐⣇⣥⣀</span><span class="t-subtle">⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀</span>  <span class="t-muted">4s &middot; esc to stop</span></div></div>
+            <div class="t-frame" data-id="r2"><div class="t-pre t-full"><span class="t-ok">&#9679;</span> <span class="t-muted">preflight</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">solve</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">parse</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">adapt</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-accent t-ring">&#9716;</span> <b>checks</b> <span class="t-subtle">&#9472;&#9472; &#9675; report</span></div><div class="t-pre t-compact"><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-accent t-ring">&#9716;</span><span class="t-subtle">&#9472;</span><span class="t-subtle">&#9675;</span>  <b>checks</b></div><div class="t-pre"><span class="t-accent">⣁⣔⣹⣄⣔⣏⣠⣐⣏⣠⣐⣇⣁⣄⣆⣁⣄⣒⣡⣠⣐⣹⣠⣐⣱</span><span class="t-subtle">⣀⣀⣀⣀⣀⣀⣀</span>  <span class="t-muted">checking ladder &middot; 9s &middot; esc to stop</span></div></div>
+            <div class="t-frame t-final" data-id="done"><div class="t-pre t-full"><span class="t-ok">&#9679;</span> <span class="t-muted">preflight</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">solve</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">parse</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">adapt</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">checks</span> <span class="t-subtle">&#9472;&#9472;</span> <span class="t-ok">&#9679;</span> <span class="t-muted">report</span></div><div class="t-pre t-compact"><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span><span class="t-subtle">&#9472;</span><span class="t-ok">&#9679;</span></div><div class="t-pre"><span class="t-ok">⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿  done</span>  <span class="t-muted">11s</span></div></div>
+          </div>
+          <div class="t-box"><span class="t-accent">&rsaquo;</span> <span class="t-typed"></span><span class="t-caret"></span></div>
+          <div class="t-status"><span class="t-muted t-s-left"><span class="t-s-idle">? for shortcuts</span><span class="t-s-type" hidden>ctrl+j for a new line</span><span class="t-s-work" hidden>esc to stop</span><span class="t-s-review" hidden>reviewing earlier output &middot; end returns to the latest</span><span class="t-s-fresh" hidden>&#9660; new output below &middot; end returns to the latest</span></span><span class="t-subtle t-s-right">stability<span class="t-s-run"> &middot; plane-poiseuille-critical-reynolds-number r1</span> &middot; Oriphim model</span></div>
+        </div>
+      </div>
     </figure>
     <ol class="how-steps">
-      <li><b>Rebuild</b><span>Equations and parameters, tied to the page.</span></li>
-      <li><b>Sign</b><span>You approve the goal and the pass band.</span></li>
-      <li><b>Run</b><span>Plain code, with convergence checks.</span></li>
-      <li><b>Compare</b><span>Your rerun beside the printed number.</span></li>
+      <li><b>Bring it</b><span>Your model, notes, code, or a paper you're building on.</span></li>
+      <li><b>Rebuild</b><span>Equations and parameters, each tied to where it came from.</span></li>
+      <li><b>Sign off</b><span>You approve the plan before anything runs.</span></li>
+      <li><b>Run and check</b><span>Convergence, conservation, and sensitivity to every free parameter.</span></li>
     </ol>
+    <p class="fine-print">Example shown for illustration. Scroll the terminal to read the whole session.</p>
   </section>
 
   <section class="chapter chapter-limits" aria-labelledby="limits-title">
-    <div class="eyebrow">Any source</div>
-    <h2 id="limits-title">Missing details don't stop the run.</h2>
+    <div class="eyebrow">Any starting point</div>
+    <h2 id="limits-title">Gaps in your notes don't stop the run.</h2>
     <div class="verdict-cols">
-      <div data-verdict="holds"><strong>Stated</strong><p>Every equation and value the paper gives, cited to its page.</p></div>
-      <div data-verdict="unclear"><strong>Inferred</strong><p>Grids, seeds and settings it leaves out, filled from the field's practice and marked in the brief.</p></div>
+      <div data-verdict="holds"><strong>Stated</strong><p>Every equation and value you give, tied to where it came from.</p></div>
+      <div data-verdict="unclear"><strong>Inferred</strong><p>Grids, seeds and settings you left out, filled from the field's practice and marked in the plan.</p></div>
       <div data-verdict="standin"><strong>Stand-in</strong><p>No dataset? A seeded one with the same shape, so the experiment still runs.</p></div>
     </div>
-    <p class="fine-print">Fills are never tuned toward the printed number, and the report says which results rest on them.</p>
+    <p class="fine-print">Fills are never tuned toward the answer you hope for, and the Evidence Pack says which results rest on them.</p>
+  </section>
+
+  <section class="chapter chapter-next" aria-labelledby="next-title">
+    <div class="eyebrow">Discovery</div>
+    <h2 id="next-title">Ask the next question.</h2>
+    <p>Change an assumption, sweep a parameter, try another method. Every run is checked the same way, so what you find next stands on the same ground as what you started with.</p>
   </section>
 
   <section class="band band-offer" id="offer" aria-labelledby="offer-title">
     <div class="wrap">
-      <h2 id="offer-title">You get a folder, not an opinion.</h2>
+      <div class="eyebrow">What you get</div>
+      <h2 id="offer-title">The Evidence Pack.</h2>
+      <p class="offer-line">What holds up. What to firm up next. What wasn't assessed. And a run folder that reruns without Ori, so anyone who needs to check your work can rerun it themselves.</p>
       <ul class="file-row">
         <li class="file">report.pdf</li>
         <li class="file">chart.png</li>
         <li class="file">run.py</li>
         <li class="file">brief.signed</li>
       </ul>
-      <p class="offer-line">Need ongoing checks or the environment in-house? Retainer or licence. <a href="/pricing">&rarr; Pricing</a></p>
+      <p class="offer-line">Ori never tells anyone you're right. It shows exactly what was checked, so they can see for themselves. Ongoing work, or Ori in your own terminal? <a href="/pricing">&rarr; Pricing</a></p>
     </div>
   </section>
 
   <section class="cta-band">
     <canvas class="topo-canvas" data-topo-map aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="eyebrow">Request a Claim Check</div>
-      <h2>Send us the paper.</h2>
-      <p class="cta-copy">Which paper, which claim. We'll reply with scope and price.</p>
-      <a href="/contact#verification-title" class="btn">Request a Claim Check</a>
+      <div class="eyebrow">Start with a Groundwork</div>
+      <h2>Bring the question.</h2>
+      <p class="cta-copy">Your model, your notes, or the paper you're building on. Ori works it through with you, and the first one is free.</p>
+      <a href="/contact#verification-title" class="btn">Start your first Groundwork</a>
     </div>
   </section>
 </main>

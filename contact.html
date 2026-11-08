@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact | Oriphim</title>
-<meta name="description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
+<meta name="description" content="Bring Ori a hard problem. Apply for your first Groundwork, free: simulation that checks itself, with an Evidence Pack anyone can rerun.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/contact">
 <meta name="theme-color" content="#120d0e">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
 <meta property="og:title" content="Contact | Oriphim">
-<meta property="og:description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
+<meta property="og:description" content="Bring Ori a hard problem. Apply for your first Groundwork, free: simulation that checks itself, with an Evidence Pack anyone can rerun.">
 <meta property="og:url" content="https://oriphim.com/contact">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact | Oriphim">
-<meta name="twitter:description" content="Apply for a free Claim Check, or get a quote for an Ori licence for your team.">
+<meta name="twitter:description" content="Bring Ori a hard problem. Apply for your first Groundwork, free: simulation that checks itself, with an Evidence Pack anyone can rerun.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -50,36 +50,53 @@
 <main class="wrap contact-main">
   <header class="contact-intro">
     <img src="/assets/oriphim-logo.svg?v=6" alt="Oriphim" width="42" height="30">
-    <h1>For teams whose work rests on a model.</h1>
+    <h1>Bring a hard problem.</h1>
   </header>
   <section class="contact-single" aria-labelledby="verification-title">
-    <h2 id="verification-title">Tell me what you need</h2>
+    <h2 id="verification-title">Apply for your first Groundwork</h2>
     <form id="contact-form" data-questions="contactQuestions">
       <div class="field-pair">
         <label for="contact-name">Name<input id="contact-name" name="name" autocomplete="name" required maxlength="120"></label>
-        <label for="contact-email">Work email<input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></label>
+        <label for="contact-email">Email<input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></label>
       </div>
       <div class="field-pair">
-        <label for="contact-company">Company<input id="contact-company" name="company" autocomplete="organization" required maxlength="160"></label>
-        <label for="contact-stage">Stage<select id="contact-stage" name="stage" required>
+        <label for="contact-company">Company, lab or university<input id="contact-company" name="company" autocomplete="organization" required maxlength="160"></label>
+        <label for="contact-role">You are<select id="contact-role" name="role" required>
           <option value="" disabled selected>Choose one</option>
-          <option>Pre-seed</option>
-          <option>Seed</option>
-          <option>Series A or later</option>
-          <option>Established company or lab</option>
+          <option>A researcher</option>
+          <option>A lab or team</option>
+          <option>A startup</option>
+          <option>An investor or reviewer</option>
         </select></label>
       </div>
+      <label for="contact-raised" data-show-when="role=A startup" hidden>Raised so far<select id="contact-raised" name="raised" disabled>
+        <option value="" selected>Choose one (optional)</option>
+        <option>Nothing yet</option>
+        <option>Under $1M</option>
+        <option>$1M to $5M</option>
+        <option>$5M to $20M</option>
+        <option>More than $20M</option>
+      </select></label>
       <div class="field-pair">
+        <label for="contact-next">What&rsquo;s coming up<select id="contact-next" name="next">
+          <option value="" disabled selected>Choose one</option>
+          <option>A paper or thesis</option>
+          <option>A grant application</option>
+          <option>An experiment or build</option>
+          <option>A raise</option>
+          <option>A partner or customer pilot</option>
+          <option>Something else</option>
+        </select></label>
         <label for="contact-interest">Interested in<select id="contact-interest" name="interest" required>
           <option value="" disabled selected>Choose one</option>
-          <option>A free Claim Check</option>
-          <option>A licence quote</option>
-          <option>Both</option>
+          <option>My first Groundwork</option>
+          <option>Ori in my own terminal</option>
+          <option>Ongoing work</option>
+          <option>Checking someone else&rsquo;s work</option>
         </select></label>
-        <label for="contact-seats">Seats, if licensing<input id="contact-seats" name="seats" type="number" inputmode="numeric" min="1" max="10000" placeholder="e.g. 5"></label>
       </div>
-      <label for="contact-brief">Which claim or model does your work rest on?<textarea id="contact-brief" name="description" required maxlength="1500" rows="3" placeholder="A paper, a model or a result, and the number you need to rely on. A sentence is enough."></textarea></label>
-      <div class="contact-submit"><button type="submit">Send request <span aria-hidden="true">↗</span></button><p>Opens your email, addressed to <a href="mailto:hello@oriphim.com">hello@oriphim.com</a>. One free Claim Check per company. Licences are priced per seat, quoted within two business days.</p></div>
+      <label for="contact-brief">What are you working on, and what question does it rest on?<textarea id="contact-brief" name="description" required maxlength="1500" rows="3" placeholder="Your model, your notes, or the paper you're building on, and the result you need to rely on. A sentence is enough."></textarea></label>
+      <div class="contact-submit"><button type="submit">Send application <span aria-hidden="true">↗</span></button><p>Opens your email, addressed to <a href="mailto:hello@oriphim.com">hello@oriphim.com</a>. One free Groundwork per person or team, 5 this quarter. I reply within two business days.</p></div>
       <p class="contact-status" role="status" aria-live="polite"></p>
     </form>
   </section>
