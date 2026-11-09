@@ -128,13 +128,14 @@
 <link rel="modulepreload" href="/assets/archive-common.js">
 <link rel="preload" href="/assets/Loom-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="/assets/site-header.css">
 <link rel="stylesheet" href="/assets/brand.css">
 <link rel="preload" href="/assets/Redaction35-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 <div class="topbar">
   <div class="wrap">
-    <a class="nav-home" href="/" aria-label="Oriphim home">oriphim.</a>
+    <a class="nav-home" href="/" aria-label="Oriphim home"><img src="/assets/oriphim-logo.svg?v=6" alt="" width="42" height="30"><span>oriphim.</span></a>
     
     <div class="topbar-actions"><a href="/pricing" class="nav-btn">Pricing</a><a href="/?auth=sign-in" class="signin-btn">Sign In</a></div>
   </div>
@@ -154,21 +155,6 @@
 
       <div data-dynamic-entries></div>
       <button type="button" data-load-more hidden>Load more</button>
-      <article class="feed-card" data-entry data-category="announcement">
-        <div class="feed-main">
-          <div class="feed-catalog">ORIPHIM RESEARCH - ENTRY No. 01 <span class="feed-catalog-date">/ JUL 23</span></div>
-          <h2 class="feed-title"><a href="/archive/catalogue-01">The Archive is live.</a></h2>
-          <p class="feed-body">This is where build notes, research notes, and honest status updates will live - what's shipped, what's roadmap, and everything in between. Starting now.</p>
-          <div class="feed-meta">
-            <span>Announcement</span>
-            <span>1 min read</span>
-          </div>
-          <a class="feed-read" href="/archive/catalogue-01">Read entry</a>
-        </div>
-        <button class="feed-infographic" type="button" data-lightbox-trigger data-lightbox-src="assets/archive-catalog-01-large.jpg" aria-label="View Entry No. 01 thumbnail larger">
-          <img src="assets/archive-catalog-01-thumb.jpg" alt="Engraved archive room with columns, scholars, and catalog shelves" width="420" height="315" loading="lazy" decoding="async">
-        </button>
-      </article>
 
 <p class="archive-status" data-archive-status role="status" aria-live="polite"></p>
       <button class="archive-retry" type="button" data-archive-retry>Refresh entries</button>

@@ -6,7 +6,6 @@ body.story-layout{overflow-x:hidden;}
 .wall-hero .topbar{position:relative;z-index:2;background:transparent;}
 /* The header spans the hero's own edges, so the logo sits in the corner above the copy. */
 .wall-hero .topbar .wrap{max-width:none;padding:0 4vw;}
-.wall-hero .nav-home img{filter:invert(1);}
 /* Buttons: solid black with a white border, so they hold up over the dither too. */
 .btn,.signin-btn,.nav-btn{background:var(--bg);color:var(--paper);border:1px solid var(--paper);text-shadow:none;}
 .btn:hover,.signin-btn:hover,.nav-btn:hover{background:var(--paper);color:var(--bg);}

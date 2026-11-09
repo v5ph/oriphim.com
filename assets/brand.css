@@ -64,6 +64,9 @@ h1,h2,h3,h4,
   white-space:nowrap;
   color:var(--ink);
 }
+/* On a phone the mark beside it needs room, so the pair steps down together (site-header.css sizes the mark in em). */
+@media(max-width:480px){.nav-home,.topbar .nav-home{font-size:30px;}}
+@media(max-width:360px){.nav-home,.topbar .nav-home{font-size:26px;}}
 
 /* "oriphim" written inside a sentence or an eyebrow takes the same face, without the full stop. */
 .oriphim-word{

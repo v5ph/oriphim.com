@@ -1,4 +1,4 @@
-[data-entry][hidden],[data-edit-entry][hidden],[data-load-more][hidden],.archive-editor [hidden]{display:none!important;}
+[data-edit-entry][hidden],[data-load-more][hidden],.archive-editor [hidden]{display:none!important;}
 .archive-toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px;}
 .archive-toolbar h2{font:500 16px 'Geist Mono',monospace;}
 .archive-toolbar button,[data-load-more],.archive-retry,.archive-editor button{appearance:none;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:10px 16px;font:12px 'IBM Plex Mono',monospace;cursor:pointer;}
@@ -42,8 +42,9 @@
 .archive-prose > p:first-child{display:flow-root;}
 .archive-prose > p:first-child::first-letter{
   float:left;
-  font-family:'Loom',serif;
-  font-size:4em;
+  font-family:var(--ori,'Redaction 50',Georgia,serif);
+  /* rem, not em: an opening "Ori" sits in a .ori-word span at 1.2em, and em would enlarge that capital by a fifth. */
+  font-size:4rem;
   font-weight:400;
   line-height:.8;
   margin:.06em .16em 0 0;
@@ -97,3 +98,11 @@ archive-animation.archive-article-cover{height:auto;max-height:none;aspect-ratio
 .archive-attachment-links{display:flex;gap:14px;font:12px/1.5 'IBM Plex Mono',monospace;}
 .archive-attachment-links a{color:inherit;text-underline-offset:3px;}
 @media(max-width:600px){.archive-attachment-links{width:100%;}}
+
+/* Headers written as "## " and "### " in a post. The face comes from brand.css; the title above is the page's h1. */
+.archive-prose h2{font-size:clamp(26px,3.4vw,34px);line-height:1.2;margin:48px 0 16px;max-width:none;}
+.archive-prose h3{font-size:clamp(21px,2.6vw,26px);line-height:1.25;margin:36px 0 12px;max-width:none;}
+.archive-prose > h2:first-child,.archive-prose > h3:first-child{margin-top:0;}
+.archive-editor .archive-field{display:grid;gap:8px;}
+.archive-format{display:flex;gap:8px;flex-wrap:wrap;}
+.archive-editor .archive-format button{padding:6px 12px;font-size:11px;}

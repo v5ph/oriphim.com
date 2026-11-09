@@ -1,4 +1,4 @@
-import {fields,element,card,entryUrl,dateLabel} from './archive-common.js';
+import {fields,element,proseElement,card,entryUrl,dateLabel} from './archive-common.js';
 const sb=window.sb;
 const feed=document.querySelector('[data-dynamic-entries]');
 const recent=document.querySelector('[data-recent-entries]');
@@ -22,7 +22,6 @@ window.setInterval(()=>{
 },4200);
 
 const tabs=[...document.querySelectorAll('[data-filter]')];
-const legacy=document.querySelector('[data-entry]');
 const empty=document.querySelector('[data-feed-empty]');
 const status=document.querySelector('[data-archive-status]');
 const more=document.querySelector('[data-load-more]');
@@ -30,15 +29,12 @@ const tagMap={announcement:'Announcement',research:'Research',build:'Build Log'}
 let active='all',generation=0,offset=0,timer;
 function recentList(entries){
   recent.replaceChildren();
-  for(const entry of entries){const link=element('a',entry.title,'archive-recent-link');link.href=entryUrl(entry);link.append(element('small',dateLabel(entry.created_at)));recent.append(link);}
-  const legacyLink=element('a','The Archive is live.','archive-recent-link');legacyLink.href='/archive/catalogue-01';recent.append(legacyLink);
-}
+  for(const entry of entries){const link=proseElement('a',entry.title,'archive-recent-link');link.href=entryUrl(entry);link.append(element('small',dateLabel(entry.created_at)));recent.append(link);}}
 async function load(append=false){
   const token=++generation;
   if(!append){offset=0;feed.replaceChildren();}
   more.hidden=true;status.textContent='Loading entries…';
   const query=search.value.trim();
-  legacy.hidden=!(active==='all'||active==='announcement') || !!(query&&!legacy.textContent.toLowerCase().includes(query.toLowerCase()));
   empty.hidden=true;
   if(!sb){status.textContent='New entries are unavailable right now. Please reload to try again.';return;}
   try{
@@ -50,7 +46,7 @@ async function load(append=false){
     if(error)throw error;
     data.forEach(entry=>feed.append(card(entry)));
     offset+=data.length;more.hidden=data.length<20;
-    status.textContent='';empty.hidden=feed.children.length>0||!legacy.hidden;
+    status.textContent='';empty.hidden=feed.children.length>0;
     empty.querySelector('p').textContent=query?'No entries match your search.':'No entries with this tag yet.';
   }catch{if(token===generation)status.textContent='Couldn’t load new entries. Please try again.';}
 }

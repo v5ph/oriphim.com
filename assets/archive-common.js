@@ -9,10 +9,18 @@ export function element(tag, text = '', className = '') {
   if (className) node.className = className;
   return node;
 }
+/** Text as nodes, with the word "Ori" in its own face (Redaction 50 via .ori-word). Builds nodes, never HTML. @param {string} text */
+export const oriNodes = text => text.split(/\bOri\b/).flatMap((part, i) => i ? [element('span', 'Ori', 'ori-word'), part] : [part]);
+/** Like element(), for entry prose that may name Ori. @param {string} tag @param {string} [text] @param {string} [className] */
+export function proseElement(tag, text = '', className = '') {
+  const node = element(tag, '', className);
+  node.append(...oriNodes(text));
+  return node;
+}
 /** @param {ArchiveEntry} entry */
-export const entryUrl = entry => '/archive/entry?id=' + encodeURIComponent(entry.id);
+export const entryUrl = entry =>'/archive/entry?id=' + encodeURIComponent(entry.id);
 /** @param {ArchiveEntry} entry */
-export const readTime = entry => Math.max(1, Math.ceil(entry.body.trim().split(/\s+/).length / 220)) + ' min read';
+export const readTime = entry => Math.max(1, Math.ceil(plainText(entry.body).trim().split(/\s+/).length / 220)) + ' min read';
 /** @param {string} value */
 export const dateLabel = value => new Date(value).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
 /** @param {string|null} path */
@@ -20,9 +28,24 @@ export function coverUrl(path) {
   if (!path || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.(jpg|png|webp|html)$/.test(path)) return '';
   return window.sb.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
-/** Render text as paragraphs, never executable HTML. @param {HTMLElement} target @param {string} body */
+/** A line starting "## " is a header and "### " a subheader. One "#" is left alone: the entry's title is the page's h1. */
+const headerLine = /^(#{2,3})[ \t]+(\S.*)$/;
+/** The body without its header markers, for text shown outside the article (excerpts, meta description, read time). @param {string} body */
+export const plainText = body => body.replace(/^#{2,3}[ \t]+/gm, '');
+/** Render text as paragraphs and headers, never executable HTML. @param {HTMLElement} target @param {string} body */
 export function renderBody(target, body) {
-  target.replaceChildren(...body.trim().split(/\n\s*\n/).filter(text => text.trim()).map(text => element('p', text)));
+  const blocks = [];
+  for (const block of body.trim().split(/\n\s*\n/)) {
+    let lines = [];
+    const flush = () => { const text = lines.join('\n'); if (text.trim()) blocks.push(proseElement('p', text)); lines = []; };
+    for (const line of block.split('\n')) {
+      const header = headerLine.exec(line.trimEnd());
+      if (header) { flush(); blocks.push(proseElement(header[1].length === 2 ? 'h2' : 'h3', header[2].trim())); }
+      else lines.push(line);
+    }
+    flush();
+  }
+  target.replaceChildren(...blocks);
 }
 /** @param {ArchiveEntry} entry */
 export function card(entry) {
@@ -31,8 +54,9 @@ export function card(entry) {
   const number = String(entry.entry_number).padStart(2, '0');
   main.append(element('div', `ORIPHIM RESEARCH — ENTRY No. ${number} / ${dateLabel(entry.created_at)}`, 'feed-catalog'));
   const heading = element('h2', '', 'feed-title');
-  const link = element('a', entry.title); link.href = entryUrl(entry); heading.append(link);
-  main.append(heading, element('p', entry.body.length > 260 ? entry.body.slice(0,260) + '…' : entry.body, 'feed-body'));
+  const link = proseElement('a', entry.title); link.href = entryUrl(entry); heading.append(link);
+  const excerpt = plainText(entry.body);
+  main.append(heading, proseElement('p', excerpt.length > 260 ? excerpt.slice(0,260) + '…' : excerpt, 'feed-body'));
   const meta = element('div', '', 'feed-meta');meta.append(element('span', entry.tag),element('span', readTime(entry)));main.append(meta);
   const read = element('a', 'Read entry', 'feed-read');read.href=entryUrl(entry);main.append(read);article.append(main);
   const imageUrl=coverUrl(entry.cover_path);

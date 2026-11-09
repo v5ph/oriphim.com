@@ -1,4 +1,4 @@
-import {fields,tags,bucket,element,renderBody,coverUrl,coverMedia,inspectCover,attachmentBucket,attachmentLimit,inspectAttachment,renderAttachments,fileSize} from './archive-common.js';
+import {fields,tags,bucket,element,proseElement,renderBody,coverUrl,coverMedia,inspectCover,attachmentBucket,attachmentLimit,inspectAttachment,renderAttachments,fileSize} from './archive-common.js';
 const sb=window.sb;
 const control=document.querySelector('[data-edit-entry]');
 if(sb&&control){
@@ -7,7 +7,7 @@ if(sb&&control){
   let attachments=[],checkingAttachments=false,attachmentGeneration=0;
   const dialog=element('dialog','','archive-editor');
   dialog.setAttribute('aria-labelledby','archive-editor-title');
-  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Post<textarea name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs."></textarea></label><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><label>PDF and ZIP attachments <small>Optional · up to 10 files, 25 MB each. Files become public when uploaded.</small><input name="attachments" type="file" multiple accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed"></label><ul class="archive-attachment-list" aria-label="Selected attachments"></ul><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
+  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><div class="archive-field"><label for="archive-post">Post</label><div class="archive-format" role="toolbar" aria-label="Text formatting"><button type="button" data-heading="2" title="Turn the selected lines into a header (## )">Header</button><button type="button" data-heading="3" title="Turn the selected lines into a subheader (### )">Subheader</button></div><textarea id="archive-post" name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs. Start a line with ## to make it a header."></textarea></div><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><label>PDF and ZIP attachments <small>Optional · up to 10 files, 25 MB each. Files become public when uploaded.</small><input name="attachments" type="file" multiple accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed"></label><ul class="archive-attachment-list" aria-label="Selected attachments"></ul><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
   document.body.append(dialog);
   const form=dialog.querySelector('form');
   const input=name=>form.elements.namedItem(name);
@@ -57,6 +57,21 @@ if(sb&&control){
   dialog.querySelector('[data-close]').addEventListener('click',close);
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
   form.addEventListener('input',()=>{dirty=true;});
+  // Header / Subheader: put "## " or "### " at the start of each selected line, or take it off if every line already has it.
+  form.querySelector('.archive-format').addEventListener('click',event=>{
+    const level=Number(event.target.closest('[data-heading]')?.dataset.heading);if(!level)return;
+    const area=input('body'),value=area.value,marker='#'.repeat(level)+' ';
+    const from=area.selectionStart?value.lastIndexOf('\n',area.selectionStart-1)+1:0;
+    const to=area.selectionEnd>area.selectionStart&&value[area.selectionEnd-1]==='\n'?area.selectionEnd-1:area.selectionEnd;
+    let end=value.indexOf('\n',to);if(end<0)end=value.length;
+    const lines=value.slice(from,end).split('\n'),filled=lines.filter(line=>line.trim());
+    if(!filled.length){if(lines.length===1)area.setRangeText(marker,from,end,'end');}
+    else{
+      const off=filled.every(line=>line.startsWith(marker));
+      area.setRangeText(lines.map(line=>!line.trim()?line:off?line.slice(marker.length):marker+line.replace(/^#{1,6}[ \t]+/,'')).join('\n'),from,end,'select');
+    }
+    area.dispatchEvent(new Event('input',{bubbles:true}));area.focus();
+  });
   input('cover').addEventListener('change',async()=>{
     clearPreviewUrl();const file=input('cover').files[0];status.textContent='';
     if(!file){setImage(input('remove_cover').checked?'':coverUrl(current?.cover_path));return;}
@@ -65,7 +80,7 @@ if(sb&&control){
   });
   input('remove_cover').addEventListener('change',()=>{if(input('remove_cover').checked){input('cover').value='';clearPreviewUrl();setImage('');}else setImage(coverUrl(current?.cover_path));});
   dialog.querySelector('[data-preview]').addEventListener('click',()=>{
-    preview.replaceChildren(element('p',input('tag').value,'eyebrow'),element('h2',input('title').value||'Untitled entry'));
+    preview.replaceChildren(element('p',input('tag').value,'eyebrow'),proseElement('h2',input('title').value||'Untitled entry'));
     if(!image.hidden)preview.append(coverMedia(selectedUrl,input('cover_alt').value,'',selectedSource));
     const body=element('div','','archive-prose');renderBody(body,input('body').value);preview.append(body);renderAttachments(preview,attachments,new Map(attachments.filter(item=>item.url).map(item=>[item,item.url])));preview.hidden=false;preview.scrollIntoView({block:'start',behavior:'smooth'});
   });
