@@ -1,4 +1,5 @@
 import {fields,element,proseElement,card,entryUrl,dateLabel} from './archive-common.js';
+window.__archiveReady=true; // the page's recovery check looks for this
 const sb=window.sb;
 const feed=document.querySelector('[data-dynamic-entries]');
 const recent=document.querySelector('[data-recent-entries]');

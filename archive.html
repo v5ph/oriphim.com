@@ -230,5 +230,29 @@
 <script src="/assets/waitlist.js" defer></script>
 <script type="module" src="/assets/archive-feed.js"></script>
 <script type="module" src="/assets/archive-editor.js"></script>
+<script>
+/* The scripts that draw the archive can be cached by the browser for hours. If a stale copy stops them from
+   starting (a current page paired with an out-of-date shared script), fetch fresh copies once and reload.
+   If that does not help, say so rather than leaving the archive looking empty. */
+addEventListener("load", function () {
+  setTimeout(function () {
+    var key = "oriphim.archive.refreshed";
+    if (window.__archiveReady) { try { sessionStorage.removeItem(key); } catch (e) {} return; }
+    var first = false;
+    try { if (sessionStorage.getItem(key) !== "1") { sessionStorage.setItem(key, "1"); first = true; } } catch (e) {}
+    if (first) {
+      var urls = [].map.call(document.querySelectorAll("script[type=module][src], link[rel=modulepreload]"), function (n) { return n.src || n.href; });
+      var again = function () { location.reload(); };
+      Promise.all(urls.map(function (u) { return fetch(u, { cache: "reload" }); })).then(again, again);
+      return;
+    }
+    var text = "The archive didn\u2019t load. Please reload the page, and contact us if it keeps happening.";
+    var empty = document.querySelector("[data-feed-empty]"), status = document.querySelector("[data-archive-status]"), entry = document.querySelector("[data-entry-content]");
+    if (empty) empty.hidden = true;
+    if (status) status.textContent = text;
+    if (entry) { var p = document.createElement("p"); p.textContent = text; entry.replaceChildren(p); }
+  }, 600);
+});
+</script>
 </body>
 </html>

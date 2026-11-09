@@ -1,4 +1,5 @@
 import {fields,element,proseElement,plainText,renderBody,coverUrl,expandableCover,dateLabel,readTime,renderAttachments} from './archive-common.js';
+window.__archiveReady=true; // the page's recovery check looks for this
 const root=document.querySelector('[data-entry-content]');
 const id=new URLSearchParams(location.search).get('id');
 async function load(){
