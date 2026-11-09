@@ -60,9 +60,9 @@
   const LOOK_AT  = 0.30;                  // share of spots aimed at the observer
   const LOOK_REACH = 0.92;                // how far out, as a share of GAZE_LIM, a spot may be
   const E1R_X = -GAZE_Y/Math.hypot(GAZE_X,GAZE_Y), E1R_Y = GAZE_X/Math.hypot(GAZE_X,GAZE_Y);  // iris fibre frame at rest
-  const FIX_MIN = 0.14, FIX_MAX = 0.80;   // seconds held between jumps
-  const REGION  = 0.9;                    // seconds on one spot before it moves on, plus up to twice as much again
-  const REST    = 0.5, REST_VAR = 1.3;    // seconds of pause between bouts: it hardly stops
+  const FIX_MIN = 0.30, FIX_MAX = 1.30;   // seconds held between jumps
+  const REGION  = 1.5;                    // seconds on one spot before it moves on, plus up to twice as much again
+  const REST    = 0.8, REST_VAR = 1.6;    // seconds of pause between bouts: it hardly stops
   const BOUT    = 7.0, BOUT_VAR = 9.0;    // seconds a scanning bout lasts
   const RATE   = 0.55;    // cycle rate of the churn
   const EYE_R  = 0.55;
@@ -303,9 +303,9 @@
     if(t>=SAC.hold){                        // launch the next saccade
       SAC.fx=SAC.x; SAC.fy=SAC.y;
       if(on){
-        const big=Math.random()<0.18 ? 2.2 : 1;
-        SAC.tx=SAC.rx+(Math.random()*2-1)*SCAN*0.38*big;
-        SAC.ty=SAC.ry+(Math.random()*2-1)*SCAN*0.30*big;
+        const big=Math.random()<0.10 ? 1.8 : 1;
+        SAC.tx=SAC.rx+(Math.random()*2-1)*SCAN*0.26*big;
+        SAC.ty=SAC.ry+(Math.random()*2-1)*SCAN*0.20*big;
       } else {                              // at rest, only microsaccades
         SAC.tx=SAC.x+(Math.random()*2-1)*0.012;
         SAC.ty=SAC.y+(Math.random()*2-1)*0.012;
@@ -313,7 +313,7 @@
       limit(SAC.tx, SAC.ty);
       SAC.tx=CL[0]; SAC.ty=CL[1];
       const amp=Math.hypot(SAC.tx-SAC.fx, SAC.ty-SAC.fy);
-      SAC.dur=0.035+amp*0.22;               // a longer jump takes longer
+      SAC.dur=0.06+amp*0.32;                // a longer jump takes longer
       SAC.t0=t;
       SAC.hold = on ? t+SAC.dur+FIX_MIN+Math.random()*(FIX_MAX-FIX_MIN)
                     : t+SAC.dur+1.6+Math.random()*4.0;
