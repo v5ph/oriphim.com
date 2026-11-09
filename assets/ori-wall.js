@@ -31,14 +31,16 @@
   const BAND_RATE = 1.0;  // how fast the rings tumble, as a multiplier
 
   // ---- gaze --------------------------------------------------------------
-  // It does not drift: it fixates, jumps, and fixates again. And it does not
-  // do that constantly. Most of the time it rests, almost still; now and then
-  // it wakes into a bout of scanning and works over a region, then settles.
-  // The eye is seen from low and to the side, as in an isometric view, and rests
-  // looking up and to the right: 35 degrees above the horizontal, about 40 degrees
-  // off the line of sight. That is the view; everything below returns to it. The pupil sits in the upper right of the ball and the
-  // cornea shows in profile there. These are offsets before the gaze is
-  // normalised, with the line of sight at z = 1.
+  // It does not drift: it fixates, jumps, and fixates again. It is looking around
+  // nearly all the time: it works over one spot for a second or two, then moves
+  // to another anywhere it can turn to, with only brief pauses between. It does
+  // not go back to a favourite direction.
+  // The eye is seen from low and to the side, as in an isometric view. GAZE_X and
+  // GAZE_Y are the direction it first looks in and the frame the iris fibres are
+  // laid out in: 35 degrees above the horizontal, about 40 degrees off the line
+  // of sight, so the pupil sits in the upper right of the ball and the cornea
+  // shows in profile there. These are offsets before the gaze is normalised,
+  // with the line of sight at z = 1.
   const GAZE_X  = 0.70, GAZE_Y = 0.50;
   const IRIS_ANG  = 0.62; // iris half-angle, radians. Smaller than a frontal eye
                           // needs: in three-quarter view it has to sit on the ball.
@@ -49,21 +51,19 @@
   const RING_FEATHER = 0.26;  // and are back to full strength this much further out
   const RING_GHOST   = 0.82;  // share of ring pixels dropped at the pupil, so the iris shows through
   const SCAN    = 0.17;                   // how wide it ranges when scanning
-  // Now and then it looks well away from rest instead of just scanning: sometimes
-  // round at the observer, sometimes elsewhere on the lit side, then it settles
-  // back to the resting gaze above. GAZE_LIM is how far it may ever turn from
-  // the viewer, as an offset at z = 1: about 48 degrees. The iris is 35 degrees
-  // across from its centre, so at the limit all of it is still on the near side
-  // of the ball. It can never turn around.
+  // Each new spot is anywhere in the cone the eye can turn through: up, down,
+  // left, right, or round at the observer. GAZE_LIM is how far it may ever turn
+  // from the viewer, as an offset at z = 1: about 48 degrees. The iris is 35
+  // degrees across from its centre, so at the limit all of it is still on the near
+  // side of the ball. It can never turn around.
   const GAZE_LIM = 1.10;
-  const LOOK_P   = 0.65;                  // share of regions that are a wide look
-  const LOOK_AT  = 0.50;                  // of those, share aimed at the observer
-  const LOOK_HOLD = 1.5;                  // seconds a wide look is held, plus up to as much again
+  const LOOK_AT  = 0.30;                  // share of spots aimed at the observer
+  const LOOK_REACH = 0.92;                // how far out, as a share of GAZE_LIM, a spot may be
   const E1R_X = -GAZE_Y/Math.hypot(GAZE_X,GAZE_Y), E1R_Y = GAZE_X/Math.hypot(GAZE_X,GAZE_Y);  // iris fibre frame at rest
   const FIX_MIN = 0.14, FIX_MAX = 0.80;   // seconds held between jumps
-  const REGION  = 2.2;                    // seconds before it moves on
-  const REST    = 9.0, REST_VAR = 13.0;   // seconds of stillness between bouts
-  const BOUT    = 2.6, BOUT_VAR = 4.0;    // seconds a scanning bout lasts
+  const REGION  = 0.9;                    // seconds on one spot before it moves on, plus up to twice as much again
+  const REST    = 0.5, REST_VAR = 1.3;    // seconds of pause between bouts: it hardly stops
+  const BOUT    = 7.0, BOUT_VAR = 9.0;    // seconds a scanning bout lasts
   const RATE   = 0.55;    // cycle rate of the churn
   const EYE_R  = 0.55;
 
@@ -264,7 +264,7 @@
   // works over one region for a while before moving on, which is what reads as
   // examining something rather than merely looking around.
   const SAC={x:0,y:0, fx:0,fy:0, tx:0,ty:0, t0:-9, dur:0.06,
-             hold:0, rx:0,ry:0, rhold:0, pupil:1, awake:0, until:4, dil:1, home:0};
+             hold:0, rx:0,ry:0, rhold:0, pupil:1, awake:1, until:8, dil:1};
   // SAC.x and SAC.y are offsets from the resting gaze. This pulls a target back
   // inside the cone the eye may turn through, measured from the line of sight,
   // and leaves the answer in CL.
@@ -274,45 +274,35 @@
     CL[0]=ax*k-GAZE_X; CL[1]=ay*k-GAZE_Y;
   }
   function gazeStep(t,dt){
-    // wake into a scanning bout, then settle back into stillness
+    // a long scanning bout, then a brief pause where it holds its gaze, then another
     if(t>=SAC.until){
       SAC.awake^=1;
       SAC.until = t + (SAC.awake ? BOUT+Math.random()*BOUT_VAR
                                  : REST+Math.random()*REST_VAR);
-      if(SAC.awake) SAC.rhold=0;            // choose something to look at
-      else {                                // settling: go back to the resting gaze
-        SAC.home=1;
-        SAC.hold=Math.min(SAC.hold, t+0.3+Math.random()*0.7);
+      if(SAC.awake){                        // choose something to look at, now
+        SAC.rhold=0;
+        SAC.hold=Math.min(SAC.hold, t+0.05+Math.random()*0.15);
       }
     }
     const on=SAC.awake;
 
     if(on && t>=SAC.rhold){                 // pick something new to examine
       let ox, oy;                           // absolute gaze offset; 0,0 is straight at the viewer
-      if(Math.random()<LOOK_P){
-        if(Math.random()<LOOK_AT){          // look round at the observer
-          ox=(Math.random()*2-1)*0.10;
-          oy=(Math.random()*2-1)*0.08;
-        } else {                            // or elsewhere on the lit side
-          ox=-0.20+Math.random()*1.30;
-          oy=-0.10+Math.random()*1.00;
-        }
-        SAC.rhold=t+LOOK_HOLD+Math.random()*LOOK_HOLD;
-      } else {                              // a small scan around where it rests
-        ox=GAZE_X+(Math.random()*2-1)*SCAN;
-        oy=GAZE_Y+(Math.random()*2-1)*SCAN*0.78;
-        SAC.rhold=t+REGION+Math.random()*REGION*1.9;
+      if(Math.random()<LOOK_AT){            // look round at the observer
+        ox=(Math.random()*2-1)*0.10;
+        oy=(Math.random()*2-1)*0.08;
+      } else {                              // or anywhere else it can turn to
+        const a=Math.random()*6.2832, d=GAZE_LIM*LOOK_REACH*Math.pow(Math.random(),0.6);
+        ox=Math.cos(a)*d;
+        oy=Math.sin(a)*d;
       }
+      SAC.rhold=t+REGION+Math.random()*REGION*2;
       limit(ox-GAZE_X, oy-GAZE_Y);
       SAC.rx=CL[0]; SAC.ry=CL[1];
     }
     if(t>=SAC.hold){                        // launch the next saccade
       SAC.fx=SAC.x; SAC.fy=SAC.y;
-      if(SAC.home){                         // settle onto the resting gaze
-        SAC.home=0;
-        SAC.tx=(Math.random()*2-1)*0.012;
-        SAC.ty=(Math.random()*2-1)*0.012;
-      } else if(on){
+      if(on){
         const big=Math.random()<0.18 ? 2.2 : 1;
         SAC.tx=SAC.rx+(Math.random()*2-1)*SCAN*0.38*big;
         SAC.ty=SAC.ry+(Math.random()*2-1)*SCAN*0.30*big;
