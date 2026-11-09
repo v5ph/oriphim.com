@@ -54,7 +54,7 @@ h1,h2,h3,h4,
 .nav-home,
 .topbar .nav-home{
   font-family:var(--display);
-  font-size:38px;
+  font-size:32px;
   font-weight:400;
   font-synthesis:none;
   letter-spacing:-.01em;
@@ -65,8 +65,8 @@ h1,h2,h3,h4,
   color:var(--ink);
 }
 /* On a phone the mark beside it needs room, so the pair steps down together (site-header.css sizes the mark in em). */
-@media(max-width:480px){.nav-home,.topbar .nav-home{font-size:30px;}}
-@media(max-width:360px){.nav-home,.topbar .nav-home{font-size:26px;}}
+@media(max-width:480px){.nav-home,.topbar .nav-home{font-size:26px;}}
+@media(max-width:360px){.nav-home,.topbar .nav-home{font-size:22px;}}
 
 /* "oriphim" written inside a sentence or an eyebrow takes the same face, without the full stop. */
 .oriphim-word{
