@@ -222,9 +222,8 @@
       </div>
       <div class="steps fade">
         <div class="step"><h3>Open <span class="ori-word">Ori</span> in a project folder</h3><p>Run <span class="inline-cmd">ori</span>. <span class="ori-word">Ori</span> reads an <span class="inline-cmd">ORI.md</span> there as standing notes about the project.</p></div>
-        <div class="step"><h3>Sign in</h3><p>Type <span class="inline-cmd">/account login</span> (Google), <span class="inline-cmd">/account login github</span>, or <span class="inline-cmd">/account login email you@example.com</span> for a code. Your draft waits while the browser is open.</p></div>
-        <div class="step"><h3>Subscribe</h3><p><span class="inline-cmd">/billing subscribe month</span> or <span class="inline-cmd">year</span> opens Stripe Checkout. Access starts when the payment is confirmed. See <a href="/pricing">pricing</a>.</p></div>
-        <div class="step"><h3>Describe, review, approve, run</h3><p>Describe the system or <span class="inline-cmd">/attach</span> a paper. <span class="ori-word">Ori</span> asks what it needs, drafts a brief, and runs nothing until you sign that exact revision with <span class="inline-cmd">/approve NAME</span>.</p></div>
+        <div class="step"><h3>Connect a model</h3><p>Run <span class="inline-cmd">ori connect anthropic</span> to use your own key. Or sign in with <span class="inline-cmd">/account login</span> (Google), <span class="inline-cmd">/account login github</span>, or <span class="inline-cmd">/account login email you@example.com</span> to start on $10 of hosted credit. See <a href="/pricing">pricing</a>.</p></div>
+        <div class="step"><h3>Describe, agree, run</h3><p>Describe your idea, or <span class="inline-cmd">/attach</span> a paper. <span class="ori-word">Ori</span> proposes the experiment and you change it in plain words. Nothing runs until you say &ldquo;run it&rdquo;.</p></div>
       </div>
     </div>
   </section>
@@ -257,10 +256,10 @@
         <div class="req-card">
           <h3>Network &amp; account</h3>
           <ul>
-            <li>A Standard subscription to start new work</li>
-            <li>Internet for sign-in, the hosted model and updates</li>
-            <li>Experiments run on your Mac; up to seven days offline between subscription checks</li>
-            <li>Results stay readable and exportable if your subscription ends</li>
+            <li>Your own Anthropic API key, or an Oriphim account for hosted credit</li>
+            <li>Internet for the model, sign-in and updates</li>
+            <li>Experiments run on your Mac, and every project is a folder that reruns without <span class="ori-word">Ori</span></li>
+            <li>A Team seat for a company&rsquo;s work (<a href="/pricing">pricing</a>)</li>
           </ul>
         </div>
       </div>
@@ -270,19 +269,17 @@
   <section id="local-models">
     <div class="wrap account-note fade">
       <div>
-        <p class="eyebrow">Optional</p>
-        <h2>Use a local model or your own endpoint.</h2>
+        <p class="eyebrow">Your own key</p>
+        <h2>Run Ori with your own Anthropic key.</h2>
       </div>
       <div>
-        <p><span class="ori-word">Ori</span> can interpret with a model on your Mac or any OpenAI-compatible endpoint instead of Oriphim&rsquo;s hosted model. These use no cloud credits and keep working when the month&rsquo;s credits are used. <span class="ori-word">Ori</span> never bundles model weights: download a model with your runtime first. A Standard subscription is still required.</p>
-<pre class="block"># a local runtime such as Ollama, already serving a model
-/model local http://127.0.0.1:11434/v1 your-model-name
+        <p><span class="ori-word">Ori</span> runs on Claude. Connect your own Anthropic API key and you pay Anthropic for what the model uses, with no Oriphim account. The key is checked once and kept in the macOS Keychain. It&rsquo;s free for personal use, students, and research at universities and non-profit labs; a company&rsquo;s work needs a <a href="/pricing">Team seat</a>.</p>
+<pre class="block"># connect your key (Ori asks for it privately)
+ori connect anthropic
 
-# your own provider and key (the key is stored in the macOS Keychain)
-ori model byok https://api.example.com/v1 model-name
-
-# back to Oriphim's hosted model
-/model hosted</pre>
+# see which model Ori uses, or switch
+ori model
+ori model claude-sonnet-5-5</pre>
       </div>
     </div>
   </section>
@@ -305,8 +302,8 @@ ori model byok https://api.example.com/v1 model-name
           <p>Something else is installed at <span class="inline-cmd">~/.local/bin/ori</span>. <span class="ori-word">Ori</span> will not overwrite it; move it aside and run the installer again.</p></details>
         <details><summary>An update caused a problem</summary>
           <p><span class="inline-cmd">ori rollback</span> switches back to the previous version, which is kept. <span class="inline-cmd">ori update --pin VERSION</span> stays on one version. Running experiments always finish on the version they started with.</p></details>
-        <details><summary>Signed in, but <span class="ori-word">Ori</span> says the subscription is not active</summary>
-          <p>After Checkout, access starts when Stripe confirms the payment, usually within a minute. <span class="inline-cmd">/billing</span> shows the confirmed state. Payment problems and renewal dates are shown there and on your <a href="/account">account page</a>.</p></details>
+        <details><summary>Signed in, but <span class="ori-word">Ori</span> says hosted models aren&rsquo;t available</summary>
+          <p>New accounts get $10 of hosted credit to start; <span class="inline-cmd">/billing</span> shows what&rsquo;s left. When it runs out, connect your own key with <span class="inline-cmd">ori connect anthropic</span>, or <a href="/contact">tell us</a> if you need more hosted credit before paid top-ups open.</p></details>
         <details><summary>Reporting a problem</summary>
           <p>Run <span class="inline-cmd">ori doctor --json &gt; ori-doctor.json</span> and send it through the <a href="/contact">contact page</a> with what you did and what you saw. It describes your installation and dependencies, not your research. <span class="ori-word">Ori</span> sends no usage or research telemetry; diagnostics leave your Mac only when you send them.</p></details>
       </div>
@@ -317,10 +314,10 @@ ori model byok https://api.example.com/v1 model-name
     <div class="wrap account-note fade">
       <div>
         <p class="eyebrow">Access</p>
-        <h2>Standard starts new work.</h2>
+        <h2>Free for people, Team for companies.</h2>
       </div>
       <div>
-        <p>$39 a month or $390 a year, with 500 cloud credits each month. Installing and signing in are free; there is no free trial. Enterprise is by conversation.</p>
+        <p>With your own Anthropic key, <span class="ori-word">Ori</span> is free for personal use, students, and research at universities and non-profit labs. Signing in gives you $10 of hosted credit, so you can start without a key. Using <span class="ori-word">Ori</span> for a company&rsquo;s work needs a Team seat for each person who runs it: $500 a month, or 3 included with Partner.</p>
         <div class="account-actions">
           <a href="/pricing" class="btn-primary">See pricing</a>
           <a href="/account" class="btn-outline">Your account</a>
