@@ -225,6 +225,8 @@
   .fine-line{font-size:13px;line-height:1.55;color:var(--ink-soft);margin-top:14px;}
   .plan-grid + .anchor-line,.plan-grid ~ .billing-line{max-width:1080px;margin-left:auto;margin-right:auto;}
   .plan-grid + .anchor-line{margin-top:24px;}
+  .price-cta .annual-link{display:block;width:100%;margin-top:12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);text-underline-offset:3px;}
+  .price-cta .annual-link:hover{color:var(--ink);}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
@@ -294,7 +296,8 @@
           <div class="price-amount-row"><span class="price-amount">$500</span><span class="price-per">/ seat / month</span></div>
           <p class="sub-price"><b>Annual:</b> pay for 10 months, get 12</p>
           <p class="price-tag">Your team runs <span class="ori-word">Ori</span> on its own work, one seat per person. Start with one and add more as you grow. Model use runs on your own Anthropic key and Anthropic bills you for it. Shared projects and evidence links are on the way.</p>
-          <div class="price-cta"><a href="/contact#verification-title" class="btn-outline">Get seats</a></div>
+          <!-- Stripe TEST-mode payment links: replace both with the live-mode links before deploying. -->
+          <div class="price-cta"><a href="https://buy.stripe.com/test_fZu9AM6VqbKegNI8tFf7i00" class="btn-outline">Get seats</a><a href="https://buy.stripe.com/test_eVq9AM5RmcOi2WSaBNf7i03" class="annual-link">Or pay annually &rarr;</a></div>
         </div>
       </div>
       <p class="anchor-line">Free for personal and academic use: install <span class="ori-word">Ori</span> and connect your own Anthropic key. <a href="/download" class="link-inline">Install&nbsp;&rarr;</a></p>
