@@ -59,3 +59,5 @@ end $$;
 reset role;
 select 'Owner publishing, dating and deleting, public reading, search, non-editor denial (publish, edit, date, delete), self-promotion denial, cover-upload denial: passed' as result;
 rollback;
+-- Rollback doesn't undo the entry-number counter: put it back so the next real post isn't skipped ahead.
+select setval('public.archive_entries_entry_number_seq', (select max(entry_number) from public.archive_entries));
