@@ -9,7 +9,7 @@
 # Research in your Ori workspace is never touched by installing or updating.
 set -eu
 
-RELEASES="${ORI_RELEASES_URL:-https://kvcoyxofptmtaywdjbzo.supabase.co/storage/v1/object/public/ori-releases}"
+RELEASES="${ORI_RELEASES_URL:-https://oriphim.com/ori}"
 CHANNEL="${ORI_CHANNEL:-stable}"
 VERSION="${ORI_VERSION:-}"
 ROOT="${ORI_INSTALL_ROOT:-$HOME/.local/share/ori}"
