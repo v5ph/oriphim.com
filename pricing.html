@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pricing | Groundwork | Oriphim</title>
-<meta name="description" content="Your first Groundwork is free: one question worked through in Ori, with an Evidence Pack in 10 business days. Ongoing work is priced after your first Groundwork.">
+<meta name="description" content="Ori is free for personal and academic use; Team seats are $500 a month. Groundworks: your first quick check or standard study is free; then a quick check is $1,000, a standard study $2,500, a deep study from $5,000. Partner, ongoing independent checks: $5,000 a month, or $2,500 for our first 5 customers.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oriphim.com/pricing">
 <meta name="theme-color" content="#120d0e">
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Oriphim">
 <meta property="og:title" content="ORIPHIM Pricing | Groundwork">
-<meta property="og:description" content="Your first Groundwork is free. Ongoing work is priced after your first Groundwork.">
+<meta property="og:description" content="Ori is free for personal and academic use. Your first quick check or standard study is free; then from $1,000 a job, or $5,000 a month for Partner.">
 <meta property="og:url" content="https://oriphim.com/pricing">
 <meta property="og:image" content="https://oriphim.com/assets/oriphim-og.png">
 <meta property="og:image:width" content="2400">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Oriphim - Simulation that can be defended. Verification, validation, explicit limits.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ORIPHIM Pricing | Groundwork">
-<meta name="twitter:description" content="Your first Groundwork is free. Ongoing work is priced after your first Groundwork.">
+<meta name="twitter:description" content="Ori is free for personal and academic use. Your first quick check or standard study is free; then from $1,000 a job, or $5,000 a month for Partner.">
 <meta name="twitter:image" content="https://oriphim.com/assets/oriphim-og.png">
 <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/favicon-16.svg?v=6">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/assets/favicon-adaptive.svg?v=6">
@@ -41,7 +41,12 @@
   "url": "https://oriphim.com/pricing",
   "description": "Ori is software your team runs: give it a paper, a dataset or a model, and it derives the governing equations, builds and runs the model on your own hardware, and stress-tests the result.",
   "offers": [
-    { "@type": "Offer", "name": "First Groundwork", "price": "0.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" }
+    { "@type": "Offer", "name": "Ori for personal and academic use", "price": "0.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "First Groundwork", "price": "0.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Quick check", "price": "1000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Standard study", "price": "2500.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Team seat, per month", "price": "500.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" },
+    { "@type": "Offer", "name": "Partner, per month", "price": "5000.00", "priceCurrency": "USD", "url": "https://oriphim.com/pricing" }
   ],
   "publisher": { "@id": "https://oriphim.com/#organization" }
 }
@@ -201,6 +206,27 @@
   .single-tier .price-features{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;}
   .single-tier .price-features li{font-size:13.5px;}
   @media(max-width:760px){.steps-grid,.tier-grid,.single-tier .price-features{grid-template-columns:1fr;}.step-card{padding:24px;}}
+
+  /* Slim pricing (2026-11-23): three columns for companies, one line for personal use. */
+  .plan-grid{max-width:1080px;margin:0 auto;}
+  .plan-grid .step-num{margin-bottom:12px;}
+  .plan-grid .step-card:first-child .step-num{color:var(--ink);font-weight:500;}
+  .plan-grid .price-amount-row{margin-top:10px;}
+  .sub-price{font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.5;color:var(--ink-soft);margin-top:8px;}
+  .sub-price b{color:var(--ink);font-weight:500;}
+  .plan-grid .price-tag{margin-top:18px;max-width:none;min-height:0;}
+  .plan-grid .price-features{margin-top:18px;gap:10px;}
+  .plan-grid .price-features li{font-size:14px;}
+  .size-list{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--line);}
+  .size-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .size-list li small{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .size-list b{font-family:'Geist Mono',monospace;font-weight:500;font-size:16px;white-space:nowrap;}
+  .size-list b small{display:inline;font-size:11px;margin:0 2px 0 0;}
+  .fine-line{font-size:13px;line-height:1.55;color:var(--ink-soft);margin-top:14px;}
+  .plan-grid + .anchor-line,.plan-grid ~ .billing-line{max-width:1080px;margin-left:auto;margin-right:auto;}
+  .plan-grid + .anchor-line{margin-top:24px;}
+  .price-cta .annual-link{display:block;width:100%;margin-top:12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);text-underline-offset:3px;}
+  .price-cta .annual-link:hover{color:var(--ink);}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css">
 <link rel="stylesheet" href="/assets/page-menu.css">
@@ -227,83 +253,89 @@
     <div class="wrap">
       <div class="hero-top">
         <h1>Pricing</h1>
-        <p class="lede">Your first Groundwork is free. Then keep <span class="ori-word">Ori</span> working on your hard problems, month to month.</p>
+        <p class="lede">Start with a free Groundwork. Then we keep checking your work, or your team runs <span class="ori-word">Ori</span> itself.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="steps-grid">
+      <div class="steps-grid plan-grid">
         <div class="price-card step-card">
           <div class="step-num">Start here</div>
           <div class="price-name">Groundwork</div>
-          <div class="price-amount-row"><span class="price-amount">Free</span><span class="price-per">your first one</span></div>
-          <p class="price-tag">Bring one question your work depends on. We work it through in <span class="ori-word">Ori</span>, and within 10 business days you get an Evidence Pack and a run folder you can rerun. One per person or team, by application.</p>
-          <p class="cap-line">We take on 5 free Groundworks this quarter.</p>
-          <div class="price-cta"><a href="/contact#verification-title" class="btn">Apply for one of the 5</a></div>
+          <div class="price-amount-row"><span class="price-amount">Free</span></div>
+          <p class="sub-price">your first quick check or standard study</p>
+          <p class="price-tag">One question, done with you, at a fixed price agreed before we start:</p>
+          <ul class="size-list">
+            <li><span>Quick check<small>1 day</small></span><b>$1,000</b></li>
+            <li><span>Standard study<small>about 3 days</small></span><b>$2,500</b></li>
+            <li><span>Deep study<small>1&ndash;2 weeks</small></span><b><small>from</small> $5,000</b></li>
+          </ul>
+          <p class="fine-line">You get a folder that reruns without <span class="ori-word">Ori</span> and an Evidence Pack, checked by a team outside your company. Plus a 30-day Team seat.</p>
+          <div class="price-cta"><a href="/contact#verification-title" class="btn">Apply for a free Groundwork</a></div>
         </div>
         <div class="price-card step-card">
           <div class="step-num">Ongoing</div>
-          <div class="price-name">Ori Monthly</div>
-          <div class="price-amount-row"><span class="price-per">Priced after your first Groundwork</span></div>
-          <p class="price-tag">Groundwork on your problems as they come up, <span class="ori-word">Ori</span> in your own terminal, and a direct line to our team. Billed monthly, cancel anytime.</p>
+          <div class="price-name">Partner</div>
+          <div class="price-amount-row"><span class="price-amount">$5,000</span><span class="price-per">/ month</span></div>
+          <p class="sub-price"><b>$2,500</b> for our first 5 customers, for 6 months</p>
+          <p class="price-tag">An outside team checks your work every month, so investors and partners don&rsquo;t have to take your word for it.</p>
+          <ul class="price-features">
+            <li>One standard study or two quick checks a month</li>
+            <li>Your Evidence Pack kept current as your model changes</li>
+            <li>Priority turnaround and a direct line to us</li>
+            <li>3 Team seats and a monthly summary</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <div class="price-cta"><a href="/contact?interest=partner#verification-title" class="btn-outline">Talk to us</a></div>
         </div>
         <div class="price-card step-card">
-          <div class="step-num">For a milestone</div>
-          <div class="price-name">Partner</div>
-          <div class="price-amount-row"><span class="price-per">Priced after your first Groundwork</span></div>
-          <p class="price-tag">Everything in Ori Monthly, with priority turnaround, for the months when a lot rides on the result: a paper, a grant, a raise or a build. Evidence Packs kept current as your model changes, prepared for whoever needs to check them, with written answers to their questions about what was run and checked.</p>
+          <div class="step-num">Run it yourself</div>
+          <div class="price-name">Team</div>
+          <div class="price-amount-row"><span class="price-amount">$500</span><span class="price-per">/ seat / month</span></div>
+          <p class="sub-price"><b>Annual:</b> pay for 10 months, get 12</p>
+          <p class="price-tag">Your team runs <span class="ori-word">Ori</span> on its own work, one seat per person. Start with one and add more as you grow. Model use runs on your own Anthropic key and Anthropic bills you for it. Shared projects and evidence links are on the way.</p>
+          <!-- Until Stripe's live payment links exist, Team goes to the contact form. Then restore
+               "Get seats" (monthly link) and "Or pay annually" (annual link), both with adjustable quantity. -->
+          <div class="price-cta"><a href="/contact?interest=team#verification-title" class="btn-outline">Request seats</a></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="price-card single-tier">
-        <div class="price-list-label">Everything in Ori Monthly</div>
-        <ul class="price-features">
-          <li>Groundwork on your problems as they come up</li>
-          <li><span class="ori-word">Ori</span> in your own terminal, on your own hardware</li>
-          <li>An Evidence Pack for every result</li>
-          <li>A monthly summary: what holds up, what to firm up next</li>
-          <li>A direct line to our team</li>
-          <li>Every update, and early access to new domains</li>
-          <li>Your models and results stay yours</li>
-          <li>Pay a year upfront and get 2 months free</li>
-        </ul>
-      </div>
-      <p class="billing-line">Larger team or lab, or checking someone else&rsquo;s work? <a href="/contact#verification-title">Let&rsquo;s talk.</a></p>
+      <p class="anchor-line">Free for personal and academic use: install <span class="ori-word">Ori</span> and connect your own Anthropic key. <a href="/download" class="link-inline">Install&nbsp;&rarr;</a></p>
+      <p class="billing-line"><b>Annual</b> billing for Team or Partner: pay for 10 months, get 12. A raise, a grant or a build riding on the result, or a larger lab? <a href="/contact#verification-title">Let&rsquo;s talk.</a></p>
     </div>
   </section>
 
   <section>
     <div class="wrap details-wrap">
       <details class="faq-item"><summary>Why is the first Groundwork free?</summary>
-        <p>Because the fastest way to see what <span class="ori-word">Ori</span> does is to watch it work on your own problem. We take on 5 a quarter, for people and teams with a question <span class="ori-word">Ori</span> can run. Before we start, we agree what a good result looks like and the date it&rsquo;s due, and we book the conversation about what comes next.</p>
+        <p>Because the fastest way to see what <span class="ori-word">Ori</span> does is to watch it work on your own problem. We take on a few a week, one per company or lab, for a quick check or a standard study that <span class="ori-word">Ori</span> can run. Before we start, we agree what a good result looks like and the date it&rsquo;s due, and we book the conversation about what comes next.</p>
       </details>
-      <details class="faq-item"><summary>Will this tell people my model is wrong?</summary>
-        <p>No. You see every result first, and you decide what to share and with whom. The Evidence Pack is yours. Where something needs work, you hear it from us before anyone else does, with what to firm up next.</p>
+      <details class="faq-item"><summary>What&rsquo;s in an Evidence Pack?</summary>
+        <p>The answer; exactly what was run; the review by the Sceptic, a second agent that sets its checks before the run and reviews the work after; and a limits file listing what <span class="ori-word">Ori</span> assumed, what it didn&rsquo;t model, and what it didn&rsquo;t test.</p>
+        <p>It isn&rsquo;t a fixed checklist, and it never says a model is correct. Anyone with the folder can rerun it and get the same numbers. The judgment stays with your team.</p>
       </details>
       <details class="faq-item"><summary>What if Ori can&rsquo;t run my problem?</summary>
         <p>We find that out in a free 30-minute call, before you pay anything. If your question is outside what <span class="ori-word">Ori</span> runs today, we&rsquo;ll tell you plainly, and what would be needed to get there.</p>
       </details>
-      <details class="faq-item"><summary>What does an Evidence Pack say?</summary>
-        <p>It records exactly which checks <span class="ori-word">Ori</span> ran and how each one came out: convergence under refinement, conservation, agreement between integrators, sensitivity to free parameters, and comparison with any reported results. It also lists what was not assessed, and anyone with the run folder can rerun it and get the same numbers.</p>
-        <p>It is not our endorsement of your conclusions, and it never says a model is correct. That is verification: whether the model solves its own equations correctly. Validation, whether the model matches reality, needs your data and your judgment. The judgment stays with your team.</p>
+      <details class="faq-item"><summary>Is it worth it?</summary>
+        <p>Compare it with what rides on the result. If a raise, a grant or a build depends on a model nobody has stress-tested, a Groundwork costs less than a week&rsquo;s delay.</p>
+        <p>Hiring a physicist costs roughly $20,000 a month and usually takes two months or more. <span class="ori-word">Ori</span> doesn&rsquo;t replace that person. It lets the people you already have rebuild, run and stress-test a model in days, and hand others something they can rerun.</p>
       </details>
-      <details class="faq-item"><summary>Why not just hire a physicist?</summary>
-        <p>You may well hire one later. A physicist in the US earns a median of about $172,000 a year. Wages are about 70% of what an employer spends on a person, so that comes to roughly $20,000 a month, and hiring one usually takes two months or more.</p>
-        <p><span class="ori-word">Ori</span> doesn&rsquo;t replace that person. It lets the people you already have rebuild, run and stress-test a model in days rather than weeks, and hand collaborators, reviewers, partners and investors something they can rerun themselves.</p>
-      </details>
-      <details class="faq-item"><summary>How is ongoing work priced?</summary>
-        <p>After your first Groundwork, once you&rsquo;ve seen what <span class="ori-word">Ori</span> does on your own problem. We send you a short proposal with a few ways we could keep working together, priced on how many problems you bring and how deep they go. Monthly plans can be cancelled at any time.</p>
+      <details class="faq-item" id="data"><summary>Where does my data go?</summary>
+        <p><b>When you run <span class="ori-word">Ori</span>, your experiments run on your machine.</b> Code, simulations and results are written to a folder on your computer. We don&rsquo;t run them on our servers.</p>
+        <p><b><span class="ori-word">Ori</span> thinks with Claude.</b> To plan, write code and review results, <span class="ori-word">Ori</span> sends what it&rsquo;s working on to Claude, Anthropic&rsquo;s AI model: your messages, and the parts of your papers, notes, code and data that it reads. Under <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" class="link-inline" target="_blank" rel="noopener noreferrer">Anthropic&rsquo;s commercial terms</a>, this isn&rsquo;t used to train their models, and Anthropic keeps it for up to 30 days to detect misuse.</p>
+        <p><b>With your own Anthropic key,</b> requests go straight from your computer to Anthropic, under your own agreement with them. That includes zero data retention if your organisation has it. Nothing passes through us.</p>
+        <p><b>When our hosted model opens,</b> its requests will pass through our server on the way to Anthropic. We&rsquo;ll record how many tokens each request used, so we can bill you, and won&rsquo;t store what you sent.</p>
+        <p><b>Web lookups.</b> When <span class="ori-word">Ori</span> looks up a method, constant or reference result, its search terms leave your machine and can describe what you&rsquo;re working on. For a sensitive project, tell <span class="ori-word">Ori</span> not to search.</p>
+        <p><b>Groundwork.</b> We run the work on our own machine, from files you share with us, and hand you the folder. We use your files only for that Groundwork and delete them within 30 days of delivery, unless you ask us to keep them. We&rsquo;ll sign an NDA if you want one.</p>
+        <p><b>Your account.</b> If you create an account, we keep your email. Stripe handles payments, and we never see your card.</p>
       </details>
       <details class="faq-item"><summary>Terms</summary>
-        <p><b>Billing.</b> Ori Monthly is billed monthly and can be cancelled anytime. Annual plans are paid upfront, with 2 months free.</p>
-        <p><b>Your data and code.</b> <span class="ori-word">Ori</span> runs on your hardware. Your papers, models and results stay with you. Nothing is sent to us or to anyone else unless you send it.</p>
-        <p><b>What you keep.</b> Every run folder is standalone code that reruns without <span class="ori-word">Ori</span>, even if you stop.</p>
+        <p><b>Licence.</b> <span class="ori-word">Ori</span> is free for personal use, for students, and for research at universities and non-profit labs. Using it for a company&rsquo;s work needs a Team seat for each person who runs it. Partner includes 3; more are $500 a month each.</p>
+        <p><b>Billing.</b> Groundworks and Partner are invoiced; Partner is billed monthly and can be cancelled anytime. On Partner, extra seats are added to your Partner invoice. Team is a subscription: each company picks monthly or annual billing for its whole team. Seats added during an annual term are charged for the months left until renewal, and seats removed come off at renewal. Annual plans are paid upfront: pay for 10 months, get 12. Compute or model costs over about $50 for a Groundwork are passed through at cost, and stated in the quote.</p>
+        <p><b>Founding price.</b> Partner at $2,500 a month is for our first 5 customers and is guaranteed for 6 months. In return, we ask for a short case study and a 15-minute call each month about what to improve.</p>
+        <p><b>What you keep.</b> Every project folder is standalone code that reruns without <span class="ori-word">Ori</span>, even if you stop.</p>
         <p><b>Where the numbers come from.</b> Physicist pay is the BLS May 2025 median for SOC 19-2012 (reported via WageDex; confirm on bls.gov). The 70% wage share is BLS Employer Costs for Employee Compensation, December 2025, private industry. Hiring time is from a recruiter source (Paraform) and is indicative only.</p>
       </details>
     </div>
@@ -315,7 +347,7 @@
       <div class="eyebrow">Where everyone starts</div>
       <h2>Your first Groundwork is free.</h2>
       <div class="cta-row-band">
-        <a href="/contact#verification-title" class="btn">Start your first Groundwork</a>
+        <a href="/contact#verification-title" class="btn">Apply for a free Groundwork</a>
       </div>
     </div>
   </section>
@@ -437,7 +469,23 @@
     }
   }
 
-
+  // Links to a folded FAQ entry (#data) open it before scrolling there.
+  const openFromHash = (hash) => {
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target && target.tagName === "DETAILS") {
+      target.open = true;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  document.querySelectorAll("[data-open-details]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      history.replaceState(null, "", link.getAttribute("href"));
+      openFromHash(link.getAttribute("href"));
+    });
+  });
+  openFromHash(location.hash);
+  window.addEventListener("hashchange", () => openFromHash(location.hash));
 </script>
 <script src="assets/supabase-js.js"></script>
 <script src="assets/oriphim-supabase.js"></script>

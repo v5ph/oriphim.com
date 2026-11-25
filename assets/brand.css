@@ -79,9 +79,10 @@ h1,h2,h3,h4,
 
 /* ---------- "Ori" ----------
    The product's name, wherever it is written: <span class="ori-word">Ori</span>.
-   Lowercase like the wordmark; the size bump offsets Redaction's small x-height.
-   Letter-spacing and weight are pinned so it looks the same inside an uppercase
-   eyebrow, a button or a headline. To keep the capital, delete the text-transform line. */
+   Written "Ori", with a capital, everywhere (decided 2026-11-23); the size bump
+   offsets Redaction's small x-height. Letter-spacing and weight are pinned so it looks
+   the same inside an uppercase eyebrow, a button or a headline. The capital is kept
+   even inside uppercase text. */
 .ori-word{
   font-family:var(--ori);
   font-size:1.2em;
@@ -90,7 +91,7 @@ h1,h2,h3,h4,
   font-synthesis:none;
   line-height:.8;
   letter-spacing:0;
-  text-transform:lowercase;
+  text-transform:none;
 }
 /* Headlines are already Redaction, so no size bump there. */
 h1 .ori-word,h2 .ori-word,h3 .ori-word,h4 .ori-word{font-size:1em;line-height:inherit}

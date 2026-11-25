@@ -90,15 +90,15 @@
         <label for="contact-interest">Interested in<select id="contact-interest" name="interest" required>
           <option value="" disabled selected>Choose one</option>
           <option>My first Groundwork</option>
-          <option>Ori in my own terminal</option>
-          <option>Ongoing work</option>
+          <option>Partner: ongoing checks</option>
+          <option>Team: Ori for my company</option>
           <option>Checking someone else&rsquo;s work</option>
         </select></label>
       </div>
       <label for="contact-brief">What are you working on, and what question does it rest on?<textarea id="contact-brief" name="description" required maxlength="1500" rows="3" placeholder="Your model, your notes, or the paper you're building on, and the result you need to rely on. A sentence is enough."></textarea></label>
       <div class="contact-hp" aria-hidden="true"><label>Leave this field empty<input name="hp_extra" tabindex="-1" autocomplete="off"></label></div>
       <div class="contact-turnstile" data-turnstile></div>
-      <div class="contact-submit"><button type="submit">Send application <span aria-hidden="true">↗</span></button><p>One free Groundwork per person or team, 5 this quarter. We reply within two business days. Prefer email? <a href="mailto:hello@oriphim.com">hello@oriphim.com</a></p></div>
+      <div class="contact-submit"><button type="submit">Send application <span aria-hidden="true">↗</span></button><p>One free Groundwork per company or lab. We take on a few a week. We reply within two business days. Prefer email? <a href="mailto:hello@oriphim.com">hello@oriphim.com</a></p></div>
       <p class="contact-status" role="status" aria-live="polite"></p>
     </form>
   </section>
@@ -107,6 +107,17 @@
     <div class="footer-actions"><button class="footer-page-menu" type="button" aria-label="Open page menu" aria-haspopup="dialog" aria-controls="page-menu">Find: [F]</button><a class="footer-x" href="https://x.com/_phil_v" target="_blank" rel="noopener noreferrer" aria-label="Follow Phil on X">V</a><a class="footer-x" href="https://x.com/Oriphim" target="_blank" rel="noopener noreferrer" aria-label="Follow Oriphim on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.293 19.492h2.039L6.486 3.24H4.298l13.31 17.405Z"/></svg></a></div></div></footer>
 <script src="/assets/contact-config.js"></script>
 <script src="/assets/contact.js"></script>
+<script>
+// /contact?interest=team (or partner, groundwork) arrives with that choice already made.
+(function () {
+  var wanted = { team: "Team: Ori for my company", partner: "Partner: ongoing checks", groundwork: "My first Groundwork" }[new URLSearchParams(location.search).get("interest")];
+  var select = document.getElementById("contact-interest");
+  if (!wanted || !select) return;
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].text === wanted) { select.selectedIndex = i; break; }
+  }
+})();
+</script>
 <script src="/assets/supabase-js.js"></script>
 <script src="/assets/oriphim-supabase.js"></script>
 <script src="/script.js"></script>

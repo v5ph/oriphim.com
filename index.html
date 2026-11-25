@@ -460,7 +460,7 @@
 
   <section class="chapter chapter-how" id="how" aria-labelledby="how-title">
     <div class="eyebrow">How it works</div>
-    <h2 id="how-title">Nothing runs until you sign off.</h2>
+    <h2 id="how-title">Nothing runs until you say so.</h2>
     <figure class="cli-demo" aria-label="An illustrative session in the Ori terminal: Ori reads a paper and drafts a brief, you sign that exact revision, it runs on your Mac and lists every check with its outcome.">
       <div class="cli-bar" aria-hidden="true"><i></i><i></i><i></i><span>ori &middot; illustrative example</span></div>
       <div class="tui">
@@ -507,10 +507,10 @@
       </div>
     </figure>
     <ol class="how-steps">
-      <li><b>Bring it</b><span>Your model, notes, code, or a paper you're building on.</span></li>
-      <li><b>Rebuild</b><span>Equations and parameters, each tied to where it came from.</span></li>
-      <li><b>Sign off</b><span>You approve the plan before anything runs.</span></li>
-      <li><b>Run and check</b><span>Convergence, conservation, and sensitivity to every free parameter.</span></li>
+      <li><b>Bring it</b><span>Your idea, notes, data, or the paper you're building on.</span></li>
+      <li><b>Agree the plan</b><span>Ori proposes the experiment, and you change it in plain words.</span></li>
+      <li><b>Run it</b><span>Say "run it". Ori and its agents build and run the project on your machine.</span></li>
+      <li><b>Check it</b><span>The Sceptic sets its checks before the run and reviews the work after. Anything Ori can't stand behind goes in the limits file.</span></li>
     </ol>
     <p class="fine-print">Example shown for illustration. Scroll the terminal to read the whole session.</p>
   </section>
@@ -532,18 +532,32 @@
     <p>Change an assumption, sweep a parameter, try another method. Every run is checked the same way, so what you find next stands on the same ground as what you started with.</p>
   </section>
 
+  <section class="chapter chapter-runs" aria-labelledby="runs-title">
+    <div class="eyebrow">Problems Ori has run</div>
+    <h2 id="runs-title">Test problems Ori was never tuned on.</h2>
+    <div class="runs-grid">
+      <div><strong>Reactor restarts</strong><p>How long xenon blocks a restart after shutdown: a peak at 8.4 hours, against 8.3 from an independent calculation.</p></div>
+      <div><strong>Quantum error correction</strong><p>A surface-code threshold of 9.5&ndash;9.8%, rising toward the published ~10% as the codes grew.</p></div>
+      <div><strong>Satellite shells</strong><p>Collision risk in a crowded orbit. Ori caught and fixed its own counting bug before reporting.</p></div>
+      <div><strong>Nanotubes</strong><p>Which of 314 carbon nanotubes conduct. The textbook rule held for every one.</p></div>
+      <div><strong>The hydrogen bond</strong><p>Every number matches the standard textbook reference.</p></div>
+      <div><strong>An open problem</strong><p>Denser tetrahedron packings: Ori recovered the record exactly, found nothing denser, and said its search was about 1/100 the size of the original.</p></div>
+    </div>
+  </section>
+
   <section class="band band-offer" id="offer" aria-labelledby="offer-title">
     <div class="wrap">
       <div class="eyebrow">What you get</div>
       <h2 id="offer-title">The Evidence Pack.</h2>
-      <p class="offer-line">What holds up. What to firm up next. What wasn't assessed. And a run folder that reruns without Ori, so anyone who needs to check your work can rerun it themselves.</p>
+      <p class="offer-line">What holds up. What to firm up next. What wasn't tested. And a project folder that reruns without Ori, so anyone who needs to check your work can rerun it themselves.</p>
       <ul class="file-row">
+        <li class="file">README.md</li>
+        <li class="file">PLAN.md</li>
+        <li class="file">LIMITS.md</li>
         <li class="file">report.pdf</li>
-        <li class="file">chart.png</li>
-        <li class="file">run.py</li>
-        <li class="file">brief.signed</li>
+        <li class="file">results/</li>
       </ul>
-      <p class="offer-line">Ori never tells anyone you're right. It shows exactly what was checked, so they can see for themselves. Ongoing work, or Ori in your own terminal? <a href="/pricing">&rarr; Pricing</a></p>
+      <p class="offer-line">Ori never tells anyone you're right. It shows exactly what was checked, so they can see for themselves. Ongoing checks, or Ori for your team? <a href="/pricing">&rarr; Pricing</a></p>
     </div>
   </section>
 

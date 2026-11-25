@@ -277,3 +277,11 @@ footer .wrap,.footer-x{color:var(--paper);}
 
 /* Keyboard focus is the one place green appears outside the verdicts. */
 a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:3px;}
+
+/* Problems Ori has run: six short results, three to a row. */
+.runs-grid{margin-top:44px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);}
+.runs-grid>div{padding:28px 28px 28px 0;border-bottom:1px solid var(--line);}
+.runs-grid>div:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line);}
+.runs-grid strong{display:block;font:560 clamp(18px,1.7vw,22px)/1.15 'Geist Mono',monospace;letter-spacing:-.01em;}
+.runs-grid p{margin-top:12px;font-size:14.5px;line-height:1.5;color:var(--ink-soft);max-width:34ch;}
+@media(max-width:860px){.runs-grid{grid-template-columns:1fr;}.runs-grid>div,.runs-grid>div:not(:nth-child(3n+1)){padding:22px 0;border-left:0;}}
