@@ -1,0 +1,15 @@
+{
+  "minimum_macos": "14.0",
+  "notes_url": "https://github.com/oriphim-inc/ori/releases/tag/v0.1.0a2",
+  "platforms": {
+    "macos-arm64": {
+      "sha256": "8d17a25fd010948ba5b818bbeeb784f0477124fb165d44059e2a7bda79332453",
+      "size": 820367619,
+      "url": "https://github.com/oriphim-inc/ori/releases/download/v0.1.0a2/ori-0.1.0a2-macos-arm64.tar.gz"
+    }
+  },
+  "released_at": "2026-11-25T19:07:41.010783+00:00",
+  "schema": 1,
+  "signed": false,
+  "version": "0.1.0a2"
+}
