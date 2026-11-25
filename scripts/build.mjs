@@ -24,6 +24,7 @@ const entries = [
   "account/complete.html",
   "auth/terminal.html",
   "install.sh",
+  "ori",
   "404.html",
   "robots.txt",
   "sitemap.xml",
