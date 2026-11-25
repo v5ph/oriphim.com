@@ -20,16 +20,21 @@
 .archive-editor label{display:grid;gap:8px;font:12px/1.6 'IBM Plex Mono',monospace;}
 .archive-editor input,.archive-editor textarea,.archive-editor select{box-sizing:border-box;width:100%;border:1px solid #e2dfd8;border-radius:0;padding:10px;background:#1f191a;color:#e2dfd8;font:14px/1.6 Inter,sans-serif;}
 .archive-editor textarea{resize:vertical;min-height:240px;}
+.archive-editor [type=date]{color-scheme:dark;}
 .archive-editor .archive-remove-cover{display:flex;align-items:center;}
 .archive-editor [type=checkbox]{width:auto;}
 .archive-editor-actions{display:flex;justify-content:space-between;gap:16px;}
 .archive-editor [data-publish]{background:#e2dfd8;color:#120d0e;}
+.archive-editor-actions [data-delete]{margin-right:auto;border-color:#e5484d;color:#e5484d;}
+.archive-editor-actions [data-delete]:hover{background:#e5484d;color:#120d0e;}
 .archive-editor :disabled{opacity:.55;cursor:wait;}
 .archive-editor [data-editor-status]{font:13px/1.6 Inter,sans-serif;margin:0;}
 .archive-cover-preview,.archive-preview img{max-width:100%;max-height:300px;object-fit:contain;}
 .archive-preview{border-top:1px solid #e2dfd8;padding-top:24px;}
 .archive-prose{font:16px/1.8 Inter,sans-serif;overflow-wrap:anywhere;}
 .archive-prose p{white-space:pre-wrap;margin:20px 0;}
+.archive-prose .archive-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
+.archive-prose .archive-link:hover,.archive-prose .archive-link:focus-visible{text-decoration-thickness:2px;}
 .archive-article{max-width:850px;margin:0 auto;padding:32px 0 64px;}
 .archive-article h1{font:500 clamp(30px,5vw,56px)/1.15 'Geist Mono',monospace;max-width:none;overflow-wrap:anywhere;margin:18px 0 30px;}
 .archive-article-cover{display:block;width:100%;max-height:560px;object-fit:contain;margin-bottom:32px;}

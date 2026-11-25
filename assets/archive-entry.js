@@ -21,4 +21,6 @@ async function load(){
     window.dispatchEvent(new CustomEvent('archive-entry-loaded',{detail:data}));
   }catch{root.replaceChildren(element('h1','Entry unavailable.'),element('p','Please reload to try again.'));}
 }
-window.addEventListener('archive-published',load);load();
+window.addEventListener('archive-published',load);
+window.addEventListener('archive-deleted',()=>location.assign('/archive'));
+load();

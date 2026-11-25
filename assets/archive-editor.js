@@ -5,9 +5,11 @@ if(sb&&control){
   let user=null,allowed=false,current=null,busy=false,dirty=false,previewUrl='',pendingPath='',pendingFile=null;
   let entryId=crypto.randomUUID();
   let attachments=[],checkingAttachments=false,attachmentGeneration=0;
+  // A date as YYYY-MM-DD in this browser's time zone, the way the archive shows it.
+  const localDay=date=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
   const dialog=element('dialog','','archive-editor');
   dialog.setAttribute('aria-labelledby','archive-editor-title');
-  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><div class="archive-field"><label for="archive-post">Post</label><div class="archive-format" role="toolbar" aria-label="Text formatting"><button type="button" data-heading="2" title="Turn the selected lines into a header (## )">Header</button><button type="button" data-heading="3" title="Turn the selected lines into a subheader (### )">Subheader</button></div><textarea id="archive-post" name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs. Start a line with ## to make it a header."></textarea></div><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><label>PDF and ZIP attachments <small>Optional · up to 10 files, 25 MB each. Files become public when uploaded.</small><input name="attachments" type="file" multiple accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed"></label><ul class="archive-attachment-list" aria-label="Selected attachments"></ul><div class="archive-editor-actions"><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
+  dialog.innerHTML=`<form><header><h2 id="archive-editor-title">New entry</h2><button type="button" data-close aria-label="Close editor">×</button></header><label>Title<input name="title" required maxlength="160"></label><label>Tag<select name="tag"></select></label><label>Release date <small>The date the archive shows for this entry.</small><input name="released" type="date" required></label><div class="archive-field"><label for="archive-post">Post</label><div class="archive-format" role="toolbar" aria-label="Text formatting"><button type="button" data-heading="2" title="Turn the selected lines into a header (## )">Header</button><button type="button" data-heading="3" title="Turn the selected lines into a subheader (### )">Subheader</button></div><textarea id="archive-post" name="body" rows="12" required maxlength="100000" placeholder="Write your entry. Blank lines start new paragraphs. Start a line with ## to make it a header."></textarea></div><label>Cover image or animation <small>Optional · JPG, PNG, WebP, or self-contained HTML · up to 5 MB. Include all animation code and assets in the HTML file. Covers are public once uploaded.</small><input name="cover" type="file" accept="image/jpeg,image/png,image/webp,text/html,.html,.htm"></label><div class="archive-cover-selection" hidden></div><label class="archive-remove-cover" hidden><input type="checkbox" name="remove_cover"> Remove current cover</label><label>Cover description<input name="cover_alt" maxlength="300" placeholder="Describe the image or animation for readers using a screen reader"></label><label>PDF and ZIP attachments <small>Optional · up to 10 files, 25 MB each. Files become public when uploaded.</small><input name="attachments" type="file" multiple accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed"></label><ul class="archive-attachment-list" aria-label="Selected attachments"></ul><div class="archive-editor-actions"><button type="button" data-delete hidden>Delete entry</button><button type="button" data-preview>Preview</button><button type="submit" data-publish>Publish entry</button></div><p role="status" data-editor-status aria-live="polite"></p><section class="archive-preview" hidden aria-label="Entry preview"></section></form>`;
   document.body.append(dialog);
   const form=dialog.querySelector('form');
   const input=name=>form.elements.namedItem(name);
@@ -49,6 +51,8 @@ if(sb&&control){
     dialog.querySelector('h2').textContent=current?'Edit entry':'New entry';
     dialog.querySelector('[data-publish]').textContent=current?'Save changes':'Publish entry';
     for(const name of ['title','body','tag','cover_alt'])input(name).value=current?.[name]||(name==='tag'?tags[0]:'');
+    input('released').value=localDay(current?new Date(current.created_at):new Date());
+    dialog.querySelector('[data-delete]').hidden=!current;
     dialog.querySelector('.archive-remove-cover').hidden=!current?.cover_path;
     setImage(coverUrl(current?.cover_path));dialog.showModal();input('title').focus();
   }
@@ -112,10 +116,12 @@ if(sb&&control){
       }
       const savedAttachments=attachments.map(({path,name,kind,size})=>({path,name,kind,size}));
       const values={attachments:savedAttachments,title:input('title').value.trim(),body:input('body').value.trim(),tag:input('tag').value,cover_path:path,cover_alt:input('cover_alt').value.trim()};
+      const chosenDay=input('released').value,originalDay=localDay(current?new Date(current.created_at):new Date());
+      const dated=chosenDay&&chosenDay!==originalDay?{created_at:new Date(chosenDay+'T12:00:00').toISOString()}:{};
       let data,error;
-      if(current){({data,error}=await sb.from('archive_entries').update(values).eq('id',entryId).eq('updated_at',current.updated_at).select(fields).maybeSingle());}
+      if(current){({data,error}=await sb.from('archive_entries').update({...values,...dated}).eq('id',entryId).eq('updated_at',current.updated_at).select(fields).maybeSingle());}
       else{
-        ({data,error}=await sb.from('archive_entries').insert({id:entryId,...values}).select(fields).single());
+        ({data,error}=await sb.from('archive_entries').insert({id:entryId,...values,...dated}).select(fields).single());
         // Resolve a lost response before retrying, without publishing duplicates.
         if(error){const found=await sb.from('archive_entries').select(fields).eq('id',entryId).maybeSingle();if(found.data&&Object.entries(values).every(([key,value])=>key==='attachments'?JSON.stringify((found.data.attachments||[]).map(a=>[a.path,a.name,a.kind,a.size]))===JSON.stringify(value.map(a=>[a.path,a.name,a.kind,a.size])):found.data[key]===value)){data=found.data;error=null;}}
       }
@@ -126,6 +132,24 @@ if(sb&&control){
       window.dispatchEvent(new CustomEvent('archive-published',{detail:data}));
       if(oldPath&&oldPath!==path)sb.storage.from(bucket).remove([oldPath]).catch(()=>{});
     }catch(error){status.textContent=error.message||'Couldn’t save. Please try again.';}
+    finally{busy=false;form.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=false);}
+  });
+  // Delete: editors only (the database enforces it too). The entry's cover and attachments
+  // are public files, so they are removed with it.
+  dialog.querySelector('[data-delete]').addEventListener('click',async()=>{
+    if(busy||!allowed||!current)return;
+    const number=String(current.entry_number).padStart(2,'0');
+    if(!confirm(`Delete entry No. ${number}, “${current.title}”? Its cover and attachments are removed too. This can’t be undone.`))return;
+    busy=true;form.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=true);status.textContent='Deleting entry…';
+    try{
+      const {data,error}=await sb.from('archive_entries').delete().eq('id',current.id).select('id');
+      if(error||!data?.length)throw Error('Couldn’t delete the entry. Please try again.');
+      const deleted=current,files=(deleted.attachments||[]).map(item=>item.path).filter(Boolean);
+      if(deleted.cover_path)sb.storage.from(bucket).remove([deleted.cover_path]).catch(()=>{});
+      if(files.length)sb.storage.from(attachmentBucket).remove(files).catch(()=>{});
+      dirty=false;busy=false;dialog.close();releaseAttachments();setImage('');preview.replaceChildren();clearPreviewUrl();
+      window.dispatchEvent(new CustomEvent('archive-deleted',{detail:deleted}));
+    }catch(error){status.textContent=error.message||'Couldn’t delete. Please try again.';}
     finally{busy=false;form.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=false);}
   });
   async function permission(){

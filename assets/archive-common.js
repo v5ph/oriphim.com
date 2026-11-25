@@ -28,6 +28,35 @@ export function coverUrl(path) {
   if (!path || !/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.(jpg|png|webp|html)$/.test(path)) return '';
   return window.sb.storage.from(bucket).getPublicUrl(path).data.publicUrl;
 }
+/** Web addresses in entry text: anything starting http:// or https://, and bare addresses
+ * like github.com/... or oriphim.com/contact. Bare ones need a .com, .org, .net, .edu or
+ * .gov ending, so file and code names (LIMITS.md, scipy.io, e.g.) stay plain text. */
+const webAddress = /\bhttps?:\/\/[^\s<>"]+|\b(?:[a-z0-9-]+\.)+(?:com|org|net|edu|gov)\b(?:\/[^\s<>"]*)?/gi;
+/** Sentence punctuation after an address belongs to the sentence, not the link. */
+const trailingPunctuation = /[.,;:!?)\]'"’”]+$/;
+/** Text as nodes with its web addresses as links. Builds nodes, never HTML; only http(s)
+ * links are made, and links off oriphim.com open in a new tab. @param {string} text */
+export function linkNodes(text) {
+  const nodes = [];
+  let last = 0;
+  for (const match of text.matchAll(webAddress)) {
+    const address = match[0].replace(trailingPunctuation, '');
+    const start = match.index;
+    let url;
+    try { url = new URL(/^https?:\/\//i.test(address) ? address : 'https://' + address); } catch { continue; }
+    if (start > last) nodes.push(...oriNodes(text.slice(last, start)));
+    const link = element('a', address, 'archive-link');
+    link.href = url.href;
+    if (!/(^|\.)oriphim\.com$/i.test(url.hostname) && url.hostname !== location.hostname) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+    nodes.push(link);
+    last = start + address.length;
+  }
+  if (last < text.length) nodes.push(...oriNodes(text.slice(last)));
+  return nodes;
+}
 /** A line starting "## " is a header and "### " a subheader. One "#" is left alone: the entry's title is the page's h1. */
 const headerLine = /^(#{2,3})[ \t]+(\S.*)$/;
 /** The body without its header markers, for text shown outside the article (excerpts, meta description, read time). @param {string} body */
@@ -37,7 +66,11 @@ export function renderBody(target, body) {
   const blocks = [];
   for (const block of body.trim().split(/\n\s*\n/)) {
     let lines = [];
-    const flush = () => { const text = lines.join('\n'); if (text.trim()) blocks.push(proseElement('p', text)); lines = []; };
+    const flush = () => {
+      const text = lines.join('\n');
+      if (text.trim()) { const paragraph = element('p'); paragraph.append(...linkNodes(text)); blocks.push(paragraph); }
+      lines = [];
+    };
     for (const line of block.split('\n')) {
       const header = headerLine.exec(line.trimEnd());
       if (header) { flush(); blocks.push(proseElement(header[1].length === 2 ? 'h2' : 'h3', header[2].trim())); }

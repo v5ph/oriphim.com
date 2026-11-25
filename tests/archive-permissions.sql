@@ -4,6 +4,11 @@ set local role authenticated;
 select set_config('request.jwt.claims', '{"sub":"b1363f93-72fa-440c-897b-22e0fedb442f","role":"authenticated"}', true);
 insert into public.archive_entries(id,title,body,tag) values ('11111111-1111-4111-8111-111111111111','Permission test','Plasma convergence research','Research');
 update public.archive_entries set title='Updated permission test' where id='11111111-1111-4111-8111-111111111111';
+update public.archive_entries set created_at='2026-01-15T12:00:00Z' where id='11111111-1111-4111-8111-111111111111';
+do $$ begin
+  if not exists(select 1 from public.archive_entries where id='11111111-1111-4111-8111-111111111111' and created_at='2026-01-15T12:00:00Z') then raise exception 'Editor could not set the release date'; end if;
+end $$;
+insert into public.archive_entries(id,title,body,tag) values ('44444444-4444-4444-8444-444444444444','Delete test','To be deleted','Research');
 do $$ begin
   if not exists(select 1 from public.archive_entries where id='11111111-1111-4111-8111-111111111111' and search_document @@ websearch_to_tsquery('english','plasma')) then raise exception 'Owner publish or search failed'; end if;
 end $$;
@@ -20,6 +25,12 @@ do $$ declare affected integer; begin
   update public.archive_entries set title='Unauthorized change' where id='11111111-1111-4111-8111-111111111111';
   get diagnostics affected = row_count;
   if affected <> 0 then raise exception 'Non-editor update was allowed'; end if;
+  update public.archive_entries set created_at='2020-01-01T00:00:00Z' where id='11111111-1111-4111-8111-111111111111';
+  get diagnostics affected = row_count;
+  if affected <> 0 then raise exception 'Non-editor date change was allowed'; end if;
+  delete from public.archive_entries where id='44444444-4444-4444-8444-444444444444';
+  get diagnostics affected = row_count;
+  if affected <> 0 then raise exception 'Non-editor delete was allowed'; end if;
   if exists(select 1 from public.archive_editors) then raise exception 'Editor list leaked'; end if;
   begin
     insert into storage.objects(bucket_id,name) values ('archive-covers','22222222-2222-4222-8222-222222222222/33333333-3333-4333-8333-333333333333.png');
@@ -33,7 +44,18 @@ do $$ begin
     insert into public.archive_entries(title,body,tag) values ('Anonymous','No','Announcement');
     raise exception 'Anonymous publish allowed';
   exception when insufficient_privilege then null; end;
+  begin
+    delete from public.archive_entries where id='44444444-4444-4444-8444-444444444444';
+    raise exception 'Anonymous delete allowed';
+  exception when insufficient_privilege then null; end;
+end $$;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"b1363f93-72fa-440c-897b-22e0fedb442f","role":"authenticated"}', true);
+do $$ declare affected integer; begin
+  delete from public.archive_entries where id='44444444-4444-4444-8444-444444444444';
+  get diagnostics affected = row_count;
+  if affected <> 1 then raise exception 'Editor delete failed'; end if;
 end $$;
 reset role;
-select 'Owner publishing, public reading, search, non-editor denial, self-promotion denial, cover-upload denial: passed' as result;
+select 'Owner publishing, dating and deleting, public reading, search, non-editor denial (publish, edit, date, delete), self-promotion denial, cover-upload denial: passed' as result;
 rollback;
