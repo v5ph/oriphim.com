@@ -69,12 +69,19 @@ else
   tar -xzf "$staging/ori.tar.gz" -C "$staging/x" || fail "the archive could not be extracted"
   set -- "$staging"/x/*
   [ "$#" -eq 1 ] && [ -x "$1/ori" ] || fail "the archive does not contain an ori directory"
-  if codesign --verify --strict "$1/ori" >/dev/null 2>&1; then
-    say "Signature verified."
-  elif [ "$(field signed 2>/dev/null || echo false)" = "true" ]; then
-    fail "this release should be signed but its signature did not verify; nothing was changed"
+  # The bundled runtime's python is what runs; the launcher only starts it.
+  # Only a release the manifest marks signed is checked: the bundled Python carries its
+  # maker's signature even in an unsigned build, so verifying it alone proves nothing.
+  if [ "$(field signed 2>/dev/null || echo false)" = "true" ]; then
+    codesign --verify --strict "$1/runtime/bin/python3.14" >/dev/null 2>&1 \
+      || fail "this release should be signed but its signature did not verify; nothing was changed"
+    # The publisher is named only when Apple's Developer ID certificate says so.
+    codesign -dvv "$1/runtime/bin/python3.14" 2>&1 \
+      | grep -qi '^Authority=Developer ID Application: Oriphim' \
+      || fail "this release is not signed by Oriphim; nothing was changed"
+    say "Verified: distributed by ORIPHIM, Inc."
   else
-    say "Note: this is an unsigned development build."
+    say "Download checked against its published checksum. (Not yet signed with an Apple Developer ID.)"
   fi
   mv "$1" "$target"
 fi
@@ -99,15 +106,74 @@ fi
 "$BIN/ori" --version >/dev/null 2>&1 || fail "Ori was installed but did not start. Run '$BIN/ori doctor' for details."
 say "Installed $("$BIN/ori" --version) in $target"
 
+# ── workspace: where every project Ori builds is kept (never replaced) ──────
+WORKSPACE="${ORIPHIM_WORKSPACE:-$HOME/Documents/ORIPHIM}"
+mkdir -p "$WORKSPACE" || fail "could not create your projects folder at $WORKSPACE"
+if [ ! -e "$WORKSPACE/README.md" ]; then
+  # Same text as oriphim.core.store.runs.WORKSPACE_README.
+  cat > "$WORKSPACE/README.md" <<'README'
+# ORIPHIM
+
+Each folder here is a project Ori built for you: its code, data, results, and a
+record of how they were made. Every project is a git repository, so you can open,
+run, and share it without Ori.
+
+Ori keeps its own settings and history in ~/.ori, not here. Uninstalling Ori
+never removes this folder.
+README
+fi
+say "Your projects will be kept in $(printf '%s' "$WORKSPACE" | sed "s#^$HOME#~#")"
+
+# ── Apple's Command Line Tools: git, which saves every project, and the compilers
+#    some Python packages build with. Ori brings its own Python and uv. ────────
+# Only `xcode-select -p` is asked: on a Mac without the tools, running git itself
+# would pop Apple's dialog with no explanation.
+if xcode-select -p >/dev/null 2>&1; then
+  :
+elif [ "${ORI_SKIP_DEVTOOLS:-}" = "1" ]; then
+  say "Note: Apple's Command Line Tools are not installed; Ori needs them before your first project."
+else
+  say ""
+  say "Ori needs Apple's Command Line Tools (free, from Apple). They give Ori git, which"
+  say "saves every project, and the compilers some scientific packages need."
+  say "A macOS window is opening: click Install. It takes about 10 minutes."
+  say "(Ori itself is already installed. Press Ctrl-C to stop waiting; run 'ori doctor' later.)"
+  xcode-select --install >/dev/null 2>&1 || true
+  waited=0
+  until xcode-select -p >/dev/null 2>&1; do
+    if [ "$waited" -ge 2700 ]; then
+      say "Still waiting for the Command Line Tools. Ori is installed; when Apple's"
+      say "installer finishes, run 'ori doctor' to check everything is ready."
+      break
+    fi
+    sleep 10
+    waited=$((waited + 10))
+  done
+  xcode-select -p >/dev/null 2>&1 && say "Command Line Tools installed."
+fi
+
+# ── PATH: added for the user (typing it by hand went wrong in testing). One line in
+#    their shell's startup file, never repeated; ORI_NO_MODIFY_PATH=1 skips it. ─────
 case ":$PATH:" in
   *":$BIN:"*) say "Run: ori" ;;
   *)
     shown="$(printf '%s' "$BIN" | sed "s#^$HOME#\$HOME#")"
     case "$(basename "${SHELL:-/bin/zsh}")" in
-      fish) say "Add Ori to your PATH:"; say "  fish_add_path $shown" ;;
-      bash) say "Add Ori to your PATH:"; say "  echo 'export PATH=\"$shown:\$PATH\"' >> ~/.bash_profile && source ~/.bash_profile" ;;
-      *)    say "Add Ori to your PATH:"; say "  echo 'export PATH=\"$shown:\$PATH\"' >> ~/.zshrc && source ~/.zshrc" ;;
+      fish) profile="$HOME/.config/fish/conf.d/ori.fish"; line="fish_add_path $shown" ;;
+      bash) profile="$HOME/.bash_profile"; line="export PATH=\"$shown:\$PATH\"" ;;
+      *)    profile="$HOME/.zshrc"; line="export PATH=\"$shown:\$PATH\"" ;;
     esac
-    say "Then run: ori"
+    if [ "${ORI_NO_MODIFY_PATH:-}" = "1" ]; then
+      say "Add Ori to your PATH by adding this line to $profile:"
+      say "  $line"
+    elif [ -f "$profile" ] && grep -qF "$line" "$profile"; then
+      say "Ori is on your PATH in new Terminal windows."
+    else
+      mkdir -p "$(dirname "$profile")"
+      printf '\n# Ori\n%s\n' "$line" >> "$profile" \
+        || fail "Ori is installed, but $profile could not be updated; add: $line"
+      say "Added Ori to your PATH in $(printf '%s' "$profile" | sed "s#^$HOME#~#")."
+    fi
+    say "Open a new Terminal window, then run: ori"
     ;;
 esac
